@@ -94,7 +94,8 @@
                 android:text="Ingresa"
                 android:textAllCaps="false"
                 android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="logIn"/>
 
 
 
@@ -125,9 +126,11 @@
             android:layout_height="wrap_content"
             android:background="#3b5998"
             android:text="Facebook"
+            android:id="@+id/facebook"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:onClick="signUp"/>
 
 
     </LinearLayout>

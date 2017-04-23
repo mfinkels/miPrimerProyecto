@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class activityLogIn extends AppCompatActivity {
 
@@ -14,10 +15,24 @@ public class activityLogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
     }
 
+    public void logIn(View viewRecibida){
+
+
+
+    }
+
     public void signUp(View viewRecibida){
 
+        Button botonPresionado;
+        botonPresionado=(Button)viewRecibida;
+
         Intent actividadDestino;
-        actividadDestino=new Intent(activityLogIn.this, activitySignUp.class);
+
+        if(botonPresionado+==R.id.facebook){
+
+        }else{
+            actividadDestino = new Intent(activityLogIn.this, activitySignUp.class);
+        }
         startActivity(actividadDestino);
     }
 
