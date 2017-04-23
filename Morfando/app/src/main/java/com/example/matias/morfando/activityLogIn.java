@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class activityLogIn extends AppCompatActivity {
 
@@ -16,7 +17,9 @@ public class activityLogIn extends AppCompatActivity {
     }
 
     public void logIn(View viewRecibida){
-
+        EditText email, password;
+        email=(EditText)findViewById(R.id.emailUser);
+        password=(EditText)findViewById(R.id.passwordUser);
 
 
     }
@@ -28,11 +31,12 @@ public class activityLogIn extends AppCompatActivity {
 
         Intent actividadDestino;
 
-        if(botonPresionado+==R.id.facebook){
-
+        if(botonPresionado.getId() == R.id.facebook){
+            actividadDestino = new Intent(activityLogIn.this, activitySignUp.class);
         }else{
             actividadDestino = new Intent(activityLogIn.this, activitySignUp.class);
         }
+
         startActivity(actividadDestino);
     }
 

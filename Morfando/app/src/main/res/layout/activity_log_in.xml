@@ -59,6 +59,7 @@
                     android:drawableTint="#000"
                     android:singleLine="true"
                     android:hint="Correo Electronico"
+                    android:id="@+id/emailUser"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -74,6 +75,7 @@
                     android:drawableLeft="@drawable/lock"
                     android:drawableTint="#000"
                     android:hint="Contraseña"
+                    android:id="@+id/passwordUser"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
