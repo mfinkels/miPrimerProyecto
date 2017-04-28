@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Morfando</string>
+    <string name="app_intro_skip">Saltar</string>
 </resources>

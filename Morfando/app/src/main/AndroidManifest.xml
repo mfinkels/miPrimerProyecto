@@ -3,7 +3,7 @@
     package="com.example.matias.morfando">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activityProfile" />
-        <activity android:name=".ActivityResetPassword"></activity>
+        <activity android:name=".ActivityResetPassword" />
+        <activity
+            android:name=".myIntro"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".activityIntroSecond" />
+        <activity android:name=".activityIntroFinal"></activity>
     </application>
 
 </manifest>
