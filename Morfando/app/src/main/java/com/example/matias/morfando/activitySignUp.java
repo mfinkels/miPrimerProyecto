@@ -22,6 +22,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import android.os.Vibrator;
+
+
 
 public class activitySignUp extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class activitySignUp extends AppCompatActivity {
     private boolean photoExist= false;
     private EditText name, lastname, email, password, confirm_password, phone;
     private Bitmap profilePhoto;
+
 
 
     @Override
@@ -60,6 +64,7 @@ public class activitySignUp extends AppCompatActivity {
         password=(EditText)findViewById(R.id.passwordUser);
         confirm_password=(EditText)findViewById(R.id.confirm_passwordUser);
         phone=(EditText)findViewById(R.id.photneUser);
+
 
 
 
@@ -193,6 +198,7 @@ public class activitySignUp extends AppCompatActivity {
             PackageOfData.putString("email", emailValidate);
         } else {
             result = "Correo Electronico invalido";
+
         }
 
         String passwordText = password.getText().toString();
