@@ -198,7 +198,7 @@ public class activitySignUp extends AppCompatActivity {
         String passwordText = password.getText().toString();
         String confirm_passwordText=confirm_password.getText().toString();
 
-        if (passwordText == confirm_passwordText)
+        if (passwordText.compareTo(confirm_passwordText) == 0)
         {
             PackageOfData.putString("password", passwordText);
         }else {
