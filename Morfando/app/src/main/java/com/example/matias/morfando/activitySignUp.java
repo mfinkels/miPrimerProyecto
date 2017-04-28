@@ -28,6 +28,7 @@ public class activitySignUp extends AppCompatActivity {
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private Button btnSelect, btnSignUp;
     private String userChoosenTask;
+    private boolean photoExist= false;
     private EditText name, lastname, email, password, confirm_password, phone;
     private Bitmap profilePhoto;
 
@@ -93,15 +94,18 @@ public class activitySignUp extends AppCompatActivity {
 
                 if (items[item].equals("Tomar Foto")) {
                     userChoosenTask ="Tomar Foto";
+                    photoExist=true;
                     if(result)
                         cameraIntent();
 
                 } else if (items[item].equals("Elegir desde Libreria")) {
                     userChoosenTask ="Elegir desde Libreria";
+                    photoExist=true;
                     if(result)
                         galleryIntent();
 
                 } else if (items[item].equals("Cancelar")) {
+                    userChoosenTask = "Cancelar";
                     dialog.dismiss();
                 }
             }
@@ -198,7 +202,7 @@ public class activitySignUp extends AppCompatActivity {
         {
             PackageOfData.putString("password", passwordText);
         }else {
-            result += System.getProperty("line.seperator") + "Las contraseñas no coinciden";
+            result += "\t" + "Las contraseñas no coinciden";
         }
         String phoneText = phone.getText().toString();
 
@@ -206,19 +210,19 @@ public class activitySignUp extends AppCompatActivity {
         {
             PackageOfData.putInt("phone", Integer.parseInt(phoneText));
         }else {
-            result += System.getProperty("line.seperator") + "El Telefono Movil es incorrecto";
+            result += "\t" + "El Telefono Movil es incorrecto";
         }
 
-        if (userChoosenTask != "Cancelar"){
+        if (photoExist){
             byte[] profilePhotoBytes = Utility.convertImageToByte(profilePhoto);
             PackageOfData.putByteArray("profilePhoto", profilePhotoBytes);
         }else {
-            result += System.getProperty("line.separator") + "No seleccionaste foto de perfil";
+            result += "\t" + "No seleccionaste foto de perfil";
         }
 
 
 
-        if (result != "") {
+        if (result == "") {
             intent.putExtras(PackageOfData);
             startActivity(intent);
         } else {
@@ -226,7 +230,7 @@ public class activitySignUp extends AppCompatActivity {
             AlertDialog.Builder errorDisplay = new AlertDialog.Builder(this);
             errorDisplay.setTitle("Error");
             errorDisplay.setMessage(result);
-            errorDisplay.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            errorDisplay.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface errorDisplay, int id) {
                     errorDisplay.dismiss();
                 }
@@ -236,5 +240,3 @@ public class activitySignUp extends AppCompatActivity {
 
         }
     }
-
-}
