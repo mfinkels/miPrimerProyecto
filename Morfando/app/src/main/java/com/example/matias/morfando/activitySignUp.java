@@ -10,9 +10,12 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,15 +26,18 @@ import java.io.IOException;
 public class activitySignUp extends AppCompatActivity {
 
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private Button btnSelect;
-    private ImageView ivImage;
+    private Button btnSelect, btnSignUp;
     private String userChoosenTask;
+    private EditText name, lastname, email, password, confirm_password, phone;
+    private Bitmap profilePhoto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSelect.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -39,7 +45,22 @@ public class activitySignUp extends AppCompatActivity {
                 selectImage();
             }
         });
-        ivImage = (ImageView) findViewById(R.id.ivImage);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                signUp();
+            }
+        });
+
+        name=(EditText)findViewById(R.id.nameUser);
+        lastname=(EditText)findViewById(R.id.lastnameUser);
+        email=(EditText)findViewById(R.id.emailUser);
+        password=(EditText)findViewById(R.id.passwordUser);
+        confirm_password=(EditText)findViewById(R.id.confirm_passwordUser);
+        phone=(EditText)findViewById(R.id.photneUser);
+
+
 
     }
 
@@ -108,13 +129,13 @@ public class activitySignUp extends AppCompatActivity {
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
+                profilePhoto = onSelectFromGalleryResult(data);
             else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
+                profilePhoto = onCaptureImageResult(data);
         }
     }
 
-    private void onCaptureImageResult(Intent data) {
+    private Bitmap onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -134,11 +155,11 @@ public class activitySignUp extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ivImage.setImageBitmap(thumbnail);
+        return thumbnail;
     }
 
     @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
+    private Bitmap onSelectFromGalleryResult(Intent data) {
 
         Bitmap bm=null;
         if (data != null) {
@@ -149,6 +170,71 @@ public class activitySignUp extends AppCompatActivity {
             }
         }
 
-        ivImage.setImageBitmap(bm);
+       return bm;
     }
+
+    private void signUp () {
+        Intent intent = new Intent(this, activityProfile.class);
+
+        Bundle PackageOfData;
+        PackageOfData= new Bundle();
+        String result ="";
+
+        PackageOfData.putString("name", name.getText().toString());
+        PackageOfData.putString("lastname", lastname.getText().toString());
+
+        String emailValidate = email.getText().toString();
+
+        if(Utility.isValidEmail(emailValidate)) {
+            PackageOfData.putString("email", emailValidate);
+        } else {
+            result = "Correo Electronico invalido";
+        }
+
+        String passwordText = password.getText().toString();
+        String confirm_passwordText=confirm_password.getText().toString();
+
+        if (passwordText == confirm_passwordText)
+        {
+            PackageOfData.putString("password", passwordText);
+        }else {
+            result += System.getProperty("line.seperator") + "Las contraseñas no coinciden";
+        }
+        String phoneText = phone.getText().toString();
+
+        if (Utility.isValidPhone(phoneText))
+        {
+            PackageOfData.putInt("phone", Integer.parseInt(phoneText));
+        }else {
+            result += System.getProperty("line.seperator") + "El Telefono Movil es incorrecto";
+        }
+
+        if (userChoosenTask != "Cancelar"){
+            byte[] profilePhotoBytes = Utility.convertImageToByte(profilePhoto);
+            PackageOfData.putByteArray("profilePhoto", profilePhotoBytes);
+        }else {
+            result += System.getProperty("line.separator") + "No seleccionaste foto de perfil";
+        }
+
+
+
+        if (result != "") {
+            intent.putExtras(PackageOfData);
+            startActivity(intent);
+        } else {
+
+            AlertDialog.Builder errorDisplay = new AlertDialog.Builder(this);
+            errorDisplay.setTitle("Error");
+            errorDisplay.setMessage(result);
+            errorDisplay.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface errorDisplay, int id) {
+                    errorDisplay.dismiss();
+                }
+            });
+            errorDisplay.show();
+        }
+
+        }
+    }
+
 }
