@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="10"
-    android:background="#b704c4"
+    android:background="#6A1B9A"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:paddingLeft="32dp"
         android:paddingRight="29dp"
-        android:text="Registrate y difruta"
+        android:text="Publica los platos que comiste"
         android:textColor="#ffffff"
         android:textSize="27sp"
         android:textStyle="bold" />
@@ -45,7 +45,7 @@
         android:gravity="center"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:text="More than 50 features in one application."
+        android:text="Sacale fotos a cada plato asi compartis con otros usuarios"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

@@ -1,10 +1,16 @@
 package com.example.matias.morfando;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 
 
+import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 /**
@@ -21,43 +27,31 @@ public class myIntro extends AppIntro {
         addSlide(AppIntroSampleSlider.newInstance(R.layout.activity_intro_second));
         addSlide(AppIntroSampleSlider.newInstance(R.layout.activity_intro_final));
 
-        // Show and Hide Skip and Done buttons
-        showStatusBar(false);
-        showSkipButton(false);
-
-        // Turn vibration on and set intensity
-        // You will need to add VIBRATE permission in Manifest file
-        setVibrate(true);
-        setVibrateIntensity(30);
-
         //Add animation to the intro slider
         setDepthAnimation();
+
+        askForPermissions(new String[]{Manifest.permission.CAMERA}, 3);
+        setSkipText("Saltear");
+        setDoneText("Terminar");
     }
 
     @Override
-    public void onSkipPressed() {
+    public void onSkipPressed(android.support.v4.app.Fragment currentFragment) {
         // Do something here when users click or tap on Skip button.
-        Toast.makeText(getApplicationContext(),
-                getString(R.string.app_intro_skip), Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getApplicationContext(), activityLogIn.class);
-        startActivity(i);
-    }
-
-    @Override
-    public void onNextPressed() {
-        // Do something here when users click or tap on Next button.
-    }
-
-    @Override
-    public void onDonePressed() {
-        // Do something here when users click or tap tap on Done button.
-        Intent i = new Intent(this, activityLogIn.class);
-        startActivity(i);
+        super.onSkipPressed(currentFragment);
         finish();
     }
 
     @Override
-    public void onSlideChanged() {
+    public void onDonePressed(android.support.v4.app.Fragment currentFragment) {
+        // Do something here when users click or tap tap on Done button.
+        super.onDonePressed(currentFragment);
+        finish();
+    }
+
+    @Override
+    public void onSlideChanged(@Nullable android.support.v4.app.Fragment oldFragment, @Nullable android.support.v4.app.Fragment newFragment) {
+        super.onSlideChanged(oldFragment, newFragment);
         // Do something here when slide is changed
     }
 
