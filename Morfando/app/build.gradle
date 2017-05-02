@@ -31,5 +31,20 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.paolorotolo:appintro:4.1.0'
+    compile 'com.github.florent37:materialtextfield:1.0.7'
+    /*
+    https://github.com/code-mc/material-icon-lib
+    https://github.com/florent37/MaterialTextField
+
+
+    https://github.com/wasabeef/awesome-android-ui/blob/master/pages/Menu.md
+
+
+    iconos: https://github.com/wasabeef/awesome-android-ui/blob/master/pages/Menu.md
+    posible menu
+    https://github.com/gotokatsuya/BlurredGridMenu
+    https://github.com/roughike/BottomBar
+     */
+
     testCompile 'junit:junit:4.12'
 }
