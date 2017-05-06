@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>s
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    s
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,7 +27,14 @@
             android:name=".myIntro"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".activityIntroSecond" />
-        <activity android:name=".activityIntroFinal"></activity>
+        <activity android:name=".activityIntroFinal" />
+        <activity android:name=".activityPreferences" />
+        <activity android:name=".activityPromotions" />
+        <activity android:name=".activityCalifications" />
+        <activity
+            android:name=".activitySettings"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".activityPayments"></activity>
     </application>
 
 </manifest>

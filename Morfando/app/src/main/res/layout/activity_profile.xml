@@ -64,10 +64,11 @@
                 android:layout_margin="5dp"
                 android:background="#fff"
                 android:clickable="true"
-                android:onClick="perfilBoton"
+                android:onClick="profileButtons"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Preferencias" />
+                android:text="Preferencias"
+                android:id="@+id/preferences"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -77,10 +78,11 @@
                 android:layout_marginTop="3dp"
                 android:background="#fff"
                 android:clickable="true"
-                android:onClick="perfilBoton"
+                android:onClick="profileButtons"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Promociones" />
+                android:text="Promociones"
+                android:id="@+id/promotions"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -90,10 +92,11 @@
                 android:layout_marginTop="3dp"
                 android:background="#fff"
                 android:clickable="true"
-                android:onClick="perfilBoton"
+                android:onClick="profileButtons"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Formas de Pago" />
+                android:text="Formas de Pago"
+                android:id="@+id/payments"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -101,10 +104,11 @@
                 android:layout_margin="5dp"
                 android:background="#fff"
                 android:clickable="true"
-                android:onClick="perfilBoton"
+                android:onClick="profileButtons"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Calificaciones" />
+                android:text="Calificaciones"
+                android:id="@+id/califications"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -112,10 +116,11 @@
                 android:layout_margin="5dp"
                 android:background="#fff"
                 android:clickable="true"
-                android:onClick="perfilBoton"
+                android:onClick="profileButtons"
                 android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Cerrar Sesion" />
+                android:text="Cerrar Sesion"
+                android:id="@+id/logOut"/>
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

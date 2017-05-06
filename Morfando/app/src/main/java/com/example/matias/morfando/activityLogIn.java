@@ -23,7 +23,7 @@ public class activityLogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        /*Thread t = new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 //  Intro App Initialize SharedPreferences
@@ -45,10 +45,7 @@ public class activityLogIn extends AppCompatActivity {
                 }
             }
         });
-        t.start(); */
-
-        Intent i = new Intent(this, myIntro.class);
-        startActivity(i);
+        t.start();
 
     }
 
