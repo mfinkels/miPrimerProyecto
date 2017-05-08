@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by HP on 10/23/2016.
+ * Created by Matias on 5/8/2017.
  */
+
 public class AppIntroSampleSlider extends Fragment {
     //Layout id
     private static final String ARG_LAYOUT_RES_ID = "layoutResId";

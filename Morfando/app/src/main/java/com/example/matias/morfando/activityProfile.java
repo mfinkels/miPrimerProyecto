@@ -49,7 +49,7 @@ public class activityProfile extends AppCompatActivity {
 
         TextView buttonProfilePressed;
         buttonProfilePressed = (TextView)ButtonsPressed;
-        Intent i;
+        Intent i = new Intent();
         Bundle packageOfData;
         packageOfData=this.getIntent().getExtras();
         i.putExtras(packageOfData);
