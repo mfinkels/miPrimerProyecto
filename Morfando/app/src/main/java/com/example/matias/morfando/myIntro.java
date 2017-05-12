@@ -27,6 +27,7 @@ public class myIntro extends AppIntro {
         addSlide(AppIntroSampleSlider.newInstance(R.layout.activity_intro_second));
         addSlide(AppIntroSampleSlider.newInstance(R.layout.activity_intro_final));
 
+        showStatusBar(false);
         //Add animation to the intro slider
         setDepthAnimation();
 

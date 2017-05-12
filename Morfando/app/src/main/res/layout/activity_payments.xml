@@ -53,7 +53,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/short_description"
+                    android:id="@+id/textDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/creditCardName"

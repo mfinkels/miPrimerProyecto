@@ -101,7 +101,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Telefono Movil"
-                    android:inputType="textPhonetic" />
+                    android:digits="0123456789"
+                    android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
