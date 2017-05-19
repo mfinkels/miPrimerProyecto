@@ -10,12 +10,13 @@ namespace ApiEjemplo.Models
         public int id { get; set; }
         public string name { get; set; }
         public string lastName { get; set; }
+        public string photo { get; set; }
         public int phone { get; set; }
         public string address { get; set; }
-        public string promotions { get; set; }
+        public int promotions { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public string payments { get; set; }
+        public int payments { get; set; }
 
     }
 }
