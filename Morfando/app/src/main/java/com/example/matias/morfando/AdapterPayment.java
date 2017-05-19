@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Matias on 5/12/2017.
@@ -51,6 +53,7 @@ public class AdapterPayment extends BaseAdapter {
         returnView = inflater.inflate(R.layout.listview_payment_item, groupActual, false);
 
 
+        // no encuentra la imagen ni imageView
         ImageView creditCardImage;
         creditCardImage = (ImageView) returnView.findViewById(R.id.creditCardImage);
 
@@ -81,9 +84,9 @@ public class AdapterPayment extends BaseAdapter {
         TextView validThru;
         validThru = (TextView)returnView.findViewById(R.id.validThru);
 
-        int validThruToActualPosition;
+        Date validThruToActualPosition;
         validThruToActualPosition = getItem(positionActual).validThru;
-        textHolder.setText(validThruToActualPosition);
+        textHolder.setText(validThruToActualPosition.toString());
 
 
         return returnView;

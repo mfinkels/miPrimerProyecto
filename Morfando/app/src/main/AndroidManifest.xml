@@ -34,7 +34,8 @@
         <activity
             android:name=".activitySettings"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".activityPayments"></activity>
+        <activity android:name=".activityPayments" />
+        <activity android:name=".activityRestaurantMain"></activity>
     </application>
 
 </manifest>

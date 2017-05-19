@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class Payment extends Activity {
     public Drawable iconCreditCard;
     public int numberCreditCard;
     public String holderCreditCard;
-    public int validThru;
+    public Date validThru;
     public String opereted;
 
     public ArrayList<Payment> getAll() {
@@ -30,13 +31,10 @@ public class Payment extends Activity {
         myPayment = new Payment();
 
         myPayment.holderCreditCard = "Matias Finkelstein";
-
-
         myPayment.iconCreditCard = getResources().getDrawable(R.drawable.mastercard);
         myPayment.numberCreditCard = 2345;
         myPayment.opereted = "MasterCard";
-        myPayment.validThru = 1019;
-
+        myPayment.validThru = new Date(2017, 12, 1);
         list.add(myPayment);
         return list;
 
