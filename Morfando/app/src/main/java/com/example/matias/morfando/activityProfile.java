@@ -49,10 +49,7 @@ public class activityProfile extends AppCompatActivity {
 
         TextView buttonProfilePressed;
         buttonProfilePressed = (TextView)ButtonsPressed;
-        Intent i = new Intent();
-        Bundle packageOfData;
-        packageOfData=this.getIntent().getExtras();
-        i.putExtras(packageOfData);
+        Intent i = new Intent(activityProfile.this, activityPreferences.class);
 
         switch (buttonProfilePressed.getId()){
             case R.id.preferences:
