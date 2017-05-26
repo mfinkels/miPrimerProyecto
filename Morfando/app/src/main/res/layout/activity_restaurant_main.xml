@@ -3,5 +3,10 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ingresaste"
+        android:textSize="40dp"/>
 
 </LinearLayout>

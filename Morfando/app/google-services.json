@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "266324580217",
+    "firebase_url": "https://miprimerproyecto-18c38.firebaseio.com",
+    "project_id": "miprimerproyecto-18c38",
+    "storage_bucket": "miprimerproyecto-18c38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266324580217:android:d4b3ab7ca7e15125",
+        "android_client_info": {
+          "package_name": "com.example.matias.morfando"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266324580217-p766k8pom0muvjr4kp1u7840a75ihslo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEqoa1VH4tihaWcaMI5of_GlsaR1iQiUE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
