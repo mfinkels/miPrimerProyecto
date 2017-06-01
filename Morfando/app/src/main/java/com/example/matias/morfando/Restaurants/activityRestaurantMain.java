@@ -1,7 +1,9 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Restaurants;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.matias.morfando.R;
 
 public class activityRestaurantMain extends Activity {
 

@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Class;
 
 import android.Manifest;
 import android.annotation.TargetApi;

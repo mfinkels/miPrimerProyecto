@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Sign;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
@@ -7,14 +7,12 @@ import android.support.v7.widget.ButtonBarLayout;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseUser;
+import com.example.matias.morfando.R;
 
 public class ActivityResetPassword extends AppCompatActivity {
 
     EditText email;
     Button resetPassword;
-
-    private FirebaseUser auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

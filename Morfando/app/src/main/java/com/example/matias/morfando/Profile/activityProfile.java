@@ -1,14 +1,19 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Profile;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.matias.morfando.R;
+import com.example.matias.morfando.Class.Utility;
+import com.example.matias.morfando.Profile.activityProfile;
+import com.example.matias.morfando.Profile.Payments.activityPayments;
+import com.example.matias.morfando.Profile.Promotions.activityPromotions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

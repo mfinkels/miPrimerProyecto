@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Sign;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,25 +17,18 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.matias.morfando.R;
+import com.example.matias.morfando.Restaurants.activityRestaurantMain;
+import com.example.matias.morfando.Intro.myIntro;
 
 public class activityLogIn extends AppCompatActivity {
 
     public boolean isFirstStart;
-    private  FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(activityLogIn.this, activityRestaurantMain.class));
-            finish();
-        }
+
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -68,7 +61,6 @@ public class activityLogIn extends AppCompatActivity {
         email=(EditText)findViewById(R.id.emailUser);
         password=(EditText)findViewById(R.id.passwordUser);
 
-        loginUser(email.getText().toString(), password.getText().toString());
     }
 
     public void signUp(View viewRecibida){
@@ -93,17 +85,4 @@ public class activityLogIn extends AppCompatActivity {
         actividadDestino=new Intent(activityLogIn.this, ActivityResetPassword.class);
     }
 
-    private void loginUser(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            // error al logearse
-                        } else {
-                            startActivity(new Intent(activityLogIn.this, activityRestaurantMain.class));
-                        }
-                    }
-                });
-    }
 }

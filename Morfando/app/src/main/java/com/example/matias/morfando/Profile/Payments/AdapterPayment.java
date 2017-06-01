@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Profile.Payments;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.matias.morfando.Class.*;
+import com.example.matias.morfando.Class.Payment;
+import com.example.matias.morfando.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

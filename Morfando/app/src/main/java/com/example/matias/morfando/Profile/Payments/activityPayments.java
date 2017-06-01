@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Profile.Payments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.matias.morfando.R;
 
 public class activityPayments extends AppCompatActivity {
 

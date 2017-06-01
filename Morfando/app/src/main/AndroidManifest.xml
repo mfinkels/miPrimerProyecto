@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    s
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,29 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitySignUp" />
-        <activity android:name=".activityLogIn">
+
+
+        <activity android:name="activityLogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activityProfile" />
-        <activity android:name=".ActivityResetPassword" />
+
+        <activity android:name="activitySignUp" />
+        <activity android:name="$Profile.activityProfile" />
+        <activity android:name="$Sign.ActivityResetPassword" />
         <activity
-            android:name=".myIntro"
+            android:name="$Intro.myIntro"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".activityIntroSecond" />
-        <activity android:name=".activityIntroFinal" />
-        <activity android:name=".activityPreferences" />
-        <activity android:name=".activityPromotions" />
-        <activity android:name=".activityCalifications" />
-        <activity
-            android:name=".activitySettings"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".activityPayments" />
-        <activity android:name=".activityRestaurantMain"></activity>
+        <activity android:name="$Intro.activityIntroSecond" />
+        <activity android:name="$Intro.activityIntroFinal" />
+        <activity android:name="$Profile.activityPreferences" />
+        <activity android:name="$Profile.Promotions.activityPromotions" />
+        <activity android:name="$Profile.activityCalifications" />
+        <activity android:name="$Class.Payment" />
+        <activity android:name="$Restaurants.activityRestaurantMain"></activity>
     </application>
 
 </manifest>

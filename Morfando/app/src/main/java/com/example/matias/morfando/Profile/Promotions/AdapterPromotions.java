@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Profile.Promotions;
 
 import android.content.Context;
 import android.support.v4.view.LayoutInflaterFactory;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.example.matias.morfando.Class.*;
+import com.example.matias.morfando.Class.Promotion;
+import com.example.matias.morfando.R;
 
 import java.util.ArrayList;
 

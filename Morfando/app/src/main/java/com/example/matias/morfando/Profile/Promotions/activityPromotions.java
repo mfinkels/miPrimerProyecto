@@ -1,8 +1,11 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Profile.Promotions;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import com.example.matias.morfando.Class.*;
+import com.example.matias.morfando.Class.Promotion;
+import com.example.matias.morfando.R;
 
 import java.util.ArrayList;
 

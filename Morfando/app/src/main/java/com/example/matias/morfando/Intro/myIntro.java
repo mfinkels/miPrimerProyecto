@@ -1,5 +1,6 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Intro;
 
+import com.example.matias.morfando.R;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 

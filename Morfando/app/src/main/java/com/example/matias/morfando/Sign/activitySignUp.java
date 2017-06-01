@@ -1,4 +1,4 @@
-package com.example.matias.morfando;
+package com.example.matias.morfando.Sign;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -23,6 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import android.os.Vibrator;
+
+import com.example.matias.morfando.R;
+import com.example.matias.morfando.Class.Utility;
 
 
 
@@ -73,7 +76,7 @@ public class activitySignUp extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+            case com.example.matias.morfando.Class.Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if(userChoosenTask.equals("Tomar Foto"))
                         cameraIntent();
@@ -95,7 +98,7 @@ public class activitySignUp extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result=Utility.checkPermission(activitySignUp.this);
+                boolean result= Utility.checkPermission(activitySignUp.this);
 
                 if (items[item].equals("Tomar Foto")) {
                     userChoosenTask ="Tomar Foto";
@@ -183,7 +186,9 @@ public class activitySignUp extends AppCompatActivity {
     }
 
     private void signUp () {
-        Intent intent = new Intent(this, activityProfile.class);
+
+
+        Intent intent = new Intent(this, com.example.matias.morfando.Profile.activityProfile.class);
 
         Bundle PackageOfData;
         PackageOfData= new Bundle();
