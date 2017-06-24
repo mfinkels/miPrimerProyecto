@@ -1,4 +1,5 @@
-﻿using ApiEjemplo.Data;
+﻿
+using ApiEjemplo.Data;
 using ApiEjemplo.Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,17 @@ namespace ApiEjemplo.Controllers
 {
     public class UserController : ApiController
     {
+        // get all the users
         // GET api/<controller>
         public IList<User> Get()
         {
             return UserData.getAll();
         }
 
+        // get one user by Id
         // GET api/<controller>/5
         [ResponseType(typeof(User))]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult GetById(int id)
         {
             User user = UserData.getById(id);
             if (user == null)
@@ -30,8 +33,9 @@ namespace ApiEjemplo.Controllers
             return Ok(user);
         }
 
+        // by the email and password you get the user
         [Route("api/user/{email}/{password}")]
-        public IHttpActionResult Get(string email, string password)
+        public IHttpActionResult GetLogged(string email, string password)
         {
             User user = new User();
             user = UserData.getUser(email, password);
@@ -39,6 +43,33 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Email o contrasena incorrecta.");
             }
             return Ok(user);
+        }
+
+        // return the promotion by Id
+        [Route("api/promotion/{idPromotion}")]
+        public IHttpActionResult GetPromotion(int idPromotion)
+        {
+            Promotion p = new Promotion();
+            p = PromotionData.getById(idPromotion);
+            if (p == null)
+            {
+                return BadRequest("Promotion doesn't exist.");
+            }
+            return Ok(p);
+        }
+
+        [Route("api/user/promotion/{id}")]
+        // return the promotion of user
+        public IList<Promotion> GetPromotionUser(int id)
+        {
+            return PromotionData.getByIdUser(id);
+        }
+
+        [Route("api/user/reservation/{id}")]
+        // return the reservation of user
+        public IList<Reservation> getReservationUser(int id)
+        {
+            return ReservationData.getByIdUser(id);
         }
 
 
@@ -66,6 +97,16 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             UserData.Update(user);
+            return Ok();
+        }
+        // DELETE: api/Persona/5
+        public IHttpActionResult Delete(int id)
+        {
+            if (UserData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            UserData.Delete(id);
             return Ok();
         }
     }

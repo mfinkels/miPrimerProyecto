@@ -41,7 +41,7 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             RestaurantData.Insert(resto);
-            return Ok();
+            return Ok(resto);
         }
 
         // PUT api/<controller>/5
@@ -56,7 +56,7 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             RestaurantData.Update(resto);
-            return Ok();
+            return Ok(resto);
         }
 
         // DELETE: api/<controller>/5

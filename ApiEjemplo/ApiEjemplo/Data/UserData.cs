@@ -10,15 +10,23 @@ namespace ApiEjemplo.Data
     public class UserData
     {
         public static void insert(User user) {
-            string sInsert = "Insert into user (Nombre, lastName, photo, phone, address, promotions, email, password, payments) values ('" + user.name + "','" + user.lastName + "','" + user.photo + "'," + user.phone + ",'" + user.address + "'," + user.promotions + ",'" + user.email + "','" + user.password + "'," + user.payments + ")";
+            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "altitude", "latitude" , "photo", "phone", "email" };
+            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.altitude, user.latitude, user.photo, user.phone, user.email };
+            string sInsert = QueryHelper.insert("user", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
 
         public static void Update(User user) {
-            string sUpdate = "update user set name='" + user.name + "',lastName='" + user.lastName + "',photo='" + user.photo + "',phone='"+ user.phone + "',address='" + user.address + "',promotions=" + Convert.ToString(user.promotions) + ",email='"+ user.email + "',password='" + user.password + "',payments=" + Convert.ToString(user.payments) + " where idUser=" + Convert.ToString(user.idUser);
+            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "altitude", "latitude", "photo", "phone", "email" };
+            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.altitude, user.latitude, user.photo, user.phone, user.email };
+            string sUpdate = QueryHelper.update("user", row, values, "idUser", user.idUser);
             DBHelper.EjecutarIUD(sUpdate);
         }
-
+        public static void Delete(int id)
+        {
+            string sUpdate = QueryHelper.delete("user", "idUser", id);
+            DBHelper.EjecutarIUD(sUpdate);
+        }
         public static User getById(int id) {
             string select = "select * from user where idUser=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
@@ -46,7 +54,7 @@ namespace ApiEjemplo.Data
 
         public static List<User> getAll()
         {
-            string select = "select * from personas";
+            string select = "select * from user";
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<User> list = new List<User>();
             User user;
@@ -66,15 +74,15 @@ namespace ApiEjemplo.Data
         {
             User user = new User();
             user.idUser = row.Field<int>("idUser");
+            user.idPromotion = row.Field<int>("idPromotion");
             user.name = row.Field<string>("name");
             user.lastName = row.Field<string>("lastName");
-            user.photo = row.Field<string>("photo");
-            user.phone = row.Field<int>("phone");
-            user.address = row.Field<string>("address");
-            user.promotions = row.Field<int>("promotions");
-            user.email = row.Field<string>("email");
             user.password = row.Field<string>("password");
-            user.payments = row.Field<int>("payments");
+            user.altitude = row.Field<string>("altitude");
+            user.latitude = row.Field<string>("latitude");
+            user.photo = row.Field<string>("photo");
+            user.phone = row.Field<string>("phone");
+            user.email = row.Field<string>("email");
             return user;
         }
     }
