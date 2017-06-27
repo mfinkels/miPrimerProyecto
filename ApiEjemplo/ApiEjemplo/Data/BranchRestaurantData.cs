@@ -11,15 +11,15 @@ namespace ApiEjemplo.Data
     {
         public static void insert(BranchRestaurant branch)
         {
-            string[] row = new string[] { "idRangePriceBranch", "idRestaurant", "name", "altitude", "latitude", "averageCalification" };
-            object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.altitude, branch.latitude, branch.averageCalification };
+            string[] row = new string[] { "idRangePriceBranch", "idRestaurant", "name","latitude", "longitude", "averageCalification" };
+            object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.latitude, branch.longitude, branch.averageCalification };
             string sInsert = QueryHelper.insert("branch_restaurant", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
         public static void update(BranchRestaurant branch)
         {
-            string[] row = new string[6] { "idRangePriceBranch", "idRestaurant", "name", "altitude", "latitude", "averageCalification" };
-            object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.altitude, branch.latitude, branch.averageCalification };
+            string[] row = new string[6] { "idRangePriceBranch", "idRestaurant", "name", "latitude", "longitude", "averageCalification" };
+            object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.latitude, branch.longitude, branch.averageCalification };
             string sUpdate = QueryHelper.update("branch_restaurant", row, values, "idBranchRestaurant", branch.idBranchRestaurant);
             DBHelper.EjecutarIUD(sUpdate);
         }
@@ -39,8 +39,13 @@ namespace ApiEjemplo.Data
                 branch = getByRow(dt.Rows[0]);
                 branch.photo = PhotoBranchData.getByBranch(branch.idBranchRestaurant);
                 branch.cuisine = CuisineBranchData.getByBranch(branch.idBranchRestaurant);
-                //branch.menu = MenuBranch.;
+                branch.filter = FilterBranchData.getByBranch(branch.idBranchRestaurant);
                 branch.promotion = BranchPromotionData.getAllByBranch(branch.idBranchRestaurant);
+                branch.menu = TypeMenuData.getMenuByBranch(branch.idBranchRestaurant);
+                branch.service = ServiceBranchData.getServicesByRestaurants(branch.idBranchRestaurant);
+                branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
+                branch.restaurant = RestaurantData.getById(branch.idBranchRestaurant);
+                branch.RangePrice = RangePriceBranchData.getById(branch.idRangePriceBranch);
                 return branch;
             }
             return null;
@@ -61,6 +66,11 @@ namespace ApiEjemplo.Data
                     branch.cuisine = CuisineBranchData.getByBranch(branch.idBranchRestaurant);
                     branch.filter = FilterBranchData.getByBranch(branch.idBranchRestaurant);
                     branch.promotion = BranchPromotionData.getAllByBranch(branch.idBranchRestaurant);
+                    branch.menu = TypeMenuData.getMenuByBranch(branch.idBranchRestaurant);
+                    branch.service = ServiceBranchData.getServicesByRestaurants(branch.idBranchRestaurant);
+                    branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
+                    branch.restaurant = RestaurantData.getById(branch.idBranchRestaurant);
+                    branch.RangePrice = RangePriceBranchData.getById(branch.idRangePriceBranch);
                     list.Add(branch);
                 }
                 branch = getByRow(dt.Rows[0]);
@@ -75,8 +85,8 @@ namespace ApiEjemplo.Data
             branch.idRangePriceBranch = row.Field<int>("idRangePriceBranch");
             branch.idRestaurant = row.Field<int>("idRestaurant");
             branch.name = row.Field<string>("name");
-            branch.altitude = row.Field<string>("altitude");
             branch.latitude = row.Field<string>("latitude");
+            branch.longitude = row.Field<string>("longitude");
             branch.averageCalification = row.Field<int>("averageCalification");
             return branch;
         }

@@ -77,7 +77,7 @@ namespace ApiEjemplo.Data
         private static PhotoBranch getByRow(DataRow row)
         {
             PhotoBranch pBranch = new PhotoBranch();
-            pBranch.idBranchPhoto = row.Field<int>("idBranchPhoto");
+            pBranch.idBranchPhoto = row.Field<int>("idPhotoBranch");
             pBranch.idBranchRestaurant = row.Field<int>("idBranchRestaurant");
             pBranch.idUser = row.Field<int>("idUser");
             pBranch.photo = row.Field<string>("photo");

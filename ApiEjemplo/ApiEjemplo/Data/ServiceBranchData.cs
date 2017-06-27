@@ -37,18 +37,19 @@ namespace ApiEjemplo.Data
             return null;
         }
 
-        public static List<ServiceBranch> getAll()
+        public static List<Service> getServicesByRestaurants(int id)
         {
-            string select = "select * from service_branch";
+            string select = "select * from service_branch Where idBranchRestaurant=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
-            List<ServiceBranch> list = new List<ServiceBranch>();
+            List<Service> list = new List<Service>();
             ServiceBranch sBranch;
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
                 {
                     sBranch = getByRow(row);
-                    list.Add(sBranch);
+                    sBranch.service = ServiceData.getById(sBranch.idService);
+                    list.Add(sBranch.service);
                 }
                 sBranch = getByRow(dt.Rows[0]);
             }

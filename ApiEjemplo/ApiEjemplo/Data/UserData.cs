@@ -10,15 +10,15 @@ namespace ApiEjemplo.Data
     public class UserData
     {
         public static void insert(User user) {
-            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "altitude", "latitude" , "photo", "phone", "email" };
-            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.altitude, user.latitude, user.photo, user.phone, user.email };
+            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "latitude", "longitude", "photo", "phone", "email" };
+            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.latitude, user.longitude, user.photo, user.phone, user.email };
             string sInsert = QueryHelper.insert("user", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
 
         public static void Update(User user) {
-            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "altitude", "latitude", "photo", "phone", "email" };
-            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.altitude, user.latitude, user.photo, user.phone, user.email };
+            string[] row = new string[] { "idPromotion", "name", "lastName", "password", "latitude", "longitude", "photo", "phone", "email" };
+            object[] values = new object[] { user.idPromotion, user.name, user.lastName, user.password, user.latitude, user.longitude, user.photo, user.phone, user.email };
             string sUpdate = QueryHelper.update("user", row, values, "idUser", user.idUser);
             DBHelper.EjecutarIUD(sUpdate);
         }
@@ -78,8 +78,8 @@ namespace ApiEjemplo.Data
             user.name = row.Field<string>("name");
             user.lastName = row.Field<string>("lastName");
             user.password = row.Field<string>("password");
-            user.altitude = row.Field<string>("altitude");
             user.latitude = row.Field<string>("latitude");
+            user.longitude = row.Field<string>("longitude");
             user.photo = row.Field<string>("photo");
             user.phone = row.Field<string>("phone");
             user.email = row.Field<string>("email");

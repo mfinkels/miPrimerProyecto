@@ -59,18 +59,19 @@ namespace ApiEjemplo.Data
             }
             return list;
         }
-        public static List<BranchPromotion> getAllByRestaurant(int id)
+        public static List<Promotion> getAllByRestaurant(int id)
         {
-            string select = "select * from branch_promotion where idRestaurant=" + id.ToString();
+            string select = "select * from branch_promotion where idBranchRestaurant=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
-            List<BranchPromotion> list = new List<BranchPromotion>();
+            List<Promotion> list = new List<Promotion>();
             BranchPromotion bProm;
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
                 {
                     bProm = getByRow(row);
-                    list.Add(bProm);
+                    bProm.promotion = PromotionData.getById(bProm.idPromotion);
+                    list.Add(bProm.promotion);
                 }
                 bProm = getByRow(dt.Rows[0]);
             }
