@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.matias.morfando">
+    package="com.morfando.android.morfando">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,28 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-        <activity android:name="activityLogIn">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="activitySignUp" />
-        <activity android:name="$Profile.activityProfile" />
-        <activity android:name="$Sign.ActivityResetPassword" />
-        <activity
-            android:name="$Intro.myIntro"
-            android:theme="@style/FullscreenTheme" />
-        <activity android:name="$Intro.activityIntroSecond" />
-        <activity android:name="$Intro.activityIntroFinal" />
-        <activity android:name="$Profile.activityPreferences" />
-        <activity android:name="$Profile.Promotions.activityPromotions" />
-        <activity android:name="$Profile.activityCalifications" />
-        <activity android:name="$Class.Payment" />
-        <activity android:name="$Restaurants.activityRestaurantMain"></activity>
     </application>
 
 </manifest>

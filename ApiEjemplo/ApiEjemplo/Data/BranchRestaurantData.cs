@@ -87,7 +87,7 @@ namespace ApiEjemplo.Data
             branch.name = row.Field<string>("name");
             branch.latitude = row.Field<string>("latitude");
             branch.longitude = row.Field<string>("longitude");
-            branch.averageCalification = row.Field<int>("averageCalification");
+            branch.averageCalification = row.Field<double>("averageCalification");
             return branch;
         }
     }

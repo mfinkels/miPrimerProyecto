@@ -85,9 +85,9 @@ namespace ApiEjemplo.Data
             PlateMenu p = new PlateMenu();
             p.idPlateMenu = row.Field<int>("idPlateMenu");
             p.idCategoryPlate = row.Field<int>("idCategoryPlate");
-            p.averageCalification = row.Field<int>("averageCalification");
+            p.averageCalification = row.Field<double>("averageCalification");
             p.name = row.Field<string>("name");
-            p.price = row.Field<int>("price");
+            p.price = row.Field<double>("price");
             p.description = row.Field<string>("description");
             return p;
         }

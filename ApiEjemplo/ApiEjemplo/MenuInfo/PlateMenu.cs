@@ -9,9 +9,9 @@ namespace ApiEjemplo.MenuInfo
     {
         public int idPlateMenu { get; set; }
         public int idCategoryPlate { get; set; }
-        public int averageCalification { get; set; }
+        public double averageCalification { get; set; }
         public string name { get; set; }
-        public int price { get; set; }
+        public double price { get; set; }
         public string description { get; set; }
         public List<PhotoPlate> photo { get; set; }
         public CategoryPlate category { get; set; }

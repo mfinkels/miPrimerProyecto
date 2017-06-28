@@ -27,7 +27,7 @@ namespace ApiEjemplo.BranchInfo
         public string latitude { get; set; }
         public string longitude { get; set; }
 
-        public int averageCalification { get; set; }
+        public double averageCalification { get; set; }
         public List<Promotion> promotion { get; set; }
     }
 }
