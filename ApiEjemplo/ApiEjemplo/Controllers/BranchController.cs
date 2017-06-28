@@ -15,9 +15,10 @@ namespace ApiEjemplo.Controllers
     public class BranchController : ApiController
     {
         // GET api/<controller>
-        public IList<BranchRestaurant> Get()
+        [Route("api/branch/{limit}/{offset}")]
+        public IList<BranchRestaurant> Get(int limit, int offset)
         {
-            return BranchRestaurantData.getAll();
+            return BranchRestaurantData.getAll(limit, offset);
         }
         // GET api/<controller>/5
         [ResponseType(typeof(BranchRestaurant))]

@@ -51,9 +51,9 @@ namespace ApiEjemplo.Data
             return null;
         }
 
-        public static List<BranchRestaurant> getAll()
+        public static List<BranchRestaurant> getAll(int limit, int offset)
         {
-            string select = "select * from branch_restaurant";
+            string select = "select * from branch_restaurant LIMIT " + limit.ToString() + " OFFSET " + offset.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<BranchRestaurant> list = new List<BranchRestaurant>();
             BranchRestaurant branch;
