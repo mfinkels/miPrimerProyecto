@@ -115,16 +115,17 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
                         JSONObject obj = jsonBranch.getJSONObject(i);
                         b.idBranch = obj.getInt("idBranchRestaurant");
                         JSONObject resto = obj.getJSONObject("restaurant");
-                        //aca ha un error
+                        /*//aca ha un error
                         b.restaurant.idRestaurant = resto.getInt("idRestaurant");
                         b.restaurant.name = resto.getString("name");
                         b.restaurant.description = resto.getString("description");
+                        */
                         JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
                         ArrayList<SocialNetwork> list = new ArrayList<SocialNetwork>();
                         for (int j = 0; j < socialNetwork.length(); j++){
                             JSONObject social = socialNetwork.getJSONObject(j);
                             SocialNetwork sn = new SocialNetwork();
-                            sn.idSocialNetwork = social.getInt("idSocialNetwork");
+                            sn.idSocialNetwork = social.getInt("idSocialNetworkRestaurant");
                             sn.name = social.getString("name");
                             sn.value = social.getString("value");
                             list.add(sn);
@@ -223,7 +224,6 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
                     return branchList;
                 }catch (JSONException e) {
                     Log.d("error", e.getMessage());
-                    String a = "puta";
                     return null;
                 }
 

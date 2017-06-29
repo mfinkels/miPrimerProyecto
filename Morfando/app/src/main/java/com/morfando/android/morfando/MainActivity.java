@@ -57,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragLogIn;
         fragLogIn = new logInFrag();
 
+        Fragment fm;
+        fm = new restaurantFrag();
+
         trans=adminFragment.beginTransaction();
-        trans.replace(R.id.fragmentConteiner, fragLogIn);
+        trans.replace(R.id.fragmentConteiner, fm);
         trans.commit();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);

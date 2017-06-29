@@ -32,6 +32,7 @@ namespace ApiEjemplo.Data
             if (dt.Rows.Count > 0)
             {
                 snResto = getByRow(dt.Rows[0]);
+                snResto.type = TypeSocialNetworkData.getById(snResto.idTypeSocialNetwork);
                 return snResto;
             }
             return null;
