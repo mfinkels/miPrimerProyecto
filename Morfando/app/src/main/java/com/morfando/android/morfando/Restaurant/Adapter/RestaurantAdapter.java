@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Restaurant;
 import com.morfando.android.morfando.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Matias on 6/18/2017.
@@ -22,7 +25,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
 
     private int mNumberItems;
 
-    private Restaurant[] mRestaurantData;
+    private ArrayList<Branch> mBranchData;
 
     final private ListItemClickListener mOnClickListener;
 
@@ -62,8 +65,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
         return mNumberItems;
     }
 
-    public void setmRestaurantData (Restaurant[] data) {
-        mRestaurantData = data;
+    public void setmRestaurantData (ArrayList<Branch> data) {
+        mBranchData = data;
         notifyDataSetChanged();
     }
 
@@ -90,8 +93,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
          * @param listIndex Position of the item in the list
          */
         void bind(int listIndex) {
-            Restaurant resto = mRestaurantData[listIndex];
-            this.resName.setText(resto.name);
+            Branch b = mBranchData.get(listIndex);
+            this.resName.setText(b.name);
         }
 
         public void onClick(View v) {

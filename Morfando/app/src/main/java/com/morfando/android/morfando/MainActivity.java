@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
+import com.morfando.android.morfando.Class.Promotion;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
 import com.morfando.android.morfando.Profile.profileFrag;
@@ -173,9 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void logInPressed(String email, String password) {
         new LogInUser().execute(email, password);
-        if (!userLoggedIn){
-            Toast.makeText(this,"Email or password incorrect", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public class LogInUser extends AsyncTask<String, Void, User> {
@@ -188,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
                 Fragment resto;
                 resto = new restaurantFrag();
                 updateFragment(resto);
+            } else {
+                Toast.makeText(getApplicationContext(),"Email or password incorrect", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://localhost/api/user/" + email + "/" + password)
+                    .url("http://apimorfandoort.azurewebsites.net/api/user/" + email + "/" + password)
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (JSONException e){
                     Log.d("Error JSON",e.getMessage());
+                    String a = "puta";
                     return null;
                 }
             } catch (IOException e) {

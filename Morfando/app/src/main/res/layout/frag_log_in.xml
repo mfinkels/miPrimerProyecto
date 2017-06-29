@@ -37,8 +37,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo Electronico">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:layout_width="match_parent"
@@ -52,8 +51,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:layout_width="match_parent"

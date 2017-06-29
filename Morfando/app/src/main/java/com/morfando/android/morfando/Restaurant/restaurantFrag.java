@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonIOException;
 import com.morfando.android.morfando.Class.Branch;
@@ -69,7 +70,8 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
 
         resAdapter = new RestaurantAdapter(30, this);
         listRestaurant.setAdapter(resAdapter);
-        listRestaurant.setVisibility(View.VISIBLE);
+
+        new BranchGetAll().execute("http://apimorfandoort.azurewebsites.net/api/branch/1/0");
     }
 
     @Override
@@ -78,11 +80,17 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
     }
 
 
-    private class RestaurantGetAll extends AsyncTask<String, Void, ArrayList<Branch>> {
+    private class BranchGetAll extends AsyncTask<String, Void, ArrayList<Branch>> {
 
         protected void onPostExecute(ArrayList<Branch> datos) {
             super.onPostExecute(datos);
-            // parseo datos
+            if (datos != null){
+                listRestaurant.setVisibility(View.VISIBLE);
+                resAdapter.setmRestaurantData(datos);
+
+            } else {
+                Toast.makeText(main,"Error connection database", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
