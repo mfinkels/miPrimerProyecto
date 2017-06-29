@@ -92,7 +92,7 @@ namespace ApiEjemplo.Data
             snResto.idSocialNetworkRestaurant = row.Field<int>("idSocialNetworkRestaurant");
             snResto.idRestaurant = row.Field<int>("idRestaurant");
             snResto.idTypeSocialNetwork = row.Field<int>("idTypeSocialNetwork");
-            snResto.value = row.Field<int>("value");
+            snResto.value = row.Field<string>("value");
             return snResto;
         }
     }
