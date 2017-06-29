@@ -221,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (JSONException e){
                     Log.d("Error JSON",e.getMessage());
-                    String a = "puta";
                     return null;
                 }
             } catch (IOException e) {

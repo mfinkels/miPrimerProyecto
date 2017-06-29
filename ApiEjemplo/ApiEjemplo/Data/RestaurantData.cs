@@ -35,6 +35,7 @@ namespace ApiEjemplo.Data
             if (dt.Rows.Count > 0)
             {
                 resto = getByRow(dt.Rows[0]);
+                resto.socialNetwork = SocialNetworkRestaurantData.getAllByRestaurant(resto.idRestaurant);
                 return resto;
             }
             return null;

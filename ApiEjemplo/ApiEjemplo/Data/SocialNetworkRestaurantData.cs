@@ -37,6 +37,19 @@ namespace ApiEjemplo.Data
             return null;
         }
 
+        public static SocialNetworkRestaurant getByRestaurant(int id)
+        {
+            string select = "select * from social_network_restaurant where idRestaurant=" + id.ToString();
+            DataTable dt = DBHelper.EjecutarSelect(select);
+            SocialNetworkRestaurant snResto;
+            if (dt.Rows.Count > 0)
+            {
+                snResto = getByRow(dt.Rows[0]);
+                return snResto;
+            }
+            return null;
+        }
+
         public static List<SocialNetworkRestaurant> getAll()
         {
             string select = "select * from social_network_restaurant";

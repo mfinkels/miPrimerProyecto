@@ -11,6 +11,6 @@ namespace ApiEjemplo.Models
         public int idRestaurant { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public SocialNetworkRestaurant socialNetwork { get; set; }
+        public List<SocialNetworkRestaurant> socialNetwork { get; set; }
     }
 }

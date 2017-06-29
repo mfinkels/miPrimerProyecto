@@ -53,7 +53,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
     private RecyclerView listRestaurant;
     private RestaurantAdapter resAdapter;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {;
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_restaurant, group, false);
         main = (MainActivity)getActivity();
@@ -99,7 +99,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://ejemplo.com/branch")
+                    .url(url)
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
@@ -115,6 +115,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
                         JSONObject obj = jsonBranch.getJSONObject(i);
                         b.idBranch = obj.getInt("idBranchRestaurant");
                         JSONObject resto = obj.getJSONObject("restaurant");
+                        //aca ha un error
                         b.restaurant.idRestaurant = resto.getInt("idRestaurant");
                         b.restaurant.name = resto.getString("name");
                         b.restaurant.description = resto.getString("description");
@@ -222,6 +223,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
                     return branchList;
                 }catch (JSONException e) {
                     Log.d("error", e.getMessage());
+                    String a = "puta";
                     return null;
                 }
 
