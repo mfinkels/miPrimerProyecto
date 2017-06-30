@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
+import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Promotion;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
@@ -24,7 +25,9 @@ import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
 import com.morfando.android.morfando.Restaurant.Adapter.RestaurantAdapter;
+import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.restaurantFrag;
+import com.morfando.android.morfando.Restaurant.restaurantSingleFrag;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -57,11 +60,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragLogIn;
         fragLogIn = new logInFrag();
 
-        Fragment fm;
-        fm = new restaurantFrag();
-
         trans=adminFragment.beginTransaction();
-        trans.replace(R.id.fragmentConteiner, fm);
+        trans.replace(R.id.fragmentConteiner, fragLogIn);
         trans.commit();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
@@ -174,6 +174,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void BranchSelected(int id){
+        Bundle b = new Bundle();
+        b.putInt("id", id);
+        Fragment fm;
+        fm = new restaurantSingleFrag();
+        fm.setArguments(b);
+        updateFragment(fm);
+    }
+
 
     public void logInPressed(String email, String password) {
         new LogInUser().execute(email, password);
@@ -187,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 userLoggedIn = true;
                 myUser = datos;
                 Fragment resto;
-                resto = new restaurantFrag();
+                resto = new lvRestaurantFrag();
                 updateFragment(resto);
             } else {
                 Toast.makeText(getApplicationContext(),"Email or password incorrect", Toast.LENGTH_SHORT).show();

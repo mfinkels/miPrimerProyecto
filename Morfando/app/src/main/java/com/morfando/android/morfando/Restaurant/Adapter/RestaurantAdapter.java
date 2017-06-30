@@ -10,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.Restaurant;
 import com.morfando.android.morfando.R;
 
@@ -79,10 +80,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
         public NumberViewHolder(View itemView) {
             super(itemView);
 
-            resName = (TextView) itemView.findViewById(R.id.text_res_name);
-            priceRange = (TextView) itemView.findViewById(R.id.price_range);
-            calification = (RatingBar) itemView.findViewById(R.id.res_calification);
-            cuisine = (TextView)itemView.findViewById(R.id.text_res_cuisine);
+            resName = (TextView) itemView.findViewById(R.id.item_res_name);
+            priceRange = (TextView) itemView.findViewById(R.id.item_price_range);
+            calification = (RatingBar) itemView.findViewById(R.id.item_res_calification);
+            cuisine = (TextView)itemView.findViewById(R.id.item_res_cuisine);
             distance = (TextView)itemView.findViewById(R.id.textview_distance);
 
         }
@@ -95,6 +96,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
         void bind(int listIndex) {
             Branch b = mBranchData.get(listIndex);
             this.resName.setText(b.name);
+            this.priceRange.setText("$" + b.range.minimum + "- $" + b.range.maximum);
+            this.calification.setRating(b.averageCalification);
+            String cousines = "";
+            for (Cuisine c : b.cuisine) {
+                if (cousines.length() != 0){
+                    cousines += "|" + c.name;
+                }else {
+                    cousines = c.name;
+                }
+            }
+            this.cuisine.setText(cousines);
         }
 
         public void onClick(View v) {

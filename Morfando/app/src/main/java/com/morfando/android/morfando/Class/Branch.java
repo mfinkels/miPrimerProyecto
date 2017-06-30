@@ -27,5 +27,11 @@ public class Branch {
     public List<Promotion> promotion;
 
 
+    public Branch() {
+        this.restaurant = new Restaurant();
+        this.range = new RangePrice();
+    }
+
+
 
 }
