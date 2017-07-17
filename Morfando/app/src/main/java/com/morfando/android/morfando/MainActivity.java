@@ -1,7 +1,6 @@
 package com.morfando.android.morfando;
 
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -10,26 +9,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-import android.support.v7.widget.RecyclerView;
 
 import com.morfando.android.morfando.Class.Branch;
-import com.morfando.android.morfando.Class.Promotion;
+import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
 import com.morfando.android.morfando.Profile.profileFrag;
-import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
-import com.morfando.android.morfando.Restaurant.Adapter.RestaurantAdapter;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
-import com.morfando.android.morfando.Restaurant.restaurantFrag;
-import com.morfando.android.morfando.Restaurant.restaurantSingleFrag;
+import com.morfando.android.morfando.Restaurant.Single.restaurantSingleFrag;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONException;
@@ -46,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager adminFragment;
     FragmentTransaction trans;
 
-    private boolean userLoggedIn = false;
+    ParseQuery pq;
+
+    private Branch branch;
+
+    private boolean userLoggedIn;
     private User myUser;
 
     @Override
@@ -57,21 +54,38 @@ public class MainActivity extends AppCompatActivity {
 
         adminFragment = getSupportFragmentManager();
 
-        Fragment fragLogIn;
-        fragLogIn = new logInFrag();
+        Fragment lvRestaurantFrag;
+        lvRestaurantFrag = new lvRestaurantFrag();
 
         trans=adminFragment.beginTransaction();
-        trans.replace(R.id.fragmentConteiner, fragLogIn);
+        trans.replace(R.id.fragmentConteiner, lvRestaurantFrag);
         trans.commit();
+
+        pq = new ParseQuery();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_favorites) {
-                    // The tab with id R.id.tab_favorites was selected,
-                    // change your content accordingly.
+                Fragment fm;
+                switch (tabId){
+                    case R.id.tab_restaurant:
+                        fm = new lvRestaurantFrag();
+                        break;
+                    /*case R.id.tab_favorites:
+
+                        break;*/
+                    /*case R.id.tab_resevation:
+
+                        break;*/
+                    case R.id.tab_profile:
+                        fm = new profileFrag();
+                        break;
+                    default:
+                        fm = new lvRestaurantFrag();
+                        break;
                 }
+                updateFragment(fm);
             }
         });
     }
@@ -175,71 +189,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BranchSelected(int id){
-        Bundle b = new Bundle();
-        b.putInt("id", id);
-        Fragment fm;
-        fm = new restaurantSingleFrag();
-        fm.setArguments(b);
-        updateFragment(fm);
+        branch = pq.getBranch(id);
+        updateFragment(new restaurantSingleFrag());
+    }
+
+    public Branch getBranch(){
+        return branch;
     }
 
 
     public void logInPressed(String email, String password) {
-        new LogInUser().execute(email, password);
-    }
+        myUser = pq.logUser(email, password);
 
-    public class LogInUser extends AsyncTask<String, Void, User> {
-
-        protected void onPostExecute(User datos) {
-            super.onPostExecute(datos);
-            if (datos != null){
-                userLoggedIn = true;
-                myUser = datos;
-                Fragment resto;
-                resto = new lvRestaurantFrag();
-                updateFragment(resto);
-            } else {
-                Toast.makeText(getApplicationContext(),"Email or password incorrect", Toast.LENGTH_SHORT).show();
-            }
+        if (myUser != null){
+            userLoggedIn = true;
+            updateFragment(new lvRestaurantFrag());
+        } else {
+            Toast.makeText(this, "Error Log In",Toast.LENGTH_SHORT);
         }
-
-        @Override
-        protected User doInBackground(String... parametros) {
-            String email = parametros[0];
-            String password = parametros[1];
-
-
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("http://apimorfandoort.azurewebsites.net/api/user/" + email + "/" + password)
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                String resultado = response.body().string();
-                try {
-                    User myUser = new User();
-                    JSONObject json = new JSONObject(resultado);
-                    myUser.idUser = json.getInt("idUser");
-                    myUser.name = json.getString("name");
-                    myUser.lastName = json.getString("lastName");
-                    myUser.password = json.getString("password");
-                    myUser.latitude = json.getString("latitude");
-                    myUser.longitude = json.getString("longitude");
-                    myUser.photo = json.getString("photo");
-                    myUser.phone = json.getString("phone");
-                    myUser.email = json.getString("email");
-
-                    return myUser;
-                }
-                catch (JSONException e){
-                    Log.d("Error JSON",e.getMessage());
-                    return null;
-                }
-            } catch (IOException e) {
-                Log.d("Error",e.getMessage());             // Error de Network
-                return null;
-            }
-        }
-
     }
 }

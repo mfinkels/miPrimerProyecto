@@ -8,8 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="RatingBar" parent="Theme.AppCompat">
+    <style name="RatingBarCustom" parent="Theme.AppCompat">
         <item name="colorControlNormal">#FFFFFF</item>
         <item name="colorControlActivated">#FFFF66</item>
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 </resources>

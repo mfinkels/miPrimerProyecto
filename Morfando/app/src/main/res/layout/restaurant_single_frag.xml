@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_height="150dp"
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginLeft="10dp"
             android:layout_alignBottom="@id/imgSwitcherSingle">
             <TextView
             android:id="@+id/nameSingle"
@@ -26,130 +27,85 @@
             android:layout_height="wrap_content"
             android:text="Medium Text"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="25sp"/>
+            android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/cousineSingle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Italian | Pasta"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right|bottom"
+                android:orientation="vertical">
 
                 <RatingBar
                     android:id="@+id/calificationSingle"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:theme="@style/RatingBar"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
                     android:numStars="5"
                     android:rating="4.5"
-                    android:stepSize="0.1"/>
+                    android:stepSize="0.1"
+                    android:theme="@style/RatingBarCustom" />
 
                 <TextView
                     android:id="@+id/priceRangeSingle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
                     android:text="$$$"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/imagesConteiner">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_below="@+id/imagesConteiner">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/descriptionRestaurant"
-            android:text="este es un excelente resto de Villa Luro el mejor plato es  fideos"
-            android:textSize="15sp"
-            />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Social Network"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"
-            />
-            <LinearLayout
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/conteinerSocialNetwork">
-                <!-- buttons social network -->
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/conteinerRangePrice"
-                android:layout_marginTop="10dp">
-
-                <TextView
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Range Price:"
-                    android:textSize="20dp"
-                    />
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"/>
+            </android.support.design.widget.AppBarLayout>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/rangePrice"
-                    android:text="$200 a $400"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
-                    />
-
-            </LinearLayout>
-
-            <TextView
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cousines:"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sushi | Empanadas"
-                android:id="@+id/cousineRestaurant"
-                android:textSize="20dp"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Services:"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Wifi "
-                android:id="@+id/ServicesRestaurant"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"/>
-
-
+                android:layout_height="match_parent"
+                android:id="@+id/fragmentSingleRestaurant"></FrameLayout>
         </LinearLayout>
 
-    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnReservation"
+        android:text="Make Reservation"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

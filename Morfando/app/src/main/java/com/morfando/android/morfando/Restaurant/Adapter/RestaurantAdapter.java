@@ -1,6 +1,7 @@
 package com.morfando.android.morfando.Restaurant.Adapter;
 
 import android.content.Context;
+import android.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -97,7 +98,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Nu
             Branch b = mBranchData.get(listIndex);
             this.resName.setText(b.name);
             this.priceRange.setText("$" + b.range.minimum + "- $" + b.range.maximum);
-            this.calification.setRating(b.averageCalification);
+            this.calification.setRating(Float.parseFloat(b.averageCalification + ""));
             String cousines = "";
             for (Cuisine c : b.cuisine) {
                 if (cousines.length() != 0){

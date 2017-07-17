@@ -1,7 +1,7 @@
 <tabs>
     <!-- Restaurants -->
     <tab
-        id="@+id/tab_nearby"
+        id="@+id/tab_restaurant"
         icon="@drawable/ic_search"
         title="Restaurants" />
     <!-- Favorites -->
@@ -16,7 +16,7 @@
         title="Reservation" />
     <!-- Profile -->
     <tab
-        id="@+id/tab_friends"
+        id="@+id/tab_profile"
         icon="@drawable/ic_friends"
-        title="Friends" />
+        title="Profile" />
 </tabs>

@@ -66,18 +66,11 @@ public class lvRestaurantAdapter extends BaseAdapter {
         Branch b = getItem(positionActual);
 
         resName.setText(b.name);
-        priceRange.setText("$" + String.valueOf(b.range.minimum) + "- $" + String.valueOf(b.range.maximum));
+        priceRange.setText("$" + String.valueOf(b.range.minimum) + " - $" + String.valueOf(b.range.maximum));
 
-        calification.setRating(b.averageCalification);
-        String cousines = "";
-        for (Cuisine c : b.cuisine) {
-            if (cousines.length() != 0){
-                cousines += "|" + c.name;
-            }else {
-                cousines = c.name;
-            }
-        }
-        cuisine.setText(cousines);
+        calification.setRating(Float.parseFloat(b.averageCalification + ""));
+        Cuisine c = new Cuisine();
+        cuisine.setText(c.cousineList(b.cuisine));
 
         return returnView;
     }

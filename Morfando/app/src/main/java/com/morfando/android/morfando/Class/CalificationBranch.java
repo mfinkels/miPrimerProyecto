@@ -1,11 +1,12 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.Calendar;
+
 /**
  * Created by Matias on 6/25/2017.
  */
 
 public class CalificationBranch {
-    //IdCalification, user(todo el usuario), typeDining(nombre), food, service, ambience, message
 
     public int idCalification;
     public User user;
@@ -13,5 +14,6 @@ public class CalificationBranch {
     public int food;
     public int service;
     public int ambience;
+    public Calendar date;
     public String message;
 }

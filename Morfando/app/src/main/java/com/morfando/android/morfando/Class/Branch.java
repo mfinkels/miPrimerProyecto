@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,23 +16,23 @@ public class Branch {
     public String name;
     public String latitude;
     public String longitude;
-    public int averageCalification;
-    public List<CalificationBranch> calificationBranch;
+    public double averageCalification;
+    public double averageFood;
+    public double averageService;
+    public double averageAmbience;
+    public ArrayList<CalificationBranch> calificationBranch;
     public RangePrice range;
-    public List<Menu> menu;
-    public List<PhotoBranch> photo;
-    public List<Service> service;
-    public List<Timetable> timetable;
-    public List<Filter> filter;
-    public List<Cuisine> cuisine;
-    public List<Promotion> promotion;
+    public ArrayList<Menu> menu;
+    public ArrayList<PhotoBranch> photo;
+    public ArrayList<Service> service;
+    public ArrayList<Timetable> timetable;
+    public ArrayList<Filter> filter;
+    public ArrayList<Cuisine> cuisine;
+    public ArrayList<Promotion> promotion;
 
 
     public Branch() {
         this.restaurant = new Restaurant();
         this.range = new RangePrice();
     }
-
-
-
 }
