@@ -14,6 +14,7 @@ public class CalificationBranch {
     public int food;
     public int service;
     public int ambience;
+    public Double averageCalification;
     public Calendar date;
     public String message;
 }

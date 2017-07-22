@@ -11,14 +11,14 @@ namespace ApiEjemplo.Data
     {
         public static void insert(BranchRestaurant branch)
         {
-            string[] row = new string[] { "idRangePriceBranch", "idRestaurant", "name","latitude", "longitude", "averageCalification" };
+            string[] row = new string[] { "idRangePriceBranch", "idRestaurant", "name", "latitude", "longitude", "averageCalification", "averageFood", "averageService", "averageAmbience" };
             object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.latitude, branch.longitude, branch.averageCalification };
             string sInsert = QueryHelper.insert("branch_restaurant", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
         public static void update(BranchRestaurant branch)
         {
-            string[] row = new string[6] { "idRangePriceBranch", "idRestaurant", "name", "latitude", "longitude", "averageCalification" };
+            string[] row = new string[] { "idRangePriceBranch", "idRestaurant", "name", "latitude", "longitude", "averageCalification", "averageFood", "averageService", "averageAmbience" };
             object[] values = new object[] { branch.idRangePriceBranch, branch.idRestaurant, branch.name, branch.latitude, branch.longitude, branch.averageCalification };
             string sUpdate = QueryHelper.update("branch_restaurant", row, values, "idBranchRestaurant", branch.idBranchRestaurant);
             DBHelper.EjecutarIUD(sUpdate);
@@ -46,6 +46,7 @@ namespace ApiEjemplo.Data
                 branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
                 branch.restaurant = RestaurantData.getById(branch.idBranchRestaurant);
                 branch.RangePrice = RangePriceBranchData.getById(branch.idRangePriceBranch);
+                branch.calification = CalificationBranchData.getByBranch(branch.idBranchRestaurant, 3, 0);
                 return branch;
             }
             return null;
@@ -88,6 +89,9 @@ namespace ApiEjemplo.Data
             branch.latitude = row.Field<string>("latitude");
             branch.longitude = row.Field<string>("longitude");
             branch.averageCalification = row.Field<double>("averageCalification");
+            branch.averageFood = row.Field<double>("averageFood");
+            branch.averageService = row.Field<double>("averageService");
+            branch.averageAmbience = row.Field<double>("averageAmbience");
             return branch;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using ApiEjemplo.BranchInfo;
 using ApiEjemplo.Data;
 using ApiEjemplo.MenuInfo;
+using ApiEjemplo.Models;
 using ApiEjemplo.PromotionInfo;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,15 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             return Ok(branch);
+        }
+
+        public IHttpActionResult GetCalificationBranch(int id, int limit, int offset) {
+            List<CalificationBranch> list = new List<CalificationBranch>();
+            list = CalificationBranchData.getByBranch(id, limit, offset);
+            if (list == null) {
+                return NotFound();
+            }
+            return Ok(list);
         }
 
         // GET api/<controller>/5 returns menu from branch

@@ -37,6 +37,8 @@ namespace ApiEjemplo.Data
             if (dt.Rows.Count > 0)
             {
                 caliBranch = getByRow(dt.Rows[0]);
+                caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
+                caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
                 return caliBranch;
             }
             return null;
@@ -53,6 +55,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     caliBranch = getByRow(row);
+                    caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
+                    caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -71,6 +75,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     caliBranch = getByRow(row);
+                    caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
+                    caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -78,9 +84,9 @@ namespace ApiEjemplo.Data
             return list;
         }
 
-        public static List<CalificationBranch> getAllByBranch(int id)
+        public static List<CalificationBranch> getByBranch(int id, int limit, int offset)
         {
-            string select = "select * from calification_branch where idBranchRestaurant=" + id.ToString();
+            string select = "select * from calification_branch where idBranchRestaurant=" + id.ToString() + " LIMIT " + limit.ToString() + " OFFSET " + offset.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<CalificationBranch> list = new List<CalificationBranch>();
             CalificationBranch caliBranch;
@@ -89,6 +95,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     caliBranch = getByRow(row);
+                    caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
+                    caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -107,6 +115,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     caliBranch = getByRow(row);
+                    caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
+                    caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -124,7 +134,9 @@ namespace ApiEjemplo.Data
             caliBranch.food = row.Field<int>("food");
             caliBranch.service = row.Field<int>("service");
             caliBranch.ambience = row.Field<int>("ambience");
+            caliBranch.averageCalification = row.Field<int>("averageCalification");
             caliBranch.message = row.Field<string>("message");
+            caliBranch.date = row.Field<DateTime>("date");
             return caliBranch;
         }
     }

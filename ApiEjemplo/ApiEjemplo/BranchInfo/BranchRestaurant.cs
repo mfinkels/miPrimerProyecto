@@ -12,7 +12,6 @@ namespace ApiEjemplo.BranchInfo
     public class BranchRestaurant
     {
         public int idBranchRestaurant { get; set; }
-        
         public int idRestaurant { get; set; }
         public Restaurant restaurant { get; set; }
         public int idRangePriceBranch { get; set; }
@@ -26,7 +25,10 @@ namespace ApiEjemplo.BranchInfo
         public List<TimetableBranch> timetable { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-
+        public List<CalificationBranch> calification { get; set; }
+        public double averageFood { get; set; }
+        public double averageService { get; set; }
+        public double averageAmbience { get; set; }
         public double averageCalification { get; set; }
         public List<Promotion> promotion { get; set; }
     }

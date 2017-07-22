@@ -26,6 +26,8 @@ import okhttp3.Response;
 
 public class ParseQuery {
 
+    // Query for List Branches
+
     private ArrayList<Branch> branches = new ArrayList<Branch>();
 
     public ArrayList<Branch> getAllBranch(int limit, int offset){
@@ -187,6 +189,8 @@ public class ParseQuery {
     }
 
 
+    // Query for log User
+
     private User userLogged = new User();
 
     public User logUser(String email, String password){
@@ -194,7 +198,7 @@ public class ParseQuery {
         return userLogged;
     }
 
-    public class LogInUser extends AsyncTask<String, Void, User> {
+    private class LogInUser extends AsyncTask<String, Void, User> {
 
         protected void onPostExecute(User datos) {
             super.onPostExecute(datos);
@@ -241,6 +245,8 @@ public class ParseQuery {
 
     }
 
+    // Query for get Detail Branch
+
     private Branch b = new Branch();
 
     public Branch getBranch(int id){
@@ -277,10 +283,13 @@ public class ParseQuery {
 
                 JSONObject obj = new JSONObject(resultado);
                 b.idBranch = obj.getInt("idBranchRestaurant");
+                //Restaurant
                 JSONObject resto = obj.getJSONObject("restaurant");
                 b.restaurant.idRestaurant = resto.getInt("idRestaurant");
                 b.restaurant.name = resto.getString("name");
                 b.restaurant.description = resto.getString("description");
+
+                //Social Network
                 JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
                 ArrayList<SocialNetwork> list = new ArrayList<SocialNetwork>();
                 for (int j = 0; j < socialNetwork.length(); j++) {
@@ -293,11 +302,17 @@ public class ParseQuery {
                     list.add(sn);
                 }
                 b.restaurant.social = list;
+
+                // Range Price
                 JSONObject rangeObj = obj.getJSONObject("RangePrice");
                 b.range.idRangePrice = rangeObj.getInt("idRangePriceBranch");
                 b.range.maximum = rangeObj.getInt("maximum");
                 b.range.minimum = rangeObj.getInt("minimum");
+
+                //Name
                 b.name = obj.getString("name");
+
+                //Photos
                 JSONArray photo = obj.getJSONArray("photo");
                 ArrayList<PhotoBranch> listPhoto = new ArrayList<PhotoBranch>();
                 for (int k = 0; k < photo.length(); k++) {
@@ -309,6 +324,8 @@ public class ParseQuery {
                     listPhoto.add(p);
                 }
                 b.photo = listPhoto;
+
+                // Cuisine
                 JSONArray cuisine = obj.getJSONArray("cuisine");
                 ArrayList<Cuisine> listCuisine = new ArrayList<Cuisine>();
                 for (int c = 0; c < cuisine.length(); c++) {
@@ -319,6 +336,8 @@ public class ParseQuery {
                     listCuisine.add(cn);
                 }
                 b.cuisine = listCuisine;
+
+                //Menu
                 JSONArray menu = obj.getJSONArray("menu");
                 ArrayList<Menu> listMenu = new ArrayList<Menu>();
                 for (int m = 0; m < menu.length(); m++) {
@@ -326,7 +345,11 @@ public class ParseQuery {
                     Menu mn = new Menu();
                     mn.idMenu = menuObj.getInt("idTypeMenu");
                     mn.type = menuObj.getString("name");
+                    listMenu.add(mn);
                 }
+                b.menu = listMenu;
+
+                //Filter
                 JSONArray filter = obj.getJSONArray("filter");
                 ArrayList<Filter> listFilter = new ArrayList<Filter>();
                 for (int f = 0; f < filter.length(); f++) {
@@ -338,6 +361,8 @@ public class ParseQuery {
                     listFilter.add(ft);
                 }
                 b.filter = listFilter;
+
+                //Service
                 JSONArray service = obj.getJSONArray("service");
                 ArrayList<Service> listService = new ArrayList<Service>();
                 for (int s = 0; s < service.length(); s++) {
@@ -348,6 +373,23 @@ public class ParseQuery {
                     listService.add(sv);
                 }
                 b.service = listService;
+
+                //Calification
+                JSONArray calification = obj.getJSONArray("calification");
+                ArrayList<CalificationBranch> listcalification = new ArrayList<CalificationBranch>();
+                for (int c = 0; c < calification.length(); c++) {
+                    JSONObject caliObj = calification.getJSONObject(c);
+                    CalificationBranch cali = new CalificationBranch();
+                    cali.idCalification = caliObj.getInt("idCalification");
+                    cali.ambience = caliObj.getInt("ambience");
+                    cali.food  = caliObj.getInt("food");
+                    cali.service   = caliObj.getInt("service");
+                    cali.averageCalification = caliObj.getDouble("averageCalification");
+                    cali.message = caliObj.getString("message");
+                }
+                //FALTA CREAR calification A Branch
+
+                //Timetable
                 JSONArray timetable = obj.getJSONArray("timetable");
                 ArrayList<Timetable> listTimetable = new ArrayList<Timetable>();
                 for (int t = 0; t < timetable.length(); t++) {
@@ -361,9 +403,15 @@ public class ParseQuery {
                     listTimetable.add(tt);
                 }
                 b.timetable = listTimetable;
+
+                // Latitude and Longitude
                 b.latitude = obj.getString("latitude");
                 b.longitude = obj.getString("longitude");
+
+                //Average Calification
                 b.averageCalification = obj.getInt("averageCalification");
+
+                //Promotion
                 JSONArray promotion = obj.getJSONArray("promotion");
                 ArrayList<Promotion> listPromotion = new ArrayList<Promotion>();
                 for (int p = 0; p < promotion.length(); p++) {
@@ -388,6 +436,14 @@ public class ParseQuery {
                 return null;
             }
         }
+    }
+
+    // Get calification from specific Branch
+
+    private ArrayList<CalificationBranch> calificationBranch = new ArrayList<CalificationBranch>();
+
+    public ArrayList<CalificationBranch> getBranchCalification(){
+        return  calificationBranch;
     }
 
 }
