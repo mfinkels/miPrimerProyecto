@@ -33,6 +33,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset) {
             List<CalificationBranch> list = new List<CalificationBranch>();
             list = CalificationBranchData.getByBranch(id, limit, offset);

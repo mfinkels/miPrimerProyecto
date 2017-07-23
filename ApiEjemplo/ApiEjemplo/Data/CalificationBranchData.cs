@@ -39,6 +39,7 @@ namespace ApiEjemplo.Data
                 caliBranch = getByRow(dt.Rows[0]);
                 caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
                 caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
+                caliBranch.user = UserData.getById(caliBranch.idUser);
                 return caliBranch;
             }
             return null;
@@ -77,6 +78,7 @@ namespace ApiEjemplo.Data
                     caliBranch = getByRow(row);
                     caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
                     caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
+                    caliBranch.user = UserData.getById(caliBranch.idUser);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -97,6 +99,7 @@ namespace ApiEjemplo.Data
                     caliBranch = getByRow(row);
                     caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
                     caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
+                    caliBranch.user = UserData.getById(caliBranch.idUser);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);
@@ -117,6 +120,7 @@ namespace ApiEjemplo.Data
                     caliBranch = getByRow(row);
                     caliBranch.typeDining = TypeDiningCalificationBranchData.getById(caliBranch.idTypeDining);
                     caliBranch.photo = PhotoBranchData.getByBranch(caliBranch.idBranchRestaurant);
+                    caliBranch.user = UserData.getById(caliBranch.idUser);
                     list.Add(caliBranch);
                 }
                 caliBranch = getByRow(dt.Rows[0]);

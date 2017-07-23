@@ -33,6 +33,8 @@ namespace ApiEjemplo.Data
             if (dt.Rows.Count > 0)
             {
                 pBranch = getByRow(dt.Rows[0]);
+                pBranch.user = UserData.getById(pBranch.idUser);
+                pBranch.branch = BranchRestaurantData.getById(pBranch.idBranchRestaurant);
                 return pBranch;
             }
             return null;
@@ -49,6 +51,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     pBranch = getByRow(row);
+                    pBranch.user = UserData.getById(pBranch.idUser);
+                    pBranch.branch = BranchRestaurantData.getById(pBranch.idBranchRestaurant);
                     list.Add(pBranch);
                 }
                 pBranch = getByRow(dt.Rows[0]);
@@ -67,6 +71,8 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     pBranch = getByRow(row);
+                    pBranch.user = UserData.getById(pBranch.idUser);
+                    pBranch.branch = BranchRestaurantData.getById(pBranch.idBranchRestaurant);
                     list.Add(pBranch);
                 }
                 pBranch = getByRow(dt.Rows[0]);

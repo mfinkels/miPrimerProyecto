@@ -26,6 +26,46 @@ import okhttp3.Response;
 
 public class ParseQuery {
 
+    private class ParsingObjects{
+
+        //Consultas para parsear JSON
+
+        public User user(JSONObject json){
+            try{
+                User myUser = new User();
+                myUser.idUser = json.getInt("idUser");
+                myUser.name = json.getString("name");
+                myUser.lastName = json.getString("lastName");
+                myUser.password = json.getString("password");
+                myUser.latitude = json.getString("latitude");
+                myUser.longitude = json.getString("longitude");
+                myUser.photo = json.getString("photo");
+                myUser.phone = json.getString("phone");
+                myUser.email = json.getString("email");
+
+                return myUser;
+
+            }catch (JSONException e){
+                Log.d("Error JSON",e.getMessage());
+                return null;
+            }
+        }
+
+        public Branch branch(JSONObject json){
+            try {
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+
+
+    }
+
+    ParsingObjects parse = new ParsingObjects();
+
     // Query for List Branches
 
     private ArrayList<Branch> branches = new ArrayList<Branch>();
@@ -97,7 +137,7 @@ public class ParseQuery {
                         JSONObject photoObj = photo.getJSONObject(k);
                         PhotoBranch p = new PhotoBranch();
                         p.idPhoto = photoObj.getInt("idBranchPhoto");
-                        p.idUser = photoObj.getInt("idUser");
+                        p.user = parse.user(photoObj);
                         p.photo = photoObj.getString("photo");
                         listPhoto.add(p);
                     }
@@ -219,17 +259,9 @@ public class ParseQuery {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
                 String resultado = response.body().string();
                 try {
-                    User myUser = new User();
+
                     JSONObject json = new JSONObject(resultado);
-                    myUser.idUser = json.getInt("idUser");
-                    myUser.name = json.getString("name");
-                    myUser.lastName = json.getString("lastName");
-                    myUser.password = json.getString("password");
-                    myUser.latitude = json.getString("latitude");
-                    myUser.longitude = json.getString("longitude");
-                    myUser.photo = json.getString("photo");
-                    myUser.phone = json.getString("phone");
-                    myUser.email = json.getString("email");
+                    User myUser = parse.user(json);
 
                     return myUser;
                 }
@@ -387,7 +419,7 @@ public class ParseQuery {
                     cali.averageCalification = caliObj.getDouble("averageCalification");
                     cali.message = caliObj.getString("message");
                 }
-                //FALTA CREAR calification A Branch
+                b.calification = listcalification;
 
                 //Timetable
                 JSONArray timetable = obj.getJSONArray("timetable");
@@ -442,8 +474,78 @@ public class ParseQuery {
 
     private ArrayList<CalificationBranch> calificationBranch = new ArrayList<CalificationBranch>();
 
-    public ArrayList<CalificationBranch> getBranchCalification(){
+    public ArrayList<CalificationBranch> getBranchCalification(int id, int limit, int offset){
+        new GetCalificationBranch().execute(id,limit,offset);
         return  calificationBranch;
     }
+
+    private class GetCalificationBranch extends AsyncTask<Integer, Void, ArrayList<CalificationBranch>> {
+
+        protected void onPostExecute(ArrayList<CalificationBranch> datos) {
+            super.onPostExecute(datos);
+            calificationBranch = datos;
+        }
+
+        @Override
+        protected ArrayList<CalificationBranch> doInBackground(Integer... parametros) {
+            int id = parametros[0];
+            int limit = parametros[1];
+            int offset = parametros[3];
+
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url("http://apimorfandoort.azurewebsites.net/api/"+ id +"/"+ limit +"/"+ offset)
+                    .build();
+            String resultado;
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                resultado = response.body().string();
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return null;
+            }
+
+            try {
+
+                //Calification
+                JSONObject obj = new JSONObject(resultado);
+                JSONArray calification = obj.getJSONArray("calification");
+                ArrayList<CalificationBranch> listcalification = new ArrayList<CalificationBranch>();
+                for (int c = 0; c < calification.length(); c++) {
+                    JSONObject caliObj = calification.getJSONObject(c);
+                    CalificationBranch cali = new CalificationBranch();
+                    cali.idCalification = caliObj.getInt("idCalification");
+                    cali.ambience = caliObj.getInt("ambience");
+                    cali.food  = caliObj.getInt("food");
+                    cali.service   = caliObj.getInt("service");
+                    cali.averageCalification = caliObj.getDouble("averageCalification");
+                    cali.message = caliObj.getString("message");
+                    cali.date;
+                    cali.user = parse.user(caliObj);
+                    JSONObject typeDining = caliObj.getJSONObject("typeDining");
+                    cali.typeDining = typeDining.getString("name");
+                    JSONArray photos = caliObj.getJSONArray("photo");
+                    for (int p = 0; p < photos.length(); p++){
+                        JSONObject photoObj = photos.getJSONObject(p);
+                        PhotoBranch photo = new PhotoBranch();
+                        photo.idPhoto = photoObj.getInt("idPhoto");
+                        photo.photo = photoObj.getString("photo");
+                        photo.user = cali.user;
+                    }
+
+                }
+                return listcalification;
+
+
+            }
+            catch(JSONException e){
+                Log.d("error", e.getMessage());
+                return null;
+            }
+        }
+    }
+
+
 
 }

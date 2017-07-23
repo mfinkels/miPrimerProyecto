@@ -20,7 +20,7 @@ public class Branch {
     public double averageFood;
     public double averageService;
     public double averageAmbience;
-    public ArrayList<CalificationBranch> calificationBranch;
+    public ArrayList<CalificationBranch> calification;
     public RangePrice range;
     public ArrayList<Menu> menu;
     public ArrayList<PhotoBranch> photo;

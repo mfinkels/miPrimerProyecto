@@ -17,6 +17,7 @@ namespace ApiEjemplo.Models
         public int ambience { get; set; }
         public double averageCalification { get; set; }
         public string message { get; set; }
+        public User user { get; set; }
         public TypeDiningCalificationBranch typeDining { get; set; }
         public List<PhotoBranch> photo { get; set; }
         public DateTime date { get; set; }

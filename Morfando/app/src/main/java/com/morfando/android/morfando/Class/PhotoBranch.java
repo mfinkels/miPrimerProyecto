@@ -6,6 +6,6 @@ package com.morfando.android.morfando.Class;
 
 public class PhotoBranch {
     public int idPhoto;
-    public int idUser;
+    public User user;
     public String photo;
 }
