@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -17,4 +18,9 @@ public class CalificationBranch {
     public Double averageCalification;
     public Calendar date;
     public String message;
+    public ArrayList<PhotoBranch> photo;
+
+    public CalificationBranch(){
+        this.user = new User();
+    }
 }

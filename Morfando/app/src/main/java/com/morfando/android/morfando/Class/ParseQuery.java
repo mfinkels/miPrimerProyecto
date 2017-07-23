@@ -1,8 +1,10 @@
 package com.morfando.android.morfando.Class;
 
+import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Range;
 import android.widget.Toast;
 
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -53,6 +55,187 @@ public class ParseQuery {
 
         public Branch branch(JSONObject json){
             try {
+                Branch b = new Branch();
+                b.idBranch = json.getInt("idBranchRestaurant");
+                b.name = json.getString("name");
+                b.latitude = json.getString("latitude");
+                b.longitude = json.getString("longitude");
+                b.averageCalification = json.getInt("averageCalification");
+                b.averageFood = json.getInt("averageFood");
+                b.averageService = json.getInt("averageService");
+                b.averageAmbience = json.getInt("averageAmbience");
+                return b;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Restaurant restaurant(JSONObject json){
+            try{
+                Restaurant r = new Restaurant();
+                r.idRestaurant = json.getInt("idRestaurant");
+                r.name = json.getString("name");
+                r.description = json.getString("description");
+                return r;
+            }
+            catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+
+        }
+
+        public SocialNetwork socialNetwork(JSONObject json){
+            try{
+                SocialNetwork sn = new SocialNetwork();
+                sn.idSocialNetwork = json.getInt("idSocialNetworkRestaurant");
+                JSONObject typeSocial = json.getJSONObject("type");
+                sn.name = typeSocial.getString("name");
+                sn.value = json.getString("value");
+                return sn;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public RangePrice rangePrice(JSONObject json){
+            try{
+                RangePrice r = new RangePrice();
+                r.idRangePrice = json.getInt("idRangePriceBranch");
+                r.maximum = json.getInt("maximum");
+                r.minimum = json.getInt("minimum");
+                return r;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public PhotoBranch photoBranch(JSONObject json){
+            try {
+                PhotoBranch p = new PhotoBranch();
+                p.idPhoto = json.getInt("idBranchPhoto");
+                p.user = user(json);
+                p.photo = json.getString("photo");
+                return p;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Cuisine cuisine(JSONObject json){
+            try{
+                Cuisine cn = new Cuisine();
+                cn.idCuisine = json.getInt("idCousine");
+                cn.name = json.getString("name");
+                return cn;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Menu menu(JSONObject json){
+            try {
+                Menu mn = new Menu();
+                mn.idMenu = json.getInt("idTypeMenu");
+                mn.type = json.getString("name");
+                return mn;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Filter filter(JSONObject json){
+            try {
+                Filter ft = new Filter();
+                ft.idFilter = json.getInt("idTypeFilter");
+                ft.name = json.getString("name");
+                ft.icon = json.getString("icon");
+                return ft;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Service service(JSONObject json){
+            try {
+                Service sv = new Service();
+                sv.idService = json.getInt("idService");
+                sv.name = json.getString("name");
+                return sv;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public CalificationBranch calificationBranch(JSONObject json){
+            try {
+                CalificationBranch cali = new CalificationBranch();
+                cali.idCalification = json.getInt("idCalification");
+                cali.ambience = json.getInt("ambience");
+                cali.food  = json.getInt("food");
+                cali.service   = json.getInt("service");
+                cali.averageCalification = json.getDouble("averageCalification");
+                cali.message = json.getString("message");
+                cali.date = Utility.convertStringToCalendar(json.getString("date"));;
+                cali.user = user(json);
+                JSONObject typeDining = json.getJSONObject("typeDining");
+                cali.typeDining = typeDining.getString("name");
+
+                JSONArray photosJSON = json.getJSONArray("photo");
+                ArrayList<PhotoBranch> photos = new ArrayList<PhotoBranch>();
+                for (int p = 0; p < photosJSON.length(); p++){
+                    JSONObject obj = photosJSON.getJSONObject(p);
+                    photos.add(photoBranch(obj));
+                }
+                cali.photo = photos;
+
+                return cali;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Timetable timetable(JSONObject json){
+            try {
+                Timetable tt = new Timetable();
+                tt.idTimetable = json.getInt("idTimetableBranch");
+                tt.openingHours = json.getString("openingHour");
+                tt.closingHours = json.getString("closingHour");
+                JSONObject dayObj = json.getJSONObject("day");
+                tt.Day = dayObj.getString("name");
+                return tt;
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public Promotion promotion(JSONObject json){
+            try {
+                Promotion prom = new Promotion();
+                prom.idPromotion = json.getInt("idPromotion");
+                prom.code = json.getString("code");
+                prom.name = json.getString("name");
+                prom.startDate = Utility.convertStringToCalendar(json.getString("startDate"));
+                prom.expireDate = Utility.convertStringToCalendar(json.getString("expireDate"));
+                prom.description = json.getString("description");
+                prom.value = json.getInt("value");
+                JSONObject type = json.getJSONObject("type");
+                prom.TypePromotion = type.getString("name");
+                return prom;
 
             }catch (JSONException e){
                 Log.d("Error", e.getMessage());
