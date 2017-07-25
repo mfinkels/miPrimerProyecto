@@ -185,7 +185,6 @@ public class ParseQuery {
                 cali.ambience = json.getInt("ambience");
                 cali.food  = json.getInt("food");
                 cali.service   = json.getInt("service");
-                cali.averageCalification = json.getDouble("averageCalification");
                 cali.message = json.getString("message");
                 cali.date = Utility.convertStringToCalendar(json.getString("date"));;
                 cali.user = user(json);
@@ -208,7 +207,7 @@ public class ParseQuery {
             }
         }
 
-        public Timetable timetable(JSONObject json){
+        public Timetable timetable(JSONObject json) {
             try {
                 Timetable tt = new Timetable();
                 tt.idTimetable = json.getInt("idTimetableBranch");
@@ -217,7 +216,7 @@ public class ParseQuery {
                 JSONObject dayObj = json.getJSONObject("day");
                 tt.Day = dayObj.getString("name");
                 return tt;
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 Log.d("Error", e.getMessage());
                 return null;
             }
@@ -236,6 +235,152 @@ public class ParseQuery {
                 JSONObject type = json.getJSONObject("type");
                 prom.TypePromotion = type.getString("name");
                 return prom;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        //Return Lists
+
+        public ArrayList<SocialNetwork> socialNetwork(JSONArray jsonArray){
+            try {
+                ArrayList<SocialNetwork> arrayList = new ArrayList<SocialNetwork>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    SocialNetwork sn = socialNetwork(obj);
+                    arrayList.add(sn);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<PhotoBranch> photoBranch(JSONArray jsonArray){
+            try {
+                ArrayList<PhotoBranch> arrayList = new ArrayList<PhotoBranch>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    PhotoBranch p = parse.photoBranch(obj);
+                    arrayList.add(p);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Cuisine> cuisine(JSONArray jsonArray){
+            try {
+                ArrayList<Cuisine> arrayList = new ArrayList<Cuisine>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Cuisine c = parse.cuisine(obj);
+                    arrayList.add(c);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Menu> menu(JSONArray jsonArray){
+            try {
+                ArrayList<Menu> arrayList = new ArrayList<Menu>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Menu m = parse.menu(obj);
+                    arrayList.add(m);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Filter> filter(JSONArray jsonArray){
+            try {
+                ArrayList<Filter> arrayList = new ArrayList<Filter>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Filter f = parse.filter(obj);
+                    arrayList.add(f);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Service> service(JSONArray jsonArray){
+            try {
+                ArrayList<Service> arrayList = new ArrayList<Service>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Service s = parse.service(obj);
+                    arrayList.add(s);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<CalificationBranch> calificationBranch(JSONArray jsonArray){
+            try {
+                ArrayList<CalificationBranch> arrayList = new ArrayList<CalificationBranch>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    CalificationBranch cali = parse.calificationBranch(obj);
+                    arrayList.add(cali);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Timetable> timetable(JSONArray jsonArray){
+            try {
+                ArrayList<Timetable> arrayList = new ArrayList<Timetable>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Timetable tt = parse.timetable(obj);
+                    arrayList.add(tt);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+        public ArrayList<Promotion> promotion(JSONArray jsonArray){
+            try {
+                ArrayList<Promotion> arrayList = new ArrayList<Promotion>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Promotion p = parse.promotion(obj);
+                    arrayList.add(p);
+                }
+                return  arrayList;
 
             }catch (JSONException e){
                 Log.d("Error", e.getMessage());
@@ -292,113 +437,49 @@ public class ParseQuery {
                 for (int i = 0; i < jsonBranch.length(); i++){
                     Branch b = new Branch();
                     JSONObject obj = jsonBranch.getJSONObject(i);
-                    b.idBranch = obj.getInt("idBranchRestaurant");
-                    JSONObject resto = obj.getJSONObject("restaurant");
-                    b.restaurant.idRestaurant = resto.getInt("idRestaurant");
-                    b.restaurant.name = resto.getString("name");
-                    b.restaurant.description = resto.getString("description");
-                    JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
-                    ArrayList<SocialNetwork> list = new ArrayList<SocialNetwork>();
-                    for (int j = 0; j < socialNetwork.length(); j++){
-                        JSONObject social = socialNetwork.getJSONObject(j);
-                        SocialNetwork sn = new SocialNetwork();
-                        sn.idSocialNetwork = social.getInt("idSocialNetworkRestaurant");
-                        JSONObject typeSocial = social.getJSONObject("type");
-                        sn.name = typeSocial.getString("name");
-                        sn.value = social.getString("value");
-                        list.add(sn);
-                    }
-                    b.restaurant.social = list;
+
+                    b = parse.branch(obj);
+                    //Restaurant
+                    JSONObject restoObj = obj.getJSONObject("restaurant");
+                    b.restaurant = parse.restaurant(restoObj);
+
+                    //Social Network
+                    JSONArray socialNetwork = restoObj.getJSONArray("socialNetwork");
+                    b.restaurant.social = parse.socialNetwork(socialNetwork);
+
+                    // Range Price
                     JSONObject rangeObj = obj.getJSONObject("RangePrice");
-                    b.range.idRangePrice = rangeObj.getInt("idRangePriceBranch");
-                    b.range.maximum = rangeObj.getInt("maximum");
-                    b.range.minimum = rangeObj.getInt("minimum");
-                    b.name = obj.getString("name");
+                    b.range = parse.rangePrice(rangeObj);
+
+                    //Photos
                     JSONArray photo = obj.getJSONArray("photo");
-                    ArrayList<PhotoBranch> listPhoto = new ArrayList<PhotoBranch>();
-                    for (int k = 0; k < photo.length(); k++){
-                        JSONObject photoObj = photo.getJSONObject(k);
-                        PhotoBranch p = new PhotoBranch();
-                        p.idPhoto = photoObj.getInt("idBranchPhoto");
-                        p.user = parse.user(photoObj);
-                        p.photo = photoObj.getString("photo");
-                        listPhoto.add(p);
-                    }
-                    b.photo = listPhoto;
+                    b.photo = parse.photoBranch(photo);
+
+                    // Cuisine
                     JSONArray cuisine = obj.getJSONArray("cuisine");
-                    ArrayList<Cuisine> listCuisine = new ArrayList<Cuisine>();
-                    for (int c = 0; c < cuisine.length(); c++){
-                        JSONObject cuisineObj = cuisine.getJSONObject(c);
-                        Cuisine cn = new Cuisine();
-                        cn.idCuisine = cuisineObj.getInt("idCousine");
-                        cn.name = cuisineObj.getString("name");
-                        listCuisine.add(cn);
-                    }
-                    b.cuisine = listCuisine;
+                    b.cuisine = parse.cuisine(cuisine);
+
+                    //Menu
                     JSONArray menu = obj.getJSONArray("menu");
-                    ArrayList<Menu> listMenu = new ArrayList<Menu>();
-                    for (int m = 0; m < menu.length(); m++){
-                        JSONObject menuObj = menu.getJSONObject(m);
-                        Menu mn = new Menu();
-                        mn.idMenu = menuObj.getInt("idTypeMenu");
-                        mn.type = menuObj.getString("name");
-                        listMenu.add(mn);
-                    }
-                    b.menu = listMenu;
+                    b.menu = parse.menu(menu);
+
+                    //Filter
                     JSONArray filter = obj.getJSONArray("filter");
-                    ArrayList<Filter> listFilter = new ArrayList<Filter>();
-                    for (int f = 0; f < filter.length(); f++){
-                        JSONObject filterObj = filter.getJSONObject(f);
-                        Filter ft = new Filter();
-                        ft.idFilter = filterObj.getInt("idTypeFilter");
-                        ft.name = filterObj.getString("name");
-                        ft.icon = filterObj.getString("icon");
-                        listFilter.add(ft);
-                    }
-                    b.filter = listFilter;
+                    b.filter = parse.filter(filter);
+
+                    //Service
                     JSONArray service = obj.getJSONArray("service");
-                    ArrayList<Service> listService = new ArrayList<Service>();
-                    for (int s = 0; s < service.length(); s++) {
-                        JSONObject svObj = service.getJSONObject(s);
-                        Service sv = new Service();
-                        sv.idService = svObj.getInt("idService");
-                        sv.name = svObj.getString("name");
-                        listService.add(sv);
-                    }
-                    b.service = listService;
+
+                    b.service = parse.service(service);
+
+                    //Timetable
                     JSONArray timetable = obj.getJSONArray("timetable");
-                    ArrayList<Timetable> listTimetable = new ArrayList<Timetable>();
-                    for(int t = 0; t < timetable.length(); t++) {
-                        JSONObject ttObj = timetable.getJSONObject(t);
-                        Timetable tt = new Timetable();
-                        tt.idTimetable = ttObj.getInt("idTimetableBranch");
-                        tt.openingHours = ttObj.getString("openingHour");
-                        tt.closingHours = ttObj.getString("closingHour");
-                        JSONObject dayObj = ttObj.getJSONObject("day");
-                        tt.Day = dayObj.getString("name");
-                        listTimetable.add(tt);
-                    }
-                    b.timetable = listTimetable;
-                    b.latitude = obj.getString("latitude");
-                    b.longitude = obj.getString("longitude");
-                    b.averageCalification = obj.getInt("averageCalification");
+                    b.timetable = parse.timetable(timetable);
+
+                    //Promotion
                     JSONArray promotion = obj.getJSONArray("promotion");
-                    ArrayList<Promotion> listPromotion = new ArrayList<Promotion>();
-                    for (int p = 0; p < promotion.length(); p++){
-                        JSONObject pObj = promotion.getJSONObject(p);
-                        Promotion prom = new Promotion();
-                        prom.idPromotion = pObj.getInt("idPromotion");
-                        prom.code = pObj.getString("code");
-                        prom.name = pObj.getString("name");
-                        prom.startDate = Utility.convertStringToCalendar(pObj.getString("startDate"));
-                        prom.expireDate = Utility.convertStringToCalendar(pObj.getString("expireDate"));
-                        prom.description = pObj.getString("description");
-                        prom.value = pObj.getInt("value");
-                        JSONObject type = pObj.getJSONObject("type");
-                        prom.TypePromotion = type.getString("name");
-                        listPromotion.add(prom);
-                    }
-                    b.promotion = listPromotion;
+                    b.promotion = parse.promotion(promotion);
+
                     branchList.add(b);
                 }
                 return branchList;
@@ -497,153 +578,51 @@ public class ParseQuery {
                 Branch b = new Branch();
 
                 JSONObject obj = new JSONObject(resultado);
-                b.idBranch = obj.getInt("idBranchRestaurant");
+                b = parse.branch(obj);
                 //Restaurant
                 JSONObject resto = obj.getJSONObject("restaurant");
-                b.restaurant.idRestaurant = resto.getInt("idRestaurant");
-                b.restaurant.name = resto.getString("name");
-                b.restaurant.description = resto.getString("description");
+                b.restaurant = parse.restaurant(resto);
 
                 //Social Network
                 JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
-                ArrayList<SocialNetwork> list = new ArrayList<SocialNetwork>();
-                for (int j = 0; j < socialNetwork.length(); j++) {
-                    JSONObject social = socialNetwork.getJSONObject(j);
-                    SocialNetwork sn = new SocialNetwork();
-                    sn.idSocialNetwork = social.getInt("idSocialNetworkRestaurant");
-                    JSONObject typeSocial = social.getJSONObject("type");
-                    sn.name = typeSocial.getString("name");
-                    sn.value = social.getString("value");
-                    list.add(sn);
-                }
-                b.restaurant.social = list;
+                b.restaurant.social = parse.socialNetwork(socialNetwork);
 
                 // Range Price
                 JSONObject rangeObj = obj.getJSONObject("RangePrice");
-                b.range.idRangePrice = rangeObj.getInt("idRangePriceBranch");
-                b.range.maximum = rangeObj.getInt("maximum");
-                b.range.minimum = rangeObj.getInt("minimum");
-
-                //Name
-                b.name = obj.getString("name");
+                b.range = parse.rangePrice(rangeObj);
 
                 //Photos
                 JSONArray photo = obj.getJSONArray("photo");
-                ArrayList<PhotoBranch> listPhoto = new ArrayList<PhotoBranch>();
-                for (int k = 0; k < photo.length(); k++) {
-                    JSONObject photoObj = photo.getJSONObject(k);
-                    PhotoBranch p = new PhotoBranch();
-                    p.idPhoto = photoObj.getInt("idBranchPhoto");
-                    p.idUser = photoObj.getInt("idUser");
-                    p.photo = photoObj.getString("photo");
-                    listPhoto.add(p);
-                }
-                b.photo = listPhoto;
+                b.photo = parse.photoBranch(photo);
 
                 // Cuisine
                 JSONArray cuisine = obj.getJSONArray("cuisine");
-                ArrayList<Cuisine> listCuisine = new ArrayList<Cuisine>();
-                for (int c = 0; c < cuisine.length(); c++) {
-                    JSONObject cuisineObj = cuisine.getJSONObject(c);
-                    Cuisine cn = new Cuisine();
-                    cn.idCuisine = cuisineObj.getInt("idCousine");
-                    cn.name = cuisineObj.getString("name");
-                    listCuisine.add(cn);
-                }
-                b.cuisine = listCuisine;
+                b.cuisine = parse.cuisine(cuisine);
 
                 //Menu
                 JSONArray menu = obj.getJSONArray("menu");
-                ArrayList<Menu> listMenu = new ArrayList<Menu>();
-                for (int m = 0; m < menu.length(); m++) {
-                    JSONObject menuObj = menu.getJSONObject(m);
-                    Menu mn = new Menu();
-                    mn.idMenu = menuObj.getInt("idTypeMenu");
-                    mn.type = menuObj.getString("name");
-                    listMenu.add(mn);
-                }
-                b.menu = listMenu;
+                b.menu = parse.menu(menu);
 
                 //Filter
                 JSONArray filter = obj.getJSONArray("filter");
-                ArrayList<Filter> listFilter = new ArrayList<Filter>();
-                for (int f = 0; f < filter.length(); f++) {
-                    JSONObject filterObj = filter.getJSONObject(f);
-                    Filter ft = new Filter();
-                    ft.idFilter = filterObj.getInt("idTypeFilter");
-                    ft.name = filterObj.getString("name");
-                    ft.icon = filterObj.getString("icon");
-                    listFilter.add(ft);
-                }
-                b.filter = listFilter;
+                b.filter = parse.filter(filter);
 
                 //Service
                 JSONArray service = obj.getJSONArray("service");
-                ArrayList<Service> listService = new ArrayList<Service>();
-                for (int s = 0; s < service.length(); s++) {
-                    JSONObject svObj = service.getJSONObject(s);
-                    Service sv = new Service();
-                    sv.idService = svObj.getInt("idService");
-                    sv.name = svObj.getString("name");
-                    listService.add(sv);
-                }
-                b.service = listService;
+
+                b.service = parse.service(service);
 
                 //Calification
                 JSONArray calification = obj.getJSONArray("calification");
-                ArrayList<CalificationBranch> listcalification = new ArrayList<CalificationBranch>();
-                for (int c = 0; c < calification.length(); c++) {
-                    JSONObject caliObj = calification.getJSONObject(c);
-                    CalificationBranch cali = new CalificationBranch();
-                    cali.idCalification = caliObj.getInt("idCalification");
-                    cali.ambience = caliObj.getInt("ambience");
-                    cali.food  = caliObj.getInt("food");
-                    cali.service   = caliObj.getInt("service");
-                    cali.averageCalification = caliObj.getDouble("averageCalification");
-                    cali.message = caliObj.getString("message");
-                }
-                b.calification = listcalification;
+                b.calification = parse.calificationBranch(calification);
 
                 //Timetable
                 JSONArray timetable = obj.getJSONArray("timetable");
-                ArrayList<Timetable> listTimetable = new ArrayList<Timetable>();
-                for (int t = 0; t < timetable.length(); t++) {
-                    JSONObject ttObj = timetable.getJSONObject(t);
-                    Timetable tt = new Timetable();
-                    tt.idTimetable = ttObj.getInt("idTimetableBranch");
-                    tt.openingHours = ttObj.getString("openingHour");
-                    tt.closingHours = ttObj.getString("closingHour");
-                    JSONObject dayObj = ttObj.getJSONObject("day");
-                    tt.Day = dayObj.getString("name");
-                    listTimetable.add(tt);
-                }
-                b.timetable = listTimetable;
-
-                // Latitude and Longitude
-                b.latitude = obj.getString("latitude");
-                b.longitude = obj.getString("longitude");
-
-                //Average Calification
-                b.averageCalification = obj.getInt("averageCalification");
+                b.timetable = parse.timetable(timetable);
 
                 //Promotion
                 JSONArray promotion = obj.getJSONArray("promotion");
-                ArrayList<Promotion> listPromotion = new ArrayList<Promotion>();
-                for (int p = 0; p < promotion.length(); p++) {
-                    JSONObject pObj = promotion.getJSONObject(p);
-                    Promotion prom = new Promotion();
-                    prom.idPromotion = pObj.getInt("idPromotion");
-                    prom.code = pObj.getString("code");
-                    prom.name = pObj.getString("name");
-                    prom.startDate = Utility.convertStringToCalendar(pObj.getString("startDate"));
-                    prom.expireDate = Utility.convertStringToCalendar(pObj.getString("expireDate"));
-                    prom.description = pObj.getString("description");
-                    prom.value = pObj.getInt("value");
-                    JSONObject type = pObj.getJSONObject("type");
-                    prom.TypePromotion = type.getString("name");
-                    listPromotion.add(prom);
-                }
-                b.promotion = listPromotion;
+                b.promotion = parse.promotion(promotion);
                 return b;
             }
             catch(JSONException e){
@@ -690,37 +669,10 @@ public class ParseQuery {
             }
 
             try {
-
                 //Calification
                 JSONObject obj = new JSONObject(resultado);
                 JSONArray calification = obj.getJSONArray("calification");
-                ArrayList<CalificationBranch> listcalification = new ArrayList<CalificationBranch>();
-                for (int c = 0; c < calification.length(); c++) {
-                    JSONObject caliObj = calification.getJSONObject(c);
-                    CalificationBranch cali = new CalificationBranch();
-                    cali.idCalification = caliObj.getInt("idCalification");
-                    cali.ambience = caliObj.getInt("ambience");
-                    cali.food  = caliObj.getInt("food");
-                    cali.service   = caliObj.getInt("service");
-                    cali.averageCalification = caliObj.getDouble("averageCalification");
-                    cali.message = caliObj.getString("message");
-                    cali.date;
-                    cali.user = parse.user(caliObj);
-                    JSONObject typeDining = caliObj.getJSONObject("typeDining");
-                    cali.typeDining = typeDining.getString("name");
-                    JSONArray photos = caliObj.getJSONArray("photo");
-                    for (int p = 0; p < photos.length(); p++){
-                        JSONObject photoObj = photos.getJSONObject(p);
-                        PhotoBranch photo = new PhotoBranch();
-                        photo.idPhoto = photoObj.getInt("idPhoto");
-                        photo.photo = photoObj.getString("photo");
-                        photo.user = cali.user;
-                    }
-
-                }
-                return listcalification;
-
-
+                return parse.calificationBranch(calification);
             }
             catch(JSONException e){
                 Log.d("error", e.getMessage());

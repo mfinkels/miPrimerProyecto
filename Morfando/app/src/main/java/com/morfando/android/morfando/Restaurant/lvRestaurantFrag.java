@@ -47,7 +47,7 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
     MainActivity main;
     ListView restaurantItems;
     lvRestaurantAdapter adapter;
-
+    ParseQuery pq = new ParseQuery();
     ArrayList<Branch> listBranches;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
@@ -56,7 +56,7 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
         main = (MainActivity)getActivity();
 
         restaurantItems = (ListView) toReturn.findViewById(R.id.lvRestaurantItems);
-        ParseQuery pq = new ParseQuery();
+
         listBranches = pq.getAllBranch(10, 0);
         adapter = new lvRestaurantAdapter(listBranches, main);
         restaurantItems.setAdapter(adapter);

@@ -91,6 +91,7 @@
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
             <FrameLayout
@@ -103,7 +104,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnReservation"
+        android:textAllCaps="false"
+        android:background="@color/buttonColor"
         android:text="Make Reservation"
+        android:textColor="#fff"
         android:textSize="24sp"
         android:layout_alignParentBottom="true"
         />

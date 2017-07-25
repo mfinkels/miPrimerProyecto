@@ -3,7 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#ebcc0e0e"
         android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -20,7 +19,7 @@
             android:layout_marginBottom="0dp"
             android:gravity="center_horizontal"
             android:text="Ingresa a tu cuenta"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimary"
             android:textSize="33dp"
             android:textStyle="bold" />
 
@@ -31,7 +30,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
             android:text="y empeza a reservar"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimary"
             android:textSize="26dp"
             android:textStyle="bold" />
 

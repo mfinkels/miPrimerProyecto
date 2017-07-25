@@ -7,15 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#ebcc0e0e">
+        android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Registrarse"
-            android:textColor="#fff"
+
+            android:textColor="@color/colorPrimary"
             android:textSize="33dp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"/>
@@ -50,7 +50,6 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
                 android:layout_marginTop="10dp">
 
                 <EditText
@@ -65,8 +64,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Apellido">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/lastnameUser"
@@ -81,8 +79,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Correo Electronico">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/emailUser"
@@ -96,8 +93,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Telefono Movil">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/photneUser"
@@ -112,8 +108,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Contraseña">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/passwordUser"
@@ -127,8 +122,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Confirmar Contraseña">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/confirm_passwordUser"
@@ -147,7 +141,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnSignUp"
             android:layout_marginTop="15dp"
-            android:background="#ebcc410e"
+            android:background="@color/buttonColor"
             android:text="Registrarse"
             android:textColor="#fff" />
 

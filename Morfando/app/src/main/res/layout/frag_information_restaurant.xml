@@ -21,6 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Como llegar"
+            android:textAllCaps="false"
+            android:background="@color/buttonColor"
+            android:textColor="#fff"
             android:textSize="20sp"
             android:layout_marginTop="5dp"/>
         <LinearLayout
@@ -245,6 +248,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btnMoreCalification"
                 android:text="More"
+                android:textAllCaps="false"
+                android:background="@color/buttonColor"
+                android:textColor="#fff"
                 android:textSize="20sp"
                 android:layout_gravity="center"/>
         </LinearLayout>

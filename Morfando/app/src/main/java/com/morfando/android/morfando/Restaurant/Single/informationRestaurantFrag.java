@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class informationRestaurantFrag extends Fragment {
 
     TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
     GridView serviceGV;
+    LinearLayout socialNetwork, promotion;
 
     ListView timetable, calification;
 
@@ -50,6 +52,10 @@ public class informationRestaurantFrag extends Fragment {
         description.setText(myBranch.restaurant.description);
 
         //si tiene socialNetwork
+        if (myBranch.restaurant.social.size() > 0){
+            socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
+
+        }
 
 
         serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
@@ -61,7 +67,9 @@ public class informationRestaurantFrag extends Fragment {
         timetable.setAdapter(adapterTimetable);
 
         // si tiene promotion
-
+        if(myBranch.promotion.size() > 0){
+            promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
+        }
 
         // se puede enlazar los types
         food = (TextView)toReturn.findViewById(R.id.foodCalification);
@@ -73,7 +81,7 @@ public class informationRestaurantFrag extends Fragment {
         ambience.setText(myBranch.averageAmbience + "");
 
         calification = (ListView)toReturn.findViewById(R.id.listCalification);
-        calificationAdapter adapterCalification = new calificationAdapter(myBranch, main);
+        calificationAdapter adapterCalification = new calificationAdapter(myBranch.calification, main);
         calification.setAdapter(adapterCalification);
 
         // FALTA consulta calificaciones solo 3 y botones
