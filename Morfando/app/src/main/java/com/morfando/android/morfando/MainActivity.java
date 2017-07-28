@@ -1,6 +1,7 @@
 package com.morfando.android.morfando;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void BranchSelected(int id){
         branch = pq.getBranch(id);
-        updateFragment(new restaurantSingleFrag());
+        startActivity(new Intent(this, Main2Activity.class));
     }
 
     public Branch getBranch(){

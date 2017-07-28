@@ -55,7 +55,7 @@ import okhttp3.Response;
 public class restaurantSingleFrag extends Fragment {
 
     MainActivity main;
-    TextView name, range, cousine, description,service;
+    TextView name, range, cousine;
     RatingBar calification;
 
     ParseQuery pq;

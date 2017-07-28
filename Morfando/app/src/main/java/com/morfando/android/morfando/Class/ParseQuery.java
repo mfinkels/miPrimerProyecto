@@ -392,6 +392,8 @@ public class ParseQuery {
 
     }
 
+    private String server = "http://apimorfandoort.azurewebsites.net/api/";
+
     ParsingObjects parse = new ParsingObjects();
 
     // Query for List Branches
@@ -399,7 +401,7 @@ public class ParseQuery {
     private ArrayList<Branch> branches = new ArrayList<Branch>();
 
     public ArrayList<Branch> getAllBranch(int limit, int offset){
-        new BranchGetAll().execute("http://apimorfandoort.azurewebsites.net/api/branch/", limit + "", offset + "");
+        new BranchGetAll().execute("branch/", limit + "", offset + "");
         return branches;
     }
 
@@ -418,7 +420,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(server + url)
                     .build();
             String resultado;
             try {
@@ -517,7 +519,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://apimorfandoort.azurewebsites.net/api/user/" + email + "/" + password)
+                    .url(server + "user/" + email + "/" + password)
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
@@ -563,7 +565,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://apimorfandoort.azurewebsites.net/api/branch/" + id)
+                    .url(server + "branch/" + id)
                     .build();
             String resultado;
             try {
@@ -657,7 +659,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://apimorfandoort.azurewebsites.net/api/"+ id +"/"+ limit +"/"+ offset)
+                    .url(server + id +"/"+ limit +"/"+ offset)
                     .build();
             String resultado;
             try {
