@@ -19,7 +19,7 @@ namespace ApiEjemplo.Models
         public User user { get; set; }
         public TypeDiningCalificationBranch typeDining { get; set; }
         public List<PhotoBranch> photo { get; set; }
-        public DateTime 3date { get; set; }
+        public DateTime date { get; set; }
 
     }
 }

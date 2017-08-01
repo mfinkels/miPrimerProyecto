@@ -91,7 +91,7 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         moreCalification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                main.moreCalificationShow(v);
+                // Mostrar mas Calificaciones
             }
         });
 

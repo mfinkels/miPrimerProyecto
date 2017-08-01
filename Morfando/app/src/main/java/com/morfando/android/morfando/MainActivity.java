@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     ParseQuery pq;
 
-    private Main2Activity main2;
-
     private Branch branch;
 
     private boolean userLoggedIn;
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         trans.commit();
 
         pq = new ParseQuery();
-        main2 = (Main2Activity)getApplicationContext();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -220,10 +217,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error Log In",Toast.LENGTH_SHORT);
         }
-    }
-
-    public void moreCalificationShow(View v) {
-        updateToMain2();
-        main2.viewPressed(v);
     }
 }

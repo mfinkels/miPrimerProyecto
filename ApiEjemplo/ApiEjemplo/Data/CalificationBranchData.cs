@@ -138,7 +138,6 @@ namespace ApiEjemplo.Data
             caliBranch.food = row.Field<int>("food");
             caliBranch.service = row.Field<int>("service");
             caliBranch.ambience = row.Field<int>("ambience");
-            caliBranch.averageCalification = row.Field<int>("averageCalification");
             caliBranch.message = row.Field<string>("message");
             caliBranch.date = row.Field<DateTime>("date");
             return caliBranch;
