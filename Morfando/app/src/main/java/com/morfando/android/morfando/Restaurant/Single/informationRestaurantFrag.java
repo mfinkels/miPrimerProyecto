@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Timetable;
+import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -28,9 +29,10 @@ import java.util.ArrayList;
  * Created by Matias on 6/30/2017.
  */
 
-public class informationRestaurantFrag extends Fragment {
+public class informationRestaurantFrag extends Fragment implements View.OnClickListener {
 
     MainActivity main;
+    Main2Activity main2;
 
     TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
     GridView serviceGV;
@@ -46,6 +48,7 @@ public class informationRestaurantFrag extends Fragment {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_information_restaurant, group, false);
         main = (MainActivity)getActivity();
+        main2 = (Main2Activity)getActivity();
         myBranch = main.getBranch();
 
         description = (TextView)toReturn.findViewById(R.id.descriptionSingle);
@@ -84,9 +87,20 @@ public class informationRestaurantFrag extends Fragment {
         calificationAdapter adapterCalification = new calificationAdapter(myBranch.calification, main);
         calification.setAdapter(adapterCalification);
 
+        moreCalification = (Button)toReturn.findViewById(R.id.btnMoreCalification);
+        moreCalification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.moreCalificationShow(v);
+            }
+        });
+
         // FALTA consulta calificaciones solo 3 y botones
 
 
         return toReturn;
+    }
+
+    public void onClick(View v){
     }
 }

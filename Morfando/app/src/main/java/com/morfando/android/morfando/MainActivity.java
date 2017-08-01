@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction trans;
 
     ParseQuery pq;
+
+    private Main2Activity main2;
 
     private Branch branch;
 
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         trans.commit();
 
         pq = new ParseQuery();
+        main2 = (Main2Activity)getApplicationContext();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -191,7 +195,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void BranchSelected(int id){
         branch = pq.getBranch(id);
-        startActivity(new Intent(this, Main2Activity.class));
+        updateToMain2();
+    }
+
+    private void updateToMain2(){
+        Intent i = new Intent(this, Main2Activity.class);
+        i.putExtra("user", (Serializable) myUser);
+        i.putExtra("userLoggedIn", userLoggedIn);
+        i.putExtra("branch", (Serializable) branch);
+        startActivity(i);
     }
 
     public Branch getBranch(){
@@ -208,5 +220,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error Log In",Toast.LENGTH_SHORT);
         }
+    }
+
+    public void moreCalificationShow(View v) {
+        updateToMain2();
+        main2.viewPressed(v);
     }
 }

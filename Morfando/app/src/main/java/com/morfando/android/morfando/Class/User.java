@@ -1,12 +1,13 @@
 package com.morfando.android.morfando.Class;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Matias on 6/12/2017.
  */
 
-public class User {
+public class User implements Serializable{
 
     public int idUser;
     public String name;
@@ -22,7 +23,7 @@ public class User {
     public List<Reservation> reservations;
     public List<OrderReservation> orders;
 
-    /*
+
     public void User(int id, String name, String lastName, String password, String photo, String phone, String email, String latitude, String longitude, Promotion promotion){
 
         this.idUser = id;
@@ -35,7 +36,7 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
         this.promotion = promotion;
-    }*/
+    }
 
 
 

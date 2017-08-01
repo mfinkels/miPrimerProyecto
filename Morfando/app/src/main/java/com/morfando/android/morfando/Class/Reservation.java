@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,9 @@ public class Reservation {
     // IdReservation, Branch(todos datos de la sucursal), date, hour, guest, list<orderReservation>
 
     public int idReservation;
+    public int idUser;
     public Branch branch;
-    public Date date;
+    public Calendar date;
     public int hour;
     public int guest;
     public List<OrderReservation> ordes;

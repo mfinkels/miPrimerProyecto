@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by Matias on 6/25/2017.
  */
 
-public class Branch {
+public class Branch implements Serializable{
 
     // list<service>, list<timetable>, list<filter>, list<cuisine>, list<promotion>
 

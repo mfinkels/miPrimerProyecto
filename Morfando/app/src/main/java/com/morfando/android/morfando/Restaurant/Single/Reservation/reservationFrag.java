@@ -8,25 +8,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.shawnlin.numberpicker.NumberPicker;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import java.util.Calendar;
+
 /**
  * Created by Matias on 25/7/17.
  */
 
-public class reservationFrag extends Fragment {
+public class reservationFrag extends Fragment implements View.OnClickListener{
 
     Main2Activity main2;
 
+    Button reserve;
     NumberPicker guestPicker;
 
     String[] guest = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
@@ -38,7 +43,13 @@ public class reservationFrag extends Fragment {
         main2 = (Main2Activity) getActivity();
 
         guestPicker = (NumberPicker) toReturn.findViewById(R.id.number_picker);
+        reserve = (Button)toReturn.findViewById(R.id.makeReservation);
+        reserve.setOnClickListener(this);
 
         return toReturn;
+    }
+
+    public void onClick(View v){
+        //main2.createReservation(guestPicker.getValue());
     }
 }

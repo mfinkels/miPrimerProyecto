@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.security.PrivateKey;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -392,9 +394,34 @@ public class ParseQuery {
 
     }
 
+    private class CreateObjects{
+
+        public String reservation(Reservation obj){
+            String json = "";
+            try {
+                JSONObject ObjJson = new JSONObject();
+                ObjJson.accumulate("idUser", obj.idUser);
+                ObjJson.accumulate("idBranchRestaurant", obj.branch.idBranch);
+                ObjJson.accumulate("date", obj.date);
+                ObjJson.accumulate("hour", obj.hour);
+                ObjJson.accumulate("guest", obj.guest);
+                json = ObjJson.toString();
+                return json;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
+    }
+
     private String server = "http://apimorfandoort.azurewebsites.net/api/";
 
+    public static final MediaType JSON = MediaType.parse("application/json");
+
     ParsingObjects parse = new ParsingObjects();
+    CreateObjects create = new CreateObjects();
 
     // Query for List Branches
 
@@ -661,6 +688,7 @@ public class ParseQuery {
             Request request = new Request.Builder()
                     .url(server + id +"/"+ limit +"/"+ offset)
                     .build();
+
             String resultado;
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
@@ -679,6 +707,45 @@ public class ParseQuery {
             catch(JSONException e){
                 Log.d("error", e.getMessage());
                 return null;
+            }
+        }
+    }
+
+    // Create Reservation in Restaurants
+    Boolean reservtionCreated;
+
+    public boolean createReservation(Reservation res){
+        new insertReservation().execute(res);
+        return reservtionCreated;
+    }
+
+    private class insertReservation extends AsyncTask<Reservation, Void, Boolean>{
+
+        protected void onPostExecute(Boolean datos) {
+            super.onPostExecute(datos);
+            reservtionCreated = datos;
+        }
+
+        @Override
+        protected Boolean doInBackground(Reservation... params) {
+            Reservation res = params[0];
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = RequestBody.create(JSON, create.reservation(res));
+            Request request = new Request.Builder()
+                    .url(server)
+                    .post(body)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                if (response.body().string() == ""){
+                    return true;
+                }
+                return false;
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return false;
             }
         }
     }
