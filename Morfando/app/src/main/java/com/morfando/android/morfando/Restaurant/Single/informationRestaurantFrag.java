@@ -60,6 +60,9 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
         }
 
+        address = (Button)toReturn.findViewById(R.id.btnGetDirection);
+        address.setOnClickListener(this);
+
 
         serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
         serviceAdapter adapterService = new serviceAdapter(main, myBranch.service);
@@ -91,16 +94,15 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         moreCalification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Mostrar mas Calificaciones
+                main.showAllCalification();
             }
         });
-
-        // FALTA consulta calificaciones solo 3 y botones
 
 
         return toReturn;
     }
 
     public void onClick(View v){
+        //Como llegar
     }
 }

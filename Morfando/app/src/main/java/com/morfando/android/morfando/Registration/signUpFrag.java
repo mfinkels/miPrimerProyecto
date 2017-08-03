@@ -1,6 +1,7 @@
 package com.morfando.android.morfando.Registration;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,12 +9,17 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,7 +39,7 @@ import java.io.IOException;
  * Created by Matias on 6/10/2017.
  */
 
-public class signUpFrag extends Fragment implements View.OnClickListener {
+public class signUpFrag extends DialogFragment implements View.OnClickListener {
 
     MainActivity main;
     private Button btnSignUp;
@@ -42,6 +48,13 @@ public class signUpFrag extends Fragment implements View.OnClickListener {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_sign_up, group, false);
         main = (MainActivity)getActivity();
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_media_previous);
+        }
 
         btnSignUp = (Button) toReturn.findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(this);
@@ -55,6 +68,25 @@ public class signUpFrag extends Fragment implements View.OnClickListener {
 
 
         return toReturn;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // handle close button click here
+            dismiss();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClick(View v){

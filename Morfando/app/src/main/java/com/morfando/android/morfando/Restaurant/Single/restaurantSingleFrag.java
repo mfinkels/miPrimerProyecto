@@ -1,16 +1,23 @@
 package com.morfando.android.morfando.Restaurant.Single;
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -52,7 +59,7 @@ import okhttp3.Response;
  * Created by Matias on 6/30/2017.
  */
 
-public class restaurantSingleFrag extends Fragment {
+public class restaurantSingleFrag extends DialogFragment {
 
     MainActivity main;
     TextView name, range, cousine;
@@ -60,10 +67,13 @@ public class restaurantSingleFrag extends Fragment {
 
     ParseQuery pq;
 
+    Button reserve;
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
     private Branch myBranch;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
@@ -72,6 +82,13 @@ public class restaurantSingleFrag extends Fragment {
         pq = new ParseQuery();
 
         myBranch = main.getBranch();
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_media_previous);
+        }
 
         name = (TextView)toReturn.findViewById(R.id.nameSingle);
         name.setText(myBranch.restaurant.name + " " + myBranch.name);
@@ -86,12 +103,39 @@ public class restaurantSingleFrag extends Fragment {
         range = (TextView)toReturn.findViewById(R.id.priceRangeSingle);
         range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
 
+        reserve = (Button) toReturn.findViewById(R.id.btnReservation);
+        reserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.makeReservation();
+            }
+        });
+
         viewPager = (ViewPager) toReturn.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) toReturn.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         return toReturn;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // handle close button click here
+            dismiss();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -416,7 +416,7 @@ public class ParseQuery {
 
     }
 
-    private String server = "http://apimorfandoort.azurewebsites.net/api/";
+    private String server = "http://appmorfando.azurewebsites.net/api/";
 
     public static final MediaType JSON = MediaType.parse("application/json");
 

@@ -1,10 +1,16 @@
 package com.morfando.android.morfando.Registration;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +22,7 @@ import com.morfando.android.morfando.R;
  * Created by Matias on 6/9/2017.
  */
 
-public class logInFrag extends Fragment implements View.OnClickListener {
+public class logInFrag extends DialogFragment implements View.OnClickListener {
 
     EditText email, password;
     TextView resetPassword;
@@ -26,6 +32,13 @@ public class logInFrag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_log_in, group, false);
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
+        }
 
         email=(EditText)toReturn.findViewById(R.id.emailUser);
         password=(EditText)toReturn.findViewById(R.id.passwordUser);
@@ -50,6 +63,25 @@ public class logInFrag extends Fragment implements View.OnClickListener {
 
 
         return toReturn;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // handle close button click here
+            dismiss();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void logIn() {

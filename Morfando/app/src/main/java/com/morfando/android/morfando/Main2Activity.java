@@ -68,25 +68,7 @@ public class Main2Activity extends AppCompatActivity {
         trans.commit();
     }
 
-    public ArrayList<CalificationBranch> getCalification(){
-        return pq.getBranchCalification(branch.idBranch, 10, 0);
-    }
 
-    public void createReservation(int guest, Calendar date) {
-        Reservation res = new Reservation();
-        // falta idUser
-        res.branch = branch;
-        res.date = date;
-        res.guest = guest;
-        res.hour = date.get(Calendar.HOUR);
-        Boolean ok = pq.createReservation(res);
-        String message = "";
-        if(ok){
-            message = "created";
-        } else {
-            message= "error";
-        }
-        Toast.makeText(this,message, Toast.LENGTH_SHORT)
-                .show();
-    }
+
+
 }

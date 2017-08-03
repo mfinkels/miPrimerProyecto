@@ -6,4 +6,6 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="buttonColor">#ebcc410e</color>
+    <color name="backgroundFrag">#fff</color>
+    <color name="maroon">#b90000</color>
 </resources>

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.IdRes;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +16,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.CalificationBranch;
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
 import com.morfando.android.morfando.Profile.profileFrag;
+import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
+import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFrag;
+import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.restaurantSingleFrag;
 import com.roughike.bottombar.BottomBar;
@@ -31,6 +37,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Branch branch;
 
-    private boolean userLoggedIn;
+    private boolean userLoggedIn = false;
     private User myUser;
 
     @Override
@@ -73,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (tabId){
                     case R.id.tab_restaurant:
                         fm = new lvRestaurantFrag();
+                        updateFragment(fm);
                         break;
                     /*case R.id.tab_favorites:
 
@@ -81,13 +90,20 @@ public class MainActivity extends AppCompatActivity {
 
                         break;*/
                     case R.id.tab_profile:
-                        fm = new profileFrag();
+                        if(userLoggedIn){
+                            fm = new profileFrag();
+                            updateFragment(fm);
+                        } else{
+                            logInFrag register = new logInFrag();
+                            showDialogFragment(register);
+                        }
                         break;
                     default:
                         fm = new lvRestaurantFrag();
+                        updateFragment(fm);
                         break;
                 }
-                updateFragment(fm);
+
             }
         });
     }
@@ -95,14 +111,12 @@ public class MainActivity extends AppCompatActivity {
     public void viewPressed(View v) {
         switch (v.getId()){
             case R.id.resetPassword:
-                Fragment reset;
-                reset = new resetPasswordFrag();
-                updateFragment(reset);
+                resetPasswordFrag reset = new resetPasswordFrag();
+                showDialogFragment(reset);
                 break;
             case R.id.register:
-                Fragment signUp;
-                signUp = new signUpFrag();
-                updateFragment(signUp);
+                signUpFrag signUp = new signUpFrag();
+                showDialogFragment(signUp);
                 break;
             case R.id.facebook:
 
@@ -190,17 +204,56 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void BranchSelected(int id){
-        branch = pq.getBranch(id);
-        updateToMain2();
+    private void showDialogFragment(DialogFragment newFragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(android.R.id.content, newFragment)
+                .addToBackStack(null).commit();
     }
 
-    private void updateToMain2(){
-        Intent i = new Intent(this, Main2Activity.class);
-        i.putExtra("user", (Serializable) myUser);
-        i.putExtra("userLoggedIn", userLoggedIn);
-        i.putExtra("branch", (Serializable) branch);
-        startActivity(i);
+    public void makeReservation(){
+        if(userLoggedIn){
+            showDialogFragment(new reservationFrag());
+        }else {
+            // si no esta logeado
+            showDialogFragment(new logInFrag());
+        }
+
+    }
+
+    public void BranchSelected(int id){
+        branch = pq.getBranch(id);
+        restaurantSingleFrag single = new restaurantSingleFrag();
+        showDialogFragment(single);
+    }
+
+    public void showAllCalification(){
+        calificationRestaurantFrag cali = new calificationRestaurantFrag();
+        showDialogFragment(cali);
+    }
+
+    public void createReservation(int guest, Calendar date) {
+        Reservation res = new Reservation();
+        res.idUser = myUser.idUser;
+        res.branch = branch;
+        res.date = date;
+        res.guest = guest;
+        res.hour = date.get(Calendar.HOUR);
+        Boolean ok = pq.createReservation(res);
+        String message = "";
+        if(ok){
+            //Ir a lista de reservas
+        } else {
+            Toast.makeText(this,"error", Toast.LENGTH_SHORT)
+                    .show();
+        }
+
+    }
+
+    public ArrayList<CalificationBranch> getCalification(){
+        return pq.getBranchCalification(branch.idBranch, 10, 0);
     }
 
     public Branch getBranch(){
