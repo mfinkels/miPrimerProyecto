@@ -11,12 +11,16 @@ namespace ApiEjemplo.Data
     {
         public static void insert(Reservation res)
         {
-            string sInsert = "Insert into reservation (idUser,idBranchRestaurant,date,hour,guest) values (" + Convert.ToString(res.idUser) + "," + res.idBranchRestaurant + ",'" + res.date.ToString("yyyy-MM-dd HH:mm") + "'," + Convert.ToString(res.hour) + "," + Convert.ToString(res.guest) + ")";
+            string[] row = new string[] { "idUser", "idBranchRestaurant", "date", "guest"};
+            object[] values = new object[] { res.idUser, res.idBranchRestaurant, Convert.ToString(res.date), res.guest };
+            string sInsert = QueryHelper.insert("reservation", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
         public static void update(Reservation res)
         {
-            string sUpdate = "update reservation set idUser=" + Convert.ToString(res.idUser) + ",idBranchRestaurant=" + Convert.ToString(res.idBranchRestaurant) + ",date='" + res.date.ToString("yyyy-MM-dd HH:mm") + "',hour=" + Convert.ToString(res.hour) + "',guest=" + Convert.ToString(res.guest) + " where idReservation=" + Convert.ToString(res.idReservation);
+            string[] row = new string[] { "idUser", "idBranchRestaurant", "date", "guest" };
+            object[] values = new object[] { res.idUser, res.idBranchRestaurant, Convert.ToString(res.date), res.guest };
+            string sUpdate = QueryHelper.update("reservation", row, values, "idReservation", res.idReservation);
             DBHelper.EjecutarIUD(sUpdate);
         }
         public static void delete(int id)
@@ -38,9 +42,9 @@ namespace ApiEjemplo.Data
             return null;
         }
 
-        public static List<Reservation> getByIdUser(int id)
+        public static List<Reservation> getByIdUser(int id, string simbol)
         {
-            string select = "select * from reservation where idUser=" + id.ToString();
+            string select = "select * from reservation where idUser=" + id.ToString() + " AND date " + simbol + " CURDATE()";
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<Reservation> list = new List<Reservation>();
             Reservation res;

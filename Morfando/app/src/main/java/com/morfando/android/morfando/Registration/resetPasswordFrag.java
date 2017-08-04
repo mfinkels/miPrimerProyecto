@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,12 +34,16 @@ public class resetPasswordFrag extends DialogFragment implements View.OnClickLis
         toReturn = inflater.inflate(R.layout.frag_reset_password, group, false);
         main = (MainActivity) getActivity();
 
+        Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_media_previous);
         }
+        setHasOptionsMenu(true);
 
         email = (EditText) toReturn.findViewById(R.id.emailToReset);
         sendReset = (Button)toReturn.findViewById(R.id.sendReset);
@@ -58,7 +63,7 @@ public class resetPasswordFrag extends DialogFragment implements View.OnClickLis
         int id = item.getItemId();
         if (id == android.R.id.home) {
             // handle close button click here
-            dismiss();
+            main.updateDialogFragment(new logInFrag());
             return true;
         }
 

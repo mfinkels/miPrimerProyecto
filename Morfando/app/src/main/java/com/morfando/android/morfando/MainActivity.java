@@ -25,6 +25,7 @@ import com.morfando.android.morfando.Profile.profileFrag;
 import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
+import com.morfando.android.morfando.Reservation.reservationMainFrag;
 import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
@@ -204,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void updateDialogFragment(DialogFragment dialog) {
+        showDialogFragment(dialog);
+    }
+
     private void showDialogFragment(DialogFragment newFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -240,11 +245,10 @@ public class MainActivity extends AppCompatActivity {
         res.branch = branch;
         res.date = date;
         res.guest = guest;
-        res.hour = date.get(Calendar.HOUR);
         Boolean ok = pq.createReservation(res);
         String message = "";
         if(ok){
-            //Ir a lista de reservas
+            updateFragment(new reservationMainFrag());
         } else {
             Toast.makeText(this,"error", Toast.LENGTH_SHORT)
                     .show();
@@ -270,5 +274,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error Log In",Toast.LENGTH_SHORT);
         }
+    }
+
+    public ArrayList<Reservation> getReservation(String type){
+        return pq.getListReservation(myUser.idUser, type);
     }
 }

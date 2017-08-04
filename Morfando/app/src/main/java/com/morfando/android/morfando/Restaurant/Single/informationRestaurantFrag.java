@@ -3,10 +3,12 @@ package com.morfando.android.morfando.Restaurant.Single;
 import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,6 +59,27 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         //si tiene socialNetwork
         if (myBranch.restaurant.social.size() > 0){
             socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
+
+            TextView titleSocial = new TextView(main);
+            titleSocial.setText("Social NetWork");
+
+            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            titleSocial.setGravity(Gravity.CENTER);
+            titleSocial.setTextSize(24);
+            titleSocial.setLayoutParams(parms);
+            socialNetwork.addView(titleSocial);
+
+            GridView gridView= new GridView(this);
+
+            gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.FILL_PARENT, GridLayout.LayoutParams.FILL_PARENT));
+            gridView.setNumColumns(myBranch.restaurant.social.size());
+            gridView.setColumnWidth(GridView.AUTO_FIT);
+
+            gridView.setAdapter(adapter);
+
+            socialNetwork.addView(gridView);
 
         }
 

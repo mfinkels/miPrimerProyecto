@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,12 +53,16 @@ public class reservationFrag extends DialogFragment implements View.OnClickListe
         reserve = (Button)toReturn.findViewById(R.id.makeReservation);
         reserve.setOnClickListener(this);
 
+        Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
         }
+        setHasOptionsMenu(true);
 
         return toReturn;
     }
@@ -75,6 +80,7 @@ public class reservationFrag extends DialogFragment implements View.OnClickListe
         if (id == android.R.id.home) {
             // handle close button click here
             dismiss();
+            main.updateDialogFragment(new reservationFrag());
             return true;
         }
 

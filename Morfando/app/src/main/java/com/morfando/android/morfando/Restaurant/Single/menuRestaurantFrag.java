@@ -21,6 +21,7 @@ public class menuRestaurantFrag extends Fragment{
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_menu_restaurant, group, false);
         main = (MainActivity)getActivity();
+
         return toReturn;
     }
 

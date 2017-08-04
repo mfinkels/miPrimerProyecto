@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -49,12 +50,16 @@ public class signUpFrag extends DialogFragment implements View.OnClickListener {
         toReturn = inflater.inflate(R.layout.frag_sign_up, group, false);
         main = (MainActivity)getActivity();
 
+        Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_media_previous);
+            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
         }
+        setHasOptionsMenu(true);
 
         btnSignUp = (Button) toReturn.findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(this);
@@ -83,6 +88,8 @@ public class signUpFrag extends DialogFragment implements View.OnClickListener {
         if (id == android.R.id.home) {
             // handle close button click here
             dismiss();
+            main.updateDialogFragment(new logInFrag());
+
             return true;
         }
 

@@ -7,8 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
+import com.morfando.android.morfando.Reservation.Adapter.reservationAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Matias on 2/8/17.
@@ -24,8 +28,13 @@ public class pastReservationFrag extends Fragment {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_past_reservation, group, false);
         main = (MainActivity)getActivity();
+        ArrayList<Reservation> list = main.getReservation("past");
 
-        reservation = (ListView)toReturn.findViewById(R.id.listPastReservation);
+        if(list.size() > 0) {
+            reservation = (ListView) toReturn.findViewById(R.id.listPastReservation);
+            reservationAdapter adapter = new reservationAdapter(list, main);
+            reservation.setAdapter(adapter);
+        }
 
         return toReturn;
     }

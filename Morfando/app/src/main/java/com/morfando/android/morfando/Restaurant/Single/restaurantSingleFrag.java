@@ -83,12 +83,16 @@ public class restaurantSingleFrag extends DialogFragment {
 
         myBranch = main.getBranch();
 
+        Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_media_previous);
         }
+        setHasOptionsMenu(true);
 
         name = (TextView)toReturn.findViewById(R.id.nameSingle);
         name.setText(myBranch.restaurant.name + " " + myBranch.name);

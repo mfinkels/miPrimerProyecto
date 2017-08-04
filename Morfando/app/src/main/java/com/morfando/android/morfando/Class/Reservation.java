@@ -15,9 +15,8 @@ public class Reservation {
     public int idUser;
     public Branch branch;
     public Calendar date;
-    public int hour;
     public int guest;
-    public List<OrderReservation> ordes;
+    public List<OrderReservation> orders;
 
 }
 

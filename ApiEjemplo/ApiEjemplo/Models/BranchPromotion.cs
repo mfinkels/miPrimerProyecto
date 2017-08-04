@@ -6,8 +6,8 @@ using System.Web;
 
 namespace ApiEjemplo.PromotionInfo
 {
-	public class BranchPromotion
-	{
+    public class BranchPromotion
+    {
         public int idBranchPromotion { get; set; }
         public int idRestaurant { get; set; }
         public int idBranchRestaurant { get; set; }

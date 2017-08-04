@@ -244,6 +244,22 @@ public class ParseQuery {
             }
         }
 
+        public Reservation reservation(JSONObject json){
+            try {
+                Reservation res = new Reservation();
+                res.idReservation = json.getInt("idReservation");
+                res.idUser = json.getInt("idUser");
+                res.branch = branch(json.getJSONObject("branch"));
+                res.date = Utility.convertStringToCalendar(json.getString("date"));
+                res.guest = json.getInt("guest");
+                return res;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
+
         //Return Lists
 
         public ArrayList<SocialNetwork> socialNetwork(JSONArray jsonArray){
@@ -390,6 +406,21 @@ public class ParseQuery {
             }
         }
 
+        public ArrayList<Reservation> reservation(JSONArray jsonArray){
+            try {
+                ArrayList<Reservation> arrayList = new ArrayList<Reservation>();
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    Reservation res = parse.reservation(obj);
+                    arrayList.add(res);
+                }
+                return  arrayList;
+
+            }catch (JSONException e){
+                Log.d("Error", e.getMessage());
+                return null;
+            }
+        }
 
 
     }
@@ -403,7 +434,6 @@ public class ParseQuery {
                 ObjJson.accumulate("idUser", obj.idUser);
                 ObjJson.accumulate("idBranchRestaurant", obj.branch.idBranch);
                 ObjJson.accumulate("date", obj.date);
-                ObjJson.accumulate("hour", obj.hour);
                 ObjJson.accumulate("guest", obj.guest);
                 json = ObjJson.toString();
                 return json;
@@ -416,7 +446,8 @@ public class ParseQuery {
 
     }
 
-    private String server = "http://appmorfando.azurewebsites.net/api/";
+    private String server = //"http://localhost:2073/api/";
+    "http://apimorfandoort.azurewebsites.net/api/";
 
     public static final MediaType JSON = MediaType.parse("application/json");
 
@@ -712,7 +743,7 @@ public class ParseQuery {
     }
 
     // Create Reservation in Restaurants
-    Boolean reservtionCreated;
+    private Boolean reservtionCreated;
 
     public boolean createReservation(Reservation res){
         new insertReservation().execute(res);
@@ -746,6 +777,54 @@ public class ParseQuery {
             } catch (IOException e) {
                 Log.d("error", e.getMessage());             // Error de Network
                 return false;
+            }
+        }
+    }
+
+
+    private ArrayList<Reservation> listReservation = new ArrayList<Reservation>();
+
+    public ArrayList<Reservation> getListReservation(int idUser, String type){
+        new getReservations().execute(String.valueOf(idUser), type);
+        return listReservation;
+    }
+
+    private class getReservations extends AsyncTask<String, Void, ArrayList<Reservation>> {
+
+        protected void onPostExecute(ArrayList<Reservation> datos) {
+            super.onPostExecute(datos);
+            listReservation = datos;
+        }
+
+        @Override
+        protected ArrayList<Reservation> doInBackground(String... parametros) {
+            String id = parametros[0];
+            String type = parametros[1];
+
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(server + "reservation/" + type + "/" + id)
+                    .build();
+
+            String resultado;
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                resultado = response.body().string();
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return null;
+            }
+
+            try {
+                //Reservation
+                JSONObject obj = new JSONObject(resultado);
+                JSONArray reservation = obj.getJSONArray("reservation");
+                return parse.reservation(reservation);
+            }
+            catch(JSONException e){
+                Log.d("error", e.getMessage());
+                return null;
             }
         }
     }
