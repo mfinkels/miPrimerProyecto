@@ -87,7 +87,6 @@ namespace ApiEjemplo.Data
             res.idUser = row.Field<int>("idUser");
             res.idBranchRestaurant = row.Field<int>("idBranchRestaurant");
             res.date = row.Field<DateTime>("date");
-            res.hour = row.Field<int>("hour");
             res.guest = row.Field<int>("guest");
             return res;
         }

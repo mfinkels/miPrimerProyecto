@@ -65,13 +65,6 @@ namespace ApiEjemplo.Controllers
             return PromotionData.getByIdUser(id);
         }
 
-        [Route("api/user/reservation/{id}")]
-        // return the reservation of user
-        public IList<Reservation> getReservationUser(int id)
-        {
-            return ReservationData.getByIdUser(id);
-        }
-
 
         // POST api/<controller>
         [ResponseType(typeof(User))]
