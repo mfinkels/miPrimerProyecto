@@ -23,6 +23,7 @@ import com.morfando.android.morfando.Class.Service;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Class.Utility;
+import com.morfando.android.morfando.Class.test;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -47,7 +48,7 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
     MainActivity main;
     ListView restaurantItems;
     lvRestaurantAdapter adapter;
-    ParseQuery pq = new ParseQuery();
+
     ArrayList<Branch> listBranches;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
@@ -56,9 +57,11 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
         main = (MainActivity)getActivity();
 
         restaurantItems = (ListView) toReturn.findViewById(R.id.lvRestaurantItems);
-
-        listBranches = pq.getAllBranch(10, 0);
         adapter = new lvRestaurantAdapter(listBranches, main);
+        test testing = new test();
+        testing.setAdapter(adapter);
+        testing.getAllBranch(10, 0);
+
         restaurantItems.setAdapter(adapter);
         restaurantItems.setOnItemClickListener(this);
         return toReturn;

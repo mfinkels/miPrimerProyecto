@@ -88,6 +88,6 @@ public class reservationFrag extends DialogFragment implements View.OnClickListe
     }
 
     public void onClick(View v){
-        main.createReservation(guestPicker.getValue());
+        //main.createReservation(guestPicker.getValue());
     }
 }

@@ -1,35 +1,26 @@
 package com.morfando.android.morfando.Class;
 
-import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.util.Range;
-import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
-import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by Matias on 7/14/2017.
+ * Created by Matias on 8/4/2017.
  */
 
-public class ParseQuery {
+public class test {
 
     private class ParsingObjects{
 
@@ -447,17 +438,18 @@ public class ParseQuery {
 
     }
 
-    private String server = "http://appmorfando.azurewebsites.net/api/";
-
-    public static final MediaType JSON = MediaType.parse("application/json");
-
     ParsingObjects parse = new ParsingObjects();
     CreateObjects create = new CreateObjects();
 
-    // Query for List Branches
+    private String server = "http://appmorfando.azurewebsites.net/api/";
+
+    public void setAdapter(lvRestaurantAdapter adapter) {
+        this.adapter = adapter;
+    }
+
     private lvRestaurantAdapter adapter;
 
-    private ArrayList<Branch> branches = new ArrayList<Branch>();
+
 
     public void getAllBranch(int limit, int offset){
         new BranchGetAll().execute("branch/", limit + "", offset + "");
@@ -552,284 +544,5 @@ public class ParseQuery {
         }
 
     }
-
-
-    // Query for log User
-
-    private User userLogged = new User();
-
-    public User logUser(String email, String password){
-        new LogInUser().execute(email, password);
-        return userLogged;
-    }
-
-    private class LogInUser extends AsyncTask<String, Void, User> {
-
-        protected void onPostExecute(User datos) {
-            super.onPostExecute(datos);
-            userLogged = datos;
-        }
-
-        @Override
-        protected User doInBackground(String... parametros) {
-            String email = parametros[0];
-            String password = parametros[1];
-
-
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(server + "user/" + email + "/" + password)
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                String resultado = response.body().string();
-                try {
-
-                    JSONObject json = new JSONObject(resultado);
-                    User myUser = parse.user(json);
-
-                    return myUser;
-                }
-                catch (JSONException e){
-                    Log.d("Error JSON",e.getMessage());
-                    return null;
-                }
-            } catch (IOException e) {
-                Log.d("Error",e.getMessage());             // Error de Network
-                return null;
-            }
-        }
-
-    }
-
-    // Query for get Detail Branch
-
-    private Branch b = new Branch();
-
-    public Branch getBranch(int id){
-        new GetBranchById().execute(id);
-        return b;
-    }
-
-    private class GetBranchById extends AsyncTask<Integer, Void, Branch> {
-
-        protected void onPostExecute(Branch datos) {
-            super.onPostExecute(datos);
-            b = datos;
-        }
-
-        @Override
-        protected Branch doInBackground(Integer... parametros) {
-            int id = parametros[0];
-
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(server + "branch/" + id)
-                    .build();
-            String resultado;
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                resultado = response.body().string();
-            } catch (IOException e) {
-                Log.d("error", e.getMessage());             // Error de Network
-                return null;
-            }
-
-            try {
-                Branch b = new Branch();
-
-                JSONObject obj = new JSONObject(resultado);
-                b = parse.branch(obj);
-                //Restaurant
-                JSONObject resto = obj.getJSONObject("restaurant");
-                b.restaurant = parse.restaurant(resto);
-
-                //Social Network
-                JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
-                b.restaurant.social = parse.socialNetwork(socialNetwork);
-
-                // Range Price
-                JSONObject rangeObj = obj.getJSONObject("RangePrice");
-                b.range = parse.rangePrice(rangeObj);
-
-                //Photos
-                JSONArray photo = obj.getJSONArray("photo");
-                b.photo = parse.photoBranch(photo);
-
-                // Cuisine
-                JSONArray cuisine = obj.getJSONArray("cuisine");
-                b.cuisine = parse.cuisine(cuisine);
-
-                //Menu
-                JSONArray menu = obj.getJSONArray("menu");
-                b.menu = parse.menu(menu);
-
-                //Filter
-                JSONArray filter = obj.getJSONArray("filter");
-                b.filter = parse.filter(filter);
-
-                //Service
-                JSONArray service = obj.getJSONArray("service");
-
-                b.service = parse.service(service);
-
-                //Calification
-                JSONArray calification = obj.getJSONArray("calification");
-                b.calification = parse.calificationBranch(calification);
-
-                //Timetable
-                JSONArray timetable = obj.getJSONArray("timetable");
-                b.timetable = parse.timetable(timetable);
-
-                //Promotion
-                JSONArray promotion = obj.getJSONArray("promotion");
-                b.promotion = parse.promotion(promotion);
-                return b;
-            }
-            catch(JSONException e){
-                Log.d("error", e.getMessage());
-                return null;
-            }
-        }
-    }
-
-    // Get calification from specific Branch
-
-    private ArrayList<CalificationBranch> calificationBranch = new ArrayList<CalificationBranch>();
-
-    public ArrayList<CalificationBranch> getBranchCalification(int id, int limit, int offset){
-        new GetCalificationBranch().execute(id,limit,offset);
-        return  calificationBranch;
-    }
-
-    private class GetCalificationBranch extends AsyncTask<Integer, Void, ArrayList<CalificationBranch>> {
-
-        protected void onPostExecute(ArrayList<CalificationBranch> datos) {
-            super.onPostExecute(datos);
-            calificationBranch = datos;
-        }
-
-        @Override
-        protected ArrayList<CalificationBranch> doInBackground(Integer... parametros) {
-            int id = parametros[0];
-            int limit = parametros[1];
-            int offset = parametros[3];
-
-
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(server + id +"/"+ limit +"/"+ offset)
-                    .build();
-
-            String resultado;
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                resultado = response.body().string();
-            } catch (IOException e) {
-                Log.d("error", e.getMessage());             // Error de Network
-                return null;
-            }
-
-            try {
-                //Calification
-                JSONObject obj = new JSONObject(resultado);
-                JSONArray calification = obj.getJSONArray("calification");
-                return parse.calificationBranch(calification);
-            }
-            catch(JSONException e){
-                Log.d("error", e.getMessage());
-                return null;
-            }
-        }
-    }
-
-    // Create Reservation in Restaurants
-    private Boolean reservtionCreated;
-
-    public boolean createReservation(Reservation res){
-        new insertReservation().execute(res);
-        return reservtionCreated;
-    }
-
-    private class insertReservation extends AsyncTask<Reservation, Void, Boolean>{
-
-        protected void onPostExecute(Boolean datos) {
-            super.onPostExecute(datos);
-            reservtionCreated = datos;
-        }
-
-        @Override
-        protected Boolean doInBackground(Reservation... params) {
-            Reservation res = params[0];
-
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody body = RequestBody.create(JSON, create.reservation(res));
-            Request request = new Request.Builder()
-                    .url(server)
-                    .post(body)
-                    .build();
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                if (response.body().string() == ""){
-                    return true;
-                }
-                return false;
-            } catch (IOException e) {
-                Log.d("error", e.getMessage());             // Error de Network
-                return false;
-            }
-        }
-    }
-
-
-    private ArrayList<Reservation> listReservation = new ArrayList<Reservation>();
-
-    public ArrayList<Reservation> getListReservation(int idUser, String type){
-        new getReservations().execute(String.valueOf(idUser), type);
-        return listReservation;
-    }
-
-    private class getReservations extends AsyncTask<String, Void, ArrayList<Reservation>> {
-
-        protected void onPostExecute(ArrayList<Reservation> datos) {
-            super.onPostExecute(datos);
-            listReservation = datos;
-        }
-
-        @Override
-        protected ArrayList<Reservation> doInBackground(String... parametros) {
-            String id = parametros[0];
-            String type = parametros[1];
-
-
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(server + "reservation/" + type + "/" + id)
-                    .build();
-
-            String resultado;
-            try {
-                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                resultado = response.body().string();
-            } catch (IOException e) {
-                Log.d("error", e.getMessage());             // Error de Network
-                return null;
-            }
-
-            try {
-                //Reservation
-                JSONObject obj = new JSONObject(resultado);
-                JSONArray reservation = obj.getJSONArray("reservation");
-                return parse.reservation(reservation);
-            }
-            catch(JSONException e){
-                Log.d("error", e.getMessage());
-                return null;
-            }
-        }
-    }
-
-
 
 }

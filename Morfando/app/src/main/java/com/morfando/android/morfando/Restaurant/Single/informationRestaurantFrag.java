@@ -1,12 +1,15 @@
 package com.morfando.android.morfando.Restaurant.Single;
 
+import android.content.Intent;
 import android.icu.text.UnicodeSetSpanner;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
@@ -15,13 +18,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.calificationAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.promotionAdapter;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.serviceAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.socialNetworkAdapter;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.timetableAdapter;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 
@@ -71,13 +77,21 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
             titleSocial.setLayoutParams(parms);
             socialNetwork.addView(titleSocial);
 
-            GridView gridView= new GridView(this);
+            GridView gridView= new GridView(main);
 
             gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.FILL_PARENT, GridLayout.LayoutParams.FILL_PARENT));
             gridView.setNumColumns(myBranch.restaurant.social.size());
             gridView.setColumnWidth(GridView.AUTO_FIT);
+            final socialNetworkAdapter adapterSocial = new socialNetworkAdapter(main, myBranch.restaurant.social);
+            gridView.setAdapter(adapterSocial);
 
-            gridView.setAdapter(adapter);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    socialNetworkPressed(adapterSocial.getItem(position).value);
+                }
+            });
+
 
             socialNetwork.addView(gridView);
 
@@ -98,6 +112,24 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         // si tiene promotion
         if(myBranch.promotion.size() > 0){
             promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
+
+            TextView titlePromotion = new TextView(main);
+            titlePromotion.setText("Promotion");
+
+            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            titlePromotion.setGravity(Gravity.CENTER);
+            titlePromotion.setTextSize(24);
+            titlePromotion.setLayoutParams(parms);
+            promotion.addView(titlePromotion);
+
+            ListView promotionList = new ListView(main);
+            promotionList.setLayoutParams(parms);
+
+            //promotionAdapter adapterPromotion = new promotionAdapter();
+            //promotionList.setAdapter(adapterPromotion);
+
         }
 
         // se puede enlazar los types
@@ -123,6 +155,11 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
 
         return toReturn;
+    }
+
+    private void socialNetworkPressed(String value) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(value));
+        startActivity(browserIntent);
     }
 
     public void onClick(View v){

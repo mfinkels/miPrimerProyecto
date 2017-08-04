@@ -69,7 +69,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
     }
 
     private void loadRestaurantData() {
-        myBranches = querys.getAllBranch(10, 0);
+        //myBranches = querys.getAllBranch(10, 0);
         LinearLayoutManager layoutManager = new LinearLayoutManager(main);
         listRestaurant.setLayoutManager(layoutManager);
         listRestaurant.setHasFixedSize(true);

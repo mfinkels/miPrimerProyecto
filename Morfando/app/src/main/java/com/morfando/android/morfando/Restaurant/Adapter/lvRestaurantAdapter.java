@@ -28,6 +28,11 @@ public class lvRestaurantAdapter extends BaseAdapter {
         myContext = usedContext;
     }
 
+    public void setData(ArrayList<Branch> branches) {
+        this.branches=branches;
+
+    }
+
     public int getCount() {
         return branches.size();
     }

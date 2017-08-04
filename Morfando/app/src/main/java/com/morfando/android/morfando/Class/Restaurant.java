@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Restaurant {
     public int idRestaurant;
     public String name;
     public String description;
-    public List<Branch> branch;
-    public List<SocialNetwork> social;
+    public ArrayList<Branch> branch;
+    public ArrayList<SocialNetwork> social;
 
 }
