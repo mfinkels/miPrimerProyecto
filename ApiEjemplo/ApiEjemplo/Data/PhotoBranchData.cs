@@ -52,7 +52,6 @@ namespace ApiEjemplo.Data
                 {
                     pBranch = getByRow(row);
                     pBranch.user = UserData.getById(pBranch.idUser);
-                    pBranch.branch = BranchRestaurantData.getById(pBranch.idBranchRestaurant);
                     list.Add(pBranch);
                 }
                 pBranch = getByRow(dt.Rows[0]);

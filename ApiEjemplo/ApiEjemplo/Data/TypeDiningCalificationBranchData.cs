@@ -16,18 +16,18 @@ namespace ApiEjemplo.Data
         }
         public static void update(TypeDiningCalificationBranch tdCalBranch)
         {
-            string sUpdate = "update type_dining_calification_branch set name='" + tdCalBranch.name + "',icon='" + tdCalBranch.icon + "' where idTypeDiningCalificationBranch=" + Convert.ToString(tdCalBranch.idTypeDiningCalificationBranch);
+            string sUpdate = "update type_dining_calification_branch set name='" + tdCalBranch.name + "',icon='" + tdCalBranch.icon + "' where idTypeDining=" + Convert.ToString(tdCalBranch.idTypeDiningCalificationBranch);
             DBHelper.EjecutarIUD(sUpdate);
         }
         public static void Delete(int id)
         {
-            string sUpdate = "delete from type_dining_calification_branch where idTypeDiningCalificationBranch=" + id.ToString();
+            string sUpdate = "delete from type_dining_calification_branch where idTypeDining=" + id.ToString();
             DBHelper.EjecutarIUD(sUpdate);
         }
 
         public static TypeDiningCalificationBranch getById(int id)
         {
-            string select = "select * from type_dining_calification_branch where idTypeDiningCalificationBranch=" + id.ToString();
+            string select = "select * from type_dining_calification_branch where idTypeDining=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
             TypeDiningCalificationBranch tdCalBranch;
             if (dt.Rows.Count > 0)
