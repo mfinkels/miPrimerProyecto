@@ -69,18 +69,25 @@ public class ParseQuery {
     // Query for log User
 
 
+    public void setUserLogged(User userLogged) {
+        this.userLogged = userLogged;
+    }
+
     private User userLogged = new User();
 
-    public User logUser(String email, String password){
+    public void logUser(String email, String password){
         new LogInUser().execute(email, password);
-        return userLogged;
     }
 
     private class LogInUser extends AsyncTask<String, Void, User> {
 
         protected void onPostExecute(User datos) {
             super.onPostExecute(datos);
-            userLogged = datos;
+            if (datos != null){
+
+            } else {
+                Toast.makeText(context, "Error Log In",Toast.LENGTH_SHORT);
+            }
         }
 
         @Override
@@ -385,23 +392,29 @@ public class ParseQuery {
 
     private ArrayList<CalificationBranch> calificationBranch = new ArrayList<CalificationBranch>();
 
-    public ArrayList<CalificationBranch> getBranchCalification(int id, int limit, int offset){
+    public void setAdapter(calificationAdapter adapter) {
+        this.adapterCali = adapter;
+    }
+
+    private calificationAdapter adapterCali;
+
+    public void getBranchCalification(int id, int limit, int offset){
         new GetCalificationBranch().execute(id,limit,offset);
-        return  calificationBranch;
     }
 
     private class GetCalificationBranch extends AsyncTask<Integer, Void, ArrayList<CalificationBranch>> {
 
         protected void onPostExecute(ArrayList<CalificationBranch> datos) {
             super.onPostExecute(datos);
-            calificationBranch = datos;
+            adapterCali.setData(datos);
+            adapterCali.notifyDataSetChanged();
         }
 
         @Override
         protected ArrayList<CalificationBranch> doInBackground(Integer... parametros) {
             int id = parametros[0];
             int limit = parametros[1];
-            int offset = parametros[3];
+            int offset = parametros[2];
 
 
             OkHttpClient client = new OkHttpClient();
@@ -420,8 +433,7 @@ public class ParseQuery {
 
             try {
                 //Calification
-                JSONObject obj = new JSONObject(resultado);
-                JSONArray calification = obj.getJSONArray("calification");
+                JSONArray calification = new JSONArray(resultado);
                 return parse.calificationBranch(calification);
             }
             catch(JSONException e){

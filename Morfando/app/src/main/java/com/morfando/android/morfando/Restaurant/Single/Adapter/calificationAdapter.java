@@ -32,6 +32,10 @@ public class calificationAdapter extends BaseAdapter {
         this.myContext = usedContext;
     }
 
+    public void setData(ArrayList<CalificationBranch> califications){
+       this.califications = califications;
+    }
+
     public int getCount() {
         return califications.size();
     }
@@ -71,7 +75,8 @@ public class calificationAdapter extends BaseAdapter {
 
         TextView date;
         date = (TextView)returnView.findViewById(R.id.datetimeCalification);
-        date.setText(cb.date.toString());
+
+        date.setText(String.valueOf(cb.date));
 
         RatingBar calification;
         calification = (RatingBar)returnView.findViewById(R.id.calificationUser);

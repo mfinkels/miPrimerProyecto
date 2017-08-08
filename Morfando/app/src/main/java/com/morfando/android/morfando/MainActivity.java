@@ -256,24 +256,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<CalificationBranch> getCalification(){
-        return pq.getBranchCalification(branch.idBranch, 10, 0);
-    }
-
     public Branch getBranch(){
         return branch;
     }
 
 
     public void logInPressed(String email, String password) {
-        myUser = pq.logUser(email, password);
-
-        if (myUser != null){
-            userLoggedIn = true;
-            updateFragment(new lvRestaurantFrag());
-        } else {
-            Toast.makeText(this, "Error Log In",Toast.LENGTH_SHORT);
-        }
+        pq.setUserLogged(myUser);
+        pq.logUser(email, password);
     }
 
     public ArrayList<Reservation> getReservation(String type){

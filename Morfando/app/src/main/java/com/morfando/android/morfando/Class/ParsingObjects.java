@@ -165,15 +165,18 @@ public class ParsingObjects {
     public CalificationBranch calificationBranch(JSONObject json){
         try {
             CalificationBranch cali = new CalificationBranch();
-            cali.idCalification = json.getInt("idCalification");
+            cali.idCalification = json.getInt("idCalificationBranch");
             cali.ambience = json.getInt("ambience");
             cali.food  = json.getInt("food");
             cali.service   = json.getInt("service");
             cali.message = json.getString("message");
-            cali.date = Utility.convertStringToCalendar(json.getString("date"));;
-            cali.user = user(json);
-            JSONObject typeDining = json.getJSONObject("typeDining");
-            cali.typeDining = typeDining.getString("name");
+            cali.date = Utility.convertStringToCalendar(json.getString("date"));
+            JSONObject user = json.getJSONObject("user");
+            cali.user = user(user);
+            if(!json.isNull("typeDining")){
+                JSONObject typeDining = json.getJSONObject("typeDining");
+                cali.typeDining = typeDining.getString("name");
+            }
 
             JSONArray photosJSON = json.getJSONArray("photo");
             ArrayList<PhotoBranch> photos = new ArrayList<PhotoBranch>();

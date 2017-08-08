@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -87,7 +88,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_below="@+id/imagesConteiner">
+            android:layout_below="@+id/imagesConteiner"
+            android:id="@+id/tabConteiner"
+            android:layout_marginBottom="60dp">
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
@@ -106,18 +109,20 @@
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/fragmentSingleRestaurant"></FrameLayout>
+
+
+
         </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/btnReservation"
         android:textAllCaps="false"
         android:background="@color/buttonColor"

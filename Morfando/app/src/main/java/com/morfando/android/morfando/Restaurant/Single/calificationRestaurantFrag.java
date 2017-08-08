@@ -14,10 +14,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ListView;
 
+import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.CalificationBranch;
+import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.calificationAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Matias on 6/30/2017.
@@ -27,16 +32,25 @@ public class calificationRestaurantFrag extends DialogFragment {
 
     MainActivity main;
 
+    ParseQuery pq;
+
     ListView calificationList;
+
+    Branch myBranch;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_calification_restaurant, group, false);
 
         main = (MainActivity)getActivity();
+        pq = new ParseQuery(main);
+        ArrayList<CalificationBranch> listCalifcations = new ArrayList<CalificationBranch>();
+        calificationAdapter adapterCali = new calificationAdapter(listCalifcations, main);
+        pq.setAdapter(adapterCali);
+        pq.getBranchCalification(main.getBranch().idBranch,10,0);
+
 
         calificationList = (ListView)toReturn.findViewById(R.id.calificationSingleLV);
-        calificationAdapter adapterCali = new calificationAdapter(main.getCalification(), main);
         calificationList.setAdapter(adapterCali);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
