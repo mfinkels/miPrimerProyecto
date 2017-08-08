@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
@@ -69,13 +70,20 @@ public class ParseQuery {
     // Query for log User
 
 
-    public void setUserLogged(User userLogged) {
-        this.userLogged = userLogged;
+    private User user = new User();
+
+
+    public User getUser() {
+        return user;
     }
 
-    private User userLogged = new User();
+    private Boolean userIsLogged;
 
-    public void logUser(String email, String password){
+    public boolean isUserIsLogged() {
+        return userIsLogged;
+    }
+
+    public void logUser(String email, String password) {
         new LogInUser().execute(email, password);
     }
 
@@ -84,10 +92,11 @@ public class ParseQuery {
         protected void onPostExecute(User datos) {
             super.onPostExecute(datos);
             if (datos != null){
-
+                userIsLogged = true;
             } else {
-                Toast.makeText(context, "Error Log In",Toast.LENGTH_SHORT);
+                userIsLogged = false;
             }
+            user = datos;
         }
 
         @Override

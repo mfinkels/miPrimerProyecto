@@ -1,5 +1,6 @@
 package com.morfando.android.morfando;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -31,6 +32,7 @@ import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFr
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.restaurantSingleFrag;
+import com.morfando.android.morfando.Restaurant.restaurantFrag;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -262,8 +264,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void logInPressed(String email, String password) {
-        pq.setUserLogged(myUser);
+        Boolean logIn = null;
         pq.logUser(email, password);
+
+        userLoggedIn = pq.isUserIsLogged();
+
+        if (userLoggedIn){
+            updateFragment(new lvRestaurantFrag());
+        } else {
+            Toast.makeText(this, "error al logearse", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public ArrayList<Reservation> getReservation(String type){
