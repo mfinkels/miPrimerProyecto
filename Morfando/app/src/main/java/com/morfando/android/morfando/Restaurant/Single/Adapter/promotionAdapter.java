@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.CalificationBranch;
+import com.morfando.android.morfando.Class.Promotion;
 import com.morfando.android.morfando.R;
 
 import java.util.ArrayList;
@@ -21,31 +22,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class promotionAdapter extends BaseAdapter {
 
-    private ArrayList<CalificationBranch> califications;
+    private ArrayList<Promotion> promotions;
     private Context myContext;
 
-    public promotionAdapter (ArrayList<CalificationBranch> califications, Context usedContext) {
-        this.califications = califications;
+    public promotionAdapter (ArrayList<Promotion> promotions, Context usedContext) {
+        this.promotions = promotions;
         this.myContext = usedContext;
     }
 
     public int getCount() {
-        return califications.size();
+        return promotions.size();
     }
 
-    public CalificationBranch getItem(int position) {
-        CalificationBranch cb = califications.get(position);
-        return cb;
+    public Promotion getItem(int position) {
+        Promotion obj = promotions.get(position);
+        return obj;
     }
 
     public long getItemId(int position) {
-        CalificationBranch cb = califications.get(position);
-        return cb.idCalification;
+        Promotion p = promotions.get(position);
+        return p.idPromotion;
     }
 
     public int getId(int position) {
-        CalificationBranch cb = califications.get(position);
-        return cb.idCalification;
+        Promotion p = promotions.get(position);
+        return p.idPromotion;
     }
 
     public View getView(int positionActual, View viewActual, ViewGroup groupActual) {
@@ -56,30 +57,8 @@ public class promotionAdapter extends BaseAdapter {
         LayoutInflater inflater;
         inflater=(LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        returnView = inflater.inflate(R.layout.calification_item,groupActual,false);
 
-        CalificationBranch cb = getItem(positionActual);
-
-        CircleImageView imgProfile = (CircleImageView) returnView.findViewById(R.id.imageUser);
-
-        TextView username;
-        username = (TextView)returnView.findViewById(R.id.userNameCalificatation);
-        username.setText(cb.user.name + " " + cb.user.lastName);
-
-        TextView date;
-        date = (TextView)returnView.findViewById(R.id.datetimeCalification);
-        date.setText(cb.date.toString());
-
-        RatingBar calification;
-        calification = (RatingBar)returnView.findViewById(R.id.calificationUser);
-        Float rating = (float) (cb.food + cb.ambience + cb.service) /3;
-        calification.setRating(rating);
-
-        TextView message;
-        message = (TextView)returnView.findViewById(R.id.messageCalificationUser);
-        message.setText(cb.message);
-
-        return returnView;
+        return null;
     }
 
 }

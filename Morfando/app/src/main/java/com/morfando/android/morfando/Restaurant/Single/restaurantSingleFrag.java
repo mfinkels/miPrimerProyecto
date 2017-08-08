@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.Filter;
 import com.morfando.android.morfando.Class.Menu;
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.ParsingObjects;
 import com.morfando.android.morfando.Class.PhotoBranch;
 import com.morfando.android.morfando.Class.Promotion;
 import com.morfando.android.morfando.Class.Service;
@@ -47,6 +49,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -66,6 +69,7 @@ public class restaurantSingleFrag extends DialogFragment {
     RatingBar calification;
 
     ParseQuery pq;
+    ParsingObjects parse;
 
     Button reserve;
 
@@ -79,9 +83,24 @@ public class restaurantSingleFrag extends DialogFragment {
         View toReturn;
         toReturn = inflater.inflate(R.layout.restaurant_single_frag, group, false);
         main = (MainActivity)getActivity();
-        pq = new ParseQuery();
+        pq = new ParseQuery(main);
+        parse = new ParsingObjects();
 
         myBranch = main.getBranch();
+
+        name = (TextView)toReturn.findViewById(R.id.nameSingle);
+        cousine = (TextView) toReturn.findViewById(R.id.cousineSingle);
+        calification = (RatingBar)toReturn.findViewById(R.id.calificationSingle);
+        range = (TextView)toReturn.findViewById(R.id.priceRangeSingle);
+        reserve = (Button) toReturn.findViewById(R.id.btnReservation);
+        reserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.makeReservation();
+            }
+        });
+
+        setInformation(myBranch);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -94,32 +113,12 @@ public class restaurantSingleFrag extends DialogFragment {
         }
         setHasOptionsMenu(true);
 
-        name = (TextView)toReturn.findViewById(R.id.nameSingle);
-        name.setText(myBranch.restaurant.name + " " + myBranch.name);
-
-        cousine = (TextView) toReturn.findViewById(R.id.cousineSingle);
-        Cuisine c = new Cuisine();
-        cousine.setText(c.cousineList(myBranch.cuisine));
-
-        calification = (RatingBar)toReturn.findViewById(R.id.calificationSingle);
-        calification.setRating(Float.parseFloat(myBranch.averageCalification + ""));
-
-        range = (TextView)toReturn.findViewById(R.id.priceRangeSingle);
-        range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
-
-        reserve = (Button) toReturn.findViewById(R.id.btnReservation);
-        reserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                main.makeReservation();
-            }
-        });
-
         viewPager = (ViewPager) toReturn.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) toReturn.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
         return toReturn;
     }
 
@@ -177,4 +176,17 @@ public class restaurantSingleFrag extends DialogFragment {
             return mFragmentTitleList.get(position);
         }
     }
+
+    private void setInformation(Branch myBranch) {
+
+        name.setText(myBranch.restaurant.name + " " + myBranch.name);
+        Cuisine c = new Cuisine();
+        cousine.setText(c.cousineList(myBranch.cuisine));
+
+        calification.setRating(Float.parseFloat(myBranch.averageCalification + ""));
+
+        range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
+    }
+
+
 }

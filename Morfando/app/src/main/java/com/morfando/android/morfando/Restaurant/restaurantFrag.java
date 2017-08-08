@@ -55,7 +55,7 @@ public class restaurantFrag extends Fragment implements RestaurantAdapter.ListIt
     private RecyclerView listRestaurant;
     private RestaurantAdapter resAdapter;
 
-    private ParseQuery querys = new ParseQuery();
+    private ParseQuery querys = new ParseQuery(main);
     private ArrayList<Branch> myBranches;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {

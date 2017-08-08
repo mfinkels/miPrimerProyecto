@@ -47,8 +47,6 @@ public class Main2Activity extends AppCompatActivity {
         trans.replace(R.id.fragmentConteinerFullPage, singleRestaurant);
         trans.commit();
 
-        pq = new ParseQuery();
-
 
     }
 

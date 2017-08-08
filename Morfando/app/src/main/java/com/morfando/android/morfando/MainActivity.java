@@ -3,6 +3,7 @@ package com.morfando.android.morfando;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.ParcelUuid;
 import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         trans.replace(R.id.fragmentConteiner, lvRestaurantFrag);
         trans.commit();
 
-        pq = new ParseQuery();
+        pq = new ParseQuery(getApplicationContext());
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -228,10 +229,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void BranchSelected(int id){
-        branch = pq.getBranch(id);
-        restaurantSingleFrag single = new restaurantSingleFrag();
-        showDialogFragment(single);
+    public void BranchSelected(Branch b){
+        branch = b;
+        updateDialogFragment(new restaurantSingleFrag());
     }
 
     public void showAllCalification(){

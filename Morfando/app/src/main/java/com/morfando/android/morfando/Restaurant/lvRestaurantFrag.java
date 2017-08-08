@@ -48,20 +48,20 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
     MainActivity main;
     ListView restaurantItems;
     lvRestaurantAdapter adapter;
+    ParseQuery pq;
 
-    ArrayList<Branch> listBranches;
+    ArrayList<Branch> listBranches = new ArrayList<Branch>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_restaurant_lv, group, false);
         main = (MainActivity)getActivity();
+        pq = new ParseQuery(main);
 
         restaurantItems = (ListView) toReturn.findViewById(R.id.lvRestaurantItems);
         adapter = new lvRestaurantAdapter(listBranches, main);
-        test testing = new test();
-        testing.setAdapter(adapter);
-        testing.getAllBranch(10, 0);
-
+        pq.setAdapter(adapter);
+        pq.getAllBranch(10, 0);
         restaurantItems.setAdapter(adapter);
         restaurantItems.setOnItemClickListener(this);
         return toReturn;
@@ -69,7 +69,7 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int idBranch = adapter.getId(position);
-        main.BranchSelected(idBranch);
+        Branch branch = adapter.getItem(position);
+        main.BranchSelected(branch);
     }
 }

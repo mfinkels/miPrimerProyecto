@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Main2Activity;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 public class informationRestaurantFrag extends Fragment implements View.OnClickListener {
 
     MainActivity main;
-    Main2Activity main2;
+    ParseQuery pq;
 
     TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
     GridView serviceGV;
@@ -56,15 +57,55 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_information_restaurant, group, false);
         main = (MainActivity)getActivity();
-        main2 = (Main2Activity)getActivity();
+        pq = new ParseQuery(main);
         myBranch = main.getBranch();
+        pq.setBranch(myBranch);
+        pq.setInformationRestaurantFrag(toReturn);
+        pq.getBranch(myBranch.idBranch);
+
+        address = (Button)toReturn.findViewById(R.id.btnGetDirection);
+        address.setOnClickListener(this);
+        moreCalification = (Button)toReturn.findViewById(R.id.btnMoreCalification);
+        moreCalification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.showAllCalification();
+            }
+        });
+
+/*
 
         description = (TextView)toReturn.findViewById(R.id.descriptionSingle);
+        serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
+        timetable = (ListView) toReturn.findViewById(R.id.timetableLV);
+        food = (TextView)toReturn.findViewById(R.id.foodCalification);
+        service = (TextView)toReturn.findViewById(R.id.serviceCalification);
+        ambience = (TextView)toReturn.findViewById(R.id.ambienceCalification);
+        calification = (ListView)toReturn.findViewById(R.id.listCalification);
+        promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
+        socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
+
+
+
+*/
+        return toReturn;
+    }
+
+    private void socialNetworkPressed(String value) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(value));
+        startActivity(browserIntent);
+    }
+
+    public void onClick(View v){
+        //Como llegar
+    }
+
+
+    private void showInformation(){
         description.setText(myBranch.restaurant.description);
 
         //si tiene socialNetwork
         if (myBranch.restaurant.social.size() > 0){
-            socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
 
             TextView titleSocial = new TextView(main);
             titleSocial.setText("Social NetWork");
@@ -97,21 +138,16 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
         }
 
-        address = (Button)toReturn.findViewById(R.id.btnGetDirection);
-        address.setOnClickListener(this);
 
 
-        serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
         serviceAdapter adapterService = new serviceAdapter(main, myBranch.service);
         serviceGV.setAdapter(adapterService);
 
-        timetable = (ListView) toReturn.findViewById(R.id.timetableLV);
         timetableAdapter adapterTimetable = new timetableAdapter(myBranch.timetable, main);
         timetable.setAdapter(adapterTimetable);
 
         // si tiene promotion
         if(myBranch.promotion.size() > 0){
-            promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
 
             TextView titlePromotion = new TextView(main);
             titlePromotion.setText("Promotion");
@@ -132,37 +168,13 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
         }
 
-        // se puede enlazar los types
-        food = (TextView)toReturn.findViewById(R.id.foodCalification);
-        service = (TextView)toReturn.findViewById(R.id.serviceCalification);
-        ambience = (TextView)toReturn.findViewById(R.id.ambienceCalification);
 
         food.setText(myBranch.averageFood + "");
         service.setText(myBranch.averageService + "");
         ambience.setText(myBranch.averageAmbience + "");
 
-        calification = (ListView)toReturn.findViewById(R.id.listCalification);
         calificationAdapter adapterCalification = new calificationAdapter(myBranch.calification, main);
         calification.setAdapter(adapterCalification);
-
-        moreCalification = (Button)toReturn.findViewById(R.id.btnMoreCalification);
-        moreCalification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                main.showAllCalification();
-            }
-        });
-
-
-        return toReturn;
     }
 
-    private void socialNetworkPressed(String value) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(value));
-        startActivity(browserIntent);
-    }
-
-    public void onClick(View v){
-        //Como llegar
-    }
 }
