@@ -23,6 +23,7 @@ import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.Profile.profileFrag;
 import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
@@ -263,18 +264,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void logInPressed(String email, String password) {
-        Boolean logIn = null;
-        pq.logUser(email, password);
-
-        userLoggedIn = pq.isUserIsLogged();
-
-        if (userLoggedIn){
-            updateFragment(new lvRestaurantFrag());
-        } else {
-            Toast.makeText(this, "error al logearse", Toast.LENGTH_SHORT).show();
-        }
-
+    public void logInPressed(String email, String password,asyncTaskCompleted listener) {
+        pq.setUser(myUser);
+        pq.setUserIsLogged(userLoggedIn);
+        pq.logUser(email, password, listener);
     }
 
     public ArrayList<Reservation> getReservation(String type){

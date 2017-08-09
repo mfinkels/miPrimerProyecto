@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -70,24 +71,29 @@ public class ParseQuery {
     // Query for log User
 
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private User user = new User();
 
-
-    public User getUser() {
-        return user;
+    public void setUserIsLogged(Boolean userIsLogged) {
+        this.userIsLogged = userIsLogged;
     }
 
     private Boolean userIsLogged;
 
-    public boolean isUserIsLogged() {
-        return userIsLogged;
-    }
-
-    public void logUser(String email, String password) {
-        new LogInUser().execute(email, password);
+    public void logUser(String email, String password, asyncTaskCompleted listener) {
+        new LogInUser(listener).execute(email, password);
     }
 
     private class LogInUser extends AsyncTask<String, Void, User> {
+
+        private asyncTaskCompleted<Object> listener;
+
+        public LogInUser(asyncTaskCompleted listener){
+            this.listener = listener;
+        }
 
         protected void onPostExecute(User datos) {
             super.onPostExecute(datos);
@@ -96,7 +102,10 @@ public class ParseQuery {
             } else {
                 userIsLogged = false;
             }
+            Log.d("userIsLogged estado", userIsLogged + "");
             user = datos;
+            Log.d("user", user + "");
+            listener.onPostAsyncTask(userIsLogged);
         }
 
         @Override
