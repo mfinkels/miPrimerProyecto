@@ -116,7 +116,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(server + "user/" + email + "/" + password)
+                    .url(server + "user/LogInUser" + email + "/" + password)
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
