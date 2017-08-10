@@ -58,7 +58,7 @@ public class ParseQuery {
 
     private Context context;
 
-    private String server = "http://appmorfando.azurewebsites.net/api/";
+    private static final String server = "http://appmorfando.azurewebsites.net/api/";
 
     private static final MediaType JSON = MediaType.parse("application/json");
 
@@ -470,6 +470,8 @@ public class ParseQuery {
     }
 
     private class insertReservation extends AsyncTask<Reservation, Void, Boolean>{
+
+
 
         protected void onPostExecute(Boolean datos) {
             super.onPostExecute(datos);
