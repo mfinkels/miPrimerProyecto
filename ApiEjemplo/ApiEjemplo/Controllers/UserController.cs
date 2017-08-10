@@ -35,6 +35,7 @@ namespace ApiEjemplo.Controllers
 
         // by the email and password you get the user
         [Route("api/user/{email}/{password}")]
+        [HttpGet]
         public IHttpActionResult GetLogInUser(string email, string password)
         {
             User user = new User();
