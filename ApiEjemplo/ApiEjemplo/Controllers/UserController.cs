@@ -82,6 +82,10 @@ namespace ApiEjemplo.Controllers
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, User user)
         {
+            if (id != user.idUser)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del user es incorrecto.");
+            }
             if (UserData.getById(id) == null)
             {
                 return NotFound();
