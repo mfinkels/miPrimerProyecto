@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -130,7 +131,7 @@ public class ParsingObjects {
             mn.idMenu = json.getInt("idTypeMenu");
             mn.type = json.getString("name");
             JSONArray array = new JSONArray("plates");
-            mn.plates =
+            mn.plates = plate(array);
             return mn;
 
         }catch (JSONException e){
@@ -146,9 +147,44 @@ public class ParsingObjects {
             JSONObject category = json.getJSONObject("category");
             p.CategoryPlate = category.getString("name");
             p.averageCalification = json.getInt("averageCalification");
-            p.calification =
+            JSONArray arrayCali = json.getJSONArray("calification");
+            p.calification = calificationPlate(arrayCali);
+            p.name = json.getString("name");
+            p.price = json.getDouble("price");
+            p.description = json.getString("description");
+            JSONArray arrayPhotos = json.getJSONArray("photo");
+            p.photos = photoPlate(arrayPhotos);
             return p;
 
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public CalificationPlate calificationPlate(JSONObject json){
+        try {
+            CalificationPlate cali = new CalificationPlate();
+            cali.idCalificationPlate = json.getInt("idCalificationPlate");
+            cali.idBranch = json.getInt("idBranchRestaurant");
+            cali.idUser = json.getInt("idUser");
+            cali.value = json.getInt("value");
+            cali.message = json.getString("message");
+            return cali;
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public PhotoPlate photoPlate(JSONObject json){
+        try {
+            PhotoPlate photoPlate = new PhotoPlate();
+            photoPlate.idPhotoPlate = json.getInt("idPhotoPlate");
+            photoPlate.idPlate = json.getInt("idPhotoPlate");
+            photoPlate.idUser = json.getInt("idUser");
+            photoPlate.photo = json.getString("photo");
+            return photoPlate;
         }catch (JSONException e){
             Log.d("Error", e.getMessage());
             return null;
@@ -419,6 +455,54 @@ public class ParsingObjects {
                 JSONObject obj = jsonArray.getJSONObject(i);
                 Reservation res = reservation(obj);
                 arrayList.add(res);
+            }
+            return  arrayList;
+
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<Plate> plate(JSONArray jsonArray){
+        try {
+            ArrayList<Plate> arrayList = new ArrayList<Plate>();
+            for (int i = 0; i < jsonArray.length(); i++){
+                JSONObject obj = jsonArray.getJSONObject(i);
+                Plate p = plate(obj);
+                arrayList.add(p);
+            }
+            return  arrayList;
+
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<PhotoPlate> photoPlate(JSONArray jsonArray){
+        try {
+            ArrayList<PhotoPlate> arrayList = new ArrayList<PhotoPlate>();
+            for (int i = 0; i < jsonArray.length(); i++){
+                JSONObject obj = jsonArray.getJSONObject(i);
+                PhotoPlate pp = photoPlate(obj);
+                arrayList.add(pp);
+            }
+            return  arrayList;
+
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<CalificationPlate> calificationPlate(JSONArray jsonArray){
+        try {
+            ArrayList<CalificationPlate> arrayList = new ArrayList<CalificationPlate>();
+            for (int i = 0; i < jsonArray.length(); i++){
+                JSONObject obj = jsonArray.getJSONObject(i);
+                CalificationPlate cali = calificationPlate(obj);
+                arrayList.add(cali);
             }
             return  arrayList;
 

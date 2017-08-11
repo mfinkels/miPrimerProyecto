@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,8 @@ public class Plate {
     public int idPlate;
     public String CategoryPlate;
     public double averageCalification;
-    public List<CalificationPlate> calification;
+    public ArrayList<PhotoPlate> photos;
+    public ArrayList<CalificationPlate> calification;
     public String name;
     public double price;
     public String description;

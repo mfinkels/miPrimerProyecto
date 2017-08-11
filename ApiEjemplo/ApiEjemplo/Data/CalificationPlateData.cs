@@ -81,7 +81,7 @@ namespace ApiEjemplo.Data
 
         public static List<CalificationPlate> getAllByPlate(int id)
         {
-            string select = "select * from calification_plate where idCalificationPlate=" + id.ToString();
+            string select = "select * from calification_plate where idPlateMenu=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<CalificationPlate> list = new List<CalificationPlate>();
             CalificationPlate caliPlate;
