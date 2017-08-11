@@ -21,13 +21,13 @@
         <LinearLayout
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="3dp"
-            android:background="#fff">
+            android:padding="3dp">
 
             <TextView
-                android:id="@+id/text_rsvDay"
+                android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="15"
@@ -35,7 +35,7 @@
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_rsvMonth"
+                android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAR"
@@ -57,7 +57,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/text_rsvRname"
+                    android:id="@+id/restaurantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -81,11 +81,10 @@
                     android:textColor="@color/maroon" />
 
                 <TextView
-                    android:id="@+id/text_rsvParty"
+                    android:id="@+id/guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
-
                     android:text="2"
                     android:textColor="@color/maroon"
                     android:textSize="14dp" />
@@ -100,7 +99,7 @@
                     android:textColor="@color/maroon" />
 
                 <TextView
-                    android:id="@+id/text_rsvTime"
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"

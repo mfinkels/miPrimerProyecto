@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
@@ -45,6 +46,10 @@ public class profileFrag extends Fragment implements View.OnClickListener {
         payments = (TextView)toReturn.findViewById(R.id.payments);
         califications = (TextView)toReturn.findViewById(R.id.califications);
         logOut = (TextView)toReturn.findViewById(R.id.logOut);
+        User myUser = main.getMyUser();
+
+        userProfileName.setText(myUser.name + " " + myUser.lastName);
+
         /*
         preferences.setOnClickListener(this);
         promotions.setOnClickListener(this);

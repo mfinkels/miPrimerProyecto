@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
@@ -96,9 +97,10 @@ public class logInFrag extends DialogFragment implements View.OnClickListener {
         asyncTaskCompleted<Object> postListener = new asyncTaskCompleted<Object>() {
             @Override
             public void onPostAsyncTask(Object result) {
-                boolean value = (boolean) result;
-                if (value) {
+                User u = (User) result;
+                if (u != null) {
                     dismiss();
+                    main.userLogged(u);
                 } else {
                     Toast.makeText(main, "Error Log In", Toast.LENGTH_SHORT).show();
                 }

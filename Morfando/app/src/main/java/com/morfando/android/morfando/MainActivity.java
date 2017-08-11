@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     private Branch branch;
 
     private boolean userLoggedIn = false;
+
+    public User getMyUser() {
+        return myUser;
+    }
+
     private User myUser;
 
     @Override
@@ -91,9 +96,15 @@ public class MainActivity extends AppCompatActivity {
                     /*case R.id.tab_favorites:
 
                         break;*/
-                    /*case R.id.tab_resevation:
-
-                        break;*/
+                    case R.id.tab_resevation:
+                        if(userLoggedIn){
+                            fm = new reservationMainFrag();
+                            updateFragment(fm);
+                        } else{
+                            logInFrag register = new logInFrag();
+                            showDialogFragment(register);
+                        }
+                        break;
                     case R.id.tab_profile:
                         if(userLoggedIn){
                             fm = new profileFrag();
@@ -248,14 +259,20 @@ public class MainActivity extends AppCompatActivity {
         res.branch = branch;
         res.date = date;
         res.guest = guest;
-        Boolean ok = pq.createReservation(res);
-        String message = "";
-        if(ok){
-            updateFragment(new reservationMainFrag());
-        } else {
-            Toast.makeText(this,"error", Toast.LENGTH_SHORT)
-                    .show();
-        }
+
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                boolean created = (boolean)result;
+                if (created){
+                    Toast.makeText(getApplicationContext(),"todo hermoso",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getApplicationContext(),"no salio bien",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        pq.createReservation(res, listener);
 
     }
 
@@ -270,7 +287,13 @@ public class MainActivity extends AppCompatActivity {
         pq.logUser(email, password, listener);
     }
 
-    public ArrayList<Reservation> getReservation(String type){
-        return pq.getListReservation(myUser.idUser, type);
+    public int getIdUser(){
+        return myUser.idUser;
+    }
+
+    public void userLogged(User u) {
+        myUser = u;
+        userLoggedIn = true;
+        updateFragment(new profileFrag());
     }
 }

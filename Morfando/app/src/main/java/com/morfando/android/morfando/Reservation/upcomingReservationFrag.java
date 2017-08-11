@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class upcomingReservationFrag extends Fragment{
 
     MainActivity main;
+    ParseQuery pq;
 
     ListView reservation;
 
@@ -28,13 +30,19 @@ public class upcomingReservationFrag extends Fragment{
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_upcoming_reservation, group, false);
         main = (MainActivity)getActivity();
-        ArrayList<Reservation> list = main.getReservation("upcoming");
+        pq = new ParseQuery(main);
+        int idUser = main.getIdUser();
 
-        if(list.size() > 0){
-            reservation = (ListView)toReturn.findViewById(R.id.listUpcomingReservation);
-            reservationAdapter adapter = new reservationAdapter(list, main);
-            reservation.setAdapter(adapter);
-        }
+        reservation = (ListView)toReturn.findViewById(R.id.listUpcomingReservation);
+
+
+        ArrayList<Reservation> list = new ArrayList<Reservation>();
+        reservationAdapter adapter = new reservationAdapter(list, main);
+        pq.setResAdapter(adapter);
+        pq.setReservations(list);
+        pq.getListReservation(idUser,"upcoming");
+        reservation.setAdapter(adapter);
+
         return toReturn;
     }
 }

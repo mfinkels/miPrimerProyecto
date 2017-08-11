@@ -12,14 +12,14 @@ namespace ApiEjemplo.Data
         public static void insert(Reservation res)
         {
             string[] row = new string[] { "idUser", "idBranchRestaurant", "date", "guest"};
-            object[] values = new object[] { res.idUser, res.idBranchRestaurant, Convert.ToString(res.date), res.guest };
+            object[] values = new object[] { res.idUser, res.idBranchRestaurant, res.date.ToString("yyyy-MM-dd HH':'mm':'ss"), res.guest };
             string sInsert = QueryHelper.insert("reservation", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
         public static void update(Reservation res)
         {
             string[] row = new string[] { "idUser", "idBranchRestaurant", "date", "guest" };
-            object[] values = new object[] { res.idUser, res.idBranchRestaurant, Convert.ToString(res.date), res.guest };
+            object[] values = new object[] { res.idUser, res.idBranchRestaurant, res.date.ToString("yyyy-MM-dd HH':'mm':'ss"), res.guest };
             string sUpdate = QueryHelper.update("reservation", row, values, "idReservation", res.idReservation);
             DBHelper.EjecutarIUD(sUpdate);
         }

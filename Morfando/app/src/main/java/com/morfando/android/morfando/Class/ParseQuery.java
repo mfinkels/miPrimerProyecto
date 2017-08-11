@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
+import com.morfando.android.morfando.Reservation.Adapter.reservationAdapter;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.calificationAdapter;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.serviceAdapter;
@@ -105,7 +106,7 @@ public class ParseQuery {
             Log.d("userIsLogged estado", userIsLogged + "");
             user = datos;
             Log.d("user", user + "");
-            listener.onPostAsyncTask(userIsLogged);
+            listener.onPostAsyncTask(datos);
         }
 
         @Override
@@ -116,7 +117,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(server + "user/LogInUser" + email + "/" + password)
+                    .url(server + "user/LogInUser/" + email + "/" + password)
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
@@ -462,20 +463,21 @@ public class ParseQuery {
     }
 
     // Create Reservation in Restaurants
-    private Boolean reservtionCreated;
 
-    public boolean createReservation(Reservation res){
-        new insertReservation().execute(res);
-        return reservtionCreated;
+    public void createReservation(Reservation res, asyncTaskCompleted listener){
+        new insertReservation(listener).execute(res);
     }
 
     private class insertReservation extends AsyncTask<Reservation, Void, Boolean>{
 
+        private asyncTaskCompleted listener;
 
+        public insertReservation(asyncTaskCompleted listener){
+            this.listener = listener;
+        }
 
         protected void onPostExecute(Boolean datos) {
             super.onPostExecute(datos);
-            reservtionCreated = datos;
         }
 
         @Override
@@ -484,9 +486,11 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
 
-            RequestBody body = RequestBody.create(JSON, create.reservation(res));
+            String insert = create.reservation(res);
+
+            RequestBody body = RequestBody.create(JSON, insert);
             Request request = new Request.Builder()
-                    .url(server)
+                    .url(server + "reservation")
                     .post(body)
                     .build();
             try {
@@ -502,19 +506,31 @@ public class ParseQuery {
         }
     }
 
+    // Query Get Reservation list
 
-    private ArrayList<Reservation> listReservation = new ArrayList<Reservation>();
 
-    public ArrayList<Reservation> getListReservation(int idUser, String type){
+    public void setReservations(ArrayList<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+
+    public void setResAdapter(reservationAdapter resAdapter) {
+        this.resAdapter = resAdapter;
+    }
+
+    private reservationAdapter resAdapter;
+
+    public void getListReservation(int idUser, String type){
         new getReservations().execute(String.valueOf(idUser), type);
-        return listReservation;
     }
 
     private class getReservations extends AsyncTask<String, Void, ArrayList<Reservation>> {
 
         protected void onPostExecute(ArrayList<Reservation> datos) {
             super.onPostExecute(datos);
-            listReservation = datos;
+            resAdapter.setData(datos);
+            resAdapter.notifyDataSetChanged();
         }
 
         @Override

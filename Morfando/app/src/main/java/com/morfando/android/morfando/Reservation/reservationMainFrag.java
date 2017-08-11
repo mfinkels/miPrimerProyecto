@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Reservation;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -30,10 +31,19 @@ public class reservationMainFrag extends Fragment {
 
     MainActivity main;
 
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_reservation_main, group, false);
         main = (MainActivity)getActivity();
+
+        viewPager = (ViewPager) toReturn.findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) toReturn.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
 
         return toReturn;
