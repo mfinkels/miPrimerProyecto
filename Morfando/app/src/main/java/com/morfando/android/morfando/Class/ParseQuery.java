@@ -495,7 +495,8 @@ public class ParseQuery {
                     .build();
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
-                if (response.body().string() == ""){
+                String respuesta = response.body().string();
+                if (respuesta == ""){
                     return true;
                 }
                 return false;
