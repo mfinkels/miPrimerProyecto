@@ -253,24 +253,14 @@ public class MainActivity extends AppCompatActivity {
         showDialogFragment(cali);
     }
 
-    public void createReservation(int guest, Calendar date) {
+    public void createReservation(int guest, Calendar date, asyncTaskCompleted listener) {
         Reservation res = new Reservation();
         res.idUser = myUser.idUser;
         res.branch = branch;
         res.date = date;
         res.guest = guest;
 
-        asyncTaskCompleted listener = new asyncTaskCompleted() {
-            @Override
-            public void onPostAsyncTask(Object result) {
-                boolean created = (boolean)result;
-                if (created){
-                    Toast.makeText(getApplicationContext(),"todo hermoso",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getApplicationContext(),"no salio bien",Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
+
 
         pq.createReservation(res, listener);
 

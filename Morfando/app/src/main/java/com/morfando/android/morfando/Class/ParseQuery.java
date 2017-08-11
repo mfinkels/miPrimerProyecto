@@ -478,6 +478,7 @@ public class ParseQuery {
 
         protected void onPostExecute(Boolean datos) {
             super.onPostExecute(datos);
+            listener.onPostAsyncTask(datos);
         }
 
         @Override
@@ -496,7 +497,7 @@ public class ParseQuery {
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
                 String respuesta = response.body().string();
-                if (respuesta == ""){
+                if (respuesta != "Datos incorrectos."){
                     return true;
                 }
                 return false;

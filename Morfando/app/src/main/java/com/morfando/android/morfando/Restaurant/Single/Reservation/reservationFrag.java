@@ -22,10 +22,12 @@ import android.widget.DatePicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
@@ -146,6 +148,17 @@ public class reservationFrag extends DialogFragment implements View.OnClickListe
     }
 
     public void onClick(View v){
-        main.createReservation(guestPicker.getValue(), datetime);
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                boolean created = (boolean)result;
+                if (created){
+                    Toast.makeText(main,"todo hermoso",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(main,"no salio bien",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        main.createReservation(guestPicker.getValue(), datetime, listener);
     }
 }
