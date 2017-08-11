@@ -38,7 +38,7 @@ namespace ApiEjemplo.Controllers
             return ReservationData.getByIdUser(id, ">");
         }
 
-        [Route("api/reservation//upcoming/{id}")]
+        [Route("api/reservation/upcoming/{id}")]
         // return list Reservation Upcoming by User
         public IList<Reservation> GetReservationUpcomingByUser(int id)
         {
