@@ -63,7 +63,7 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             ReservationData.insert(res);
-            return Ok(res);
+            return Ok("");
         }
 
         // PUT api/<controller>/5

@@ -21,9 +21,9 @@ public class CreateObjects {
         try {
             JSONObject ObjJson = new JSONObject();
             ObjJson.accumulate("idUser", obj.idUser);
-            ObjJson.accumulate("idBranchRestaurant", obj.branch.idBranch);
+            ObjJson.accumulate("branch", obj.branch.idBranch);
             String datetime = obj.date.get(Calendar.YEAR) + "-" + (obj.date.get(Calendar.MONTH)+1) + "-" + obj.date.get(Calendar.DAY_OF_MONTH) + " " + obj.date.get(Calendar.HOUR_OF_DAY) + ":" + obj.date.get(Calendar.MINUTE) + ":00";
-            ObjJson.accumulate("date", obj.date.toString());
+            ObjJson.accumulate("date", datetime);
             ObjJson.accumulate("guest", obj.guest);
             json = ObjJson.toString();
             return json;

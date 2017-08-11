@@ -14,7 +14,6 @@ namespace ApiEjemplo.Models
         public int idBranchRestaurant { get; set; }
         public DateTime date { get; set; }
         public int guest { get; set; }
-        public Restaurant restaurant { get; set; }
         public BranchRestaurant branch { get; set; }
     }
 }
