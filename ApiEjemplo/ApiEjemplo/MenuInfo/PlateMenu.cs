@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiEjemplo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,5 +16,6 @@ namespace ApiEjemplo.MenuInfo
         public string description { get; set; }
         public List<PhotoPlate> photo { get; set; }
         public CategoryPlate category { get; set; }
+        public List<CalificationPlate> calification { get; set; }
     }
 }

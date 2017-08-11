@@ -129,7 +129,25 @@ public class ParsingObjects {
             Menu mn = new Menu();
             mn.idMenu = json.getInt("idTypeMenu");
             mn.type = json.getString("name");
+            JSONArray array = new JSONArray("plates");
+            mn.plates =
             return mn;
+
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public Plate plate(JSONObject json){
+        try {
+            Plate p = new Plate();
+            p.idPlate = json.getInt("idPlateMenu");
+            JSONObject category = json.getJSONObject("category");
+            p.CategoryPlate = category.getString("name");
+            p.averageCalification = json.getInt("averageCalification");
+            p.calification =
+            return p;
 
         }catch (JSONException e){
             Log.d("Error", e.getMessage());
@@ -245,6 +263,8 @@ public class ParsingObjects {
             return null;
         }
     }
+
+
 
     //Return Lists
 
