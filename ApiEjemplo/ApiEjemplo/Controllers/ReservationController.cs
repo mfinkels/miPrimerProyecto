@@ -30,7 +30,7 @@ namespace ApiEjemplo.Controllers
             return Ok(res);
         }
 
-        [Route("api/reservation/past/{id}")]
+        [Route("api/reservation/GetReservationPastByUser/past/{id}")]
         // return list Reservation Past by User
         public IList<Reservation> GetReservationPastByUser(int id)
         {
@@ -38,7 +38,7 @@ namespace ApiEjemplo.Controllers
             return ReservationData.getByIdUser(id, ">");
         }
 
-        [Route("api/reservation/upcoming/{id}")]
+        [Route("api/reservation/GetReservationUpcomingByUser/upcoming/{id}")]
         // return list Reservation Upcoming by User
         public IList<Reservation> GetReservationUpcomingByUser(int id)
         {
