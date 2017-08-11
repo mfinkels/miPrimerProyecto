@@ -54,7 +54,6 @@ namespace ApiEjemplo.Data
                 {
                     res = getByRow(row);
                     res.branch = BranchRestaurantData.getById(res.idBranchRestaurant);
-                    res.restaurant = RestaurantData.getById(res.branch.idRestaurant);
                     list.Add(res);
                 }
                 res = getByRow(dt.Rows[0]);
