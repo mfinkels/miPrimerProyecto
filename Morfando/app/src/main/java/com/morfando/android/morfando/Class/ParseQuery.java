@@ -539,11 +539,19 @@ public class ParseQuery {
         protected ArrayList<Reservation> doInBackground(String... parametros) {
             String id = parametros[0];
             String type = parametros[1];
+            String actionResult;
 
+            if (type.compareTo("past") == 0){
+                actionResult = "GetReservationPastByUser";
+
+            }else {
+                actionResult = "GetReservationUpcomingByUser";
+
+            }
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(server + "reservation/GetReservationUpcomingByUser/" + type + "/" + id)
+                    .url(server + "reservation/" + actionResult + "/" + type + "/" + id)
                     .build();
 
             String resultado;
