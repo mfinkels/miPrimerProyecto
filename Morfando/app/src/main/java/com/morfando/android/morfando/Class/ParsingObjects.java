@@ -234,7 +234,8 @@ public class ParsingObjects {
             Reservation res = new Reservation();
             res.idReservation = json.getInt("idReservation");
             res.idUser = json.getInt("idUser");
-            res.branch = branch(json.getJSONObject("branch"));
+            JSONObject branch = json.getJSONObject("branch");
+            res.branch = branch(branch);
             res.date = Utility.convertStringToCalendar(json.getString("date"));
             res.guest = json.getInt("guest");
             return res;

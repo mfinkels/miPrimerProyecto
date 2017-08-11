@@ -10,7 +10,6 @@ namespace ApiEjemplo.MenuInfo
         public int idMenuPlate { get; set; }
         public int idPlateMenu { get; set; }
         public int idTypeMenu { get; set; }
-        public TypeMenu type { get; set; }
         public PlateMenu plate { get; set; }
 
     }

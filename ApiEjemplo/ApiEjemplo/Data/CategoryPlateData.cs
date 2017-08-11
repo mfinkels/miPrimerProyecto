@@ -42,19 +42,6 @@ namespace ApiEjemplo.Data
             return null;
         }
 
-        public static CategoryPlate getByIdPlate(int id)
-        {
-            string select = "select * from category_plate where idPlateMenu=" + id.ToString();
-            DataTable dt = DBHelper.EjecutarSelect(select);
-            CategoryPlate catPlate;
-            if (dt.Rows.Count > 0)
-            {
-                catPlate = getByRow(dt.Rows[0]);
-                return catPlate;
-            }
-            return null;
-        }
-
         public static List<CategoryPlate> getAll()
         {
             string select = "select * from category_plate";

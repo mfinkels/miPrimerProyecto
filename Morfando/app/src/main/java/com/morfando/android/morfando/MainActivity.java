@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private User myUser;
+    BottomBar bottomBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
         trans.commit();
 
         pq = new ParseQuery(getApplicationContext());
-
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -285,5 +286,9 @@ public class MainActivity extends AppCompatActivity {
         myUser = u;
         userLoggedIn = true;
         updateFragment(new profileFrag());
+    }
+
+    public void reservationCreated() {
+        updateFragment(new reservationMainFrag());
     }
 }

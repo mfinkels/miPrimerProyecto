@@ -67,6 +67,7 @@ namespace ApiEjemplo.Data
                 foreach (DataRow row in dt.Rows)
                 {
                     tMenu = getByRow(row);
+                    tMenu.plates = MenuPlateData.getPlateMenuBranch(tMenu.idTypeMenu);
                     list.Add(tMenu);
                 }
                 tMenu = getByRow(dt.Rows[0]);

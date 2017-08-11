@@ -63,19 +63,18 @@ namespace ApiEjemplo.Data
 
         public static List<PlateMenu> getPlateMenuBranch(int type)
         {
-            string select = "select * from menu_plate where idTypeMenu=" + type.ToString();
+            string select = "select menu_plate.idPlateMenu,  plate_menu.idCategoryPlate,  plate_menu.averageCalification,  plate_menu.name,  plate_menu.price,  plate_menu.description  from menu_plate INNER JOIN plate_menu ON menu_plate.idPlateMenu = plate_menu.idPlateMenu where menu_plate.idTypeMenu=" + type.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<PlateMenu> list = new List<PlateMenu>();
-            MenuPlate menuPlate;
+            PlateMenu plate;
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    menuPlate = getByRow(row);
-                    menuPlate.plate = PlateMenuData.getById(menuPlate.idPlateMenu);
-                    list.Add(menuPlate.plate);
+                    int id = row.Field<int>("idPlateMenu");
+                    plate = PlateMenuData.getById(id);
+                    list.Add(plate);
                 }
-                menuPlate = getByRow(dt.Rows[0]);
             }
             return list;
         }

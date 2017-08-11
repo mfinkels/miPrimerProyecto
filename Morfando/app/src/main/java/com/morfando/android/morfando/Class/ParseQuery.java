@@ -531,8 +531,11 @@ public class ParseQuery {
 
         protected void onPostExecute(ArrayList<Reservation> datos) {
             super.onPostExecute(datos);
-            resAdapter.setData(datos);
-            resAdapter.notifyDataSetChanged();
+            if (datos != null){
+                resAdapter.setData(datos);
+                resAdapter.notifyDataSetChanged();
+            }
+
         }
 
         @Override
@@ -565,9 +568,8 @@ public class ParseQuery {
 
             try {
                 //Reservation
-                JSONObject obj = new JSONObject(resultado);
-                JSONArray reservation = obj.getJSONArray("reservation");
-                return parse.reservation(reservation);
+                JSONArray arr = new JSONArray(resultado);
+                return parse.reservation(arr);
             }
             catch(JSONException e){
                 Log.d("error", e.getMessage());

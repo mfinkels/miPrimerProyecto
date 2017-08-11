@@ -18,5 +18,9 @@ public class Reservation {
     public int guest;
     public List<OrderReservation> orders;
 
+    public Reservation(){
+        this.branch = new Branch();
+    }
+
 }
 

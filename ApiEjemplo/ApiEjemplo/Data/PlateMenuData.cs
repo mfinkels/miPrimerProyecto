@@ -38,7 +38,7 @@ namespace ApiEjemplo.Data
             {
                 p = getByRow(dt.Rows[0]);
                 p.photo = PhotoPlateData.getPhotoByPlate(p.idPlateMenu);
-                p.category = CategoryPlateData.getByIdPlate(p.idPlateMenu);
+                p.category = CategoryPlateData.getById(p.idCategoryPlate);
                 return p;
             }
             return null;
