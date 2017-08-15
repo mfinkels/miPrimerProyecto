@@ -578,6 +578,60 @@ public class ParseQuery {
         }
     }
 
+    // query get Menu
+
+    private ArrayList<Menu> menuList = new ArrayList<Menu>();
+
+    public void getMenuInfo(int idBranch, asyncTaskCompleted listener){
+        new GetMenu(listener).execute(idBranch);
+    }
+
+    private class GetMenu extends AsyncTask<Integer, Void, ArrayList<Menu>> {
+
+        private asyncTaskCompleted listener;
+
+        public GetMenu(asyncTaskCompleted listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Menu> datos) {
+            super.onPostExecute(datos);
+            listener.onPostAsyncTask(datos);
+        }
+
+        @Override
+        protected ArrayList<Menu> doInBackground(Integer... params) {
+            int id = params[0];
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(server + "branch/menu/" + id)
+                    .build();
+
+            String resultado;
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                resultado = response.body().string();
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return null;
+            }
+
+            try {
+                //Reservation
+                JSONArray arr = new JSONArray(resultado);
+                return parse.menu(arr);
+            }
+            catch(JSONException e){
+                Log.d("error", e.getMessage());
+                return null;
+            }
+        }
+    }
+
+
+
 
 
 }

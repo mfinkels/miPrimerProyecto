@@ -19,7 +19,6 @@ namespace ApiEjemplo.BranchInfo
         public string name { get; set; }
         public List<PhotoBranch> photo { get; set; }
         public List<Cuisine> cuisine { get; set; }
-        public List<TypeMenu> menu { get; set; }
         public List<TypeFilter> filter { get; set; }
         public List<Service> service { get; set; }
         public List<TimetableBranch> timetable { get; set; }
