@@ -67,7 +67,6 @@ namespace ApiEjemplo.Data
                     branch.cuisine = CuisineBranchData.getByBranch(branch.idBranchRestaurant);
                     branch.filter = FilterBranchData.getByBranch(branch.idBranchRestaurant);
                     branch.promotion = BranchPromotionData.getAllByBranch(branch.idBranchRestaurant);
-                    branch.menu = TypeMenuData.getMenuByBranch(branch.idBranchRestaurant);
                     branch.service = ServiceBranchData.getServicesByRestaurants(branch.idBranchRestaurant);
                     branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
                     branch.restaurant = RestaurantData.getById(branch.idBranchRestaurant);

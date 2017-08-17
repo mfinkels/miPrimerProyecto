@@ -379,10 +379,6 @@ public class ParseQuery {
                 JSONArray photo = obj.getJSONArray("photo");
                 b.photo = parse.photoBranch(photo);
 
-                //Menu
-                JSONArray menu = obj.getJSONArray("menu");
-                b.menu = parse.menu(menu);
-
                 //Service
                 JSONArray service = obj.getJSONArray("service");
                 b.service = parse.service(service);
