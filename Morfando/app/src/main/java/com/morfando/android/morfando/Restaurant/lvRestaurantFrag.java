@@ -24,6 +24,7 @@ import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Class.Utility;
 import com.morfando.android.morfando.Class.test;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -59,11 +60,24 @@ public class lvRestaurantFrag extends Fragment  implements AdapterView.OnItemCli
         pq = new ParseQuery(main);
 
         restaurantItems = (ListView) toReturn.findViewById(R.id.lvRestaurantItems);
-        adapter = new lvRestaurantAdapter(listBranches, main);
-        pq.setAdapter(adapter);
-        pq.getAllBranch(10, 0);
-        restaurantItems.setAdapter(adapter);
         restaurantItems.setOnItemClickListener(this);
+
+
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                ArrayList<Branch> branches = (ArrayList<Branch>) result;
+                if (branches != null){
+                    adapter = new lvRestaurantAdapter(branches, main);
+                    restaurantItems.setAdapter(adapter);
+                }else {
+                    Toast.makeText(main,"Error loading Branches",Toast.LENGTH_SHORT);
+                }
+            }
+        };
+
+
+        pq.getAllBranch(10, 0, listener);
         return toReturn;
     }
 

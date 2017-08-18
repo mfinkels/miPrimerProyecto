@@ -260,11 +260,7 @@ public class MainActivity extends AppCompatActivity {
         res.branch = branch;
         res.date = date;
         res.guest = guest;
-
-
-
         pq.createReservation(res, listener);
-
     }
 
     public Branch getBranch(){

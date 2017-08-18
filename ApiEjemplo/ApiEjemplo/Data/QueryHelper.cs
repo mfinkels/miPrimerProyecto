@@ -49,7 +49,7 @@ namespace ApiEjemplo.Data
 
         public static string update(string table, string[] row, object[] values, string sId, int id) {
             string update = "update " + table + " set ";
-            for (int i = 0; i <= row.Count(); i++)
+            for (int i = 0; i < row.Count(); i++)
             {
                 update += row[i] + "=";
                 if (values[i].GetType() == typeof(string))

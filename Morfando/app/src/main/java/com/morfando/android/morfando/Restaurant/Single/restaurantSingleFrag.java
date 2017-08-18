@@ -12,14 +12,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -38,9 +43,14 @@ import com.morfando.android.morfando.Class.Service;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Class.Utility;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.calificationAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.serviceAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.socialNetworkAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.timetableAdapter;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.informationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.menuRestaurantFrag;
@@ -73,6 +83,14 @@ public class restaurantSingleFrag extends DialogFragment {
     ParsingObjects parse;
 
     Button reserve;
+    TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
+    GridView serviceGV;
+    LinearLayout socialNetwork, promotion;
+
+    ListView timetable, calificationLV;
+
+    Button address, moreCalification;
+
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -85,7 +103,6 @@ public class restaurantSingleFrag extends DialogFragment {
         toReturn = inflater.inflate(R.layout.restaurant_single_frag, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
-        parse = new ParsingObjects();
 
         myBranch = main.getBranch();
 
@@ -101,7 +118,31 @@ public class restaurantSingleFrag extends DialogFragment {
             }
         });
 
+        description = (TextView)toReturn.findViewById(R.id.descriptionSingle);
+        serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
+        timetable = (ListView) toReturn.findViewById(R.id.timetableLV);
+        food = (TextView)toReturn.findViewById(R.id.foodCalification);
+        service = (TextView)toReturn.findViewById(R.id.serviceCalification);
+        ambience = (TextView)toReturn.findViewById(R.id.ambienceCalification);
+        calificationLV = (ListView)toReturn.findViewById(R.id.listCalification);
+        promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
+        socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
+
         setInformation(myBranch);
+
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                Branch b = (Branch) result;
+                if (b != null){
+                    showInformation(b);
+                } else {
+                    Toast.makeText(main,"Error on Branch",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        pq.getBranch(myBranch.idBranch, listener);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -187,6 +228,81 @@ public class restaurantSingleFrag extends DialogFragment {
         calification.setRating(Float.parseFloat(myBranch.averageCalification + ""));
 
         range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
+    }
+
+    private void showInformation(Branch myBranch){
+        description.setText(myBranch.restaurant.description);
+
+        //si tiene socialNetwork
+        if (myBranch.restaurant.social.size() > 0){
+
+            TextView titleSocial = new TextView(main);
+            titleSocial.setText("Social NetWork");
+
+            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            titleSocial.setGravity(Gravity.CENTER);
+            titleSocial.setTextSize(24);
+            titleSocial.setLayoutParams(parms);
+            socialNetwork.addView(titleSocial);
+
+            GridView gridView= new GridView(main);
+
+            gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.FILL_PARENT, GridLayout.LayoutParams.FILL_PARENT));
+            gridView.setNumColumns(myBranch.restaurant.social.size());
+            gridView.setColumnWidth(GridView.AUTO_FIT);
+            final socialNetworkAdapter adapterSocial = new socialNetworkAdapter(main, myBranch.restaurant.social);
+            gridView.setAdapter(adapterSocial);
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                }
+            });
+
+
+            socialNetwork.addView(gridView);
+
+        }
+
+
+
+        serviceAdapter adapterService = new serviceAdapter(main, myBranch.service);
+        serviceGV.setAdapter(adapterService);
+
+        timetableAdapter adapterTimetable = new timetableAdapter(myBranch.timetable, main);
+        timetable.setAdapter(adapterTimetable);
+
+        // si tiene promotion
+        if(myBranch.promotion.size() > 0){
+
+            TextView titlePromotion = new TextView(main);
+            titlePromotion.setText("Promotion");
+
+            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            titlePromotion.setGravity(Gravity.CENTER);
+            titlePromotion.setTextSize(24);
+            titlePromotion.setLayoutParams(parms);
+            promotion.addView(titlePromotion);
+
+            ListView promotionList = new ListView(main);
+            promotionList.setLayoutParams(parms);
+
+            //promotionAdapter adapterPromotion = new promotionAdapter();
+            //promotionList.setAdapter(adapterPromotion);
+
+        }
+
+
+        food.setText(myBranch.averageFood + "");
+        service.setText(myBranch.averageService + "");
+        ambience.setText(myBranch.averageAmbience + "");
+
+        calificationAdapter adapterCalification = new calificationAdapter(myBranch.calification, main);
+        calificationLV.setAdapter(adapterCalification);
     }
 
 

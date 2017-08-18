@@ -86,6 +86,23 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        // PUT api/<controller>/5
+        [Route("api/branch/plate/{id}")]
+        [HttpPut]
+        public IHttpActionResult PutPlate(int id, PlateMenu plate)
+        {
+            if (id != plate.idPlateMenu)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (PlateMenuData.getById(plate.idPlateMenu) == null)
+            {
+                return NotFound();
+            }
+            PlateMenuData.update(plate);
+            return Ok(plate);
+        }
+
         // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {

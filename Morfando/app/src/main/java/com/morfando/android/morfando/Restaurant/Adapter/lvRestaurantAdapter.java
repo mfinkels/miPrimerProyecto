@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Cuisine;
+import com.morfando.android.morfando.Class.PhotoBranch;
 import com.morfando.android.morfando.R;
 
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class lvRestaurantAdapter extends BaseAdapter {
     }
 
     public int getCount() {
+        if (branches == null){
+            return 0;
+        }
         return branches.size();
     }
 
@@ -66,11 +71,12 @@ public class lvRestaurantAdapter extends BaseAdapter {
         TextView priceRange = (TextView) returnView.findViewById(R.id.item_price_range);
         RatingBar calification = (RatingBar) returnView.findViewById(R.id.item_res_calification);
         TextView cuisine = (TextView)returnView.findViewById(R.id.item_res_cuisine);
+        ImageView image = (ImageView)returnView.findViewById(R.id.imgRestaurant);
 
 
         Branch b = getItem(positionActual);
 
-        resName.setText(b.name);
+        resName.setText(b.restaurant.name + " " + b.name);
         priceRange.setText("$" + String.valueOf(b.range.minimum) + " - $" + String.valueOf(b.range.maximum));
 
         calification.setRating(Float.parseFloat(b.averageCalification + ""));
