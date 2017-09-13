@@ -15,6 +15,7 @@ import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Matias on 8/3/2017.
@@ -71,6 +72,12 @@ public class reservationAdapter extends BaseAdapter {
         time = (TextView)returnView.findViewById(R.id.time);
         day = (TextView)returnView.findViewById(R.id.day);
         month = (TextView)returnView.findViewById(R.id.month);
+
+        restaurantName.setText(res.branch.restaurant.name + " " +res.branch.name);
+        guest.setText(res.guest + "");
+        time.setText(res.date.get(Calendar.HOUR_OF_DAY) + ":" + res.date.get(Calendar.MINUTE));
+        day.setText(res.date.get(Calendar.DAY_OF_MONTH));
+        month.setText(res.date.get(Calendar.MONTH));
 
 
         return returnView;

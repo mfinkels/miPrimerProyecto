@@ -130,19 +130,6 @@ public class restaurantSingleFrag extends DialogFragment {
 
         setInformation(myBranch);
 
-        asyncTaskCompleted listener = new asyncTaskCompleted() {
-            @Override
-            public void onPostAsyncTask(Object result) {
-                Branch b = (Branch) result;
-                if (b != null){
-                    showInformation(b);
-                } else {
-                    Toast.makeText(main,"Error on Branch",Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
-        pq.getBranch(myBranch.idBranch, listener);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -230,80 +217,6 @@ public class restaurantSingleFrag extends DialogFragment {
         range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
     }
 
-    private void showInformation(Branch myBranch){
-        description.setText(myBranch.restaurant.description);
-
-        //si tiene socialNetwork
-        if (myBranch.restaurant.social.size() > 0){
-
-            TextView titleSocial = new TextView(main);
-            titleSocial.setText("Social NetWork");
-
-            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            titleSocial.setGravity(Gravity.CENTER);
-            titleSocial.setTextSize(24);
-            titleSocial.setLayoutParams(parms);
-            socialNetwork.addView(titleSocial);
-
-            GridView gridView= new GridView(main);
-
-            gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.FILL_PARENT, GridLayout.LayoutParams.FILL_PARENT));
-            gridView.setNumColumns(myBranch.restaurant.social.size());
-            gridView.setColumnWidth(GridView.AUTO_FIT);
-            final socialNetworkAdapter adapterSocial = new socialNetworkAdapter(main, myBranch.restaurant.social);
-            gridView.setAdapter(adapterSocial);
-
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                }
-            });
-
-
-            socialNetwork.addView(gridView);
-
-        }
-
-
-
-        serviceAdapter adapterService = new serviceAdapter(main, myBranch.service);
-        serviceGV.setAdapter(adapterService);
-
-        timetableAdapter adapterTimetable = new timetableAdapter(myBranch.timetable, main);
-        timetable.setAdapter(adapterTimetable);
-
-        // si tiene promotion
-        if(myBranch.promotion.size() > 0){
-
-            TextView titlePromotion = new TextView(main);
-            titlePromotion.setText("Promotion");
-
-            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            titlePromotion.setGravity(Gravity.CENTER);
-            titlePromotion.setTextSize(24);
-            titlePromotion.setLayoutParams(parms);
-            promotion.addView(titlePromotion);
-
-            ListView promotionList = new ListView(main);
-            promotionList.setLayoutParams(parms);
-
-            //promotionAdapter adapterPromotion = new promotionAdapter();
-            //promotionList.setAdapter(adapterPromotion);
-
-        }
-
-
-        food.setText(myBranch.averageFood + "");
-        service.setText(myBranch.averageService + "");
-        ambience.setText(myBranch.averageAmbience + "");
-
-        calificationAdapter adapterCalification = new calificationAdapter(myBranch.calification, main);
-        calificationLV.setAdapter(adapterCalification);
-    }
 
 
 }

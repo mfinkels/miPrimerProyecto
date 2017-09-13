@@ -16,11 +16,13 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
@@ -59,9 +61,21 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
         myBranch = main.getBranch();
-        pq.setBranch(myBranch);
-        pq.setInformationRestaurantFrag(toReturn);
-        pq.getBranch(myBranch.idBranch);
+
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                Branch b = (Branch) result;
+                myBranch = b;
+                if (b != null){
+                    showInformation();
+                } else {
+                    Toast.makeText(main,"Error on Branch",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        pq.getBranch(myBranch.idBranch, listener);
 
         address = (Button)toReturn.findViewById(R.id.btnGetDirection);
         address.setOnClickListener(this);
@@ -73,7 +87,6 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
             }
         });
 
-/*
 
         description = (TextView)toReturn.findViewById(R.id.descriptionSingle);
         serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
@@ -85,9 +98,6 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
         socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
 
-
-
-*/
         return toReturn;
     }
 

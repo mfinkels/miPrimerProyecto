@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Reservation.Adapter.reservationAdapter;
@@ -38,10 +39,18 @@ public class upcomingReservationFrag extends Fragment{
 
         ArrayList<Reservation> list = new ArrayList<Reservation>();
         reservationAdapter adapter = new reservationAdapter(list, main);
-        pq.setResAdapter(adapter);
-        pq.setReservations(list);
-        pq.getListReservation(idUser,"upcoming");
-        reservation.setAdapter(adapter);
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                ArrayList<Reservation> list = (ArrayList<Reservation>) result;
+                if (list != null){
+                    reservationAdapter adapter = new reservationAdapter(list, main);
+                    reservation.setAdapter(adapter);
+                }
+            }
+        };
+
+        pq.getListReservation(idUser,"upcoming", listener);
 
         return toReturn;
     }

@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuAdapter;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Menu;
@@ -21,6 +23,7 @@ import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
+import com.morfando.android.morfando.Restaurant.Adapter.plateAdapter;
 
 import java.util.ArrayList;
 
@@ -58,7 +61,8 @@ public class menuRestaurantFrag extends DialogFragment{
             public void onPostAsyncTask(Object result) {
                 ArrayList<Menu> list = (ArrayList<Menu>) result;
                 if (list != null){
-
+                }else {
+                    Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
                 }
             }
         };

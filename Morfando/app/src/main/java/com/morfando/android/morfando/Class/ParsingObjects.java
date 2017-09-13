@@ -292,6 +292,7 @@ public class ParsingObjects {
             res.branch = branch(branch);
             res.date = Utility.convertStringToCalendar(json.getString("date"));
             res.guest = json.getInt("guest");
+            res.orders = null;
             return res;
 
         }catch (JSONException e){

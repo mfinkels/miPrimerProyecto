@@ -236,26 +236,10 @@ public class ParseQuery {
 
     // Query for get Detail Branch
 
-    public void setBranch(Branch b) {
-        this.b = b;
-    }
-
-    private Branch b = new Branch();
-
-    public void setInformationRestaurantFrag(View informationRestaurantFrag) {
-        this.informationRestaurantFrag = informationRestaurantFrag;
-    }
-
-
-
-    private View informationRestaurantFrag;
-
 
     public void getBranch(int id, asyncTaskCompleted listener){
         new GetBranchById(listener).execute(id);
     }
-
-
 
     private class GetBranchById extends AsyncTask<Integer, Void, Branch> {
 
@@ -427,32 +411,21 @@ public class ParseQuery {
 
     // Query Get Reservation list
 
-
-    public void setReservations(ArrayList<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-
-    public void setResAdapter(reservationAdapter resAdapter) {
-        this.resAdapter = resAdapter;
-    }
-
-    private reservationAdapter resAdapter;
-
-    public void getListReservation(int idUser, String type){
-        new getReservations().execute(String.valueOf(idUser), type);
+    public void getListReservation(int idUser, String type, asyncTaskCompleted listener){
+        new getReservations(listener).execute(String.valueOf(idUser), type);
     }
 
     private class getReservations extends AsyncTask<String, Void, ArrayList<Reservation>> {
 
+        private asyncTaskCompleted listener;
+
+        public getReservations(asyncTaskCompleted listener) {
+            this.listener = listener;
+        }
+
         protected void onPostExecute(ArrayList<Reservation> datos) {
             super.onPostExecute(datos);
-            if (datos != null){
-                resAdapter.setData(datos);
-                resAdapter.notifyDataSetChanged();
-            }
-
+            listener.onPostAsyncTask(datos);
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +17,11 @@ public class Reservation {
     public Branch branch;
     public Calendar date;
     public int guest;
-    public List<OrderReservation> orders;
+    public ArrayList<OrderReservation> orders;
 
     public Reservation(){
         this.branch = new Branch();
+        this.orders = new ArrayList<OrderReservation>();
     }
 
 }

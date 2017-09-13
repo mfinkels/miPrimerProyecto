@@ -83,7 +83,7 @@ public class Utility {
 
     public static Calendar convertStringToCalendar(String s) {
         // 2017-06-26 00:00:00
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Calendar cal  = Calendar.getInstance();
         try{
             cal.setTime(df.parse(s));
