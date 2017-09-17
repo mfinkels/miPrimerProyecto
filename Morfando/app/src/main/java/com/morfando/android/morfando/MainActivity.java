@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.CalificationBranch;
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.Class.User;
 import com.morfando.android.morfando.Class.Utility;
@@ -31,6 +32,7 @@ import com.morfando.android.morfando.Registration.signUpFrag;
 import com.morfando.android.morfando.Reservation.reservationMainFrag;
 import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
+import com.morfando.android.morfando.Restaurant.Single.platesFrag;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.restaurantSingleFrag;
 import com.morfando.android.morfando.Restaurant.restaurantFrag;
@@ -44,6 +46,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     ParseQuery pq;
 
     private Branch branch;
+    private Reservation reservation;
+    private ArrayList<Plate> plates;
 
     private boolean userLoggedIn = false;
 
@@ -286,5 +291,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void reservationCreated() {
         updateFragment(new reservationMainFrag());
+    }
+
+    public void ReservationSelected(Reservation res) {
+        reservation = res;
+        //Muestro reserva
+    }
+
+    public void setPlates(ArrayList<Plate> plates) {
+        this.plates = plates;
+        updateDialogFragment(new platesFrag());
+    }
+
+    public ArrayList<Plate> getPlates(){
+        return plates;
     }
 }

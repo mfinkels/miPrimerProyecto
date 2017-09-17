@@ -76,8 +76,8 @@ public class reservationAdapter extends BaseAdapter {
         restaurantName.setText(res.branch.restaurant.name + " " +res.branch.name);
         guest.setText(res.guest + "");
         time.setText(res.date.get(Calendar.HOUR_OF_DAY) + ":" + res.date.get(Calendar.MINUTE));
-        day.setText(res.date.get(Calendar.DAY_OF_MONTH));
-        month.setText(res.date.get(Calendar.MONTH));
+        day.setText(res.date.get(Calendar.DAY_OF_MONTH) + "");
+        month.setText(res.date.get(Calendar.MONTH) + "");
 
 
         return returnView;

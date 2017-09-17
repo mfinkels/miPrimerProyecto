@@ -80,7 +80,6 @@ public class restaurantSingleFrag extends DialogFragment {
     RatingBar calification;
 
     ParseQuery pq;
-    ParsingObjects parse;
 
     Button reserve;
     TextView description, food, service, ambience, typeFood, typeAmbience, typeService;

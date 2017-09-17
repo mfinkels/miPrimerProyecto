@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.morfando.android.morfando.Class.ParseQuery;
@@ -26,6 +27,7 @@ public class upcomingReservationFrag extends Fragment{
     ParseQuery pq;
 
     ListView reservation;
+    reservationAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
@@ -38,14 +40,19 @@ public class upcomingReservationFrag extends Fragment{
 
 
         ArrayList<Reservation> list = new ArrayList<Reservation>();
-        reservationAdapter adapter = new reservationAdapter(list, main);
         asyncTaskCompleted listener = new asyncTaskCompleted() {
             @Override
             public void onPostAsyncTask(Object result) {
                 ArrayList<Reservation> list = (ArrayList<Reservation>) result;
                 if (list != null){
-                    reservationAdapter adapter = new reservationAdapter(list, main);
+                    adapter = new reservationAdapter(list, main);
                     reservation.setAdapter(adapter);
+                    reservation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            reservationPressed(position);
+                        }
+                    });
                 }
             }
         };
@@ -53,5 +60,10 @@ public class upcomingReservationFrag extends Fragment{
         pq.getListReservation(idUser,"upcoming", listener);
 
         return toReturn;
+    }
+
+    private void reservationPressed(int p) {
+        Reservation res = adapter.getItem(p);
+        main.ReservationSelected(res);
     }
 }

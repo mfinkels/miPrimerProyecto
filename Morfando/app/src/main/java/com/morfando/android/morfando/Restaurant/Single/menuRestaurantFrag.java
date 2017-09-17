@@ -8,12 +8,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuAdapter;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
+import com.morfando.android.morfando.Restaurant.Adapter.menuAdapter;
 import com.morfando.android.morfando.Restaurant.Adapter.plateAdapter;
 
 import java.util.ArrayList;
@@ -31,29 +34,21 @@ import java.util.ArrayList;
  * Created by Matias on 6/30/2017.
  */
 
-public class menuRestaurantFrag extends DialogFragment{
+public class menuRestaurantFrag extends Fragment{
 
     MainActivity main;
 
     ParseQuery pq;
     ListView menu;
+    menuAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_menu_restaurant, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
+        Branch myBranch = main.getBranch();
 
-        Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
-        }
-        setHasOptionsMenu(true);
 
         menu = (ListView)toReturn.findViewById(R.id.menuList);
         asyncTaskCompleted listener = new asyncTaskCompleted() {
@@ -61,41 +56,26 @@ public class menuRestaurantFrag extends DialogFragment{
             public void onPostAsyncTask(Object result) {
                 ArrayList<Menu> list = (ArrayList<Menu>) result;
                 if (list != null){
+                    adapter = new menuAdapter(list, main);
+                    menu.setAdapter(adapter);
+                    menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            menuPressed(position);
+                        }
+                    });
                 }else {
                     Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
                 }
             }
         };
+        pq.getMenuInfo(myBranch.idBranch, listener);
 
         return toReturn;
     }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
+    private void menuPressed(int position) {
+        Menu m = adapter.getItem(position);
+        main.setPlates(m.plates);
     }
-
-    @Override
-    public void onCreateOptionsMenu(android.view.Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.cart_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.cartItem){
-            // hacer algo si toca el carrito
-        } else if (id == android.R.id.home) {
-            // handle close button click here
-            dismiss();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }

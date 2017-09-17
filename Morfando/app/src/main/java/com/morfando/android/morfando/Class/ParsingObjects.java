@@ -130,8 +130,9 @@ public class ParsingObjects {
             Menu mn = new Menu();
             mn.idMenu = json.getInt("idTypeMenu");
             mn.type = json.getString("name");
-            JSONArray array = new JSONArray("plates");
+            JSONArray array = json.getJSONArray("plates");
             mn.plates = plate(array);
+            Log.d("Menu", mn.toString());
             return mn;
 
         }catch (JSONException e){
@@ -290,6 +291,8 @@ public class ParsingObjects {
             res.idUser = json.getInt("idUser");
             JSONObject branch = json.getJSONObject("branch");
             res.branch = branch(branch);
+            JSONObject resto = branch.getJSONObject("restaurant");
+            res.branch.restaurant = restaurant(resto);
             res.date = Utility.convertStringToCalendar(json.getString("date"));
             res.guest = json.getInt("guest");
             res.orders = null;
@@ -361,7 +364,7 @@ public class ParsingObjects {
                 Menu m = menu(obj);
                 arrayList.add(m);
             }
-            return  arrayList;
+            return arrayList;
 
         }catch (JSONException e){
             Log.d("Error", e.getMessage());

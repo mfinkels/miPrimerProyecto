@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * Created by Matias on 8/11/2017.
  */
 
-public class plateAdapter {
+public class plateAdapter  extends BaseAdapter{
     private ArrayList<Plate> plates;
     private Context myContext;
     private boolean reservation;

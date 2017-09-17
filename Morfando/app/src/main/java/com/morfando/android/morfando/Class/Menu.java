@@ -1,5 +1,6 @@
 package com.morfando.android.morfando.Class;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,5 +11,9 @@ public class Menu {
     //IdMenu, menú(nombre), menú(type), list<plate>
     public int idMenu;
     public String type;
-    public List<Plate> plates;
+    public ArrayList<Plate> plates;
+
+    public Menu(){
+        this.plates = new ArrayList<Plate>();
+    }
 }
