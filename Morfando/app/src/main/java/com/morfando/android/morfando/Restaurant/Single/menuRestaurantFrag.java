@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
@@ -39,7 +41,10 @@ public class menuRestaurantFrag extends Fragment{
     MainActivity main;
 
     ParseQuery pq;
+
     ListView lv;
+    Spinner menu;
+
     menuAdapter adapter;
     ArrayList<Menu> list;
 
@@ -50,14 +55,28 @@ public class menuRestaurantFrag extends Fragment{
         pq = new ParseQuery(main);
         Branch myBranch = main.getBranch();
 
+        menu = (Spinner)toReturn.findViewById(R.id.spMenu);
+        lv = (ListView)toReturn.findViewById(R.id.plateList);
 
-        lv = (ListView)toReturn.findViewById(R.id.menuList);
         asyncTaskCompleted listener = new asyncTaskCompleted() {
             @Override
             public void onPostAsyncTask(Object result) {
                 list = (ArrayList<Menu>) result;
                 if (list != null){
-                    putMenu();
+                    ArrayList<String> types = new ArrayList<String>();
+                    for (Menu m : list) {
+                        types.add(m.type);
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter<String>(main, android.R.layout.simple_spinner_dropdown_item, types);
+                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    menu.setAdapter(adapter);
+                    menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            menuSelected(position);
+                        }
+                    });
+                    listTypesMenu();
                 }else {
                     Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
                 }
@@ -68,21 +87,18 @@ public class menuRestaurantFrag extends Fragment{
         return toReturn;
     }
 
-    private void menuPressed(int position) {
-        Menu m = adapter.getItem(position);
+    private void listPlates(Menu m) {
         plateAdapter adapterP = new plateAdapter(m.plates,main,false);
         lv.setAdapter(adapterP);
-        //Volver al Menu
         lv.deferNotifyDataSetChanged();
     }
-    private void putMenu(){
-        adapter = new menuAdapter(list, main);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                menuPressed(position);
-            }
-        });
+
+    private void listTypesMenu(){
+
+    }
+
+    private void menuSelected(int position) {
+        Menu m = adapter.getItem(position);
+        listPlates(m);
     }
 }
