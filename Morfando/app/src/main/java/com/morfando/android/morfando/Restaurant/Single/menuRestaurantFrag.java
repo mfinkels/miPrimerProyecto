@@ -63,19 +63,6 @@ public class menuRestaurantFrag extends Fragment{
             public void onPostAsyncTask(Object result) {
                 list = (ArrayList<Menu>) result;
                 if (list != null){
-                    ArrayList<String> types = new ArrayList<String>();
-                    for (Menu m : list) {
-                        types.add(m.type);
-                    }
-                    ArrayAdapter adapter = new ArrayAdapter<String>(main, android.R.layout.simple_spinner_dropdown_item, types);
-                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    menu.setAdapter(adapter);
-                    menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            menuSelected(position);
-                        }
-                    });
                     listTypesMenu();
                 }else {
                     Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
@@ -94,7 +81,24 @@ public class menuRestaurantFrag extends Fragment{
     }
 
     private void listTypesMenu(){
+        ArrayList<String> types = new ArrayList<String>();
+        for (Menu m : list) {
+            types.add(m.type);
+        }
+        ArrayAdapter adapter = new ArrayAdapter<String>(main, android.R.layout.simple_spinner_dropdown_item, types);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        menu.setAdapter(adapter);
+        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                menuSelected(position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void menuSelected(int position) {
