@@ -42,7 +42,7 @@ public class platesFrag extends DialogFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
-        toReturn = inflater.inflate(R.layout.restaurant_single_frag, group, false);
+        toReturn = inflater.inflate(R.layout.frag_plates, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
 

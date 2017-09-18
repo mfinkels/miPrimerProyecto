@@ -39,8 +39,9 @@ public class menuRestaurantFrag extends Fragment{
     MainActivity main;
 
     ParseQuery pq;
-    ListView menu;
+    ListView lv;
     menuAdapter adapter;
+    ArrayList<Menu> list;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
@@ -50,20 +51,13 @@ public class menuRestaurantFrag extends Fragment{
         Branch myBranch = main.getBranch();
 
 
-        menu = (ListView)toReturn.findViewById(R.id.menuList);
+        lv = (ListView)toReturn.findViewById(R.id.menuList);
         asyncTaskCompleted listener = new asyncTaskCompleted() {
             @Override
             public void onPostAsyncTask(Object result) {
-                ArrayList<Menu> list = (ArrayList<Menu>) result;
+                list = (ArrayList<Menu>) result;
                 if (list != null){
-                    adapter = new menuAdapter(list, main);
-                    menu.setAdapter(adapter);
-                    menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            menuPressed(position);
-                        }
-                    });
+                    putMenu();
                 }else {
                     Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
                 }
@@ -76,6 +70,19 @@ public class menuRestaurantFrag extends Fragment{
 
     private void menuPressed(int position) {
         Menu m = adapter.getItem(position);
-        main.setPlates(m.plates);
+        plateAdapter adapterP = new plateAdapter(m.plates,main,false);
+        lv.setAdapter(adapterP);
+        //Volver al Menu
+        lv.deferNotifyDataSetChanged();
+    }
+    private void putMenu(){
+        adapter = new menuAdapter(list, main);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                menuPressed(position);
+            }
+        });
     }
 }
