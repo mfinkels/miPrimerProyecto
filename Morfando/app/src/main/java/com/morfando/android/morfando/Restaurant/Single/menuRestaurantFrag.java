@@ -102,7 +102,7 @@ public class menuRestaurantFrag extends Fragment{
     }
 
     private void menuSelected(int position) {
-        Menu m = adapter.getItem(position);
+        Menu m = list.get(position);
         listPlates(m);
     }
 }

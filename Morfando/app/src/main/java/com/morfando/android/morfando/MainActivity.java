@@ -29,7 +29,9 @@ import com.morfando.android.morfando.Profile.profileFrag;
 import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
+import com.morfando.android.morfando.Reservation.Single.singleReservationFrag;
 import com.morfando.android.morfando.Reservation.reservationMainFrag;
+import com.morfando.android.morfando.Reservation.upcomingReservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.platesFrag;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         break;*/
                     case R.id.tab_resevation:
                         if(userLoggedIn){
-                            fm = new reservationMainFrag();
+                            fm = new upcomingReservationFrag();
                             updateFragment(fm);
                         } else{
                             logInFrag register = new logInFrag();
@@ -294,16 +296,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ReservationSelected(Reservation res) {
-        reservation = res;
+        setReservation(res);
+        updateDialogFragment(new singleReservationFrag());
         //Muestro reserva
     }
 
     public void setPlates(ArrayList<Plate> plates) {
         this.plates = plates;
-        updateDialogFragment(new platesFrag());
     }
 
     public ArrayList<Plate> getPlates(){
         return plates;
     }
+
+    public void setReservation(Reservation reservation){
+        this.reservation = reservation;
+    }
+
+    public Reservation getReservation(){
+        return reservation;
+    }
+
 }
