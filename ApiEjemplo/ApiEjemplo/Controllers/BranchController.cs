@@ -71,6 +71,18 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        // POST api/<controller>
+        [ResponseType(typeof(BranchRestaurant))]
+        public IHttpActionResult Post(PlateMenu p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            PlateMenuData.insert(p);
+            return Ok(p);
+        }
+
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, BranchRestaurant branch)
         {
@@ -113,5 +125,16 @@ namespace ApiEjemplo.Controllers
             BranchRestaurantData.delete(id);
             return Ok();
         }
+
+        public IHttpActionResult DeletePlate(int id)
+        {
+            if (PlateMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            PlateMenuData.delete(id);
+            return Ok();
+        }
+
     }
 }

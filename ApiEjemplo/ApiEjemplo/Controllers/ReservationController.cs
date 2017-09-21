@@ -50,8 +50,18 @@ namespace ApiEjemplo.Controllers
         [Route("api/reservation/order/{id}")]
         // return the order of Reservation
         public IList<OrderReservation> getOrderOfReservation(int id) {
-
             return OrderReservationData.getAllByReservation(id);
+        }
+
+        [ResponseType(typeof(OrderReservation))]
+        public IHttpActionResult Post(OrderReservation order)
+        {
+            if (order == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            OrderReservationData.insert(order);
+            return Ok(order);
         }
 
         // POST api/<controller>
