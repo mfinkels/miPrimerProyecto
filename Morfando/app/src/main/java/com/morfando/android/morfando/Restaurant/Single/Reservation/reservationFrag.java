@@ -154,7 +154,6 @@ public class reservationFrag extends DialogFragment implements View.OnClickListe
                 boolean created = (boolean)result;
                 if (created){
                     dismiss();
-                    main.reservationCreated();
                     Toast.makeText(main,"se creo la reserva",Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(main,"Ups! Hubo un error",Toast.LENGTH_SHORT).show();

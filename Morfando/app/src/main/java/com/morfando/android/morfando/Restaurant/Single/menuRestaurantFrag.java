@@ -65,7 +65,7 @@ public class menuRestaurantFrag extends Fragment{
     }
 
     private void listPlates(Menu m) {
-        plateAdapter adapterP = new plateAdapter(m.plates,main,false);
+        plateAdapter adapterP = new plateAdapter(m.plates,main,false, null);
         lv.setAdapter(adapterP);
         lv.deferNotifyDataSetChanged();
     }

@@ -13,6 +13,7 @@ import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.Menu;
 import com.morfando.android.morfando.Class.Plate;
+import com.morfando.android.morfando.Interface.getPlateToOrder;
 import com.morfando.android.morfando.R;
 
 import java.util.ArrayList;
@@ -25,16 +26,17 @@ public class plateAdapter  extends BaseAdapter{
     private ArrayList<Plate> plates;
     private Context myContext;
     private boolean reservation;
+    private getPlateToOrder listener;
 
-    public plateAdapter (ArrayList<Plate> listPlate, Context usedContext, boolean reservation) {
+    public plateAdapter (ArrayList<Plate> listPlate, Context usedContext, boolean reservation, getPlateToOrder listener) {
         this.plates = listPlate;
         this.myContext = usedContext;
         this.reservation = reservation;
+        this.listener = listener;
     }
 
     public void setData(ArrayList<Plate> plates) {
         this.plates=plates;
-
     }
 
     public int getCount() {
@@ -56,7 +58,7 @@ public class plateAdapter  extends BaseAdapter{
         return p.idPlate;
     }
 
-    public View getView(int positionActual, View viewActual, ViewGroup groupActual) {
+    public View getView(final int positionActual, View viewActual, ViewGroup groupActual) {
 
         View returnView;
 
@@ -85,7 +87,10 @@ public class plateAdapter  extends BaseAdapter{
             addCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addToCart(plate);
+                    if (listener != null){
+                        listener.onPostPlate(plate);
+                    }
+
                 }
             });
 

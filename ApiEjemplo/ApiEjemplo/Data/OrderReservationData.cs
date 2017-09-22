@@ -1,4 +1,5 @@
-﻿using ApiEjemplo.ReservationInfo;
+﻿using ApiEjemplo.MenuInfo;
+using ApiEjemplo.ReservationInfo;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -55,11 +56,11 @@ namespace ApiEjemplo.Data
             return list;
         }
 
-        public static List<OrderReservation> getAllByReservation(int id)
+        public static List<PlateMenu> getAllByReservation(int id)
         {
             string select = "select * from order_reservation where idReservation=" + id.ToString();
             DataTable dt = DBHelper.EjecutarSelect(select);
-            List<OrderReservation> list = new List<OrderReservation>();
+            List<PlateMenu> list = new List<PlateMenu>();
             OrderReservation oRes;
             if (dt.Rows.Count > 0)
             {
@@ -67,7 +68,7 @@ namespace ApiEjemplo.Data
                 {
                     oRes = getByRow(row);
                     oRes.plate = PlateMenuData.getById(oRes.idPlateMenu);
-                    list.Add(oRes);
+                    list.Add(oRes.plate);
                 }
                 oRes = getByRow(dt.Rows[0]);
             }

@@ -62,7 +62,7 @@ public class orderReservationFrag extends DialogFragment {
                 if (plates != null && plates.size() >= 0) {
                     myReservation.orders = plates;
                     main.setReservation(myReservation);
-                    plateAdapter adapter = new plateAdapter(myReservation.orders,main,false);
+                    plateAdapter adapter = new plateAdapter(myReservation.orders,main,false, null);
                     listOrder.setAdapter(adapter);
                     listOrder.deferNotifyDataSetChanged();
                 } else {

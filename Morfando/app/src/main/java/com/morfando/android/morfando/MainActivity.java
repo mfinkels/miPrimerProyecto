@@ -10,8 +10,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.OrderReservation;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
@@ -306,5 +308,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNewOrder() {
         updateDialogFragment(new plateWithCartFrag());
+    }
+
+    public void addOrderToReservation(ArrayList<OrderReservation> order, asyncTaskCompleted listener) {
+        pq.createOrder(order, listener);
     }
 }

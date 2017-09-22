@@ -143,11 +143,6 @@ public class ParseQuery {
 
 
     // Query for List Branches
-    private lvRestaurantAdapter adapter;
-
-    public void setAdapter(lvRestaurantAdapter adapter) {
-        this.adapter = adapter;
-    }
 
 
     public void getAllBranch(int limit, int offset, asyncTaskCompleted listener){
