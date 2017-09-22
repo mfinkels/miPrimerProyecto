@@ -1,6 +1,10 @@
 package com.morfando.android.morfando.Restaurant.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.PhotoBranch;
 import com.morfando.android.morfando.R;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +37,6 @@ public class lvRestaurantAdapter extends BaseAdapter {
 
     public void setData(ArrayList<Branch> branches) {
         this.branches=branches;
-
     }
 
     public int getCount() {
@@ -76,6 +80,10 @@ public class lvRestaurantAdapter extends BaseAdapter {
 
         Branch b = getItem(positionActual);
 
+        if (b.photo.size() >= 0){
+            new DownloadImageTask(image).execute(b.photo.get(0).photo);
+        }
+
         resName.setText(b.restaurant.name + " " + b.name);
         priceRange.setText("$" + String.valueOf(b.range.minimum) + " - $" + String.valueOf(b.range.maximum));
 
@@ -85,4 +93,33 @@ public class lvRestaurantAdapter extends BaseAdapter {
 
         return returnView;
     }
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+                return mIcon11;
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                return null;
+            }
+
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            if (result != null){
+                bmImage.setImageBitmap(result);
+            }
+        }
+    }
+
 }

@@ -12,26 +12,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.morfando.android.morfando.Class.Menu;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
+import com.morfando.android.morfando.Class.Reservation;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
-import com.morfando.android.morfando.Reservation.Adapter.plateAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.plateAdapter;
 
 import java.util.ArrayList;
 
 /**
- * Created by Matias on 16/9/17.
+ * Created by Matias on 9/22/2017.
  */
 
-public class platesFrag extends DialogFragment {
+public class plateWithCartFrag extends DialogFragment {
     MainActivity main;
     ParseQuery pq;
-    ArrayList<Plate> myPlates;
+
+    Reservation myReservation;
+
     ListView plates;
-    plateAdapter adapter;
+    Spinner menus;
+    TextView items;
     FloatingActionButton cart;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
@@ -40,11 +51,29 @@ public class platesFrag extends DialogFragment {
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
 
-        myPlates = main.getPlates();
+        myReservation = main.getReservation();
+
+        menus = (Spinner)toReturn.findViewById(R.id.spMenus);
         plates = (ListView)toReturn.findViewById(R.id.listPlates);
+        items = (TextView)toReturn.findViewById(R.id.displayItemsInCart);
+
+        items.setText("0");
+
         cart = (FloatingActionButton)toReturn.findViewById(R.id.btnCart);
-        adapter = new plateAdapter(myPlates,main,true);
-        plates.setAdapter(adapter);
+
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                ArrayList<Menu> listMenu = (ArrayList<Menu>) result;
+                if (listMenu != null){
+                    myReservation.branch.menu = listMenu;
+                    listTypesMenu();
+                }else {
+                    Toast.makeText(main, "Error Menu", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        pq.getMenuInfo(myReservation.branch.idBranch, listener);
 
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +94,38 @@ public class platesFrag extends DialogFragment {
         setHasOptionsMenu(true);
 
         return toReturn;
+    }
+
+    private void listTypesMenu() {
+        ArrayList<String> types = new ArrayList<String>();
+        for (Menu m : myReservation.branch.menu) {
+            types.add(m.type);
+        }
+        ArrayAdapter adapter = new ArrayAdapter<String>(main, android.R.layout.simple_spinner_dropdown_item, types);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        menus.setAdapter(adapter);
+        menus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                menuSelected(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void menuSelected(int position) {
+        Menu m = myReservation.branch.menu.get(position);
+        listPlates(m);
+    }
+
+    private void listPlates(Menu m) {
+        plateAdapter adapterP = new plateAdapter(m.plates,main,true);
+        plates.setAdapter(adapterP);
+        plates.deferNotifyDataSetChanged();
     }
 
     private void checkOutCart() {

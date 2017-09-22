@@ -1,4 +1,4 @@
-package com.morfando.android.morfando.Reservation.Adapter;
+package com.morfando.android.morfando.Restaurant.Single.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

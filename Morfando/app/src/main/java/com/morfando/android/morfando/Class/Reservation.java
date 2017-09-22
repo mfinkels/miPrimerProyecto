@@ -17,11 +17,11 @@ public class Reservation {
     public Branch branch;
     public Calendar date;
     public int guest;
-    public ArrayList<OrderReservation> orders;
+    public ArrayList<Plate> orders;
 
     public Reservation(){
         this.branch = new Branch();
-        this.orders = new ArrayList<OrderReservation>();
+        this.orders = new ArrayList<Plate>();
     }
 
 }

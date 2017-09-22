@@ -22,8 +22,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ListView
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/appbar"
+        android:id="@+id/spMenus"></Spinner>
+
+    <ListView
+        android:layout_below="@id/spMenus"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listPlates"></ListView>
@@ -48,6 +54,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="7dp"
+            android:id="@+id/displayItemsInCart"
             android:text="2"
             android:elevation="20dp"
             android:textColor="#fff"

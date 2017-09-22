@@ -23,7 +23,7 @@ import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
 import com.morfando.android.morfando.Reservation.Single.orderReservationFrag;
-import com.morfando.android.morfando.Reservation.Single.platesFrag;
+import com.morfando.android.morfando.Reservation.Single.plateWithCartFrag;
 import com.morfando.android.morfando.Reservation.Single.singleReservationFrag;
 import com.morfando.android.morfando.Reservation.reservationMainFrag;
 import com.morfando.android.morfando.Reservation.upcomingReservationFrag;
@@ -305,6 +305,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addNewOrder() {
-        updateDialogFragment(new platesFrag());
+        updateDialogFragment(new plateWithCartFrag());
     }
 }

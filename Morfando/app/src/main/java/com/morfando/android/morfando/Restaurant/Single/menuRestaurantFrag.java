@@ -18,7 +18,7 @@ import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.menuAdapter;
-import com.morfando.android.morfando.Reservation.Adapter.plateAdapter;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.plateAdapter;
 
 import java.util.ArrayList;
 

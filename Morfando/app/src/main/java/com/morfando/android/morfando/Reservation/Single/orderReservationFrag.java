@@ -13,11 +13,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
+import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
+import com.morfando.android.morfando.Restaurant.Single.Adapter.plateAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Matias on 9/21/2017.
@@ -49,11 +55,22 @@ public class orderReservationFrag extends DialogFragment {
             }
         });
 
-        if (myReservation.orders != null && myReservation.orders.size() > 0) {
-            //listo los platos  de la orden
-        }
-
-
+        final asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                ArrayList<Plate> plates = (ArrayList<Plate>) result;
+                if (plates != null && plates.size() >= 0) {
+                    myReservation.orders = plates;
+                    main.setReservation(myReservation);
+                    plateAdapter adapter = new plateAdapter(myReservation.orders,main,false);
+                    listOrder.setAdapter(adapter);
+                    listOrder.deferNotifyDataSetChanged();
+                } else {
+                    Toast.makeText(main,"Order is empty",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        pq.getOrder(myReservation.idReservation, listener);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
