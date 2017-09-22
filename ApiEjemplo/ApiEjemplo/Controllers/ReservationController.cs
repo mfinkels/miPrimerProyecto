@@ -1,4 +1,5 @@
 ﻿using ApiEjemplo.Data;
+using ApiEjemplo.MenuInfo;
 using ApiEjemplo.Models;
 using ApiEjemplo.ReservationInfo;
 using System;
@@ -49,7 +50,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/reservation/order/{id}")]
         // return the order of Reservation
-        public IList<OrderReservation> getOrderOfReservation(int id) {
+        public IList<PlateMenu> getOrderOfReservation(int id) {
             return OrderReservationData.getAllByReservation(id);
         }
 
@@ -74,6 +75,18 @@ namespace ApiEjemplo.Controllers
             }
             ReservationData.insert(res);
             return Ok("");
+        }
+
+        // POST api/<controller>
+        [ResponseType(typeof(OrderReservation))]
+        public IHttpActionResult PostOrder(OrderReservation order)
+        {
+            if (order == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            OrderReservationData.insert(order);
+            return Ok(order);
         }
 
         // PUT api/<controller>/5

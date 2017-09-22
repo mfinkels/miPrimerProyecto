@@ -6,5 +6,8 @@ package com.morfando.android.morfando.Class;
 
 public class OrderReservation {
     public int idOrderReservation;
+    public int idReservation;
+    public int idPlate;
+    public int idUser;
     public Plate plate;
 }

@@ -1,31 +1,24 @@
-package com.morfando.android.morfando.Restaurant.Single;
+package com.morfando.android.morfando.Reservation.Single;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
-import com.morfando.android.morfando.Restaurant.Adapter.plateAdapter;
+import com.morfando.android.morfando.Reservation.Adapter.plateAdapter;
 
 import java.util.ArrayList;
 
@@ -39,6 +32,7 @@ public class platesFrag extends DialogFragment {
     ArrayList<Plate> myPlates;
     ListView plates;
     plateAdapter adapter;
+    FloatingActionButton cart;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
@@ -48,9 +42,16 @@ public class platesFrag extends DialogFragment {
 
         myPlates = main.getPlates();
         plates = (ListView)toReturn.findViewById(R.id.listPlates);
-        adapter = new plateAdapter(myPlates,main,false);
+        cart = (FloatingActionButton)toReturn.findViewById(R.id.btnCart);
+        adapter = new plateAdapter(myPlates,main,true);
         plates.setAdapter(adapter);
 
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkOutCart();
+            }
+        });
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -65,6 +66,11 @@ public class platesFrag extends DialogFragment {
 
         return toReturn;
     }
+
+    private void checkOutCart() {
+
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);

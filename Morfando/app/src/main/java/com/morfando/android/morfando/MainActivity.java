@@ -1,10 +1,6 @@
 package com.morfando.android.morfando;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.ParcelUuid;
 import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -13,12 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
-import com.morfando.android.morfando.Class.CalificationBranch;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
@@ -29,30 +22,20 @@ import com.morfando.android.morfando.Profile.profileFrag;
 import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
+import com.morfando.android.morfando.Reservation.Single.orderReservationFrag;
+import com.morfando.android.morfando.Reservation.Single.platesFrag;
 import com.morfando.android.morfando.Reservation.Single.singleReservationFrag;
 import com.morfando.android.morfando.Reservation.reservationMainFrag;
 import com.morfando.android.morfando.Reservation.upcomingReservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.Reservation.reservationFrag;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
-import com.morfando.android.morfando.Restaurant.Single.platesFrag;
 import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.restaurantSingleFrag;
-import com.morfando.android.morfando.Restaurant.restaurantFrag;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -317,4 +300,11 @@ public class MainActivity extends AppCompatActivity {
         return reservation;
     }
 
+    public void viewOrder() {
+        updateDialogFragment(new orderReservationFrag());
+    }
+
+    public void addNewOrder() {
+        updateDialogFragment(new platesFrag());
+    }
 }

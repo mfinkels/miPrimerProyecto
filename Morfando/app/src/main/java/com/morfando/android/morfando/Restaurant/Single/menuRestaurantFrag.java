@@ -1,20 +1,10 @@
 package com.morfando.android.morfando.Restaurant.Single;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuAdapter;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,7 +18,7 @@ import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.menuAdapter;
-import com.morfando.android.morfando.Restaurant.Adapter.plateAdapter;
+import com.morfando.android.morfando.Reservation.Adapter.plateAdapter;
 
 import java.util.ArrayList;
 

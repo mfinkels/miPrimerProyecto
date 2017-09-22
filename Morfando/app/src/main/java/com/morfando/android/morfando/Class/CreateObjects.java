@@ -34,4 +34,19 @@ public class CreateObjects {
         }
     }
 
+    public String order(OrderReservation obj){
+        String json = "";
+        try {
+            JSONObject ObjJson = new JSONObject();
+            ObjJson.accumulate("idReservation", obj.idReservation);
+            ObjJson.accumulate("idPlateMenu", obj.idPlate);
+            ObjJson.accumulate("idUser", obj.idUser);
+            return json;
+
+        }catch (JSONException e){
+            Log.d("Error", e.getMessage());
+            return null;
+        }
+    }
+
 }

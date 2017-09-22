@@ -470,7 +470,6 @@ public class ParseQuery {
 
     // query get Menu
 
-    private ArrayList<Menu> menuList = new ArrayList<Menu>();
 
     public void getMenuInfo(int idBranch, asyncTaskCompleted listener){
         new GetMenu(listener).execute(idBranch);
@@ -520,6 +519,110 @@ public class ParseQuery {
         }
     }
 
+
+
+    // query get Plates Order
+
+    public void getOrder(int idReservation, asyncTaskCompleted listener){
+        new getOrderPlates(listener).execute(idReservation);
+    }
+
+    private class getOrderPlates extends AsyncTask<Integer, Void, ArrayList<Plate>> {
+
+        private asyncTaskCompleted listener;
+
+        public getOrderPlates(asyncTaskCompleted listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Plate> datos) {
+            super.onPostExecute(datos);
+            listener.onPostAsyncTask(datos);
+        }
+
+        @Override
+        protected ArrayList<Plate> doInBackground(Integer... params) {
+            int id = params[0];
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(server + "reservation/order/" + id)
+                    .build();
+
+            String resultado;
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                resultado = response.body().string();
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return null;
+            }
+
+            try {
+                //Reservation
+                JSONArray arr = new JSONArray(resultado);
+                return parse.plate(arr);
+            }
+            catch(JSONException e){
+                Log.d("error", e.getMessage());
+                return null;
+            }
+        }
+    }
+
+
+    // query insert Order
+
+    public void createOrder(ArrayList<OrderReservation> listOrders, asyncTaskCompleted listener) {
+        new insertOrder(listener).execute(listOrders);
+    }
+
+    private class insertOrder extends AsyncTask<ArrayList<OrderReservation>, Void, Boolean>{
+
+        private asyncTaskCompleted listener;
+
+        public insertOrder(asyncTaskCompleted listener){
+            this.listener = listener;
+        }
+
+        protected void onPostExecute(Boolean datos) {
+            super.onPostExecute(datos);
+            listener.onPostAsyncTask(datos);
+        }
+
+        @Override
+        protected Boolean doInBackground(ArrayList<OrderReservation>... params) {
+            ArrayList<OrderReservation> list = params[0];
+
+            OkHttpClient client = new OkHttpClient();
+
+            String insert = "[";
+
+            for (OrderReservation order: list) {
+                String orderJson = create.order(order);
+                insert += orderJson;
+            }
+            insert += "]";
+
+            RequestBody body = RequestBody.create(JSON, insert);
+            Request request = new Request.Builder()
+                    .url(server + "reservation")
+                    .post(body)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                String respuesta = response.body().string();
+                if (respuesta != "Datos incorrectos."){
+                    return true;
+                }
+                return false;
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return false;
+            }
+        }
+    }
 
 
 

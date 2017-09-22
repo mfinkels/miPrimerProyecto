@@ -12,58 +12,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 
-import java.util.Calendar;
-
 /**
- * Created by Matias on 9/18/2017.
+ * Created by Matias on 9/21/2017.
  */
 
-public class singleReservationFrag extends DialogFragment {
+public class orderReservationFrag extends DialogFragment {
     MainActivity main;
     ParseQuery pq;
 
-    TextView resName, calendar, time, guest;
-    Button order, cancel;
-    
+    ListView listOrder;
+    Button newOrder;
+
     Reservation myReservation;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
-        toReturn = inflater.inflate(R.layout.frag_single_reservation, group, false);
+        toReturn = inflater.inflate(R.layout.frag_order_reservation, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
 
         myReservation = main.getReservation();
 
-        
-        resName = (TextView)toReturn.findViewById(R.id.restaurantName);
-        calendar = (TextView)toReturn.findViewById(R.id.calendar);
-        time = (TextView)toReturn.findViewById(R.id.time);
-        guest = (TextView)toReturn.findViewById(R.id.guest);
-        order = (Button)toReturn.findViewById(R.id.btnOrder);
-        order.setOnClickListener(new View.OnClickListener() {
+        listOrder =(ListView)toReturn.findViewById(R.id.listOrder);
+        newOrder = (Button)toReturn.findViewById(R.id.btnNewOrder);
+        newOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeOrder();
+                makeNewOrder();
             }
         });
-        cancel = (Button)toReturn.findViewById(R.id.btnCancelReservation);
 
-
-        resName.setText(myReservation.branch.restaurant.name + " " + myReservation.branch.name);
-        calendar.setText(myReservation.date.get(Calendar.DAY_OF_MONTH) + "/" + myReservation.date.get(Calendar.MONTH));
-        time.setText(myReservation.date.get(Calendar.HOUR_OF_DAY) + ":" + myReservation.date.get(Calendar.MINUTE));
-        guest.setText(myReservation.guest + "");
-
-
-
+        if (myReservation.orders != null && myReservation.orders.size() > 0) {
+            //listo los platos  de la orden
+        }
 
 
 
@@ -81,11 +69,8 @@ public class singleReservationFrag extends DialogFragment {
         return toReturn;
     }
 
-    private void cancelReservation() {
-    }
-
-    private void makeOrder() {
-        main.viewOrder();
+    private void makeNewOrder() {
+        main.addNewOrder();
     }
 
     @Override
