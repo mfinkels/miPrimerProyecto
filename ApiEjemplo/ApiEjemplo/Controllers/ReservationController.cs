@@ -54,16 +54,6 @@ namespace ApiEjemplo.Controllers
             return OrderReservationData.getAllByReservation(id);
         }
 
-        [ResponseType(typeof(OrderReservation))]
-        public IHttpActionResult Post(OrderReservation order)
-        {
-            if (order == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            OrderReservationData.insert(order);
-            return Ok(order);
-        }
 
         // POST api/<controller>
         [ResponseType(typeof(Reservation))]
@@ -74,10 +64,9 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             ReservationData.insert(res);
-            return Ok("");
+            return Ok(res);
         }
 
-        
 
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, Reservation res)
