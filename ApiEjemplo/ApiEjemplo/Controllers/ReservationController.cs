@@ -77,18 +77,7 @@ namespace ApiEjemplo.Controllers
             return Ok("");
         }
 
-        // POST api/<controller>
-        [Route("reservation/order")]
-        [ResponseType(typeof(OrderReservation))]
-        public IHttpActionResult PostOrder(OrderReservation order)
-        {
-            if (order == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            OrderReservationData.insert(order);
-            return Ok(order);
-        }
+        
 
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, Reservation res)
