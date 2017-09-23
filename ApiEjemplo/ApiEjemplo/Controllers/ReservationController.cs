@@ -83,6 +83,19 @@ namespace ApiEjemplo.Controllers
             return Ok(res);
         }
 
+
+        // POST api/<controller>
+        [ResponseType(typeof(OrderReservation))]
+        public IHttpActionResult PostOrder(OrderReservation order)
+        {
+            if (order == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            OrderReservationData.insert(order);
+            return Ok(order);
+        }
+
         // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
