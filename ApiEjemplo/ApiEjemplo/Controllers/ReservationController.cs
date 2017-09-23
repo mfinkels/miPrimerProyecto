@@ -86,7 +86,7 @@ namespace ApiEjemplo.Controllers
 
         // POST api/<controller>
         [Route("reservation/order")]
-        [ResponseType(typeof(OrderReservation))]
+        [HttpPost]
         public IHttpActionResult PostOrder(OrderReservation order)
         {
             if (order == null)//validamos nombre
