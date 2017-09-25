@@ -5,9 +5,11 @@ import android.util.Log;
 
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -41,12 +43,29 @@ public class CreateObjects {
             ObjJson.accumulate("idReservation", obj.idReservation);
             ObjJson.accumulate("idPlateMenu", obj.idPlate);
             ObjJson.accumulate("idUser", obj.idUser);
+            json = ObjJson.toString();
             return json;
 
         }catch (JSONException e){
+            Log.d("Error order", e.getMessage());
+            return null;
+        }
+    }
+
+    public String order(ArrayList<OrderReservation> arr){
+        try {
+            JSONArray array = new JSONArray();
+            for (OrderReservation order : arr) {
+                String orderJson = order(order);
+                array.put(orderJson);
+            }
+            return array.toString();
+
+        }catch (Exception e){
             Log.d("Error", e.getMessage());
             return null;
         }
     }
+
 
 }

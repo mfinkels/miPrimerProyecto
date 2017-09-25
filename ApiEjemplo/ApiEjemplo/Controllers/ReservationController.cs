@@ -88,14 +88,19 @@ namespace ApiEjemplo.Controllers
         [Route("api/reservation/order")]
         [HttpPost]
         [ResponseType(typeof(OrderReservation))]
-        public IHttpActionResult PostOrder(OrderReservation order)
+        public IHttpActionResult PostOrder(IList<OrderReservation> orders)
         {
-            if (order == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
+            foreach (OrderReservation order in orders) {
+                if (order == null)//validamos nombre
+                {
+                    return BadRequest("This order is bad: " + order.ToString());
+                }
             }
-            OrderReservationData.insert(order);
-            return Ok(order);
+            foreach (OrderReservation order in orders)
+            {
+                OrderReservationData.insert(order);
+            }
+            return Ok(orders);
         }
 
         // DELETE: api/<controller>/5

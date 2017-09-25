@@ -592,17 +592,12 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
 
-            String insert = "[";
-
-            for (OrderReservation order: list) {
-                String orderJson = create.order(order);
-                insert += orderJson;
-            }
-            insert += "]";
+            String insert = create.order(list);
+            Log.d("order created", insert);
 
             RequestBody body = RequestBody.create(JSON, insert);
             Request request = new Request.Builder()
-                    .url(server + "reservation")
+                    .url(server + "reservation/order")
                     .post(body)
                     .build();
             try {
