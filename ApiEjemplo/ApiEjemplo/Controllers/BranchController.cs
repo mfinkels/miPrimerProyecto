@@ -1,4 +1,4 @@
-﻿using ApiEjemplo.BranchInfo;
+using ApiEjemplo.BranchInfo;
 using ApiEjemplo.Data;
 using ApiEjemplo.MenuInfo;
 using ApiEjemplo.Models;
@@ -34,10 +34,12 @@ namespace ApiEjemplo.Controllers
         }
 
         [Route("api/{id}/{limit}/{offset}")]
-        public IHttpActionResult GetCalificationBranch(int id, int limit, int offset) {
+        public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
+        {
             List<CalificationBranch> list = new List<CalificationBranch>();
             list = CalificationBranchData.getByBranch(id, limit, offset);
-            if (list == null) {
+            if (list == null)
+            {
                 return NotFound();
             }
             return Ok(list);
@@ -83,6 +85,18 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
         }
 
+        // POST api/<controller>
+        [ResponseType(typeof(BranchRestaurant))]
+        public IHttpActionResult Post(TypeMenu p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            TypeMenuData.update(p);
+            return Ok(p);
+        }
+
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, BranchRestaurant branch)
         {
@@ -96,6 +110,69 @@ namespace ApiEjemplo.Controllers
             }
             BranchRestaurantData.update(branch);
             return Ok(branch);
+        }
+        public IHttpActionResult Put(int id, CategoryPlate categoryplate)
+        {
+            if (id != categoryplate.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del user es incorrecto.");
+            }
+            if (CategoryPlateData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            CategoryPlateData.update(categoryplate);
+            return Ok(categoryplate);
+        }
+        // PUT api/<controller>/5
+        public IHttpActionResult Put(int id, TypeMenu menu)
+        {
+            if (id != menu.idBranchRestaurant)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del user es incorrecto.");
+            }
+            if (TypeMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeMenuData.update(menu);
+            return Ok(menu);
+        }
+        // PUT api/<controller>/5
+        public IHttpActionResult Putcategory(int id, CategoryPlate menu)
+        {
+            if (id != menu.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del user es incorrecto.");
+            }
+            if (CategoryPlateData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            CategoryPlateData.update(menu);
+            return Ok(menu);
+        }
+        // DELETE: api/<controller>/5
+        public IHttpActionResult Deletemenu(int id)
+        {
+            if (TypeMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeMenuData.Delete(id);
+            return Ok();
+        }
+
+
+        // DELETE: api/<controller>/5m
+        public IHttpActionResult Delete(int id)
+        {
+            if (BranchRestaurantData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            BranchRestaurantData.delete(id);
+            return Ok();
         }
 
         // PUT api/<controller>/5
@@ -115,16 +192,7 @@ namespace ApiEjemplo.Controllers
             return Ok(plate);
         }
 
-        // DELETE: api/<controller>/5
-        public IHttpActionResult Delete(int id)
-        {
-            if (BranchRestaurantData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            BranchRestaurantData.delete(id);
-            return Ok();
-        }
+
 
         public IHttpActionResult DeletePlate(int id)
         {
