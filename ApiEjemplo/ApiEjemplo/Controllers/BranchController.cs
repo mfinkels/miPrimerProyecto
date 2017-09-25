@@ -32,7 +32,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-          [Route("api/branch/{IdBranch}/categoryPlate")]
+          [Route("api/branch/menu/{IdBranch}/categoryPlate")]
         public IList<CategoryPlate> GetCategory(int IdBranch)
         {
             return CategoryPlateData.getAll(IdBranch);
