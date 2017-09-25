@@ -88,7 +88,7 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [Route("api/branch/TypeMenu")]
+        [Route("api/branch/menu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult Post(TypeMenu p)
         {
@@ -129,6 +129,7 @@ namespace ApiEjemplo.Controllers
             CategoryPlateData.update(categoryplate);
             return Ok(categoryplate);
         }
+        [Route("api/branch/menu/{id}")]
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, TypeMenu menu)
         {
@@ -143,20 +144,8 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.update(menu);
             return Ok(menu);
         }
-        // PUT api/<controller>/5
-        public IHttpActionResult Putcategory(int id, CategoryPlate menu)
-        {
-            if (id != menu.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id del user es incorrecto.");
-            }
-            if (CategoryPlateData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            CategoryPlateData.update(menu);
-            return Ok(menu);
-        }
+
+        [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
         public IHttpActionResult Deletemenu(int id)
         {
@@ -167,9 +156,8 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-
-
-        // DELETE: api/<controller>/5m
+        
+        // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
             if (BranchRestaurantData.getById(id) == null)
@@ -198,7 +186,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-
+        [Route("api/branch/plate/{id}")]
         public IHttpActionResult DeletePlate(int id)
         {
             if (PlateMenuData.getById(id) == null)

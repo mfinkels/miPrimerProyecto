@@ -36,7 +36,7 @@ namespace ApiEjemplo.Controllers
         public IList<Reservation> GetReservationPastByUser(int id)
         {
 
-            return ReservationData.getByIdUser(id, ">");
+            return ReservationData.getByIdUser(id, "<");
         }
 
         [Route("api/reservation/GetReservationUpcomingByUser/upcoming/{id}")]
@@ -44,7 +44,7 @@ namespace ApiEjemplo.Controllers
         public IList<Reservation> GetReservationUpcomingByUser(int id)
         {
 
-            return ReservationData.getByIdUser(id, "<=");
+            return ReservationData.getByIdUser(id, ">=");
         }
 
 
