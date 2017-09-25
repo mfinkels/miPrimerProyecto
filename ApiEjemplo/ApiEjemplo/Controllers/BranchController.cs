@@ -62,6 +62,7 @@ namespace ApiEjemplo.Controllers
 
 
         // POST api/<controller>
+
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Post(BranchRestaurant branch)
         {
@@ -74,7 +75,8 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [ResponseType(typeof(BranchRestaurant))]
+        [Route("api/branch/plate")]
+        [ResponseType(typeof(PlateMenu))]
         public IHttpActionResult Post(PlateMenu p)
         {
             if (p == null)//validamos nombre
@@ -86,7 +88,8 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [ResponseType(typeof(BranchRestaurant))]
+        [Route("api/branch/TypeMenu")]
+        [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult Post(TypeMenu p)
         {
             if (p == null)//validamos nombre
@@ -111,6 +114,8 @@ namespace ApiEjemplo.Controllers
             BranchRestaurantData.update(branch);
             return Ok(branch);
         }
+
+        [Route("api/branch/category/{id}")]
         public IHttpActionResult Put(int id, CategoryPlate categoryplate)
         {
             if (id != categoryplate.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
