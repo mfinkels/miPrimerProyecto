@@ -124,7 +124,7 @@ namespace ApiEjemplo.Controllers
         }
 
         [Route("api/branch/category/{id}")]
-        public IHttpActionResult Put(int id, CategoryPlate categoryplate)
+        public IHttpActionResult PutCategory(int id, CategoryPlate categoryplate)
         {
             if (id != categoryplate.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
             {
