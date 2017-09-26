@@ -45,10 +45,12 @@ namespace ApiEjemplo.Controllers
         }
         //----------------------------------------------------------------
           
-       [Route("api/category")]
-        public IHttpActionResult GetCategory()
+       
+        // GET api/<controller>
+        [Route("api/branch/category")]
+        public IList<CategoryPlate> Get()
         {
-        return  CategoryPlateData.getAll();
+        return CategoryPlateData.getAll();
         }
        
         [Route("api/plate/{id}")]
