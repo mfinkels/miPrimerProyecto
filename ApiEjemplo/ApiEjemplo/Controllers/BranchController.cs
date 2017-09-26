@@ -32,37 +32,13 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        
-        [Route("api/branch/category/{id}")]
-        public IHttpActionResult GetCategory(int id)
-        {
-            CategoryPlate p = CategoryPlateData.getById(id);
-            if (p == null)
-            {
-                return NotFound();
-            }
-            return Ok(p);
-        }
-        //----------------------------------------------------------------
-          
-       
         // GET api/<controller>
-        [Route("api/branch/category")]
         public IList<CategoryPlate> Get()
         {
-        return CategoryPlateData.getAll();
+            return CategoryPlateData.getAll();
         }
-       
-        [Route("api/plate/{id}")]
-        public IHttpActionResult GetPlateMenu(int id)
-        {
-            PlateMenu p = PlateMenuData.getById(id);
-            if (p == null)
-            {
-                return NotFound();
-            }
-            return Ok(p);
-        }
+
+
 
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
