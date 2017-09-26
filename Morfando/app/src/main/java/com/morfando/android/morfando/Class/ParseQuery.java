@@ -544,7 +544,7 @@ public class ParseQuery {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(server + "reservation/order/" + id)
+                    .url(server + "reservation/orders/" + id)
                     .build();
 
             String resultado;

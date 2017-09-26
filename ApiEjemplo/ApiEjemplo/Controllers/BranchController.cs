@@ -51,14 +51,6 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(category);
         }
-        
-            
-          
-            
-
-
-
-
        
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)

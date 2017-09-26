@@ -48,7 +48,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/reservation/orders/{id}")]
+        [Route("api/{id}/orders")]
         // return the order of Reservation
         public IList<PlateMenu> getOrderOfReservation(int id) {
             return OrderReservationData.getAllByReservation(id);
