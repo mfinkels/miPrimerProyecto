@@ -33,6 +33,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
         // GET api/<controller>/CategoryPlate
+        [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
         {
             return CategoryPlateData.getAll();
