@@ -593,7 +593,7 @@ public class ParseQuery {
             OkHttpClient client = new OkHttpClient();
 
             String insert = create.order(list);
-            Log.d("order created", insert);
+            Log.d("order", insert);
 
             RequestBody body = RequestBody.create(JSON, insert);
             Request request = new Request.Builder()
@@ -603,6 +603,7 @@ public class ParseQuery {
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
                 String respuesta = response.body().string();
+                Log.d("order", respuesta);
                 if (respuesta != "Datos incorrectos."){
                     return true;
                 }

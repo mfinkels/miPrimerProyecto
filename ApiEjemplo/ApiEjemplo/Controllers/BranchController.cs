@@ -44,7 +44,7 @@ namespace ApiEjemplo.Controllers
           [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
         {
-            CategoryPlate category = CategoryPlatetData.getById(id);
+            CategoryPlate category = CategoryPlateData.getById(id);
             if (category == null)
             {
                 return NotFound();
