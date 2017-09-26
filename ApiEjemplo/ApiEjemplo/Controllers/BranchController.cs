@@ -44,7 +44,7 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
         }
         //jnjnkbnjhkbjkghvhgvhgvhjgvghj
-          [Route("api/category")]
+          
        [Route("api/category")]
         public IHttpActionResult GetCategory()
         {
