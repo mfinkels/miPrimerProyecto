@@ -45,9 +45,10 @@ namespace ApiEjemplo.Controllers
         }
         //jnjnkbnjhkbjkghvhgvhgvhjgvghj
           [Route("api/category")]
+       [Route("api/category")]
         public IHttpActionResult GetCategory()
         {
-        return CategoryPlate p = CategoryPlateData.getAll();
+        return  CategoryPlateData.getAll();
         }
        
         [Route("api/plate/{id}")]
