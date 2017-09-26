@@ -43,10 +43,11 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(p);
         }
+       
         [Route("api/plate/{id}")]
         public IHttpActionResult GetPlateMenu(int id)
         {
-            plateMenu p = MenuPlateData.getById(id);
+            PlateMenu p = PlateMenuData.getById(id);
             if (p == null)
             {
                 return NotFound();
