@@ -43,6 +43,12 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(p);
         }
+        //jnjnkbnjhkbjkghvhgvhgvhjgvghj
+          [Route("api/category")]
+        public IHttpActionResult GetCategory((int limit, int offset))
+        {
+        return CategoryPlate p = CategoryPlateData.getAll(limit,offset);
+        }
        
         [Route("api/plate/{id}")]
         public IHttpActionResult GetPlateMenu(int id)
