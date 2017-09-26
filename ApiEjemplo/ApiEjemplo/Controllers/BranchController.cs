@@ -39,7 +39,8 @@ namespace ApiEjemplo.Controllers
             return CategoryPlateData.getAll();
         }
         
-          [ResponseType(typeof(CategoryPlate))]
+
+        [ResponseType(typeof(CategoryPlate))]
           [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
         {
@@ -50,6 +51,14 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(category);
         }
+        
+            
+          
+            
+
+
+
+
        
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
