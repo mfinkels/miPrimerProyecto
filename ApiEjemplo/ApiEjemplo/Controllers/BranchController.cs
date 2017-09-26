@@ -40,7 +40,7 @@ namespace ApiEjemplo.Controllers
         }
         
           [ResponseType(typeof(CategoryPlate))]
-          [Route("api/branch/CategoryPlate/{idCategoriaPlate}")]
+          [Route("api/branch/{idCategoryPlate}/CategoryPlate")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
         {
             CategoryPlate category = CategoryPlatetData.getById(id);
