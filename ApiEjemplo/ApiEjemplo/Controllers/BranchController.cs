@@ -39,7 +39,7 @@ namespace ApiEjemplo.Controllers
             return CategoryPlateData.getAll();
         }
         
-          [ResponseType(typeof(BranchRestaurant))]
+          [ResponseType(typeof(CategoryPlate))]
           [Route("api/branch/CategoryPlate/{idCategoriaPlate}")]
         public IHttpActionResult Get(int id)
         {
