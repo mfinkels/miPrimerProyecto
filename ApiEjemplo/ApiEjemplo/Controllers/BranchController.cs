@@ -32,7 +32,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        // GET api/<controller>
+        // GET api/<controller>/CategoryPlate
         public IList<CategoryPlate> GetCategory()
         {
             return CategoryPlateData.getAll();
