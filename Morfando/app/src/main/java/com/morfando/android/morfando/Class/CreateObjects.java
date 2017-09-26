@@ -28,6 +28,7 @@ public class CreateObjects {
             ObjJson.accumulate("date", datetime);
             ObjJson.accumulate("guest", obj.guest);
             json = ObjJson.toString();
+            Log.d("reservation obj", json);
             return json;
 
         }catch (JSONException e){
@@ -44,6 +45,7 @@ public class CreateObjects {
             ObjJson.accumulate("idPlateMenu", obj.idPlate);
             ObjJson.accumulate("idUser", obj.idUser);
             json = ObjJson.toString();
+            Log.d("order obj", json);
             return json;
 
         }catch (JSONException e){
