@@ -94,7 +94,7 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [Route("api/branch/plate")]
+      /*  [Route("api/branch/plate")]
         [ResponseType(typeof(PlateMenu))]
         public IHttpActionResult Post(PlateMenu p)
         {
@@ -107,7 +107,7 @@ namespace ApiEjemplo.Controllers
           //return Ok(p);
         return Ok(/*PlateMenuData.insert*/1);
         }
-
+        */
         // POST api/<controller>
         [Route("api/branch/menu")]
         [ResponseType(typeof(TypeMenu))]
