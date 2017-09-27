@@ -18,7 +18,7 @@ namespace ApiEjemplo.Data
         }
        */
         
-        public static int newinsert(MenuPlate menuPlate)
+        public static int insert(MenuPlate menuPlate)
         {
             string[] row = new string[] { "idMenuPlate", "idPlateMenu", "idTypeMenu" };
             object[] values = new object[] { menuPlate.idPlateMenu, menuPlate.idPlateMenu, menuPlate.idTypeMenu };
