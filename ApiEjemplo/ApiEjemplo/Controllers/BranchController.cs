@@ -35,7 +35,7 @@ namespace ApiEjemplo.Controllers
         
         // 	TypeMenuData
                  // POST api/<controller>
-        [Route("api/branch/menu/TypeMenu")]
+        [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult Post(TypeMenu p)
         {
