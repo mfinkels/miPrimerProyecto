@@ -109,6 +109,21 @@ namespace ApiEjemplo.Controllers
         }
         
          // POST api/<controller>
+        [Route("api/branch/plate")]
+        [ResponseType(typeof(CategoryPlate))]
+        public IHttpActionResult Post(CategoryPlate p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            CategoryPlateData.insert(p);
+           
+          return Ok(p);
+      
+}
+        
+         // POST api/<controller>
         [Route("api/branch/MenuPlate")]
         [ResponseType(typeof(MenuPlate))]
         public IHttpActionResult Post(MenuPlate p)
