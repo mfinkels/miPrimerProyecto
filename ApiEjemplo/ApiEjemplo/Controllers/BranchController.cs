@@ -37,7 +37,7 @@ namespace ApiEjemplo.Controllers
                  // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
-        public IHttpActionResult Post(TypeMenu p)
+        public IHttpActionResult PostTypeMenu(TypeMenu p)
         {
             if (p == null)//validamos nombre
             {
