@@ -9,13 +9,25 @@ namespace ApiEjemplo.Data
 {
     public class MenuPlateData
     {
-        public static void insert(MenuPlate menuPlate)
+     /*   public static void insert(MenuPlate menuPlate)
         {
             string[] row = new string[] { "idMenuPlate", "idPlateMenu", "idTypeMenu" };
             object[] values = new object[] { menuPlate.idPlateMenu, menuPlate.idPlateMenu, menuPlate.idTypeMenu };
             string sInsert = QueryHelper.insert("menu_plate", row, values);
             DBHelper.EjecutarIUD(sInsert);
         }
+       */
+        
+        public static int newinsert(MenuPlate menuPlate)
+        {
+            string[] row = new string[] { "idMenuPlate", "idPlateMenu", "idTypeMenu" };
+            object[] values = new object[] { menuPlate.idPlateMenu, menuPlate.idPlateMenu, menuPlate.idTypeMenu };
+            string sInsert = QueryHelper.insert("menu_plate", row, values);
+           return DBHelper.EjecutarIUD(sInsert);
+        }
+        
+        
+        
         public static void update(MenuPlate menuPlate)
         {
             string[] row = new string[] { "idMenuPlate", "idPlateMenu", "idTypeMenu" };
