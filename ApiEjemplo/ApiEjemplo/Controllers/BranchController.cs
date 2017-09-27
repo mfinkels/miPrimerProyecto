@@ -32,6 +32,24 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+        
+        // 	TypeMenuData
+                 // POST api/<controller>
+        [Route("api/branch/TypeMenu")]
+        [ResponseType(typeof(TypeMenu))]
+        public IHttpActionResult Post(TypeMenu p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            TypeMenuData.insert(p);
+           
+          return Ok(p);
+      }
+        
+        
+        
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
@@ -120,8 +138,7 @@ namespace ApiEjemplo.Controllers
             CategoryPlateData.insert(p);
            
           return Ok(p);
-      
-}
+      }
         
          // POST api/<controller>
         [Route("api/branch/MenuPlate")]
