@@ -93,6 +93,18 @@ namespace ApiEjemplo.Controllers
         {
             return MenuPlateData.getPlateMenuBranch(idTypeMenu);
         }
+        
+          [Route("api/branch/TypeMenu/{idTypeMenu}")]
+        public IHttpActionResult DeletePlate(int id)
+        {
+            if (TypeMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeMenuData.delete(id);
+            return Ok();
+        }
+
 
 
 
