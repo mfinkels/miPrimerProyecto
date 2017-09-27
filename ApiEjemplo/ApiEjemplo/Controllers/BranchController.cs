@@ -102,8 +102,10 @@ namespace ApiEjemplo.Controllers
             {
                 return BadRequest("Datos incorrectos.");
             }
-            PlateMenuData.insert(p);
-            return Ok(p);
+           // PlateMenuData.insert(p);
+           
+          //return Ok(p);
+        return Ok(PlateMenuData.insert(p));
         }
 
         // POST api/<controller>
