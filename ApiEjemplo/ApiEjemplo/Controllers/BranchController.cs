@@ -48,8 +48,6 @@ namespace ApiEjemplo.Controllers
           return Ok(p);
       }
         
-        
-        
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
