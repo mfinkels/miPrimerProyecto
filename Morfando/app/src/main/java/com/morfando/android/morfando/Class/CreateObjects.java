@@ -56,12 +56,24 @@ public class CreateObjects {
 
     public String order(ArrayList<OrderReservation> arr){
         try {
-            JSONArray array = new JSONArray();
-            for (OrderReservation order : arr) {
+            String JSONArray = "[";
+            //JSONArray array = new JSONArray();
+            for (int i = 0; i < arr.size(); i++){
+                OrderReservation order = arr.get(i);
+                String orderJson = order(order);
+                if (i != arr.size()-1){
+                    JSONArray += orderJson + ",";
+                } else {
+                    JSONArray += orderJson + "]";
+                }
+            }
+
+            /*for (OrderReservation order : arr) {
                 String orderJson = order(order);
                 array.put(orderJson);
-            }
-            return array.toString();
+            }*/
+
+            return JSONArray;
 
         }catch (Exception e){
             Log.d("Error", e.getMessage());
