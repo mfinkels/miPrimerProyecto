@@ -105,7 +105,7 @@ namespace ApiEjemplo.Controllers
            // PlateMenuData.insert(p);
            
           //return Ok(p);
-        return Ok(PlateMenuData.insert(p));
+        return Ok(/*PlateMenuData.insert*/1);
         }
 
         // POST api/<controller>
