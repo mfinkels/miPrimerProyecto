@@ -9,12 +9,19 @@ namespace ApiEjemplo.Data
 {
     public class TypeMenuData
     {
-        public static void insert(TypeMenu tMenu)
+        /*public static void insert(TypeMenu tMenu)
         {
             string sInsert = "Insert into type_menu (name,idBranchRestaurant) values ('" + tMenu.name + "'" +tMenu.idBranchRestaurant + ")";
             DBHelper.EjecutarIUD(sInsert);
+        }*/
+        public static void insert(TypeMenu p)
+        {
+            string[] row = new string[] { "name", "idbranchRestaurant" };
+            object[] values = new object[] { p.name, p.idBranchRestaurant };
+            string sInsert = QueryHelper.insert("type_menu", row, values);
+            DBHelper.EjecutarIUD(sInsert);
         }
-        
+             
         
         public static void update(TypeMenu tMenu)
         {
