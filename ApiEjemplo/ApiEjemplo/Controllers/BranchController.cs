@@ -109,7 +109,7 @@ namespace ApiEjemplo.Controllers
         }
         
          // POST api/<controller>
-        [Route("api/branch/plate")]
+        [Route("api/branch/CategoryPlate")]
         [ResponseType(typeof(CategoryPlate))]
         public IHttpActionResult Post(CategoryPlate p)
         {
