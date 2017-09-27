@@ -108,6 +108,21 @@ namespace ApiEjemplo.Controllers
       
         }
         
+         // POST api/<controller>
+        [Route("api/branch/MenuPlate")]
+        [ResponseType(typeof(MenuPlate))]
+        public IHttpActionResult Post(MenuPlate p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            MenuPlateData.insert(p);
+           
+          return Ok(p);
+      
+        }
+        
         // POST api/<controller>
         [Route("api/branch/menu")]
         [ResponseType(typeof(TypeMenu))]
