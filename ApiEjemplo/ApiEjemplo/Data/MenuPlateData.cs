@@ -17,7 +17,7 @@ namespace ApiEjemplo.Data
             DBHelper.EjecutarIUD(sInsert);
            
            
-               string traerId="";
+               string traerId="SELECT MAX(`idPlateMenu`) FROM `plate_menu`";
                DataTable dt = DBHelper.EjecutarSelect(trerId);
             if (dt.Rows.Count > 0)
             {
