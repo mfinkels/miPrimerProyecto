@@ -17,11 +17,11 @@ namespace ApiEjemplo.Data
             DBHelper.EjecutarIUD(sInsert);
            
            
-               string traerId="SELECT MAX(`idPlateMenu`) FROM `plate_menu`";
+               string traerId="SELECT MAX(`idPlateMenu`) AS Leo FROM `plate_menu`";
                DataTable dt = DBHelper.EjecutarSelect(trerId);
             if (dt.Rows.Count > 0)
             {
-                int id = dt.Rows[0].Field<int>("id");
+                int id = dt.Rows[0].Field<int>("Leo");
                 return id;
             }
                return null;
