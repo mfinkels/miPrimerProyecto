@@ -15,6 +15,16 @@ namespace ApiEjemplo.Data
             object[] values = new object[] { menuPlate.idPlateMenu, menuPlate.idPlateMenu, menuPlate.idTypeMenu };
             string sInsert = QueryHelper.insert("menu_plate", row, values);
             DBHelper.EjecutarIUD(sInsert);
+           
+           
+               string traerId="";
+               DataTable dt = DBHelper.EjecutarSelect(trerId);
+            if (dt.Rows.Count > 0)
+            {
+                int id = dt.Rows[0].Field<int>("id");
+                return id;
+            }
+               return null;
         }
        
         public static void update(MenuPlate menuPlate)
