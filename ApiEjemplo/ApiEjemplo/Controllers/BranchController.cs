@@ -276,7 +276,7 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
         [Route("api/branch/TypeMenu/{idTypeMenu}")]
-        public IHttpActionResult DeleteTypeMenu(int id)
+        public IHttpActionResult DeleteType(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
