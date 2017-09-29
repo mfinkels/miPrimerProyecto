@@ -130,9 +130,9 @@ namespace ApiEjemplo.Controllers
             {
                 return BadRequest("Datos incorrectos.");
             }
-            p.idPlateMenu =  PlateMenuData.insert(p);
+            //p.idPlateMenu =  ;
            
-          return Ok(p);
+          return Ok(PlateMenuData.insert(p));
           
       
         }
