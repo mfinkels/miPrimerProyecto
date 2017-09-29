@@ -535,6 +535,7 @@ public class ParseQuery {
         @Override
         protected void onPostExecute(ArrayList<Plate> datos) {
             super.onPostExecute(datos);
+            Log.d("order", datos.toString());
             listener.onPostAsyncTask(datos);
         }
 
@@ -551,6 +552,7 @@ public class ParseQuery {
             try {
                 Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
                 resultado = response.body().string();
+                Log.d("order", resultado);
             } catch (IOException e) {
                 Log.d("error", e.getMessage());             // Error de Network
                 return null;
