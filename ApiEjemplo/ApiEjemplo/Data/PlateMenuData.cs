@@ -15,6 +15,15 @@ namespace ApiEjemplo.Data
             object[] values = new object[] { p.idCategoryPlate, p.averageCalification, p.name, p.price, p.description };
             string sInsert = QueryHelper.insert("plate_menu", row, values);
             DBHelper.EjecutarIUD(sInsert);
+           
+           
+               string traerId="SELECT MAX(`idPlateMenu`) AS Leo FROM `plate_menu`";
+               DataTable dt = DBHelper.EjecutarSelect(trerId);
+            if (dt.Rows.Count > 0)
+            {
+                int id = dt.Rows[0].Field<int>("Leo");
+                return id;
+            }
         }
      
      public static void update(PlateMenu p)
