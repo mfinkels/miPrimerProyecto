@@ -24,7 +24,7 @@ namespace ApiEjemplo.Data
                 int id = dt.Rows[0].Field<int>("Leo");
                 return id;
             }
-            return 0;
+            return -1;
         }
      
      public static void update(PlateMenu p)
