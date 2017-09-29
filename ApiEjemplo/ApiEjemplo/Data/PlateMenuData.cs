@@ -9,7 +9,7 @@ namespace ApiEjemplo.Data
 {
     public class PlateMenuData
     {
-       public static void insert(PlateMenu p)
+       public static int insert(PlateMenu p)
         {
             string[] row = new string[] { "idCategoryPlate", "averageCalification", "name", "price", "description" };
             object[] values = new object[] { p.idCategoryPlate, p.averageCalification, p.name, p.price, p.description };
@@ -17,13 +17,14 @@ namespace ApiEjemplo.Data
             DBHelper.EjecutarIUD(sInsert);
            
            
-               string traerId="SELECT MAX(`idPlateMenu`) AS Leo FROM `plate_menu`";
-               DataTable dt = DBHelper.EjecutarSelect(trerId);
+               string traerId ="SELECT MAX(`idPlateMenu`) AS Leo FROM `plate_menu`";
+               DataTable dt = DBHelper.EjecutarSelect(traerId);
             if (dt.Rows.Count > 0)
             {
                 int id = dt.Rows[0].Field<int>("Leo");
                 return id;
             }
+            return 0;
         }
      
      public static void update(PlateMenu p)

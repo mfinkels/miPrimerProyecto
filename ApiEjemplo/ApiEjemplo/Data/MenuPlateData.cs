@@ -15,9 +15,6 @@ namespace ApiEjemplo.Data
             object[] values = new object[] { menuPlate.idPlateMenu, menuPlate.idPlateMenu, menuPlate.idTypeMenu };
             string sInsert = QueryHelper.insert("menu_plate", row, values);
             DBHelper.EjecutarIUD(sInsert);
-           
-           
-               return null;
         }
        
         public static void update(MenuPlate menuPlate)
