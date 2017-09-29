@@ -283,7 +283,7 @@ namespace ApiEjemplo.Controllers
                 return NotFound();  
             }
             TypeMenuData.Delete(id);
-            return Ok();
+            return Ok(id);
         }
 
     }
