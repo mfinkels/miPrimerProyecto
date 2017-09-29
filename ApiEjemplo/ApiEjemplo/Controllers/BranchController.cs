@@ -101,7 +101,7 @@ namespace ApiEjemplo.Controllers
             {
                 return NotFound();
             }
-            TypeMenuData.delete(id);
+            TypeMenuData.Delete(id);
             return Ok();
         }
 
