@@ -275,12 +275,12 @@ namespace ApiEjemplo.Controllers
             PlateMenuData.delete(id);
             return Ok();
         }
-        [Route("api/branch/TypeMenu/{idTypeMenu}")]
-        public IHttpActionResult DeleteType(int id)
+        [Route("api/branch/TypeMenu/{id}")]
+     public IHttpActionResult DeleteType(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
-                return NotFound();
+                return NotFound();  
             }
             TypeMenuData.Delete(id);
             return Ok();
