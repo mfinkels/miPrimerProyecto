@@ -285,6 +285,16 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok(id);
         }
+            [Route("api/branch/Categorylate/{id}")]
+     public IHttpActionResult DeleteType(int id)
+        {
+            if (CategoryPlateData.getById(id) == null)
+            {
+                return NotFound();  
+            }
+            CategoryPlateData.Delete(id);
+            return Ok(id);
+        }
 
     }
 }
