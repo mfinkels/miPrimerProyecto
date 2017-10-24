@@ -3,6 +3,7 @@ using ApiEjemplo.Data;
 using ApiEjemplo.MenuInfo;
 using ApiEjemplo.Models;
 using ApiEjemplo.PromotionInfo;
+using ApiEjemplo.RestaurantInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,6 +107,45 @@ namespace ApiEjemplo.Controllers
         }
 
 
+        [Route("api/branch/DeleteSocialNetwork/{id}")]
+        public IHttpActionResult DeleteSocialNetwork(int id)
+        {
+            if (SocialNetworkRestaurantData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            SocialNetworkRestaurantData.delete(id);
+            return Ok();
+        }
+        // POST api/<controller>
+
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
+        {
+            if (social == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            SocialNetworkRestaurantData.insert(social);
+            return Ok(social);
+        }
+
+        // POST api/<controller>
+        [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult PostsocialNetwork(SocialNetworkRestaurant p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            SocialNetworkRestaurantData.update(p);
+            return Ok(p);
+        }
+
+        
+
+
 
 
         // POST api/<controller>
@@ -120,6 +160,7 @@ namespace ApiEjemplo.Controllers
             BranchRestaurantData.insert(branch);
             return Ok(branch);
         }
+
 
         // POST api/<controller>
         [Route("api/branch/plate")]
@@ -136,8 +177,47 @@ namespace ApiEjemplo.Controllers
           
       
         }
-        
-         // POST api/<controller>
+
+        // POST api/<controller>
+        [Route("api/branch/ServiceBranch")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult Post(ServiceBranch p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceBranchData.insert(p);
+
+            return Ok(p);
+        }
+
+        // POST api/<controller>
+        [Route("api/branch/ServiceBranch")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult Postservice(ServiceBranch p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceBranchData.update(p);
+            return Ok(p);
+        }
+        [Route("api/branch/ServiceBranch/{id}")]
+        // DELETE: api/<controller>/5
+        public IHttpActionResult Deletemenu(int id)
+        {
+            if (ServiceBranchData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            ServiceBranchData.Delete(id);
+            return Ok();
+        }
+
+
+        // POST api/<controller>
         [Route("api/branch/CategoryPlate")]
         [ResponseType(typeof(CategoryPlate))]
         public IHttpActionResult Post(CategoryPlate p)
@@ -178,6 +258,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.update(p);
             return Ok(p);
         }
+
 
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, BranchRestaurant branch)
