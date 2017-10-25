@@ -22,6 +22,12 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
+
+        [Route("api/branch/SocialNetworkRestaurant/{limit}/{offset}")]
+        public IList<SocialNetworkRestaurant> GetlistSocial()
+        {
+            return SocialNetworkRestaurantData.getAll();
+        }
         // GET api/<controller>/5
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
@@ -33,9 +39,20 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        
+
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult GetSocial(int id)
+        {
+            SocialNetworkRestaurant branch = SocialNetworkRestaurantData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
         // 	TypeMenuData
-                 // POST api/<controller>
+        // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult PostTypeMenu(TypeMenu p)
@@ -307,7 +324,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
-        public IHttpActionResult Deletemenu(int id)
+        public IHttpActionResult DeleteMenu(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
@@ -367,13 +384,13 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
             [Route("api/branch/CategoryPlate/{id}")]
-     public IHttpActionResult DeleteType(int id)
+     public IHttpActionResult DeleteTypeCategory(int id)
         {
             if (CategoryPlateData.getById(id) == null)
             {
                 return NotFound();  
             }
-            CategoryPlateData.Delete(id);
+            CategoryPlateData.delete(id);
             return Ok(id);
         }
 
