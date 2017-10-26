@@ -22,28 +22,11 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
-
-        [Route("api/branch/SocialNetworkRestaurant/{limit}/{offset}")]
-        public IList<SocialNetworkRestaurant> GetlistSocial()
-        {
-            return SocialNetworkRestaurantData.getAll();
-        }
         // GET api/<controller>/5
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
         {
             BranchRestaurant branch = BranchRestaurantData.getById(id);
-            if (branch == null)
-            {
-                return NotFound();
-            }
-            return Ok(branch);
-        }
-
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        public IHttpActionResult GetSocial(int id)
-        {
-            SocialNetworkRestaurant branch = SocialNetworkRestaurantData.getById(id);
             if (branch == null)
             {
                 return NotFound();
@@ -62,20 +45,20 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             TypeMenuData.insert(p);
-           
-          return Ok(p);
-      }
-        
+
+            return Ok(p);
+        }
+
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
         {
             return CategoryPlateData.getAll();
         }
-        
+
 
         [ResponseType(typeof(CategoryPlate))]
-          [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
+        [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
         {
             CategoryPlate category = CategoryPlateData.getById(id);
@@ -85,7 +68,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(category);
         }
-       
+
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
         {
@@ -111,8 +94,8 @@ namespace ApiEjemplo.Controllers
         {
             return MenuPlateData.getPlateMenuBranch(idTypeMenu);
         }
-        
-          [Route("api/branch/TypeMenu/{idTypeMenu}")]
+
+        [Route("api/branch/TypeMenu/{idTypeMenu}")]
         public IHttpActionResult DeleteTypeMenu(int id)
         {
             if (TypeMenuData.getById(id) == null)
@@ -160,7 +143,7 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
         }
 
-        
+
 
 
 
@@ -191,8 +174,8 @@ namespace ApiEjemplo.Controllers
             p.idPlateMenu = PlateMenuData.insert(p);
 
             return Ok(p);
-          
-      
+
+
         }
 
         // POST api/<controller>
@@ -244,11 +227,11 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             CategoryPlateData.insert(p);
-           
-          return Ok(p);
-      }
-        
-         // POST api/<controller>
+
+            return Ok(p);
+        }
+
+        // POST api/<controller>
         [Route("api/branch/MenuPlate")]
         [ResponseType(typeof(MenuPlate))]
         public IHttpActionResult Post(MenuPlate p)
@@ -258,11 +241,11 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             MenuPlateData.insert(p);
-           
-          return Ok(p);
-      
+
+            return Ok(p);
+
         }
-        
+
         // POST api/<controller>
         [Route("api/branch/menu")]
         [ResponseType(typeof(TypeMenu))]
@@ -324,11 +307,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
-<<<<<<< HEAD
         public IHttpActionResult Deletemenues(int id)
-=======
-        public IHttpActionResult DeleteMenu(int id)
->>>>>>> origin/master
         {
             if (TypeMenuData.getById(id) == null)
             {
@@ -337,7 +316,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-        
+
         // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
@@ -378,28 +357,23 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
         [Route("api/branch/TypeMenu/{id}")]
-     public IHttpActionResult DeleteType(int id)
+        public IHttpActionResult DeleteType(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
-                return NotFound();  
+                return NotFound();
             }
             TypeMenuData.Delete(id);
             return Ok(id);
         }
-            [Route("api/branch/CategoryPlate/{id}")]
-<<<<<<< HEAD
-     public IHttpActionResult DeleteCategory(int id)
-=======
-     public IHttpActionResult DeleteTypeCategory(int id)
->>>>>>> origin/master
+        [Route("api/branch/CategoryPlate/{id}")]
+        public IHttpActionResult DeleteCategory(int id)
         {
             if (CategoryPlateData.getById(id) == null)
             {
-                return NotFound();  
+                return NotFound();
             }
             CategoryPlateData.delete(id);
-<<<<<<< HEAD
             return Ok(id);
         }
 
@@ -411,8 +385,6 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             TypeSocialNetworkData.Delete(id);
-=======
->>>>>>> origin/master
             return Ok(id);
         }
         [Route("api/branch/TypeSocialNetwork/{id}")]
