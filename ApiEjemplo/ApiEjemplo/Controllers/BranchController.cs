@@ -22,6 +22,12 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
+
+        [Route("api/branch/SocialNetworkRestaurant/{limit}/{offset}")]
+        public IList<SocialNetworkRestaurant> GetlistSocial()
+        {
+            return SocialNetworkRestaurantData.getAll();
+        }
         // GET api/<controller>/5
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
@@ -33,9 +39,20 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        
+
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult GetSocial(int id)
+        {
+            SocialNetworkRestaurant branch = SocialNetworkRestaurantData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
         // 	TypeMenuData
-                 // POST api/<controller>
+        // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult PostTypeMenu(TypeMenu p)
@@ -307,7 +324,11 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
+<<<<<<< HEAD
         public IHttpActionResult Deletemenues(int id)
+=======
+        public IHttpActionResult DeleteMenu(int id)
+>>>>>>> origin/master
         {
             if (TypeMenuData.getById(id) == null)
             {
@@ -367,13 +388,18 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
             [Route("api/branch/CategoryPlate/{id}")]
+<<<<<<< HEAD
      public IHttpActionResult DeleteCategory(int id)
+=======
+     public IHttpActionResult DeleteTypeCategory(int id)
+>>>>>>> origin/master
         {
             if (CategoryPlateData.getById(id) == null)
             {
                 return NotFound();  
             }
             CategoryPlateData.delete(id);
+<<<<<<< HEAD
             return Ok(id);
         }
 
@@ -385,6 +411,8 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             TypeSocialNetworkData.Delete(id);
+=======
+>>>>>>> origin/master
             return Ok(id);
         }
         [Route("api/branch/TypeSocialNetwork/{id}")]
