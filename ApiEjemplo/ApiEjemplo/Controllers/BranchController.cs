@@ -405,7 +405,7 @@ namespace ApiEjemplo.Controllers
 
         // POST api/<controller>
         [Route("api/branch/TypeSocialNetwork")]
-        [ResponseType(typeof(MenuPlate))]
+        [ResponseType(typeof(TypeSocialNetwork))]
         public IHttpActionResult Post(TypeSocialNetwork p)
         {
             if (p == null)//validamos nombre
