@@ -307,7 +307,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
-        public IHttpActionResult Deletemenu(int id)
+        public IHttpActionResult Deletemenues(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
@@ -367,14 +367,55 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
             [Route("api/branch/CategoryPlate/{id}")]
-     public IHttpActionResult DeleteType(int id)
+     public IHttpActionResult DeleteCategory(int id)
         {
             if (CategoryPlateData.getById(id) == null)
             {
                 return NotFound();  
             }
-            CategoryPlateData.Delete(id);
+            CategoryPlateData.delete(id);
             return Ok(id);
+        }
+
+        [Route("api/branch/TypeSocial/{id}")]
+        public IHttpActionResult TypeSocial(int id)
+        {
+            if (TypeSocialNetworkData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeSocialNetworkData.Delete(id);
+            return Ok(id);
+        }
+        [Route("api/branch/TypeSocialNetwork/{id}")]
+        [HttpPut]
+        public IHttpActionResult PutTypeSocialNetwork(int id, TypeSocialNetwork plate)
+        {
+            if (id != plate.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (TypeSocialNetworkData.getById(plate.idTypeSocialNetwork) == null)
+            {
+                return NotFound();
+            }
+            TypeSocialNetworkData.update(plate);
+            return Ok(plate);
+        }
+
+        // POST api/<controller>
+        [Route("api/branch/TypeSocialNetwork")]
+        [ResponseType(typeof(MenuPlate))]
+        public IHttpActionResult Post(TypeSocialNetwork p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            TypeSocialNetworkData.insert(p);
+
+            return Ok(p);
+
         }
 
     }
