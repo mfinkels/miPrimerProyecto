@@ -378,7 +378,7 @@ namespace ApiEjemplo.Controllers
         }
 
         [Route("api/branch/TypeSocial/{id}")]
-        public IHttpActionResult TypeSocial(int id)
+        public IHttpActionResult deletetypeSocial(int id)
         {
             if (TypeSocialNetworkData.getById(id) == null)
             {
@@ -423,6 +423,24 @@ namespace ApiEjemplo.Controllers
         {
             return TypeSocialNetworkData.getAll();
         }
+       
+       
+       
+        [Route("api/branch/TypeSocialNetwork/{id}")]
+        public IHttpActionResult TypeSocialNetwork(int id, CategoryPlate categoryplate)
+        {
+            if (id != categoryplate.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del user es incorrecto.");
+            }
+            if (TypeSocialNetwork.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeSocialNetworkData.update(categoryplate);
+            return Ok(categoryplate);
+        } 
+        
 
     }
 }
