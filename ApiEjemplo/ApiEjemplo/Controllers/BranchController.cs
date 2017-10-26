@@ -142,11 +142,7 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.update(p);
             return Ok(p);
         }
-
-
-
-
-
+     
 
         // POST api/<controller>
 
@@ -423,6 +419,13 @@ namespace ApiEjemplo.Controllers
         {
             return TypeSocialNetworkData.getAll();
         }
+            // GET api/<controller>
+        [Route("api/branch/SocialNetwork/{limit}/{offset}")]
+        public IList<SocialNetwork> GetSocialNetwork(int limit, int offset)
+        {
+            return SocialNetworkData.getAll();
+        }
+        
         
          // GET api/<controller>
         [Route("api/branch/SocialNetwork/{limit}/{offset}")]
@@ -455,11 +458,11 @@ namespace ApiEjemplo.Controllers
          {
              if (p == null)//validamos nombre
              {
- +                return BadRequest("Datos incorrectos.");
- +            }
- +            SocialNetworkRestaurantData.update(p);
- +            return Ok(p);
- +        }
+                 return BadRequest("Datos incorrectos.");
+             }
+             SocialNetworkRestaurantData.update(p);
+            return Ok(p);
+         }
 
     }
 }
