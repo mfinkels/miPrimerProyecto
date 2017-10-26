@@ -427,14 +427,7 @@ namespace ApiEjemplo.Controllers
         }
         
         
-         // GET api/<controller>
-        [Route("api/branch/SocialNetwork/{limit}/{offset}")]
-        public IList<SocialNetwork> Get(int limit, int offset)
-        {
-            return BranchRestaurantData.getAll();
-        }
-       
-       
+ 
        
         [Route("api/branch/TypeSocialNetwork/{id}")]
         public IHttpActionResult TypeSocialNetwork(int id, CategoryPlate categoryplate)
