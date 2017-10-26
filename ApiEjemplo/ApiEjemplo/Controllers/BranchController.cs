@@ -441,6 +441,18 @@ namespace ApiEjemplo.Controllers
             return Ok(categoryplate);
         } 
         
+         // POST api/<controller>
+         [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+         public IHttpActionResult PostsocialNetwork(SocialNetworkRestaurant p)
+         {
+             if (p == null)//validamos nombre
+             {
+ +                return BadRequest("Datos incorrectos.");
+ +            }
+ +            SocialNetworkRestaurantData.update(p);
+ +            return Ok(p);
+ +        }
 
     }
 }
