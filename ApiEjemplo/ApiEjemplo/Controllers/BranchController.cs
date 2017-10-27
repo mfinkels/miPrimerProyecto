@@ -48,12 +48,12 @@ namespace ApiEjemplo.Controllers
 
             return Ok(p);
         }
-        [Route("api/branch/SocialNetworkRestaurant")]
+        /*[Route("api/branch/SocialNetworkRestaurant")]
         public IList<SocialNetworkRestaurant> GetlistSocial()
         {
             return SocialNetworkRestaurantData.getAll();
         }
-
+        */
 
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult GetSocial(int id)
