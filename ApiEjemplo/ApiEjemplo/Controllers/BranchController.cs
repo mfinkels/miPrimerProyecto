@@ -468,7 +468,7 @@ namespace ApiEjemplo.Controllers
         }
 
         // GET api/<controller>
-        [Route("api/branch/SocialNetworkRestaurant/{limit}/{offset}")]
+        [Route("api/branch/GetSocialNetworkRestaurant/{limit}/{offset}")]
         public IList<SocialNetworkRestaurant> GetSocialNetworkRestaurant(int limit, int offset)
         {
             return SocialNetworkRestaurantData.getAll();
