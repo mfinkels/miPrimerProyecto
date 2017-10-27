@@ -356,6 +356,7 @@ namespace ApiEjemplo.Controllers
             return Ok(plate);
         }
 
+       
 
         [Route("api/branch/plate/{id}")]
         public IHttpActionResult DeletePlate(int id)
@@ -428,6 +429,49 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
 
         }
+
+        // POST api/<controller>
+        [Route("api/branch/CuisineBranch")]
+        [ResponseType(typeof(CuisineBranch))]
+        public IHttpActionResult PostcusineBranch(CuisineBranch p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            CuisineBranchData.insert(p);
+
+            return Ok(p);
+        }
+
+
+        // POST api/<controller>
+        [Route("api/branch/Cuisine")]
+        [ResponseType(typeof(Cuisine))]
+        public IHttpActionResult Postcusine(Cuisine p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            CuisineData.insert(p);
+
+            return Ok(p);
+           }
+
+        public IHttpActionResult putcuisine(int id, CuisineBranch plate)
+        {
+            if (id != plate.idCousine)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (CuisineBranchData.getById(plate.idCousine) == null)
+            {
+                return NotFound();
+            }
+            CuisineBranchData.update(plate);
+            return Ok(plate);
+        }
         // GET api/<controller>
         [Route("api/branch/TypeSocialNetwork/{limit}/{offset}")]
         public IList<TypeSocialNetwork> GetTypeSocialNetwork()
@@ -443,6 +487,5 @@ namespace ApiEjemplo.Controllers
              return SocialNetworkRestaurantData.getAll();
          }
 
-
-}
+ }
 }
