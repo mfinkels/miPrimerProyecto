@@ -437,7 +437,7 @@ namespace ApiEjemplo.Controllers
 
         // GET api/<controller>
         [Route("api/branch/SocialNetwork")]
-        public IList<SocialNetworkRestaurant> SocialNetwork()
+        public IList<SocialNetworkRestaurant> GetSocialNetwork()
         {
             return SocialNetworkRestaurantData.getAll();
         }
