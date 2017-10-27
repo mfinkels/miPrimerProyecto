@@ -389,6 +389,29 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
 
+        [Route("api/branch/Cusine/{id}")]
+        public IHttpActionResult DeleteCuisine(int id)
+        {
+            if (CuisineBranchData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            CuisineData.delete(id);
+            return Ok(id);
+        }
+
+        [Route("api/branch/CusineBranch/{id}")]
+        public IHttpActionResult DeleteCusineBranch(int id)
+        {
+            if (CuisineBranchData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            CuisineBranchData.delete(id);
+            return Ok(id);
+        }
+
+
         [Route("api/branch/TypeSocial/{id}")]
         public IHttpActionResult deletetypeSocial(int id)
         {
