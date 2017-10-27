@@ -48,6 +48,58 @@ namespace ApiEjemplo.Controllers
 
             return Ok(p);
         }
+        [Route("api/branch/SocialNetworkRestaurant/{limit}/{offset}")]
+        public IList<SocialNetworkRestaurant> GetlistSocial()
+        {
+            return SocialNetworkRestaurantData.getAll();
+        }
+
+
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult GetSocial(int id)
+        {
+            SocialNetworkRestaurant branch = SocialNetworkRestaurantData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
+        [Route("api/branch/DeleteSocialNetwork/{id}")]
+        public IHttpActionResult DeleteSocialNetwork(int id)
+        {
+            if (SocialNetworkRestaurantData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            SocialNetworkRestaurantData.delete(id);
+            return Ok();
+        }
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
+        {
+            if (social == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            SocialNetworkRestaurantData.insert(social);
+            return Ok(social);
+        }
+        // POST api/<controller>
+        [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        public IHttpActionResult PostsocialNetwork(SocialNetworkRestaurant p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            SocialNetworkRestaurantData.update(p);
+            return Ok(p);
+        }
+
+
 
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
