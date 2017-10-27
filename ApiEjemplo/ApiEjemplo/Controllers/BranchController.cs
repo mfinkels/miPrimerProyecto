@@ -157,14 +157,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-
-
-       
-        // POST api/<controller>
-
-        
-
-      
+  
 
         // POST api/<controller>
 
@@ -436,39 +429,18 @@ namespace ApiEjemplo.Controllers
 
         }
         // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork/{limit}/{offset}")]
-        public IList<TypeSocialNetwork> GetTypeSocialNetwork(int limit, int offset)
+        [Route("api/branch/TypeSocialNetwork")]
+        public IList<TypeSocialNetwork> GetTypeSocialNetwork()
         {
             return TypeSocialNetworkData.getAll();
         }
 
         // GET api/<controller>
-        [Route("api/branch/SocialNetwork/{limit}/{offset}")]
-        public IList<SocialNetworkRestaurant> SocialNetwork(int limit, int offset)
+        [Route("api/branch/SocialNetwork")]
+        public IList<SocialNetworkRestaurant> SocialNetwork()
         {
             return SocialNetworkRestaurantData.getAll();
         }
-
-
-
-
-
-
-        [Route("api/branch/TypeSocialNetwork/{id}")]
-        public IHttpActionResult TypeSocialNetwork(int id, TypeSocialNetwork categoryplate)
-        {
-            if (id != TypeSocialNetwork.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id del user es incorrecto.");
-            }
-            if (TypeSocialNetworkData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            TypeSocialNetworkData.update(categoryplate);
-            return Ok(categoryplate);
-        } 
-        
 
     }
 }

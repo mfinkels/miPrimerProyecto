@@ -230,3 +230,6 @@ C:\Users\Matias\Documents\GitHub\miPrimerProyecto\ApiEjemplo\ApiEjemplo\bin\Newt
 C:\Users\Matias\Documents\GitHub\miPrimerProyecto\ApiEjemplo\ApiEjemplo\bin\System.Net.Http.Formatting.xml
 C:\Users\Matias\Documents\GitHub\miPrimerProyecto\ApiEjemplo\ApiEjemplo\bin\System.Web.Http.xml
 C:\Users\Matias\Documents\GitHub\miPrimerProyecto\ApiEjemplo\ApiEjemplo\bin\System.Web.Http.WebHost.xml
+C:\Users\42200717\Documents\miPrimerProyecto\ApiEjemplo\ApiEjemplo\obj\Debug\ApiEjemplo.csprojResolveAssemblyReference.cache
+C:\Users\42200717\Documents\miPrimerProyecto\ApiEjemplo\ApiEjemplo\obj\Debug\ApiEjemplo.dll
+C:\Users\42200717\Documents\miPrimerProyecto\ApiEjemplo\ApiEjemplo\obj\Debug\ApiEjemplo.pdb
