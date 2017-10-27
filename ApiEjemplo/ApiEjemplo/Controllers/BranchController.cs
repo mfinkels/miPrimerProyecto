@@ -159,28 +159,10 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/DeleteSocialNetwork/{id}")]
-        public IHttpActionResult DeleteSocialNetwork(int id)
-        {
-            if (SocialNetworkRestaurantData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            SocialNetworkRestaurantData.delete(id);
-            return Ok();
-        }
+       
         // POST api/<controller>
 
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
-        {
-            if (social == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            SocialNetworkRestaurantData.insert(social);
-            return Ok(social);
-        }
+        
 
       
 
