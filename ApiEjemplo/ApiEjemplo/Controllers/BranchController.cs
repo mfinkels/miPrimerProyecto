@@ -510,5 +510,19 @@ namespace ApiEjemplo.Controllers
              return SocialNetworkRestaurantData.getAll();
          }
 
+
+        [Route("api/branch/Cuisine/{limit}/{offset}")]
+        public IList<Cuisine> Cuisine(int limit, int offset)
+        {
+            return CuisineData.getAll();
+        }
+
+
+        [Route("api/branch/CusisineBranch/{limit}/{offset}")]
+        public IList<CuisineBranch> CuisineBranch(int limit, int offset)
+        {
+            return CuisineBranchData.getAll();
+        }
+
  }
 }
