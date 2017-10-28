@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{CA1F4DD8-2F69-47B1-AADF-E17A0E5CE353}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ApiEjemplo/Web.config">
+    <Files>
+      <File FileName="ApiEjemplo/Web.config" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ApiEjemplo PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
