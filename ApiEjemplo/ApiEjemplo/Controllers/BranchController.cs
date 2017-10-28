@@ -504,22 +504,22 @@ namespace ApiEjemplo.Controllers
 
       
 
-        [Route("api/branch/SocialNetwork/{limit}/{offset}")]
-         public IList<SocialNetworkRestaurant> GetSocial(int limit, int offset)
+        [Route("api/branch/SocialNetwork")]
+         public IList<SocialNetworkRestaurant> GetSocial()
          {
              return SocialNetworkRestaurantData.getAll();
          }
 
 
         [Route("api/branch/Cuisine/{limit}/{offset}")]
-        public IList<Cuisine> Cuisine(int limit, int offset)
+        public IList<Cuisine> GetCuisine(int limit, int offset)
         {
             return CuisineData.getAll();
         }
 
 
         [Route("api/branch/CusisineBranch/{limit}/{offset}")]
-        public IList<CuisineBranch> CuisineBranch(int limit, int offset)
+        public IList<CuisineBranch> GetCuisineBranch(int limit, int offset)
         {
             return CuisineBranchData.getAll();
         }
