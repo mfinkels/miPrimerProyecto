@@ -34,6 +34,17 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        [ResponseType(typeof(TypeSocialNetwork))]
+        public IHttpActionResult GetTypeSocialNetwork(int id)
+        {
+            TypeSocialNetwork branch = TypeSocialNetworkData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
         // 	TypeMenuData
         // POST api/<controller>
         [Route("api/branch/TypeMenu")]
@@ -422,21 +433,7 @@ namespace ApiEjemplo.Controllers
             TypeSocialNetworkData.Delete(id);
             return Ok(id);
         }
-        [Route("api/branch/TypeSocialNetwork/{id}")]
-        [HttpPut]
-        public IHttpActionResult PutTypeSocialNetwork(int id, TypeSocialNetwork plate)
-        {
-            if (id != plate.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id del plate es incorrecto.");
-            }
-            if (TypeSocialNetworkData.getById(plate.idTypeSocialNetwork) == null)
-            {
-                return NotFound();
-            }
-            TypeSocialNetworkData.update(plate);
-            return Ok(plate);
-        }
+    
 
         // POST api/<controller>
         [Route("api/branch/TypeSocialNetwork")]
