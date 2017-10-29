@@ -35,11 +35,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-        [Route("api/branch/Service")]
-        public IList<ServiceBranch> Get()
-        {
-            return ServiceBranchData.getAll();
-        }
+       
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
