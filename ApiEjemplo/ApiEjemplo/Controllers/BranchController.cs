@@ -481,7 +481,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [Route(" ")]
+        [Route("api/branch/CuisineBranch/{id} ")]
         [ResponseType(typeof(CuisineBranch))]
         public IHttpActionResult GetCuisineBranch(int id)
         {
@@ -583,8 +583,8 @@ namespace ApiEjemplo.Controllers
          }
 
 
-        [Route("api/branch/Cuisine/{limit}/{offset}")]
-        public IList<Cuisine> GetCuisine(int limit, int offset)
+        [Route("api/branch/Cuisine")]
+        public IList<Cuisine> GetCuisine()
         {
             return CuisineData.getAll();
         }
