@@ -481,7 +481,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [Route("api/branch/CuisineBranch/{id} ")]
+        [Route("api/branch/CuisineBranch/{id}")]
         [ResponseType(typeof(CuisineBranch))]
         public IHttpActionResult GetCuisineBranch(int id)
         {
