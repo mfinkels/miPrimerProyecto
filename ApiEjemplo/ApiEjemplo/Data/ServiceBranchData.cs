@@ -37,6 +37,11 @@ namespace ApiEjemplo.Data
             return null;
         }
 
+        internal static IList<ServiceBranch> getAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public static List<Service> getServicesByRestaurants(int id)
         {
             string select = "select * from service_branch Where idBranchRestaurant=" + id.ToString();
