@@ -440,6 +440,8 @@ namespace ApiEjemplo.Controllers
             TypeSocialNetworkData.Delete(id);
             return Ok(id);
         }
+
+
     
 
         // POST api/<controller>
@@ -499,9 +501,17 @@ namespace ApiEjemplo.Controllers
             CuisineBranchData.update(plate);
             return Ok(plate);
         }
-        // GET api/<controller>
+      /*  // GET api/<controller>
         [Route("api/branch/TypeSocialNetwork")]
         public IList<TypeSocialNetwork> GetTypeSocialNetwork()
+        {
+            return TypeSocialNetworkData.getAll();
+        }
+        */
+
+        // GET api/<controller>
+        [Route("api/branch/TypeSocialNetwork/{limit}/{offset}")]
+        public IList<TypeSocialNetwork> TypeSocialNetwork(int limit, int offset)
         {
             return TypeSocialNetworkData.getAll();
         }
