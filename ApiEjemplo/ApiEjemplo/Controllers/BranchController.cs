@@ -34,6 +34,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        [Route("api/branch/TypeSocialNetwork/{id}")]
         [ResponseType(typeof(TypeSocialNetwork))]
         public IHttpActionResult GetTypeSocialNetwork(int id)
         {
@@ -474,6 +475,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
+
         // POST api/<controller>
         [Route("api/branch/Cuisine")]
         [ResponseType(typeof(Cuisine))]
@@ -532,8 +534,8 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/CusisineBranch/{limit}/{offset}")]
-        public IList<CuisineBranch> GetCuisineBranch(int limit, int offset)
+        [Route("api/branch/CusisineBranch/")]
+        public IList<CuisineBranch> GetCuisineBranch()
         {
             return CuisineBranchData.getAll();
         }
