@@ -1,10 +1,7 @@
 ﻿<Properties StartupConfiguration="{CA1F4DD8-2F69-47B1-AADF-E17A0E5CE353}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ApiEjemplo/BranchInfo/Cuisine.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ApiEjemplo/Controllers/BranchController.cs">
     <Files>
-      <File FileName="ApiEjemplo/Controllers/BranchController.cs" Line="467" Column="35" />
-      <File FileName="ApiEjemplo/BranchInfo/ServiceBranch.cs" Line="8" Column="18" />
-      <File FileName="ApiEjemplo/Data/CuisineData.cs" Line="1" Column="1" />
-      <File FileName="ApiEjemplo/BranchInfo/Cuisine.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/BranchController.cs" Line="586" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
