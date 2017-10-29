@@ -510,8 +510,8 @@ namespace ApiEjemplo.Controllers
         */
 
         // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork/{limit}/{offset}")]
-        public IList<TypeSocialNetwork> TypeSocialNetwork(int limit, int offset)
+        [Route("api/branch/TypeSocialNetwork/")]
+        public IList<TypeSocialNetwork> TypeSocialNetwork()
         {
             return TypeSocialNetworkData.getAll();
         }
