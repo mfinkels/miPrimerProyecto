@@ -467,6 +467,7 @@ namespace ApiEjemplo.Controllers
             CuisineBranchData.delete(id);
             return Ok(id);
         }
+
         [Route("api/branch/Cuisine")]
         public IList<Cuisine> Getlist()
         {
