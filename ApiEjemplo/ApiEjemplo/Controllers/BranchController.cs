@@ -36,7 +36,7 @@ namespace ApiEjemplo.Controllers
         }
 
         [Route("api/branch/Service")]
-        public IList<ServiceBranch> Gets()
+        public IList<ServiceBranch> Get()
         {
             return ServiceBranchData.getAll();
         }
