@@ -119,6 +119,13 @@ namespace ApiEjemplo.Controllers
             return CategoryPlateData.getAll();
         }
 
+        // GET api/<controller>/CategoryPlate
+        [Route("api/branch/TypeSocialNetwork")]
+        public IList<TypeSocialNetwork> getallTypeSocialNetwork()
+        {
+            return TypeSocialNetworkData.getAll();
+        }
+
 
         [ResponseType(typeof(CategoryPlate))]
         [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
