@@ -431,6 +431,29 @@ namespace ApiEjemplo.Controllers
         }
 
 
+        [Route("api/branch/CuisineById/{id}")]
+        [ResponseType(typeof(Cuisine))]
+        public IHttpActionResult GetCuisine(int id)
+        {
+            Cuisine branch = CuisineData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+        [Route("api/branch/CuisineById/{id}")]
+        [ResponseType(typeof(CuisineBranch))]
+        public IHttpActionResult GetCuisineBranch(int id)
+        {
+            CuisineBranch branch = CuisineBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
         [Route("api/branch/TypeSocial/{id}")]
         public IHttpActionResult deletetypeSocial(int id)
         {
