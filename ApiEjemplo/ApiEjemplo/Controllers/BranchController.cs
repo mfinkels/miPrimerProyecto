@@ -34,6 +34,12 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
+        [Route("api/branch/Service")]
+        public IList<ServiceBranch> Gets()
+        {
+            return ServiceBranchData.getAll();
+        }
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
@@ -461,7 +467,11 @@ namespace ApiEjemplo.Controllers
             CuisineBranchData.delete(id);
             return Ok(id);
         }
-
+        [Route("api/branch/Cuisine")]
+        public IList<Cuisine> Getlist()
+        {
+            return CuisineData.getAll();
+        }
 
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
@@ -583,7 +593,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/CusisineBranch/")]
+        [Route("api/branch/CusisineBranch")]
         public IList<CuisineBranch> GetCuisineBranch()
         {
             return CuisineBranchData.getAll();
