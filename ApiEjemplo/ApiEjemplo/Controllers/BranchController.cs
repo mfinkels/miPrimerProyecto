@@ -23,6 +23,7 @@ namespace ApiEjemplo.Controllers
             return BranchRestaurantData.getAll(limit, offset);
         }
         // GET api/<controller>/5
+
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
         {
@@ -33,6 +34,35 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+        [Route("api/branch/Service/{id}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult Getservice(int id)
+        {
+            Service branch = ServiceData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+        [Route("api/branch/ServiceBranch/{id}")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult GetserviceBranch(int id)
+        {
+            ServiceBranch branch = ServiceBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+        [Route("api/branch/Service")]
+        public IList<Service> Get()
+        {
+            return ServiceData.getAll();
+        }
+
+
 
         [Route("api/branch/TypeSocialNetwork/{id}")]
         [ResponseType(typeof(TypeSocialNetwork))]
@@ -246,6 +276,8 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
 
+       
+
 
         // POST api/<controller>
         [Route("api/branch/CategoryPlate")]
@@ -442,7 +474,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [Route("api/branch/CuisineBranch/{id}")]
+        [Route(" ")]
         [ResponseType(typeof(CuisineBranch))]
         public IHttpActionResult GetCuisineBranch(int id)
         {
@@ -526,13 +558,7 @@ namespace ApiEjemplo.Controllers
             CuisineBranchData.update(plate);
             return Ok(plate);
         }
-      /*  // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork")]
-        public IList<TypeSocialNetwork> GetTypeSocialNetwork()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
-        */
+ 
 
         // GET api/<controller>
         [Route("api/branch/TypeSocialNetwork/")]
