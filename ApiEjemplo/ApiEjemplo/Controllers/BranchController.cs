@@ -142,7 +142,18 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.update(p);
             return Ok(p);
         }
-
+        // POST api/<controller>
+        [Route("api/branch/Service/{p}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult PostService(Service p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceData.update(p);
+            return Ok(p);
+        }
   
 
         // GET api/<controller>/CategoryPlate
@@ -501,6 +512,18 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             TypeSocialNetworkData.Delete(id);
+            return Ok(id);
+        }
+
+
+        [Route("api/branch/Service/{id}")]
+        public IHttpActionResult deleteService(int id)
+        {
+            if (ServiceData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            ServiceData.Delete(id);
             return Ok(id);
         }
 
