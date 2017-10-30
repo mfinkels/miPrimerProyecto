@@ -151,7 +151,7 @@ namespace ApiEjemplo.Controllers
             {
                 return BadRequest("Datos incorrectos.");
             }
-            ServiceData.update(p);
+            ServiceDatae.update(p);
             return Ok(p);
         }
   
@@ -590,13 +590,7 @@ namespace ApiEjemplo.Controllers
         }
  
 
-        // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork/")]
-        public IList<TypeSocialNetwork> TypeSocialNetwork()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
-
+       
       
 
         [Route("api/branch/SocialNetwork")]
