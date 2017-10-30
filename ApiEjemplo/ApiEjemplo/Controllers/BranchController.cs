@@ -151,7 +151,7 @@ namespace ApiEjemplo.Controllers
             {
                 return BadRequest("Datos incorrectos.");
             }
-            ServiceDatae.update(p);
+            ServiceData.update(p);
             return Ok(p);
         }
   
@@ -475,7 +475,19 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
 
-        [Route("api/branch/Cuisine")]
+       
+        [Route("api/branch/CuisineBranch/{id}")]
+        [ResponseType(typeof(CuisineBranch))]
+        public IHttpActionResult GetCuisineBranch(int id)
+        {
+            CuisineBranch branch = CuisineBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+        [Route("api/branch/GetallCuisine")]
         public IList<Cuisine> Getlist()
         {
             return CuisineData.getAll();
@@ -486,17 +498,6 @@ namespace ApiEjemplo.Controllers
         public IHttpActionResult GetCuisine(int id)
         {
             Cuisine branch = CuisineData.getById(id);
-            if (branch == null)
-            {
-                return NotFound();
-            }
-            return Ok(branch);
-        }
-        [Route("api/branch/CuisineBranch/{id}")]
-        [ResponseType(typeof(CuisineBranch))]
-        public IHttpActionResult GetCuisineBranch(int id)
-        {
-            CuisineBranch branch = CuisineBranchData.getById(id);
             if (branch == null)
             {
                 return NotFound();
@@ -600,12 +601,7 @@ namespace ApiEjemplo.Controllers
          }
 
 
-        [Route("api/branch/Cuisine")]
-        public IList<Cuisine> GetCuisine()
-        {
-            return CuisineData.getAll();
-        }
-
+     
 
         [Route("api/branch/CusisineBranch")]
         public IList<CuisineBranch> GetCuisineBranch()
