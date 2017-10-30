@@ -44,7 +44,7 @@ namespace ApiEjemplo.Data
 
         public static List<Cuisine> getAll()
         {
-            string select = "select * from city";
+            string select = "select * from cuisine";
             DataTable dt = DBHelper.EjecutarSelect(select);
             List<Cuisine> list = new List<Cuisine>();
             Cuisine cuisine;
