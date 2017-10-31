@@ -22,14 +22,6 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
-        // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork}")]
-        public IList<TypeSocialNetwork> getTypeSocialNetwork()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
-
-
         // GET api/<controller>/5
 
         [ResponseType(typeof(BranchRestaurant))]
@@ -44,7 +36,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/Cuisine/{id}")]
+        [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
         {
@@ -60,7 +52,7 @@ namespace ApiEjemplo.Controllers
         [ResponseType(typeof(Service))]
         public IHttpActionResult GetCuisine(int id)
         {
-            Cuisine branch = CuisineData .getById(id);
+            Cuisine branch = CuisineData.getById(id);
             if (branch == null)
             {
                 return NotFound();
