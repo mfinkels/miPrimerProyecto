@@ -546,6 +546,22 @@ namespace ApiEjemplo.Controllers
 
         }
 
+
+        // POST api/<controller>
+        [Route("api/branch/Service")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult Postservice(Service p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceData.insert(p);
+
+            return Ok(p);
+
+        }
+
         // POST api/<controller>
         [Route("api/branch/CuisineBranch")]
         [ResponseType(typeof(CuisineBranch))]
