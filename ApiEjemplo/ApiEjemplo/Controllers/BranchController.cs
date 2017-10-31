@@ -619,7 +619,7 @@ namespace ApiEjemplo.Controllers
 
      
 
-        [Route("api/branch/CusisineBranch")]
+        [Route("api/branch/CusineBranch")]
         public IList<CuisineBranch> GetCuisineBranch()
         {
             return CuisineBranchData.getAll();
