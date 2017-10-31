@@ -166,7 +166,8 @@ namespace ApiEjemplo.Controllers
             TypeSocialNetworkData.update(p);
             return Ok(p);
         }
-  
+        
+    
 
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
@@ -175,9 +176,9 @@ namespace ApiEjemplo.Controllers
             return CategoryPlateData.getAll();
         }
 
-        // GET api/<controller>/CategoryPlate
+       
         [Route("api/branch/TypeSocialNetwork")]
-        public IList<TypeSocialNetwork> getallTypeSocialNetwork()
+        public IList<TypeSocialNetwork> TypeSocialNetwork()
         {
             return TypeSocialNetworkData.getAll();
         }
