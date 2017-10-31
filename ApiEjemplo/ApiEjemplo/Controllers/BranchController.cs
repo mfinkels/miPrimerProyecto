@@ -50,7 +50,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
-        public IHttpActionResult GetCuisine(int id)
+        public IHttpActionResult Cuisine(int id)
         {
             Cuisine branch = CuisineData.getById(id);
             if (branch == null)
