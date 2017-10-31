@@ -154,6 +154,18 @@ namespace ApiEjemplo.Controllers
             ServiceData.update(p);
             return Ok(p);
         }
+        
+        [Route("api/branch/TypeSocialNetwork/{p}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult PostService(TypeSocialNetwork p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            TypeSocialNetworkData.update(p);
+            return Ok(p);
+        }
   
 
         // GET api/<controller>/CategoryPlate
