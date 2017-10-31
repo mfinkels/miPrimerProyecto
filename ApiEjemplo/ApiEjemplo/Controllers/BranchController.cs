@@ -36,7 +36,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/Service/{id}")]
+        [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
         {
