@@ -30,7 +30,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        // ruebGET api/<controller>/5
+        // GET api/<controller>/5
 
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
