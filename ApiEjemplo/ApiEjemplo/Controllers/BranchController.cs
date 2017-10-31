@@ -35,6 +35,11 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
+        [Route("api/branch/{limit}/{offset}")]
+        public IList<TypeSocialNetwork> Get()
+        {
+            return TypeSocialNetworkData.getAll();
+        }
 
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
