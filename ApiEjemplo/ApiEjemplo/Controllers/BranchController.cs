@@ -22,8 +22,14 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
+        // GET api/<controller>
+        [Route("api/branch/TypeSocialNetwork}")]
+        public IList<TypeSocialNetwork> TypeSocialNetwork()
+        {
+            return TypeSocialNetworkData.getAll();
+        }
 
-       
+
         // GET api/<controller>/5
 
         [ResponseType(typeof(BranchRestaurant))]
