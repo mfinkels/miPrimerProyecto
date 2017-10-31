@@ -35,7 +35,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-       
+
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
@@ -47,6 +47,19 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
+        [Route("api/branch/Cuisine/{id}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult GetCuisine(int id)
+        {
+            Cuisine branch = CuisineData .getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
         [Route("api/branch/ServiceBranch/{id}")]
         [ResponseType(typeof(ServiceBranch))]
         public IHttpActionResult GetserviceBranch(int id)
@@ -63,12 +76,6 @@ namespace ApiEjemplo.Controllers
         {
             return ServiceData.getAll();
         }
-        
-            [Route("api/branch/TypeSocialNetwork")]
-        public IList<Service> GetTypeSocialNetwork()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
 
 
 
@@ -84,7 +91,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-        // 	TypeMenuData
+        //  TypeMenuData
         // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
@@ -160,20 +167,7 @@ namespace ApiEjemplo.Controllers
             ServiceData.update(p);
             return Ok(p);
         }
-        
-        [Route("api/branch/TypeSocialNetwork/{p}")]
-        [ResponseType(typeof(Service))]
-        public IHttpActionResult PostService(TypeSocialNetwork p)
-        {
-            if (p == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            TypeSocialNetworkData.update(p);
-            return Ok(p);
-        }
-        
-    
+
 
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
@@ -182,9 +176,9 @@ namespace ApiEjemplo.Controllers
             return CategoryPlateData.getAll();
         }
 
-       
+        // GET api/<controller>/CategoryPlate
         [Route("api/branch/TypeSocialNetwork")]
-        public IList<TypeSocialNetwork> TypeSocialNetwork()
+        public IList<TypeSocialNetwork> getallTypeSocialNetwork()
         {
             return TypeSocialNetworkData.getAll();
         }
@@ -238,7 +232,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-  
+
 
         // POST api/<controller>
 
@@ -308,7 +302,7 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
 
-       
+
 
 
         // POST api/<controller>
@@ -439,7 +433,7 @@ namespace ApiEjemplo.Controllers
             return Ok(plate);
         }
 
-       
+
 
         [Route("api/branch/plate/{id}")]
         public IHttpActionResult DeletePlate(int id)
@@ -494,7 +488,7 @@ namespace ApiEjemplo.Controllers
             return Ok(id);
         }
 
-       
+
         [Route("api/branch/CuisineBranch/{id}")]
         [ResponseType(typeof(CuisineBranch))]
         public IHttpActionResult GetCuisineBranch(int id)
@@ -548,7 +542,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-    
+
 
         // POST api/<controller>
         [Route("api/branch/TypeSocialNetwork")]
@@ -609,7 +603,7 @@ namespace ApiEjemplo.Controllers
             CuisineData.insert(p);
 
             return Ok(p);
-           }
+        }
 
         public IHttpActionResult putcuisine(int id, CuisineBranch plate)
         {
@@ -624,25 +618,25 @@ namespace ApiEjemplo.Controllers
             CuisineBranchData.update(plate);
             return Ok(plate);
         }
- 
 
-       
-      
+
+
+
 
         [Route("api/branch/SocialNetwork")]
-         public IList<SocialNetworkRestaurant> GetSocial()
-         {
-             return SocialNetworkRestaurantData.getAll();
-         }
+        public IList<SocialNetworkRestaurant> GetSocial()
+        {
+            return SocialNetworkRestaurantData.getAll();
+        }
 
 
-     
 
-        [Route("api/branch/CusineBranch")]
+
+        [Route("api/branch/CusisineBranch")]
         public IList<CuisineBranch> GetCuisineBranch()
         {
             return CuisineBranchData.getAll();
         }
 
- }
+    }
 }
