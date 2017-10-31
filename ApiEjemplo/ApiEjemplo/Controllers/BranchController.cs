@@ -24,7 +24,7 @@ namespace ApiEjemplo.Controllers
         }
         // GET api/<controller>
         [Route("api/branch/TypeSocialNetwork}")]
-        public IList<TypeSocialNetwork> TypeSocialNetwork()
+        public IList<TypeSocialNetwork> getTypeSocialNetwork()
         {
             return TypeSocialNetworkData.getAll();
         }
