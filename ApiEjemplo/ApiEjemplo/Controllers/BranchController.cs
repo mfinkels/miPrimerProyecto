@@ -82,12 +82,6 @@ namespace ApiEjemplo.Controllers
             return ServiceData.getAll();
         }
 
-        [Route("api/branch/TypeSocialNetwork")]
-        public IList<TypeSocialNetwork> GetTypeSocialNetWork()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
-
 
         [Route("api/branch/TypeSocialNetwork/{id}")]
         [ResponseType(typeof(TypeSocialNetwork))]
@@ -567,6 +561,35 @@ namespace ApiEjemplo.Controllers
 
             return Ok(p);
 
+        }
+
+        public IHttpActionResult putcuisine(int id, Cuisine plate)
+        {
+            if (id != plate.idCousine)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (CuisineData.getById(plate.idCousine) == null)
+            {
+                return NotFound();
+            }
+            CuisineData.update(plate);
+            return Ok(plate);
+        }
+
+
+        public IHttpActionResult putTypeSocialNetwork(int id, TypeSocialNetwork plate)
+        {
+            if (id != plate.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (TypeSocialNetworkData.getById(plate.idTypeSocialNetwork) == null)
+            {
+                return NotFound();
+            }
+            TypeSocialNetworkData.update(plate);
+            return Ok(plate);
         }
 
 
