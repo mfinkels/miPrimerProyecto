@@ -77,7 +77,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
         [Route("api/branch/Service")]
-        public IList<Service> Get()
+        public IList<Service> Getservice()
         {
             return ServiceData.getAll();
         }
