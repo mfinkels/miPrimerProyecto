@@ -111,7 +111,7 @@ namespace ApiEjemplo.Controllers
             return SocialNetworkRestaurantData.getAll();
         }
         */
-
+        [Route("api/branch/SocialNetworkRestaurant/{id}")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult GetSocial(int id)
         {
