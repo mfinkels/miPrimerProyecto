@@ -504,7 +504,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [Route("api/branch/GetallCuisine")]
+        [Route("api/branch/Cuisine")]
         public IList<Cuisine> Getlist()
         {
             return CuisineData.getAll();
@@ -666,7 +666,7 @@ namespace ApiEjemplo.Controllers
 
 
         [Route("api/branch/CusisineBranch")]
-        public IList<CuisineBranch> GetCuisineBranch()
+        public IList<CuisineBranch> CuisineBranch()
         {
             return CuisineBranchData.getAll();
         }
