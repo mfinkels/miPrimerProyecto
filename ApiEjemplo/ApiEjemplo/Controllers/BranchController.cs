@@ -82,6 +82,11 @@ namespace ApiEjemplo.Controllers
             return ServiceData.getAll();
         }
 
+        [Route("api/branch/TypeSocialNetwork")]
+        public IList<TypeSocialNetwork> GetTypeSocialNetWork()
+        {
+            return TypeSocialNetworkData.getAll();
+        }
 
 
         [Route("api/branch/TypeSocialNetwork/{id}")]
