@@ -562,7 +562,7 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
 
         }
-
+        [Route("api/branch/Cuisine")]
         public IHttpActionResult putcuisine(int id, Cuisine plate)
         {
             if (id != plate.idCousine)//Nos tiene que llegar el objeto correctamente
@@ -577,7 +577,7 @@ namespace ApiEjemplo.Controllers
             return Ok(plate);
         }
 
-
+        [Route("api/branch/TypeSocialNetwork")]
         public IHttpActionResult putTypeSocialNetwork(int id, TypeSocialNetwork plate)
         {
             if (id != plate.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
