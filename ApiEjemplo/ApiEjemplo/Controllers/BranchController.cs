@@ -35,11 +35,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-        [Route("api/branch/{limit}/{offset}")]
-        public IList<TypeSocialNetwork> Get()
-        {
-            return TypeSocialNetworkData.getAll();
-        }
+      
 
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
@@ -504,11 +500,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [Route("api/branch/Cuisine")]
-        public IList<Cuisine> Getlist()
-        {
-            return CuisineData.getAll();
-        }
+       
 
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
@@ -637,6 +629,8 @@ namespace ApiEjemplo.Controllers
 
             return Ok(p);
         }
+
+     
 
         public IHttpActionResult putcuisine(int id, CuisineBranch plate)
         {
