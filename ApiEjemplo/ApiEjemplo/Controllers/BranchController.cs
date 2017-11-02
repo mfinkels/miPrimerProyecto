@@ -139,6 +139,17 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.delete(id);
             return Ok();
         }
+
+        [Route("api/branch/DeleteCuisne/{id}")]
+        public IHttpActionResult DeleteCuisne(int id)
+        {
+            if (CuisineData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            CuisineData.delete(id);
+            return Ok();
+        }
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
         {
