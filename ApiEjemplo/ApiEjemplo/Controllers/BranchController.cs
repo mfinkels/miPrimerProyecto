@@ -125,18 +125,7 @@ namespace ApiEjemplo.Controllers
         }
         */
 
-        //no anda y no se pruqe si 
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        [Route("api/branch/SocialNetworkRestaurant/{id}")]
-        public IHttpActionResult GetSocialNetworkRestaurant(int id)
-        {
-            SocialNetworkRestaurant category = SocialNetworkRestaurantData.getById(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return Ok(category);
-        }
+
         //anda
         [Route("api/branch/DeleteSocialNetwork/{id}")]
         public IHttpActionResult DeleteSocialNetwork(int id)
@@ -172,9 +161,22 @@ namespace ApiEjemplo.Controllers
             return Ok(social);
         }
 
+        //no anda y no se pruqe si son todos los metodos iguales
+        [ResponseType(typeof(SocialNetworkRestaurant))]
+        [Route("api/branch/SocialNetworkRestaurant/{id}")]
+        public IHttpActionResult GetSocialNetworkRestaurant(int id)
+        {
+            SocialNetworkRestaurant category = SocialNetworkRestaurantData.getById(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
 
 
 
+        //anda
         // POST api/<controller>
         [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
@@ -187,6 +189,7 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.update(p);
             return Ok(p);
         }
+        //anda
         // POST api/<controller>
         [Route("api/branch/Service/{p}")]
         [ResponseType(typeof(Service))]
@@ -200,14 +203,14 @@ namespace ApiEjemplo.Controllers
             return Ok(p);
         }
 
-
+        //anda
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
         {
             return CategoryPlateData.getAll();
         }
-
+        //anda
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/TypeSocialNetwork")]
         public IList<TypeSocialNetwork> getallTypeSocialNetwork()
@@ -215,7 +218,7 @@ namespace ApiEjemplo.Controllers
             return TypeSocialNetworkData.getAll();
         }
 
-
+        //anda
         [ResponseType(typeof(CategoryPlate))]
         [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
@@ -227,7 +230,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(category);
         }
-
+        //anda
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
         {
@@ -240,20 +243,21 @@ namespace ApiEjemplo.Controllers
             return Ok(list);
         }
 
+        //anda
         // GET api/<controller>/5 returns menu from branch
         [Route("api/branch/menu/{idBranch}")]
         public IList<TypeMenu> GetMenu(int idBranch)
         {
             return TypeMenuData.getMenuByBranch(idBranch);
         }
-
+        //anda
         // GET api/<controller>/5 returns plates from menu
         [Route("api/branch/menu/{idTypeMenu}/plates")]
         public IList<PlateMenu> GetPlates(int idTypeMenu)
         {
             return MenuPlateData.getPlateMenuBranch(idTypeMenu);
         }
-
+        //anda
         [Route("api/branch/TypeMenu/{idTypeMenu}")]
         public IHttpActionResult DeleteTypeMenu(int id)
         {
@@ -264,7 +268,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-
+        //anda
         [Route("api/branch/TypeSocial/{id}")]
         public IHttpActionResult DeleteTypeSocial(int id)
         {
@@ -290,7 +294,7 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-
+        //anda
         // POST api/<controller>
         [Route("api/branch/plate")]
         [ResponseType(typeof(PlateMenu))]
@@ -308,7 +312,7 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [Route("api/branch/ServiceBranch")]
+        [Route("api/branch/PostServiceBranch")]
         [ResponseType(typeof(ServiceBranch))]
         public IHttpActionResult Post(ServiceBranch p)
         {
