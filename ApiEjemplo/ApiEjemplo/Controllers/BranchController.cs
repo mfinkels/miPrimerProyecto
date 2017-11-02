@@ -128,7 +128,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        [HttpDelete]
         [Route("api/branch/DeleteSocialNetwork/{id}")]
         public IHttpActionResult DeleteSocialNetwork(int id)
         {
@@ -139,7 +139,7 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.delete(id);
             return Ok();
         }
-
+        [HttpDelete]
         [Route("api/branch/DeleteCuisne/{id}")]
         public IHttpActionResult DeleteCuisne(int id)
         {
