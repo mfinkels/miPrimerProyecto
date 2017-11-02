@@ -128,7 +128,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        [HttpDelete]
+
         [Route("api/branch/DeleteSocialNetwork/{id}")]
         public IHttpActionResult DeleteSocialNetwork(int id)
         {
@@ -139,7 +139,7 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.delete(id);
             return Ok();
         }
-        [HttpDelete]
+
         [Route("api/branch/DeleteCuisne/{id}")]
         public IHttpActionResult DeleteCuisne(int id)
         {
@@ -150,7 +150,6 @@ namespace ApiEjemplo.Controllers
             CuisineData.delete(id);
             return Ok();
         }
-        [Route("api/branch/branch/SocialNetworkRestaurant")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
         {
