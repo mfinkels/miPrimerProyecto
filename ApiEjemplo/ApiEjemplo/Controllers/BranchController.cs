@@ -140,7 +140,7 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
 
-        [Route("api/branch/Cuisne/{id}")]
+        [Route("api/branch/DeleteCuisne/{id}")]
         public IHttpActionResult DeleteCuisne(int id)
         {
             if (CuisineData.getById(id) == null)
