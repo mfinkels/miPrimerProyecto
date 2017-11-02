@@ -72,12 +72,18 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
         [Route("api/branch/Service")]
         public IList<Service> Getservice()
         {
             return ServiceData.getAll();
         }
 
+        [Route("api/branch/Cuisine")]
+        public IList<Cuisine> GetCuisine()
+        {
+            return CuisineData.getAll();
+        }
 
         [Route("api/branch/TypeSocialNetwork/{id}")]
         [ResponseType(typeof(TypeSocialNetwork))]
@@ -230,6 +236,17 @@ namespace ApiEjemplo.Controllers
                 return NotFound();
             }
             TypeMenuData.Delete(id);
+            return Ok();
+        }
+
+        [Route("api/branch/TypeSocial/{id}")]
+        public IHttpActionResult DeleteTypeSocial(int id)
+        {
+            if (TypeSocialNetworkData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeSocialNetworkData.Delete(id);
             return Ok();
         }
 
