@@ -150,6 +150,7 @@ namespace ApiEjemplo.Controllers
             CuisineData.delete(id);
             return Ok();
         }
+        [Route("api/branch/branch/SocialNetworkRestaurant")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
         {
