@@ -36,7 +36,7 @@ namespace ApiEjemplo.Controllers
         }
 
       
-
+        //anda
         [Route("api/branch/Service/{id}")]
         [ResponseType(typeof(Service))]
         public IHttpActionResult Getservice(int id)
@@ -48,7 +48,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        //anda
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
         public IHttpActionResult Cuisine(int id)
@@ -60,7 +60,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        //anda
         [Route("api/branch/ServiceBranch/{id}")]
         [ResponseType(typeof(ServiceBranch))]
         public IHttpActionResult GetserviceBranch(int id)
@@ -72,19 +72,19 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        //anda
         [Route("api/branch/Service")]
         public IList<Service> Getservice()
         {
             return ServiceData.getAll();
         }
-
+        //anda
         [Route("api/branch/Cuisine")]
         public IList<Cuisine> GetCuisine()
         {
             return CuisineData.getAll();
         }
-
+        //seee anda
         [Route("api/branch/TypeSocialNetwork/{id}")]
         [ResponseType(typeof(TypeSocialNetwork))]
         public IHttpActionResult GetTypeSocialNetwork(int id)
@@ -96,7 +96,11 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        [Route("api/branch/TypeMenu")]
+        public IList<TypeMenu> GetTypeMenu()
+        {
+            return TypeMenuData.getAll();
+        }
         //  TypeMenuData
         // POST api/<controller>
         [Route("api/branch/TypeMenu")]
