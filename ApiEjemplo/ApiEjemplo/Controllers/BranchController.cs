@@ -96,12 +96,15 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
+        //anda
         [Route("api/branch/TypeMenu")]
         public IList<TypeMenu> GetTypeMenu()
         {
             return TypeMenuData.getAll();
         }
-        //  TypeMenuData
+
+        // anda
         // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
@@ -121,6 +124,8 @@ namespace ApiEjemplo.Controllers
             return SocialNetworkRestaurantData.getAll();
         }
         */
+
+        //anda
         [Route("api/branch/SocialNetworkRestaurant/{id}")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult GetSocial(int id)
@@ -132,7 +137,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        //anda
         [Route("api/branch/DeleteSocialNetwork/{id}")]
         public IHttpActionResult DeleteSocialNetwork(int id)
         {
@@ -143,7 +148,7 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.delete(id);
             return Ok();
         }
-
+        //anda
         [Route("api/branch/DeleteCuisine/{id}")]
         public IHttpActionResult DeleteCuisne(int id)
         {
@@ -154,6 +159,8 @@ namespace ApiEjemplo.Controllers
             CuisineData.delete(id);
             return Ok();
         }
+
+        //anda
         [ResponseType(typeof(SocialNetworkRestaurant))]
         public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
         {
@@ -164,6 +171,10 @@ namespace ApiEjemplo.Controllers
             SocialNetworkRestaurantData.insert(social);
             return Ok(social);
         }
+
+
+
+
         // POST api/<controller>
         [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
         [ResponseType(typeof(SocialNetworkRestaurant))]
