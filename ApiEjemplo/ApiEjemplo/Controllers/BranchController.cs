@@ -126,16 +126,16 @@ namespace ApiEjemplo.Controllers
         */
 
         //anda
+        [ResponseType(typeof(CategoryPlate))]
         [Route("api/branch/SocialNetworkRestaurant/{id}")]
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        public IHttpActionResult GetSocial(int id)
+        public IHttpActionResult GetSocialNetworkRestaurant(int id)
         {
-            SocialNetworkRestaurant branch = SocialNetworkRestaurantData.getById(id);
-            if (branch == null)
+            SocialNetworkRestaurant category = SocialNetworkRestaurantData.getById(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return Ok(branch);
+            return Ok(category);
         }
         //anda
         [Route("api/branch/DeleteSocialNetwork/{id}")]
