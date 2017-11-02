@@ -125,8 +125,8 @@ namespace ApiEjemplo.Controllers
         }
         */
 
-        //anda
-        [ResponseType(typeof(CategoryPlate))]
+        //no anda y no se pruqe si 
+        [ResponseType(typeof(SocialNetworkRestaurant))]
         [Route("api/branch/SocialNetworkRestaurant/{id}")]
         public IHttpActionResult GetSocialNetworkRestaurant(int id)
         {
