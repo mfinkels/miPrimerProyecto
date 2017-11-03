@@ -29,6 +29,13 @@ namespace ApiEjemplo.Controllers
         {
             return ServiceBranchData.getAll();
         }
+
+        [Route("api/branch/TimetableBranch")]
+        public IList<TimetableBranch> TiemTable()
+        {
+            return TimetableBranchData.getAll();
+        }
+
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
         {
