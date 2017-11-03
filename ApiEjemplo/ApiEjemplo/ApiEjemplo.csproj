@@ -207,7 +207,6 @@
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\CategoryPlateController.cs" />
     <Compile Include="Controllers\ServiceBranch.cs" />
-    <Compile Include="Controllers\plateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
