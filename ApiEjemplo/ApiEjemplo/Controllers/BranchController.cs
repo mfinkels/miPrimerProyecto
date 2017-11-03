@@ -24,12 +24,9 @@ namespace ApiEjemplo.Controllers
         }
         // GET api/<controller>/5
         //[HttpGet]
-        [AcceptVerbs("get" , "post")]
+        [AcceptVerbs("get", "post")]
         [Route("api/branch/ServiceBranch")]
-        public IList<ServiceBranch> ServiceBranch()
-        {
-            return ServiceBranchData.getAll();
-        }
+        public IList<ServiceBranch> ServiceBranch() => ServiceBranchData.getAll();
 
         [Route("api/branch/TimetableBranch")]
         public IList<TimetableBranch> TiemTable()
