@@ -59,6 +59,19 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
+        //anda
+        [Route("api/branch/Service/{id}")]
+        [ResponseType(typeof(TimetableBranch))]
+        public IHttpActionResult GetTimeTable(int id)
+        {
+            TimetableBranch branch = TimetableBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
         //anda
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
