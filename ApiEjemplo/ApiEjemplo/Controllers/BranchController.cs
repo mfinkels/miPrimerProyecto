@@ -34,13 +34,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        //
-        // GET api/<controller>
-        [Route("api/branch/GetallServiceBranch")]
-        public IList<ServiceBranch> GetServiceBranch()
-        {
-            return ServiceBranchData.getAll();
-        }
+
       
         //anda
         [Route("api/branch/Service/{id}")]
