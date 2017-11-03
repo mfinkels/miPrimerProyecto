@@ -1,4 +1,4 @@
-using ApiEjemplo.BranchInfo;
+﻿using ApiEjemplo.BranchInfo;
 using ApiEjemplo.Data;
 using ApiEjemplo.MenuInfo;
 using ApiEjemplo.Models;
@@ -14,7 +14,7 @@ using System.Web.Http.Description;
 
 namespace ApiEjemplo.Controllers
 {
-    public class BranchController : ApiController
+    public class SocialNetworkRestaurantController : ApiController
     {
 
         [Route("api/branch/SocialNetwork")]
