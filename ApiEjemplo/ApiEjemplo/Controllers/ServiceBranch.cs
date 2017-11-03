@@ -7,66 +7,213 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ApiEjemplo.BranchInfo
 
 namespace ApiEjemplo.Controllers
 {
-    public class RestaurantController : ApiController
+    public class ServiceBranchController : ApiController
     {
 
-        // GET api/<controller>
-        public IList<Restaurant> Get()
+        [Route("api/branch/ServiceBranch")]
+        public IList<ServiceBranch> ServiceBranch()
         {
-            return RestaurantData.getAll();
+            return ServiceBranchData.getAll();
         }
-
-        // GET api/<controller>/5
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult Get(int id)
+        [Route("api/branch/Service/{id}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult Getservice(int id)
         {
-            Restaurant resto = RestaurantData.getById(id);
-            if (resto == null)
+            Service branch = ServiceData.getById(id);
+            if (branch == null)
             {
                 return NotFound();
             }
-            return Ok(resto);
+            return Ok(branch);
+        }
+
+        //anda
+        [Route("api/branch/Service/{id}")]
+        [ResponseType(typeof(TimetableBranch))]
+        public IHttpActionResult GetTimeTable(int id)
+        {
+            TimetableBranch branch = TimetableBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
         }
 
 
-        // POST api/<controller>
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult Post(Restaurant resto)
+
+        //anda
+        [Route("api/branch/ServiceBranch/{id}")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult GetserviceBranch(int id)
         {
-            if (resto == null)//validamos nombre
+            ServiceBranch branch = ServiceBranchData.getById(id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+            return Ok(branch);
+        }
+
+        //anda
+        [Route("api/branch/Service")]
+        public IList<Service> Getservice()
+        {
+            return ServiceData.getAll();
+        }
+
+        //seee anda
+
+        [Route("api/branch/TypeMenu")]
+        public IList<TypeMenu> GetTypeMenu()
+        {
+            return TypeMenuData.getAll();
+        }
+
+        // anda
+        // POST api/<controller>
+        [Route("api/branch/TypeMenu")]
+        [ResponseType(typeof(TypeMenu))]
+        public IHttpActionResult PostTypeMenu(TypeMenu p)
+        {
+            if (p == null)//validamos nombre
             {
                 return BadRequest("Datos incorrectos.");
             }
-            RestaurantData.Insert(resto);
-            return Ok(resto);
+            TypeMenuData.insert(p);
+
+            return Ok(p);
         }
 
-        // PUT api/<controller>/5
-        public IHttpActionResult Put(int id, Restaurant resto)
+
+
+
+
+
+
+        //anda
+        // POST api/<controller>
+        [Route("api/branch/Service/{p}")]
+        [ResponseType(typeof(Service))]
+        public IHttpActionResult PostService(Service p)
         {
-            if (id != resto.idRestaurant)//Nos tiene que llegar el objeto correctamente
+            if (p == null)//validamos nombre
             {
-                return BadRequest("El id del user es incorrecto.");
+                return BadRequest("Datos incorrectos.");
             }
-            if (RestaurantData.getById(id) == null)
+            ServiceData.update(p);
+            return Ok(p);
+        }
+
+
+        //anda
+        [Route("api/{id}/{limit}/{offset}")]
+        public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
+        {
+            List<CalificationBranch> list = new List<CalificationBranch>();
+            list = CalificationBranchData.getByBranch(id, limit, offset);
+            if (list == null)
             {
                 return NotFound();
             }
-            RestaurantData.Update(resto);
-            return Ok(resto);
+            return Ok(list);
         }
 
+        //anda
+        // GET api/<controller>/5 returns menu from branch
+        [Route("api/branch/menu/{idBranch}")]
+        public IList<TypeMenu> GetMenu(int idBranch)
+        {
+            return TypeMenuData.getMenuByBranch(idBranch);
+        }
+        //anda
+        // GET api/<controller>/5 returns plates from menu
+        [Route("api/branch/menu/{idTypeMenu}/plates")]
+        public IList<PlateMenu> GetPlates(int idTypeMenu)
+        {
+            return MenuPlateData.getPlateMenuBranch(idTypeMenu);
+        }
+        //anda
+        [Route("api/branch/TypeMenu/{idTypeMenu}")]
+        public IHttpActionResult DeleteTypeMenu(int id)
+        {
+            if (TypeMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            TypeMenuData.Delete(id);
+            return Ok();
+        }
+
+        // POST api/<controller>
+
+        [ResponseType(typeof(BranchRestaurant))]
+        public IHttpActionResult Post(BranchRestaurant branch)
+        {
+            if (branch == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            BranchRestaurantData.insert(branch);
+            return Ok(branch);
+        }
+
+        //anda
+        // POST api/<controller>
+        [Route("api/branch/plate")]
+        [ResponseType(typeof(PlateMenu))]
+        public IHttpActionResult Post(PlateMenu p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            p.idPlateMenu = PlateMenuData.insert(p);
+
+            return Ok(p);
+
+
+        }
+
+        // POST api/<controller>
+        [Route("api/branch/PostServiceBranch")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult Post(ServiceBranch p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceBranchData.insert(p);
+
+            return Ok(p);
+        }
+
+        // POST api/<controller>
+        [Route("api/branch/ServiceBranch")]
+        [ResponseType(typeof(ServiceBranch))]
+        public IHttpActionResult Postservice(ServiceBranch p)
+        {
+            if (p == null)//validamos nombre
+            {
+                return BadRequest("Datos incorrectos.");
+            }
+            ServiceBranchData.update(p);
+            return Ok(p);
+        }
+        [Route("api/branch/ServiceBranch/{id}")]
         // DELETE: api/<controller>/5
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Deletemenu(int id)
         {
-            if (RestaurantData.getById(id) == null)
+            if (ServiceBranchData.getById(id) == null)
             {
                 return NotFound();
             }
-            RestaurantData.Delete(id);
+            ServiceBranchData.Delete(id);
             return Ok();
         }
     }
