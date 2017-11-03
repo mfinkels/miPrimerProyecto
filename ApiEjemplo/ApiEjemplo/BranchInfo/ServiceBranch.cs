@@ -10,7 +10,6 @@ namespace ApiEjemplo.BranchInfo
         public int idServiceBranch { get; set; }
         public int idBranchRestaurant { get; set; }
         public int idService { get; set; }
-        public Service service { get; set; }
         public IList<Service> services { get; set; }
     }
 }

@@ -10,63 +10,50 @@ using System.Web.Http.Description;
 
 namespace ApiEjemplo.Controllers
 {
-    public class PersonaController : ApiController
+    public class plateController : ApiController
     {
 
-        // GET: api/Persona
-        public IList<Persona> Get()
+        // PUT api/<controller>/5
+        [Route("api/branch/plate/{id}")]
+        [HttpPut]
+        public IHttpActionResult PutPlate(int id, PlateMenu plate)
         {
-            return PersonaData.ObtenerTodos();
-        }
-
-        // GET: api/Persona/5
-        [ResponseType(typeof(Persona))]
-        public IHttpActionResult Get(int id)
-        {
-            Persona persona = PersonaData.ObtenerPorId(id);
-            if (persona == null)
+            if (id != plate.idPlateMenu)//Nos tiene que llegar el objeto correctamente
+            {
+                return BadRequest("El id del plate es incorrecto.");
+            }
+            if (PlateMenuData.getById(plate.idPlateMenu) == null)
             {
                 return NotFound();
             }
-            return Ok(persona);
+            PlateMenuData.update(plate);
+            return Ok(plate);
         }
 
-        // POST: api/Persona
-        [ResponseType(typeof(Persona))]
-        public IHttpActionResult Post(Persona persona)
+
+        [Route("api/branch/plate/{id}")]
+        public IHttpActionResult DeletePlate(int id)
         {
-            if (persona==null || string.IsNullOrEmpty(persona.Nombre))//validamos nombre
+            if (PlateMenuData.getById(id) == null)
+            {
+                return NotFound();
+            }
+            PlateMenuData.delete(id);
+            return Ok();
+        }
+        // POST api/<controller>
+        [Route("api/branch/MenuPlate")]
+        [ResponseType(typeof(MenuPlate))]
+        public IHttpActionResult Post(MenuPlate p)
+        {
+            if (p == null)//validamos nombre
             {
                 return BadRequest("Datos incorrectos.");
             }
-            PersonaData.Insert(persona);
-            return Ok();
-        }
+            MenuPlateData.insert(p);
 
-        // PUT: api/Persona/5
-        public IHttpActionResult Put(int id, Persona persona)
-        {
-            if (id != persona.Id)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id de la persona es incorrecto.");
-            }
-            if (PersonaData.ObtenerPorId(id) == null)
-            {
-                return NotFound();
-            }
-            PersonaData.Update(persona);
-            return Ok();
-        }
+            return Ok(p);
 
-        // DELETE: api/Persona/5
-        public IHttpActionResult Delete(int id)
-        {
-            if (PersonaData.ObtenerPorId(id) == null)
-            {
-                return NotFound();
-            }
-            PersonaData.Delete(id);
-            return Ok();
         }
     }
 }
