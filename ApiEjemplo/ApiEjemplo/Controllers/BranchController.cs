@@ -23,7 +23,7 @@ namespace ApiEjemplo.Controllers
             return BranchRestaurantData.getAll(limit, offset);
         }
         // GET api/<controller>/5
-        [HttpGet]
+        //[HttpGet]
         [AcceptVerbs("get" , "post")]
         [Route("api/branch/ServiceBranch")]
         public IList<ServiceBranch> ServiceBranch()
