@@ -59,7 +59,7 @@ namespace ApiEjemplo.Data
         }
         */
 
-        internal static IList<ServiceBranch> getAll()
+       /* internal static IList<ServiceBranch> getAll()
         {
             string select = "SELECT * FROM `service_branch` ";
             DataTable dt = DBHelper.EjecutarSelect(select);
@@ -77,6 +77,7 @@ namespace ApiEjemplo.Data
             }
             return list;
         }
+        */
 
         public static List<Service> getServicesByRestaurants(int id)
         {
