@@ -23,7 +23,7 @@ namespace ApiEjemplo.Controllers
             return BranchRestaurantData.getAll(limit, offset);
         }
         // GET api/<controller>/5
-
+        [HttpGet]
         [Route("api/branch/ServiceBranch")]
         public IList<ServiceBranch> ServiceBranch()
         {
@@ -72,6 +72,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
         //anda
         [Route("api/branch/Cuisine/{id}")]
         [ResponseType(typeof(Cuisine))]
