@@ -136,7 +136,7 @@
     <Compile Include="BranchInfo\FilterBranch.cs" />
     <Compile Include="BranchInfo\PhotoBranch.cs" />
     <Compile Include="Controllers\BranchController.cs" />
-    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\CuisineBranchController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -203,6 +203,11 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInfo\PromotionUser.cs" />
+    <Compile Include="Controllers\SocialNetworkRestaurantController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\CategoryPlateController.cs" />
+    <Compile Include="Controllers\ServiceBranch.cs" />
+    <Compile Include="Controllers\plateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -243,6 +248,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

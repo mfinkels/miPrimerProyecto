@@ -11,5 +11,6 @@ namespace ApiEjemplo.BranchInfo
         public int idBranchRestaurant { get; set; }
         public int idService { get; set; }
         public Service service { get; set; }
+        public IList<Service> services { get; set; }
     }
 }

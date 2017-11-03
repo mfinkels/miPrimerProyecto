@@ -1,17 +1,28 @@
 ﻿<Properties StartupConfiguration="{CA1F4DD8-2F69-47B1-AADF-E17A0E5CE353}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ApiEjemplo/Controllers/BranchController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ApiEjemplo/MenuInfo/CategoryPlate.cs">
     <Files>
-      <File FileName="ApiEjemplo/Controllers/BranchController.cs" Line="70" Column="14" />
-      <File FileName="ApiEjemplo/Data/ServiceBranchData.cs" Line="40" Column="44" />
+      <File FileName="ApiEjemplo/Controllers/BranchController.cs" Line="49" Column="32" />
+      <File FileName="ApiEjemplo/RestaurantInfo/SocialNetworkRestaurant.cs" Line="16" Column="6" />
+      <File FileName="ApiEjemplo/BranchInfo/ServiceBranch.cs" Line="8" Column="23" />
       <File FileName="ApiEjemplo/BranchInfo/BranchRestaurant.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/SocialNetworkRestaurantController.cs" Line="143" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/CuisineController.cs" Line="15" Column="6" />
+      <File FileName="ApiEjemplo/Controllers/UserController.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/PersonaController.cs" Line="31" Column="12" />
+      <File FileName="ApiEjemplo/Controllers/CuisineBranchController.cs" Line="10" Column="29" />
+      <File FileName="ApiEjemplo/Controllers/CategoryPlateController.cs" Line="31" Column="45" />
+      <File FileName="ApiEjemplo/Controllers/ServiceBranch.cs" Line="217" Column="10" />
+      <File FileName="ApiEjemplo/Controllers/RestaurantController.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/ReservationController.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/BranchInfo/Cuisine.cs" Line="1" Column="1" />
+      <File FileName="ApiEjemplo/Controllers/plateController.cs" Line="57" Column="10" />
+      <File FileName="ApiEjemplo/Data/CategoryPlateData.cs" Line="49" Column="54" />
+      <File FileName="ApiEjemplo/MenuInfo/CategoryPlate.cs" Line="8" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/alanfried/Desktop/miPrimerProyecto/ApiEjemplo/ApiEjemplo/Controllers/BranchController.cs" relfile="ApiEjemplo/Controllers/BranchController.cs" line="27" column="1" />
-      <Breakpoint file="/Users/alanfried/Desktop/miPrimerProyecto/ApiEjemplo/ApiEjemplo/Controllers/BranchController.cs" relfile="ApiEjemplo/Controllers/BranchController.cs" line="33" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ApiEjemplo PreferredExecutionTarget="MonoDevelop.Default" />
