@@ -24,6 +24,7 @@ namespace ApiEjemplo.Controllers
         }
         // GET api/<controller>/5
         [HttpGet]
+        [AcceptVerbs("get" , "post")]
         [Route("api/branch/ServiceBranch")]
         public IList<ServiceBranch> ServiceBranch()
         {
