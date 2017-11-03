@@ -710,7 +710,7 @@ namespace ApiEjemplo.Controllers
             return SocialNetworkRestaurantData.getAll();
         }
 
-       //pu
+        [Route("api/branch/ServiceBranch")]         public IList<ServiceBranch> ServiceBranch()         {             return ServiceBranchData.getAll();         }          [Route("api/branch/TimetableBranch")]         public IList<TimetableBranch> TiemTable()         {             return TimetableBranchData.getAll();         }           [Route("api/branch/CusisineBranch")]         public IList<CuisineBranch> CuisineBranch()         {             return CuisineBranchData.getAll();         }  
 
     }
 }
