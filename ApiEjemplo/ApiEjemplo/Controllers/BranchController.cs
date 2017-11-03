@@ -24,15 +24,8 @@ namespace ApiEjemplo.Controllers
         }
         // GET api/<controller>/5
         //[HttpGet]
-        [AcceptVerbs("get", "post")]
-        [Route("api/branch/ServiceBranch")]
-        public IList<ServiceBranch> ServiceBranch() => ServiceBranchData.getAll();
 
-        [Route("api/branch/TimetableBranch")]
-        public IList<TimetableBranch> TiemTable()
-        {
-            return TimetableBranchData.getAll();
-        }
+
 
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
@@ -374,10 +367,7 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
 
-
-
-
-        // POST api/<controller>
+         // POST api/<controller>
         [Route("api/branch/CategoryPlate")]
         [ResponseType(typeof(CategoryPlate))]
         public IHttpActionResult Post(CategoryPlate p)
@@ -720,14 +710,7 @@ namespace ApiEjemplo.Controllers
             return SocialNetworkRestaurantData.getAll();
         }
 
-
-
-
-        [Route("api/branch/CusisineBranch")]
-        public IList<CuisineBranch> CuisineBranch()
-        {
-            return CuisineBranchData.getAll();
-        }
+       //pu
 
     }
 }
