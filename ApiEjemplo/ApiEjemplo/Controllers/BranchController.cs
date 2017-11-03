@@ -34,7 +34,13 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        //
+        // GET api/<controller>
+        [Route("api/branch/ServiceBranch")]
+        public IList<ServiceBranch> GetServiceBranch()
+        {
+            return ServiceBranchData.getAll();
+        }
       
         //anda
         [Route("api/branch/Service/{id}")]
@@ -60,6 +66,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
         //anda
         [Route("api/branch/ServiceBranch/{id}")]
         [ResponseType(typeof(ServiceBranch))]
@@ -72,6 +79,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
+
         //anda
         [Route("api/branch/Service")]
         public IList<Service> Getservice()
@@ -409,7 +417,7 @@ namespace ApiEjemplo.Controllers
             BranchRestaurantData.update(branch);
             return Ok(branch);
         }
-
+        //anda
         [Route("api/branch/category/{id}")]
         public IHttpActionResult PutCategory(int id, CategoryPlate categoryplate)
         {
@@ -424,6 +432,7 @@ namespace ApiEjemplo.Controllers
             CategoryPlateData.update(categoryplate);
             return Ok(categoryplate);
         }
+
         [Route("api/branch/menu/{id}")]
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, TypeMenu menu)
@@ -515,8 +524,8 @@ namespace ApiEjemplo.Controllers
 
        
 
-        [Route("api/branch/CusineBranch/{id}")]
-        public IHttpActionResult DeleteCusineBranch(int id)
+        [Route("api/branch/CuisineBranch/{id}")]
+        public IHttpActionResult DeleteCuisineBranch(int id)
         {
             if (CuisineBranchData.getById(id) == null)
             {
