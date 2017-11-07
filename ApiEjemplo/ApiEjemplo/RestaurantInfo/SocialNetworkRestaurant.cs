@@ -12,6 +12,5 @@ namespace ApiEjemplo.RestaurantInfo
         public int idTypeSocialNetwork { get; set; }
         public string value { get; set; }
         public TypeSocialNetwork type {get; set;}
-
     }
 }

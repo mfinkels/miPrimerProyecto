@@ -3,7 +3,6 @@ using ApiEjemplo.Data;
 using ApiEjemplo.MenuInfo;
 using ApiEjemplo.Models;
 using ApiEjemplo.PromotionInfo;
-using ApiEjemplo.RestaurantInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +32,9 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-
+        
         // 	TypeMenuData
-        // POST api/<controller>
+                 // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult PostTypeMenu(TypeMenu p)
@@ -45,20 +44,20 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             TypeMenuData.insert(p);
-
-            return Ok(p);
-        }
-
+           
+          return Ok(p);
+      }
+        
         // GET api/<controller>/CategoryPlate
         [Route("api/branch/CategoryPlate")]
         public IList<CategoryPlate> GetCategory()
         {
             return CategoryPlateData.getAll();
         }
-
+        
 
         [ResponseType(typeof(CategoryPlate))]
-        [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
+          [Route("api/branch/CategoryPlate/{id}")]//idCategoryPlate
         public IHttpActionResult GetCategory(int id)
         {
             CategoryPlate category = CategoryPlateData.getById(id);
@@ -68,7 +67,7 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(category);
         }
-
+       
         [Route("api/{id}/{limit}/{offset}")]
         public IHttpActionResult GetCalificationBranch(int id, int limit, int offset)
         {
@@ -94,8 +93,8 @@ namespace ApiEjemplo.Controllers
         {
             return MenuPlateData.getPlateMenuBranch(idTypeMenu);
         }
-
-        [Route("api/branch/TypeMenu/{idTypeMenu}")]
+        
+          [Route("api/branch/TypeMenu/{idTypeMenu}")]
         public IHttpActionResult DeleteTypeMenu(int id)
         {
             if (TypeMenuData.getById(id) == null)
@@ -107,42 +106,7 @@ namespace ApiEjemplo.Controllers
         }
 
 
-        [Route("api/branch/DeleteSocialNetwork/{id}")]
-        public IHttpActionResult DeleteSocialNetwork(int id)
-        {
-            if (SocialNetworkRestaurantData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            SocialNetworkRestaurantData.delete(id);
-            return Ok();
-        }
-        // POST api/<controller>
 
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        public IHttpActionResult PostInsertSocial(SocialNetworkRestaurant social)
-        {
-            if (social == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            SocialNetworkRestaurantData.insert(social);
-            return Ok(social);
-        }
-
-        // POST api/<controller>
-        [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-        public IHttpActionResult PostsocialNetwork(SocialNetworkRestaurant p)
-        {
-            if (p == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            SocialNetworkRestaurantData.update(p);
-            return Ok(p);
-        }
-     
 
         // POST api/<controller>
 
@@ -157,7 +121,6 @@ namespace ApiEjemplo.Controllers
             return Ok(branch);
         }
 
-
         // POST api/<controller>
         [Route("api/branch/plate")]
         [ResponseType(typeof(PlateMenu))]
@@ -170,50 +133,11 @@ namespace ApiEjemplo.Controllers
             p.idPlateMenu = PlateMenuData.insert(p);
 
             return Ok(p);
-
-
+          
+      
         }
-
-        // POST api/<controller>
-        [Route("api/branch/ServiceBranch")]
-        [ResponseType(typeof(ServiceBranch))]
-        public IHttpActionResult Post(ServiceBranch p)
-        {
-            if (p == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            ServiceBranchData.insert(p);
-
-            return Ok(p);
-        }
-
-        // POST api/<controller>
-        [Route("api/branch/ServiceBranch")]
-        [ResponseType(typeof(ServiceBranch))]
-        public IHttpActionResult Postservice(ServiceBranch p)
-        {
-            if (p == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            ServiceBranchData.update(p);
-            return Ok(p);
-        }
-        [Route("api/branch/ServiceBranch/{id}")]
-        // DELETE: api/<controller>/5
-        public IHttpActionResult Deletemenu(int id)
-        {
-            if (ServiceBranchData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            ServiceBranchData.Delete(id);
-            return Ok();
-        }
-
-
-        // POST api/<controller>
+        
+         // POST api/<controller>
         [Route("api/branch/CategoryPlate")]
         [ResponseType(typeof(CategoryPlate))]
         public IHttpActionResult Post(CategoryPlate p)
@@ -223,11 +147,11 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             CategoryPlateData.insert(p);
-
-            return Ok(p);
-        }
-
-        // POST api/<controller>
+           
+          return Ok(p);
+      }
+        
+         // POST api/<controller>
         [Route("api/branch/MenuPlate")]
         [ResponseType(typeof(MenuPlate))]
         public IHttpActionResult Post(MenuPlate p)
@@ -237,11 +161,11 @@ namespace ApiEjemplo.Controllers
                 return BadRequest("Datos incorrectos.");
             }
             MenuPlateData.insert(p);
-
-            return Ok(p);
-
+           
+          return Ok(p);
+      
         }
-
+        
         // POST api/<controller>
         [Route("api/branch/menu")]
         [ResponseType(typeof(TypeMenu))]
@@ -254,7 +178,6 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.update(p);
             return Ok(p);
         }
-
 
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, BranchRestaurant branch)
@@ -303,7 +226,7 @@ namespace ApiEjemplo.Controllers
 
         [Route("api/branch/menu/{id}")]
         // DELETE: api/<controller>/5
-        public IHttpActionResult Deletemenues(int id)
+        public IHttpActionResult Deletemenu(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
@@ -312,7 +235,7 @@ namespace ApiEjemplo.Controllers
             TypeMenuData.Delete(id);
             return Ok();
         }
-
+        
         // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
@@ -353,109 +276,15 @@ namespace ApiEjemplo.Controllers
             return Ok();
         }
         [Route("api/branch/TypeMenu/{id}")]
-        public IHttpActionResult DeleteType(int id)
+     public IHttpActionResult DeleteType(int id)
         {
             if (TypeMenuData.getById(id) == null)
             {
-                return NotFound();
+                return NotFound();  
             }
             TypeMenuData.Delete(id);
             return Ok(id);
         }
-        [Route("api/branch/CategoryPlate/{id}")]
-        public IHttpActionResult DeleteCategory(int id)
-        {
-            if (CategoryPlateData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            CategoryPlateData.delete(id);
-            return Ok(id);
-        }
-
-        [Route("api/branch/TypeSocial/{id}")]
-        public IHttpActionResult deletetypeSocial(int id)
-        {
-            if (TypeSocialNetworkData.getById(id) == null)
-            {
-                return NotFound();
-            }
-            TypeSocialNetworkData.Delete(id);
-            return Ok(id);
-        }
-        [Route("api/branch/TypeSocialNetwork/{id}")]
-        [HttpPut]
-        public IHttpActionResult PutTypeSocialNetwork(int id, TypeSocialNetwork plate)
-        {
-            if (id != plate.idTypeSocialNetwork)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id del plate es incorrecto.");
-            }
-            if (TypeSocialNetworkData.getById(plate.idTypeSocialNetwork) == null)
-            {
-                return NotFound();
-            }
-            TypeSocialNetworkData.update(plate);
-            return Ok(plate);
-        }
-
-        // POST api/<controller>
-        [Route("api/branch/TypeSocialNetwork")]
-        [ResponseType(typeof(TypeSocialNetwork))]
-        public IHttpActionResult Post(TypeSocialNetwork p)
-        {
-            if (p == null)//validamos nombre
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-            TypeSocialNetworkData.insert(p);
-
-            return Ok(p);
-
-        }
-        // GET api/<controller>
-        [Route("api/branch/TypeSocialNetwork/{limit}/{offset}")]
-        public IList<TypeSocialNetwork> GetTypeSocialNetwork(int limit, int offset)
-        {
-            return TypeSocialNetworkData.getAll();
-        }
-            // GET api/<controller>
-        [Route("api/branch/SocialNetwork/{limit}/{offset}")]
-        public IList<SocialNetwork> GetSocialNetwork(int limit, int offset)
-        {
-            return SocialNetworkData.getAll();
-        }
-        
-        
- 
-       
-        [Route("api/branch/TypeSocialNetwork/{id}")]
-        public IHttpActionResult TypeSocialNetwork(int id, CategoryPlate categoryplate)
-        {
-            if (id != categoryplate.idCategoryPlate)//Nos tiene que llegar el objeto correctamente
-            {
-                return BadRequest("El id del user es incorrecto.");
-            }
-            if (TypeSocialNetwork.getById(id) == null)
-            {
-                return NotFound();
-            }
-            TypeSocialNetworkData.update(categoryplate);
-            return Ok(categoryplate);
-        } 
-        
-         // POST api/<controller>
-         [Route("api/branch/menu/SocialNetworkRestaurant/{p}")]
-        [ResponseType(typeof(SocialNetworkRestaurant))]
-         public IHttpActionResult PostsocialNetwork(SocialNetworkRestaurant p)
-         {
-             if (p == null)//validamos nombre
-             {
-                 return BadRequest("Datos incorrectos.");
-             }
-             SocialNetworkRestaurantData.update(p);
-            return Ok(p);
-         }
 
     }
 }
