@@ -85,6 +85,7 @@ public class singleReservationFrag extends DialogFragment {
     }
 
     private void makeOrder() {
+
         main.viewOrder();
     }
 

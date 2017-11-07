@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.plateAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Matias on 9/21/2017.
@@ -34,6 +36,8 @@ public class orderReservationFrag extends DialogFragment {
     ParseQuery pq;
 
     ListView listOrder;
+    plateAdapter adapter;
+
     Button newOrder;
 
     Reservation myReservation;
@@ -43,17 +47,29 @@ public class orderReservationFrag extends DialogFragment {
         toReturn = inflater.inflate(R.layout.frag_order_reservation, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
+        listOrder =(ListView)toReturn.findViewById(R.id.listOrder);
+        newOrder = (Button)toReturn.findViewById(R.id.btnNewOrder);
 
         myReservation = main.getReservation();
 
-        listOrder =(ListView)toReturn.findViewById(R.id.listOrder);
-        newOrder = (Button)toReturn.findViewById(R.id.btnNewOrder);
-        newOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeNewOrder();
-            }
-        });
+        if (myReservation.date.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
+            newOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    makeNewOrder();
+                }
+            });
+        } else {
+            newOrder.setVisibility(View.INVISIBLE);
+            listOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Plate plate = adapter.getItem(position);
+                    main.setMyPlate(plate);
+                    main.showPlateCalification();
+                }
+            });
+        }
 
         final asyncTaskCompleted listener = new asyncTaskCompleted() {
             @Override

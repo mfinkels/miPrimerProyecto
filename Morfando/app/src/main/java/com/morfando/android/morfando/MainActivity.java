@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private Branch branch;
     private Reservation reservation;
     private ArrayList<Plate> plates;
+    private Plate myPlate;
 
     private boolean userLoggedIn = false;
 
@@ -163,6 +164,13 @@ public class MainActivity extends AppCompatActivity {
         trans.commit();
     }
 
+    public Plate getMyPlate() {
+        return myPlate;
+    }
+
+    public void setMyPlate(Plate myPlate) {
+        this.myPlate = myPlate;
+    }
 
     private void errorAlert(String title, String message) {
         AlertDialog.Builder errorDisplay = new AlertDialog.Builder(this);
