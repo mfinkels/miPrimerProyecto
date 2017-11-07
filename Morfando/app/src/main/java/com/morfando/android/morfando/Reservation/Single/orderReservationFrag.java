@@ -66,7 +66,7 @@ public class orderReservationFrag extends DialogFragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Plate plate = adapter.getItem(position);
                     main.setMyPlate(plate);
-                    main.showPlateCalification();
+                    //main.showPlateCalification();
                 }
             });
         }

@@ -321,4 +321,8 @@ public class MainActivity extends AppCompatActivity {
     public void addOrderToReservation(ArrayList<OrderReservation> order, asyncTaskCompleted listener) {
         pq.createOrder(order, listener);
     }
+
+    public void showPlateCalification() {
+
+    }
 }
