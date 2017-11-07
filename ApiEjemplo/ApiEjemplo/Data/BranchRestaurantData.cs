@@ -68,7 +68,7 @@ namespace ApiEjemplo.Data
                     branch.promotion = BranchPromotionData.getAllByBranch(branch.idBranchRestaurant);
                     branch.service = ServiceBranchData.getServicesByRestaurants(branch.idBranchRestaurant);
                     branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
-                    branch.restaurant = RestaurantData.getById(branch.idBranchRestaurant);
+                    branch.restaurant = RestaurantData.getById(branch.idRestaurant);
                     branch.RangePrice = RangePriceBranchData.getById(branch.idRangePriceBranch);
                     list.Add(branch);
                 }
