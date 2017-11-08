@@ -1,48 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar"
+        android:theme="@style/AppTheme"
+        android:fitsSystemWindows="false">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginBottom="60dp">
+        android:gravity="center">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="bife"
-            android:gravity="center_horizontal"
-            android:textSize="24sp"
-            android:id="@+id/plateName"/>
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="60dp">
 
-        <TextView
-            android:layout_width="match_parent"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="bife"
+                android:gravity="center_horizontal"
+                android:textSize="24sp"
+                android:id="@+id/plateName"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="200 gramos de carne"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:id="@+id/plateDescription"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$10"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:id="@+id/pricePlate"/>
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/calificationPlate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="200 gramos de carne"
-            android:textSize="16sp"
-            android:gravity="center_horizontal"
-            android:id="@+id/plateDescription"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="$10"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:id="@+id/pricePlate"/>
+            android:numStars="5"
+            android:stepSize="1" />
 
     </LinearLayout>
 
-    <RatingBar
-        android:id="@+id/calificationPlate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1" />
 
-</LinearLayout>
+
+</RelativeLayout>

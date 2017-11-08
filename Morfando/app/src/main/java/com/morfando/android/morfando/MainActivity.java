@@ -24,6 +24,7 @@ import com.morfando.android.morfando.Profile.profileFrag;
 import com.morfando.android.morfando.Registration.logInFrag;
 import com.morfando.android.morfando.Registration.resetPasswordFrag;
 import com.morfando.android.morfando.Registration.signUpFrag;
+import com.morfando.android.morfando.Reservation.Single.calificationPlateFrag;
 import com.morfando.android.morfando.Reservation.Single.orderReservationFrag;
 import com.morfando.android.morfando.Reservation.Single.plateWithCartFrag;
 import com.morfando.android.morfando.Reservation.Single.singleReservationFrag;
@@ -92,11 +93,9 @@ public class MainActivity extends AppCompatActivity {
                         break;*/
                     case R.id.tab_resevation:
                         if(userLoggedIn){
-                            fm = new upcomingReservationFrag();
-                            updateFragment(fm);
+                            updateFragment(new reservationMainFrag());
                         } else{
-                            logInFrag register = new logInFrag();
-                            showDialogFragment(register);
+                            showDialogFragment(new logInFrag());
                         }
                         break;
                     case R.id.tab_profile:
@@ -323,6 +322,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showPlateCalification() {
-
+        updateDialogFragment(new orderReservationFrag());
     }
 }

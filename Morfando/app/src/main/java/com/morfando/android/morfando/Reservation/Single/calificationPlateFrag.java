@@ -1,8 +1,8 @@
 package com.morfando.android.morfando.Reservation.Single;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,65 +28,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by Matias on 9/21/2017.
+ * Created by Matias on 11/7/2017.
  */
 
-public class orderReservationFrag extends DialogFragment {
+public class calificationPlateFrag extends android.support.v4.app.DialogFragment {
     MainActivity main;
     ParseQuery pq;
 
-    ListView listOrder;
-    plateAdapter adapter;
-
-    Button newOrder;
-
-    Reservation myReservation;
+    Plate myPlate;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
-        toReturn = inflater.inflate(R.layout.frag_order_reservation, group, false);
+        toReturn = inflater.inflate(R.layout.frag_calification_plate, group, false);
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
-        listOrder =(ListView)toReturn.findViewById(R.id.listOrder);
-        newOrder = (Button)toReturn.findViewById(R.id.btnNewOrder);
 
-        myReservation = main.getReservation();
+        myPlate = main.getMyPlate();
 
-        if (myReservation.date.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
-            newOrder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    makeNewOrder();
-                }
-            });
-        } else {
-            newOrder.setVisibility(View.INVISIBLE);
-            listOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Plate plate = adapter.getItem(position);
-                    main.setMyPlate(plate);
-                    main.showPlateCalification();
-                }
-            });
-        }
-
-        final asyncTaskCompleted listener = new asyncTaskCompleted() {
-            @Override
-            public void onPostAsyncTask(Object result) {
-                ArrayList<Plate> plates = (ArrayList<Plate>) result;
-                if (plates != null && plates.size() >= 0) {
-                    myReservation.orders = plates;
-                    main.setReservation(myReservation);
-                    plateAdapter adapter = new plateAdapter(myReservation.orders,main,false, null);
-                    listOrder.setAdapter(adapter);
-                    listOrder.deferNotifyDataSetChanged();
-                } else {
-                    Toast.makeText(main,"Order is empty",Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        pq.getOrder(myReservation.idReservation, listener);
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -102,9 +60,6 @@ public class orderReservationFrag extends DialogFragment {
         return toReturn;
     }
 
-    private void makeNewOrder() {
-        main.addNewOrder();
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

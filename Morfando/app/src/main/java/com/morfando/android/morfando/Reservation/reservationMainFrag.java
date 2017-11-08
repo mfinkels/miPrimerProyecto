@@ -58,13 +58,10 @@ public class reservationMainFrag extends Fragment {
                 pastPressed();
             }
         });
-        upcoming.setEnabled(false);
 
         adminFragment = main.getSupportFragmentManager();
 
-        trans=adminFragment.beginTransaction();
-        trans.replace(R.id.fragReservation, new upcomingReservationFrag());
-        trans.commit();
+        upComingPressed();
 
         return toReturn;
     }
