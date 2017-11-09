@@ -104,7 +104,7 @@ namespace ApiEjemplo.Controllers
         }
 
         // POST api/<controller>
-        [Route("api/reservation/plate/calification")]
+        [Route("api/reservation/PostPlateCalification")]
         [HttpPost]
         [ResponseType(typeof(CalificationPlate))]
         public IHttpActionResult PostPlateCalification(CalificationPlate cali)
