@@ -103,6 +103,20 @@ namespace ApiEjemplo.Controllers
             return Ok(orders);
         }
 
+        // POST api/<controller>
+        [Route("api/reservation/plate/calification")]
+        [HttpPost]
+        [ResponseType(typeof(CalificationPlate))]
+        public IHttpActionResult PostPlateCalification(CalificationPlate cali)
+        {
+            if (cali == null){
+                return BadRequest("Error Cali");
+            }
+
+            CalificationPlateData.insert(cali);
+            return Ok(cali);
+        }
+
         // DELETE: api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
