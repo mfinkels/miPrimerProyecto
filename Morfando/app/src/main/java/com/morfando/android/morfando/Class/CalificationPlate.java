@@ -9,6 +9,7 @@ public class CalificationPlate {
     public int idCalificationPlate;
     public int idBranch;
     public int idUser;
+    public int idPlate;
     public int value;
     public String message;
 

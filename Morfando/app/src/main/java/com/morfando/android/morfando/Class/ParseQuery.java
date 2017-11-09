@@ -618,6 +618,54 @@ public class ParseQuery {
     }
 
 
+    // query create Calification Plate
+
+    public void createCalificationPlate(CalificationPlate cali, asyncTaskCompleted listener){
+        new insertCalificationPlate(listener).execute(cali);
+    }
+
+    private class insertCalificationPlate extends AsyncTask<CalificationPlate, Void, Boolean>{
+
+        private asyncTaskCompleted listener;
+
+        public insertCalificationPlate(asyncTaskCompleted listener){
+            this.listener = listener;
+        }
+
+        protected void onPostExecute(Boolean datos) {
+            super.onPostExecute(datos);
+            listener.onPostAsyncTask(datos);
+        }
+
+        @Override
+        protected Boolean doInBackground(CalificationPlate... params) {
+            CalificationPlate cali = params[0];
+
+            OkHttpClient client = new OkHttpClient();
+
+            String insert = create.calificationPlate(cali);
+            Log.d("calificationPlate", insert);
+
+            RequestBody body = RequestBody.create(JSON, insert);
+            Request request = new Request.Builder()
+                    .url(server + "reservation/PostPlateCalification")
+                    .post(body)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();  // Llamo al API Rest servicio1 en ejemplo.com
+                String respuesta = response.body().string();
+                if (respuesta.compareTo("Error Cali") != 0){
+                    return true;
+                }
+                return false;
+            } catch (IOException e) {
+                Log.d("error", e.getMessage());             // Error de Network
+                return false;
+            }
+        }
+    }
+
+
 
 
 }

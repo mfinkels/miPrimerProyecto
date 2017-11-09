@@ -37,6 +37,26 @@ public class CreateObjects {
         }
     }
 
+    public String calificationPlate(CalificationPlate obj){
+        String json = "";
+        try {
+            JSONObject ObjJson = new JSONObject();
+            ObjJson.accumulate("idCalificationPlate", obj.idCalificationPlate);
+            ObjJson.accumulate("idBranchRestaurant", obj.idBranch);
+            ObjJson.accumulate("idUser", obj.idUser);
+            ObjJson.accumulate("idPlateMenu", obj.idPlate);
+            ObjJson.accumulate("value", obj.value);
+            ObjJson.accumulate("message", obj.message);
+            json = ObjJson.toString();
+            Log.d("calification obj", json);
+            return json;
+
+        }catch (JSONException e){
+            Log.d("Error calification", e.getMessage());
+            return null;
+        }
+    }
+
     public String order(OrderReservation obj){
         String json = "";
         try {

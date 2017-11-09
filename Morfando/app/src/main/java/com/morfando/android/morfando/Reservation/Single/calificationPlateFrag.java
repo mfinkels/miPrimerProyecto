@@ -14,6 +14,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.ParseQuery;
@@ -37,6 +39,14 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
 
     Plate myPlate;
 
+    TextView name, description, price;
+
+    RatingBar value;
+    TextView message;
+
+
+    Button send;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle data) {
         View toReturn;
         toReturn = inflater.inflate(R.layout.frag_calification_plate, group, false);
@@ -44,6 +54,9 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
         pq = new ParseQuery(main);
 
         myPlate = main.getMyPlate();
+
+        //muestro datos plato, al a pretar enviar recibir info generar CalificationPlate y insertar
+        //FALTA AGARRAR ID BRANCH Y ID USER
 
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
@@ -58,6 +71,12 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
         setHasOptionsMenu(true);
 
         return toReturn;
+    }
+
+    private void sendPressed(){
+        // genero Calification
+
+        //listener y mando espero q vuelva
     }
 
 
