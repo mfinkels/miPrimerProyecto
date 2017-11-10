@@ -1,0 +1,63 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\TipoUsuarioRepository")
+ * @ORM\Table(name="tipoUsuario") 
+ * @UniqueEntity(
+ * 		fields = {"descripcion"},
+ *                      errorPath ="descripcion",
+ *                      message="Ya existe un Tipo de Usuario con el mismo nombre."
+ * 		)
+ */
+class TipoUsuario {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @ORM\Column(type="string", length=50,nullable=false)
+     */
+    protected $descripcion;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default"=1})
+     */
+    protected $activo=true;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Usuario", mappedBy="tipoUsuario")
+     */
+    protected $usuarios;
+    
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        $this->usuarios = new ArrayCollection();
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString  () {
+        return $this->getDescripcion();
+    }
+    
+    
+
+}

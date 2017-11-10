@@ -1,0 +1,154 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\CategoriaRepository")
+ * @ORM\Table(name="categoria") 
+ * @UniqueEntity(
+ * 		fields = {"descripcion"},
+ *                      errorPath ="descripcion",
+ *                      message="Ya existe una Categoría con el mismo nombre."
+ * 		)
+ */
+class Categoria {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $descripcion;
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    protected $sinonimo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SubCategoria", mappedBy="categoria")
+     */
+    protected $subcategorias;
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default"=1})
+     */
+    protected $activo=true;
+    
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        $this->subcategorias = new ArrayCollection();
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        return $this->getDescripcion();
+    }
+    
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Categoria
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Add subcategorias
+     *
+     * @param \MERCADO\MSBundle\Entity\SubCategoria $subcategorias
+     * @return Categoria
+     */
+    public function addSubcategoria(\MERCADO\MSBundle\Entity\SubCategoria $subcategorias)
+    {
+        $this->subcategorias[] = $subcategorias;
+    
+        return $this;
+    }
+
+    /**
+     * Remove subcategorias
+     *
+     * @param \MERCADO\MSBundle\Entity\SubCategoria $subcategorias
+     */
+    public function removeSubcategoria(\MERCADO\MSBundle\Entity\SubCategoria $subcategorias)
+    {
+        $this->subcategorias->removeElement($subcategorias);
+    }
+
+    /**
+     * Get subcategorias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubcategorias()
+    {
+        return $this->subcategorias;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return Categoria
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+    
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+}

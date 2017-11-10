@@ -1,0 +1,35 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\ProductoColorRepository")
+ * @ORM\Table(name="productocolor") 
+ */
+class ProductoColor {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Producto")
+     * @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     */
+    protected $producto;  
+    /**
+     * @ORM\ManyToOne(targetEntity="Color")
+     * @ORM\JoinColumn(name="color_id", referencedColumnName="id")
+     */
+    protected $color;  
+
+    
+}

@@ -1,0 +1,20 @@
+socialnetworkrestaurant_get:
+    path:     /{idRestaurant}/{idTypeSocialNetwork}
+    defaults: { _controller: "APIAPIBundle:SocialNetworkRestaurant:get", idTypeSocialNetwork: 0  }
+    requirements: { _method: get }
+socialnetworkrestaurant_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:SocialNetworkRestaurant:put" }
+    requirements: { _method: put }
+
+socialnetworkrestaurant_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:SocialNetworkRestaurant:delete" }
+    requirements: { _method: delete }
+socialnetworkrestaurant_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:SocialNetworkRestaurant:post" }
+    requirements: { _method: post }
+
+
+

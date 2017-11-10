@@ -1,0 +1,59 @@
+<?php
+
+namespace API\APIBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="API\APIBundle\Entity\RangePriceBranchRepository")
+ * @ORM\Table(name="range_price_branch") 
+ */
+class RangePriceBranch {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BranchRestaurant", inversedBy="rangesPricesBranch")
+     * @ORM\JoinColumn(name="idBranchRestaurant", referencedColumnName="idBranchRestaurant")
+     */
+    protected $idBranchRestaurant;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $minimum;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $maximum;
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        
+    }
+
+}

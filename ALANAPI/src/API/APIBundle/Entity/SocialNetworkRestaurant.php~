@@ -1,0 +1,59 @@
+<?php
+
+namespace API\APIBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="API\APIBundle\Entity\SocialNetworkRestaurantRepository")
+ * @ORM\Table(name="social_network_restaurant") 
+ */
+class SocialNetworkRestaurant {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="redesSociales")
+     * @ORM\JoinColumn(name="idRestaurant", referencedColumnName="idRestaurant")
+     */
+    protected $restaurant;
+    /**
+     * @ORM\ManyToOne(targetEntity="TypeSocialNetwork", inversedBy="restaurants")
+     * @ORM\JoinColumn(name="idTypeSocialNetwork", referencedColumnName="idTypeSocialNetwork")
+     */
+    protected $typeSocialNetwork;
+    
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    protected $value;
+    
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+
+    }
+    
+
+}

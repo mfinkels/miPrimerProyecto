@@ -1,0 +1,60 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\RechazoRepository")
+ * @ORM\Table(name="rechazo") 
+ */
+class Rechazo {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Publicacion", inversedBy="rechazos")
+     * @ORM\JoinColumn(name="publicacion_id", referencedColumnName="id")
+     */
+    protected $publicacion;
+
+    /**
+     * @ORM\Column(type="date",nullable=false)
+     */
+    protected $fecha;
+
+    /**
+     * @ORM\Column(type="string", length=200,nullable=false)
+     */
+    protected $observacion;
+
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        $this->fecha = new \DateTime();
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        return $this->getObservacion();
+    }
+
+}

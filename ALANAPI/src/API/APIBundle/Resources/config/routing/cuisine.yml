@@ -1,0 +1,18 @@
+cuisine_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Cuisine:get", id: 0  }
+    requirements: { _method: get }
+cuisine_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Cuisine:put" }
+    requirements: { _method: put }
+
+cuisine_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Cuisine:delete" }
+    requirements: { _method: delete }
+cuisine_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:Cuisine:post" }
+    requirements: { _method: post }
+    

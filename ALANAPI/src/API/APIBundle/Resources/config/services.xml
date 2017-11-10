@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- este id es el que usamos para instanciar el servicio en los controllers -->
+        <service id="session.manager" class="API\APIBundle\Services\SessionManager">
+            <argument type="service" id="service_container" />
+        </service>        
+        <!-- Servicio para obtener la clase de un objeto desde twig -->        
+        <service id="class_twig_extension"
+                 class="API\APIBundle\Twig\ClassTwigExtension"
+                 public="false">
+            <tag name="twig.extension" />
+        </service>
+        <!-- Servicio para obtener el controlador desde la vista a través de twig -->        
+        <service id="controller_action_twig_extension"
+                 class="API\APIBundle\Twig\ControllerActionExtension"
+                 public="false">
+            <tag name="twig.extension" />
+        </service>
+        <!--<service id="serializer" alias="jms_serializer.serializer" />        -->
+    </services>
+</container>

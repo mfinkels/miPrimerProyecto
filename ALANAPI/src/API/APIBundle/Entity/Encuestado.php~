@@ -1,0 +1,95 @@
+<?php
+
+namespace ELOGISTIXPR\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXPR\ElogistixBundle\Entity\EncuestadoRepository")
+ * @ORM\Table(name="encuestado") 
+ */
+class Encuestado {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $nombre;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $apellido;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $empresa;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $mail;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $web;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $provincia;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $pais;
+    /**
+     * @ORM\Column(type="string", length=2000)
+     */
+    protected $comentario;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $manejoDocumentario;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $controlCorreccion;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $almacenamiento;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $planeamiento;
+
+    
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        
+    }
+
+
+}

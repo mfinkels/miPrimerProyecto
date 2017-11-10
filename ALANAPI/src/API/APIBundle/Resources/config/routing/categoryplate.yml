@@ -1,0 +1,17 @@
+categoryplate_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:CategoryPlate:get", id: 0  }
+    requirements: { _method: get }
+categoryplate_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:CategoryPlate:put" }
+    requirements: { _method: put }
+
+categoryplate_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:CategoryPlate:delete" }
+    requirements: { _method: delete }
+categoryplate_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:CategoryPlate:post" }
+    requirements: { _method: post }

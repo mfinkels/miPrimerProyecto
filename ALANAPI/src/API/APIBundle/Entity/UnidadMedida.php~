@@ -1,0 +1,31 @@
+<?php 
+namespace ELOGISTIXPR\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXPR\ElogistixBundle\Entity\UnidadMedidaRepository")
+ * @ORM\Table(name="unidadmedida") 
+ */
+class UnidadMedida{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    protected $descripcion;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $estado = 'A';
+
+}

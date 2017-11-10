@@ -1,0 +1,840 @@
+<?php
+
+namespace ELOGISTIXAL\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXAL\ElogistixBundle\Entity\ALRepository")
+ * @ORM\Table(name="al")
+ */
+class AL{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+	/**
+	* @ORM\ManyToOne(targetEntity="UnidadNegocio", inversedBy="al")
+	* @ORM\JoinColumn(name="unidadnegocio_id", referencedColumnName="al")
+	*/
+    protected $unidadnegocio;
+
+    /**
+	* @ORM\ManyToOne(targetEntity="Turno", inversedBy="al")
+	* @ORM\JoinColumn(name="turno_id", referencedColumnName="id")
+	*/
+    protected $turno;
+    
+   /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $fecha;
+       
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $posicionPalletVacia;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $personalPropio;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $horasNormales;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $horasCincuenta;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $horasCien;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $incidenteLaboral;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $horasPerdidasIncidente;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $ordenCompraIngresada;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $pedidosPreparados;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $lineasIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $lineasOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $bultosIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $bultosOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $palletsIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $palletsOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $chasisIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $chasisOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $semiIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $semiOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $reclamos;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $montoInventariado;
+    /**
+     * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $montoAjusteInventariado;
+    /**
+     * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $montoMerma;
+    /**
+     * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $montoFacturado;
+    /**
+     * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $kgFacturado;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $estado = 'A';
+
+    /**********************************
+     * __construct
+     *
+     * 
+     **********************************/        
+	public function __construct()
+	{
+	}
+
+	/**********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     *********************************/ 
+	 public function __toString()
+	{
+	}
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return AL
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set posicionPalletVacia
+     *
+     * @param integer $posicionPalletVacia
+     * @return AL
+     */
+    public function setPosicionPalletVacia($posicionPalletVacia)
+    {
+        $this->posicionPalletVacia = $posicionPalletVacia;
+    
+        return $this;
+    }
+
+    /**
+     * Get posicionPalletVacia
+     *
+     * @return integer 
+     */
+    public function getPosicionPalletVacia()
+    {
+        return $this->posicionPalletVacia;
+    }
+
+    /**
+     * Set personalPropio
+     *
+     * @param integer $personalPropio
+     * @return AL
+     */
+    public function setPersonalPropio($personalPropio)
+    {
+        $this->personalPropio = $personalPropio;
+    
+        return $this;
+    }
+
+    /**
+     * Get personalPropio
+     *
+     * @return integer 
+     */
+    public function getPersonalPropio()
+    {
+        return $this->personalPropio;
+    }
+
+    /**
+     * Set horasNormales
+     *
+     * @param integer $horasNormales
+     * @return AL
+     */
+    public function setHorasNormales($horasNormales)
+    {
+        $this->horasNormales = $horasNormales;
+    
+        return $this;
+    }
+
+    /**
+     * Get horasNormales
+     *
+     * @return integer 
+     */
+    public function getHorasNormales()
+    {
+        return $this->horasNormales;
+    }
+
+    /**
+     * Set horasCincuenta
+     *
+     * @param integer $horasCincuenta
+     * @return AL
+     */
+    public function setHorasCincuenta($horasCincuenta)
+    {
+        $this->horasCincuenta = $horasCincuenta;
+    
+        return $this;
+    }
+
+    /**
+     * Get horasCincuenta
+     *
+     * @return integer 
+     */
+    public function getHorasCincuenta()
+    {
+        return $this->horasCincuenta;
+    }
+
+    /**
+     * Set horasCien
+     *
+     * @param integer $horasCien
+     * @return AL
+     */
+    public function setHorasCien($horasCien)
+    {
+        $this->horasCien = $horasCien;
+    
+        return $this;
+    }
+
+    /**
+     * Get horasCien
+     *
+     * @return integer 
+     */
+    public function getHorasCien()
+    {
+        return $this->horasCien;
+    }
+
+    /**
+     * Set incidenteLaboral
+     *
+     * @param integer $incidenteLaboral
+     * @return AL
+     */
+    public function setIncidenteLaboral($incidenteLaboral)
+    {
+        $this->incidenteLaboral = $incidenteLaboral;
+    
+        return $this;
+    }
+
+    /**
+     * Get incidenteLaboral
+     *
+     * @return integer 
+     */
+    public function getIncidenteLaboral()
+    {
+        return $this->incidenteLaboral;
+    }
+
+    /**
+     * Set horasPerdidasIncidente
+     *
+     * @param integer $horasPerdidasIncidente
+     * @return AL
+     */
+    public function setHorasPerdidasIncidente($horasPerdidasIncidente)
+    {
+        $this->horasPerdidasIncidente = $horasPerdidasIncidente;
+    
+        return $this;
+    }
+
+    /**
+     * Get horasPerdidasIncidente
+     *
+     * @return integer 
+     */
+    public function getHorasPerdidasIncidente()
+    {
+        return $this->horasPerdidasIncidente;
+    }
+
+    /**
+     * Set ordenCompraIngresada
+     *
+     * @param integer $ordenCompraIngresada
+     * @return AL
+     */
+    public function setOrdenCompraIngresada($ordenCompraIngresada)
+    {
+        $this->ordenCompraIngresada = $ordenCompraIngresada;
+    
+        return $this;
+    }
+
+    /**
+     * Get ordenCompraIngresada
+     *
+     * @return integer 
+     */
+    public function getOrdenCompraIngresada()
+    {
+        return $this->ordenCompraIngresada;
+    }
+
+    /**
+     * Set pedidosPreparados
+     *
+     * @param integer $pedidosPreparados
+     * @return AL
+     */
+    public function setPedidosPreparados($pedidosPreparados)
+    {
+        $this->pedidosPreparados = $pedidosPreparados;
+    
+        return $this;
+    }
+
+    /**
+     * Get pedidosPreparados
+     *
+     * @return integer 
+     */
+    public function getPedidosPreparados()
+    {
+        return $this->pedidosPreparados;
+    }
+
+    /**
+     * Set lineasIN
+     *
+     * @param integer $lineasIN
+     * @return AL
+     */
+    public function setLineasIN($lineasIN)
+    {
+        $this->lineasIN = $lineasIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get lineasIN
+     *
+     * @return integer 
+     */
+    public function getLineasIN()
+    {
+        return $this->lineasIN;
+    }
+
+    /**
+     * Set lineasOUT
+     *
+     * @param integer $lineasOUT
+     * @return AL
+     */
+    public function setLineasOUT($lineasOUT)
+    {
+        $this->lineasOUT = $lineasOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get lineasOUT
+     *
+     * @return integer 
+     */
+    public function getLineasOUT()
+    {
+        return $this->lineasOUT;
+    }
+
+    /**
+     * Set bultosIN
+     *
+     * @param integer $bultosIN
+     * @return AL
+     */
+    public function setBultosIN($bultosIN)
+    {
+        $this->bultosIN = $bultosIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get bultosIN
+     *
+     * @return integer 
+     */
+    public function getBultosIN()
+    {
+        return $this->bultosIN;
+    }
+
+    /**
+     * Set bultosOUT
+     *
+     * @param integer $bultosOUT
+     * @return AL
+     */
+    public function setBultosOUT($bultosOUT)
+    {
+        $this->bultosOUT = $bultosOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get bultosOUT
+     *
+     * @return integer 
+     */
+    public function getBultosOUT()
+    {
+        return $this->bultosOUT;
+    }
+
+    /**
+     * Set palletsIN
+     *
+     * @param integer $palletsIN
+     * @return AL
+     */
+    public function setPalletsIN($palletsIN)
+    {
+        $this->palletsIN = $palletsIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get palletsIN
+     *
+     * @return integer 
+     */
+    public function getPalletsIN()
+    {
+        return $this->palletsIN;
+    }
+
+    /**
+     * Set palletsOUT
+     *
+     * @param integer $palletsOUT
+     * @return AL
+     */
+    public function setPalletsOUT($palletsOUT)
+    {
+        $this->palletsOUT = $palletsOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get palletsOUT
+     *
+     * @return integer 
+     */
+    public function getPalletsOUT()
+    {
+        return $this->palletsOUT;
+    }
+
+    /**
+     * Set chasisIN
+     *
+     * @param integer $chasisIN
+     * @return AL
+     */
+    public function setChasisIN($chasisIN)
+    {
+        $this->chasisIN = $chasisIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get chasisIN
+     *
+     * @return integer 
+     */
+    public function getChasisIN()
+    {
+        return $this->chasisIN;
+    }
+
+    /**
+     * Set chasisOUT
+     *
+     * @param integer $chasisOUT
+     * @return AL
+     */
+    public function setChasisOUT($chasisOUT)
+    {
+        $this->chasisOUT = $chasisOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get chasisOUT
+     *
+     * @return integer 
+     */
+    public function getChasisOUT()
+    {
+        return $this->chasisOUT;
+    }
+
+    /**
+     * Set semiIN
+     *
+     * @param integer $semiIN
+     * @return AL
+     */
+    public function setSemiIN($semiIN)
+    {
+        $this->semiIN = $semiIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get semiIN
+     *
+     * @return integer 
+     */
+    public function getSemiIN()
+    {
+        return $this->semiIN;
+    }
+
+    /**
+     * Set semiOUT
+     *
+     * @param integer $semiOUT
+     * @return AL
+     */
+    public function setSemiOUT($semiOUT)
+    {
+        $this->semiOUT = $semiOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get semiOUT
+     *
+     * @return integer 
+     */
+    public function getSemiOUT()
+    {
+        return $this->semiOUT;
+    }
+
+    /**
+     * Set reclamos
+     *
+     * @param integer $reclamos
+     * @return AL
+     */
+    public function setReclamos($reclamos)
+    {
+        $this->reclamos = $reclamos;
+    
+        return $this;
+    }
+
+    /**
+     * Get reclamos
+     *
+     * @return integer 
+     */
+    public function getReclamos()
+    {
+        return $this->reclamos;
+    }
+
+    /**
+     * Set montoInventariado
+     *
+     * @param integer $montoInventariado
+     * @return AL
+     */
+    public function setMontoInventariado($montoInventariado)
+    {
+        $this->montoInventariado = $montoInventariado;
+    
+        return $this;
+    }
+
+    /**
+     * Get montoInventariado
+     *
+     * @return integer 
+     */
+    public function getMontoInventariado()
+    {
+        return $this->montoInventariado;
+    }
+
+    /**
+     * Set montoAjusteInventariado
+     *
+     * @param float $montoAjusteInventariado
+     * @return AL
+     */
+    public function setMontoAjusteInventariado($montoAjusteInventariado)
+    {
+        $this->montoAjusteInventariado = $montoAjusteInventariado;
+    
+        return $this;
+    }
+
+    /**
+     * Get montoAjusteInventariado
+     *
+     * @return float 
+     */
+    public function getMontoAjusteInventariado()
+    {
+        return $this->montoAjusteInventariado;
+    }
+
+    /**
+     * Set montoMerma
+     *
+     * @param float $montoMerma
+     * @return AL
+     */
+    public function setMontoMerma($montoMerma)
+    {
+        $this->montoMerma = $montoMerma;
+    
+        return $this;
+    }
+
+    /**
+     * Get montoMerma
+     *
+     * @return float 
+     */
+    public function getMontoMerma()
+    {
+        return $this->montoMerma;
+    }
+
+    /**
+     * Set montoFacturado
+     *
+     * @param float $montoFacturado
+     * @return AL
+     */
+    public function setMontoFacturado($montoFacturado)
+    {
+        $this->montoFacturado = $montoFacturado;
+    
+        return $this;
+    }
+
+    /**
+     * Get montoFacturado
+     *
+     * @return float 
+     */
+    public function getMontoFacturado()
+    {
+        return $this->montoFacturado;
+    }
+
+    /**
+     * Set kgFacturado
+     *
+     * @param float $kgFacturado
+     * @return AL
+     */
+    public function setKgFacturado($kgFacturado)
+    {
+        $this->kgFacturado = $kgFacturado;
+    
+        return $this;
+    }
+
+    /**
+     * Get kgFacturado
+     *
+     * @return float 
+     */
+    public function getKgFacturado()
+    {
+        return $this->kgFacturado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return AL
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return string 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set unidadnegocio
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\UnidadNegocio $unidadnegocio
+     * @return AL
+     */
+    public function setUnidadnegocio(\ELOGISTIXAL\ElogistixBundle\Entity\UnidadNegocio $unidadnegocio = null)
+    {
+        $this->unidadnegocio = $unidadnegocio;
+    
+        return $this;
+    }
+
+    /**
+     * Get unidadnegocio
+     *
+     * @return \ELOGISTIXAL\ElogistixBundle\Entity\UnidadNegocio 
+     */
+    public function getUnidadnegocio()
+    {
+        return $this->unidadnegocio;
+    }
+
+    /**
+     * Set turno
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno
+     * @return AL
+     */
+    public function setTurno(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno = null)
+    {
+        $this->turno = $turno;
+    
+        return $this;
+    }
+
+    /**
+     * Get turno
+     *
+     * @return \ELOGISTIXAL\ElogistixBundle\Entity\Turno 
+     */
+    public function getTurno()
+    {
+        return $this->turno;
+    }
+}

@@ -1,0 +1,808 @@
+<?php
+namespace ELOGISTIXAL\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXAL\ElogistixBundle\Entity\ResumenMensualRepository")
+ * @ORM\Table(name="resumenmensual")
+ */
+class ResumenMensual {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+	/**
+	* @ORM\ManyToOne(targetEntity="Turno", inversedBy="almensual")
+	* @ORM\JoinColumn(name="turno_id", referencedColumnName="almensual")
+	*/
+    protected $turno;
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    protected $fecha;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $promedioPalletVacio;
+    /**
+     * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $promedioPersonalPropio;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $promedioPersonalAgencia;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaHorasNormales;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaHorasCien;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaIncidenteLaboral;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaOrdenCompra;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $ordenCompraIngresada;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaPedidosPreparados;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaLineasIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaLineasOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaBultosIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaBultosOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaPalletsIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaPalletsOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaChasisIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaChasisOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaSemiIN;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaSemiOUT;
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     */
+    protected $sumaReclamos;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $sumaMontoInventariado;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $sumaMontajeAjusteInventariado;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $sumaMontoMerma;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $sumaMontoFacturado;
+    /**
+    * @ORM\Column(type="float", scale=2,  nullable=true)
+     */
+    protected $sumaKgFacturado;
+        /**
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $estado = 'A';
+
+    /**********************************
+     * __construct
+     *
+     * 
+     **********************************/        
+	public function __construct()
+	{
+	}
+
+	/**********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     *********************************/ 
+	 public function __toString()
+	{
+	}
+    
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param string $fecha
+     * @return resumenMensual
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return string 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set promedioPalletVacio
+     *
+     * @param float $promedioPalletVacio
+     * @return resumenMensual
+     */
+    public function setPromedioPalletVacio($promedioPalletVacio)
+    {
+        $this->promedioPalletVacio = $promedioPalletVacio;
+    
+        return $this;
+    }
+
+    /**
+     * Get promedioPalletVacio
+     *
+     * @return float 
+     */
+    public function getPromedioPalletVacio()
+    {
+        return $this->promedioPalletVacio;
+    }
+
+    /**
+     * Set promedioPersonalPropio
+     *
+     * @param float $promedioPersonalPropio
+     * @return resumenMensual
+     */
+    public function setPromedioPersonalPropio($promedioPersonalPropio)
+    {
+        $this->promedioPersonalPropio = $promedioPersonalPropio;
+    
+        return $this;
+    }
+
+    /**
+     * Get promedioPersonalPropio
+     *
+     * @return float 
+     */
+    public function getPromedioPersonalPropio()
+    {
+        return $this->promedioPersonalPropio;
+    }
+
+    /**
+     * Set promedioPersonalAgencia
+     *
+     * @param float $promedioPersonalAgencia
+     * @return resumenMensual
+     */
+    public function setPromedioPersonalAgencia($promedioPersonalAgencia)
+    {
+        $this->promedioPersonalAgencia = $promedioPersonalAgencia;
+    
+        return $this;
+    }
+
+    /**
+     * Get promedioPersonalAgencia
+     *
+     * @return float 
+     */
+    public function getPromedioPersonalAgencia()
+    {
+        return $this->promedioPersonalAgencia;
+    }
+
+    /**
+     * Set sumaHorasNormales
+     *
+     * @param integer $sumaHorasNormales
+     * @return resumenMensual
+     */
+    public function setSumaHorasNormales($sumaHorasNormales)
+    {
+        $this->sumaHorasNormales = $sumaHorasNormales;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaHorasNormales
+     *
+     * @return integer 
+     */
+    public function getSumaHorasNormales()
+    {
+        return $this->sumaHorasNormales;
+    }
+
+    /**
+     * Set sumaHorasCien
+     *
+     * @param integer $sumaHorasCien
+     * @return resumenMensual
+     */
+    public function setSumaHorasCien($sumaHorasCien)
+    {
+        $this->sumaHorasCien = $sumaHorasCien;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaHorasCien
+     *
+     * @return integer 
+     */
+    public function getSumaHorasCien()
+    {
+        return $this->sumaHorasCien;
+    }
+
+    /**
+     * Set sumaIncidenteLaboral
+     *
+     * @param integer $sumaIncidenteLaboral
+     * @return resumenMensual
+     */
+    public function setSumaIncidenteLaboral($sumaIncidenteLaboral)
+    {
+        $this->sumaIncidenteLaboral = $sumaIncidenteLaboral;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaIncidenteLaboral
+     *
+     * @return integer 
+     */
+    public function getSumaIncidenteLaboral()
+    {
+        return $this->sumaIncidenteLaboral;
+    }
+
+    /**
+     * Set sumaOrdenCompra
+     *
+     * @param integer $sumaOrdenCompra
+     * @return resumenMensual
+     */
+    public function setSumaOrdenCompra($sumaOrdenCompra)
+    {
+        $this->sumaOrdenCompra = $sumaOrdenCompra;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaOrdenCompra
+     *
+     * @return integer 
+     */
+    public function getSumaOrdenCompra()
+    {
+        return $this->sumaOrdenCompra;
+    }
+
+    /**
+     * Set ordenCompraIngresada
+     *
+     * @param integer $ordenCompraIngresada
+     * @return resumenMensual
+     */
+    public function setOrdenCompraIngresada($ordenCompraIngresada)
+    {
+        $this->ordenCompraIngresada = $ordenCompraIngresada;
+    
+        return $this;
+    }
+
+    /**
+     * Get ordenCompraIngresada
+     *
+     * @return integer 
+     */
+    public function getOrdenCompraIngresada()
+    {
+        return $this->ordenCompraIngresada;
+    }
+
+    /**
+     * Set sumaPedidosPreparados
+     *
+     * @param integer $sumaPedidosPreparados
+     * @return resumenMensual
+     */
+    public function setSumaPedidosPreparados($sumaPedidosPreparados)
+    {
+        $this->sumaPedidosPreparados = $sumaPedidosPreparados;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaPedidosPreparados
+     *
+     * @return integer 
+     */
+    public function getSumaPedidosPreparados()
+    {
+        return $this->sumaPedidosPreparados;
+    }
+
+    /**
+     * Set sumaLineasIN
+     *
+     * @param integer $sumaLineasIN
+     * @return resumenMensual
+     */
+    public function setSumaLineasIN($sumaLineasIN)
+    {
+        $this->sumaLineasIN = $sumaLineasIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaLineasIN
+     *
+     * @return integer 
+     */
+    public function getSumaLineasIN()
+    {
+        return $this->sumaLineasIN;
+    }
+
+    /**
+     * Set sumaLineasOUT
+     *
+     * @param integer $sumaLineasOUT
+     * @return resumenMensual
+     */
+    public function setSumaLineasOUT($sumaLineasOUT)
+    {
+        $this->sumaLineasOUT = $sumaLineasOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaLineasOUT
+     *
+     * @return integer 
+     */
+    public function getSumaLineasOUT()
+    {
+        return $this->sumaLineasOUT;
+    }
+
+    /**
+     * Set sumaBultosIN
+     *
+     * @param integer $sumaBultosIN
+     * @return resumenMensual
+     */
+    public function setSumaBultosIN($sumaBultosIN)
+    {
+        $this->sumaBultosIN = $sumaBultosIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaBultosIN
+     *
+     * @return integer 
+     */
+    public function getSumaBultosIN()
+    {
+        return $this->sumaBultosIN;
+    }
+
+    /**
+     * Set sumaBultosOUT
+     *
+     * @param integer $sumaBultosOUT
+     * @return resumenMensual
+     */
+    public function setSumaBultosOUT($sumaBultosOUT)
+    {
+        $this->sumaBultosOUT = $sumaBultosOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaBultosOUT
+     *
+     * @return integer 
+     */
+    public function getSumaBultosOUT()
+    {
+        return $this->sumaBultosOUT;
+    }
+
+    /**
+     * Set sumaPalletsIN
+     *
+     * @param integer $sumaPalletsIN
+     * @return resumenMensual
+     */
+    public function setSumaPalletsIN($sumaPalletsIN)
+    {
+        $this->sumaPalletsIN = $sumaPalletsIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaPalletsIN
+     *
+     * @return integer 
+     */
+    public function getSumaPalletsIN()
+    {
+        return $this->sumaPalletsIN;
+    }
+
+    /**
+     * Set sumaPalletsOUT
+     *
+     * @param integer $sumaPalletsOUT
+     * @return resumenMensual
+     */
+    public function setSumaPalletsOUT($sumaPalletsOUT)
+    {
+        $this->sumaPalletsOUT = $sumaPalletsOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaPalletsOUT
+     *
+     * @return integer 
+     */
+    public function getSumaPalletsOUT()
+    {
+        return $this->sumaPalletsOUT;
+    }
+
+    /**
+     * Set sumaChasisIN
+     *
+     * @param integer $sumaChasisIN
+     * @return resumenMensual
+     */
+    public function setSumaChasisIN($sumaChasisIN)
+    {
+        $this->sumaChasisIN = $sumaChasisIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaChasisIN
+     *
+     * @return integer 
+     */
+    public function getSumaChasisIN()
+    {
+        return $this->sumaChasisIN;
+    }
+
+    /**
+     * Set sumaChasisOUT
+     *
+     * @param integer $sumaChasisOUT
+     * @return resumenMensual
+     */
+    public function setSumaChasisOUT($sumaChasisOUT)
+    {
+        $this->sumaChasisOUT = $sumaChasisOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaChasisOUT
+     *
+     * @return integer 
+     */
+    public function getSumaChasisOUT()
+    {
+        return $this->sumaChasisOUT;
+    }
+
+    /**
+     * Set sumaSemiIN
+     *
+     * @param integer $sumaSemiIN
+     * @return resumenMensual
+     */
+    public function setSumaSemiIN($sumaSemiIN)
+    {
+        $this->sumaSemiIN = $sumaSemiIN;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaSemiIN
+     *
+     * @return integer 
+     */
+    public function getSumaSemiIN()
+    {
+        return $this->sumaSemiIN;
+    }
+
+    /**
+     * Set sumaSemiOUT
+     *
+     * @param integer $sumaSemiOUT
+     * @return resumenMensual
+     */
+    public function setSumaSemiOUT($sumaSemiOUT)
+    {
+        $this->sumaSemiOUT = $sumaSemiOUT;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaSemiOUT
+     *
+     * @return integer 
+     */
+    public function getSumaSemiOUT()
+    {
+        return $this->sumaSemiOUT;
+    }
+
+    /**
+     * Set sumaReclamos
+     *
+     * @param integer $sumaReclamos
+     * @return resumenMensual
+     */
+    public function setSumaReclamos($sumaReclamos)
+    {
+        $this->sumaReclamos = $sumaReclamos;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaReclamos
+     *
+     * @return integer 
+     */
+    public function getSumaReclamos()
+    {
+        return $this->sumaReclamos;
+    }
+
+    /**
+     * Set sumaMontoInventariado
+     *
+     * @param float $sumaMontoInventariado
+     * @return resumenMensual
+     */
+    public function setSumaMontoInventariado($sumaMontoInventariado)
+    {
+        $this->sumaMontoInventariado = $sumaMontoInventariado;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaMontoInventariado
+     *
+     * @return float 
+     */
+    public function getSumaMontoInventariado()
+    {
+        return $this->sumaMontoInventariado;
+    }
+
+    /**
+     * Set sumaMontajeAjusteInventariado
+     *
+     * @param float $sumaMontajeAjusteInventariado
+     * @return resumenMensual
+     */
+    public function setSumaMontajeAjusteInventariado($sumaMontajeAjusteInventariado)
+    {
+        $this->sumaMontajeAjusteInventariado = $sumaMontajeAjusteInventariado;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaMontajeAjusteInventariado
+     *
+     * @return float 
+     */
+    public function getSumaMontajeAjusteInventariado()
+    {
+        return $this->sumaMontajeAjusteInventariado;
+    }
+
+    /**
+     * Set sumaMontoMerma
+     *
+     * @param float $sumaMontoMerma
+     * @return resumenMensual
+     */
+    public function setSumaMontoMerma($sumaMontoMerma)
+    {
+        $this->sumaMontoMerma = $sumaMontoMerma;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaMontoMerma
+     *
+     * @return float 
+     */
+    public function getSumaMontoMerma()
+    {
+        return $this->sumaMontoMerma;
+    }
+
+    /**
+     * Set sumaMontoFacturado
+     *
+     * @param float $sumaMontoFacturado
+     * @return resumenMensual
+     */
+    public function setSumaMontoFacturado($sumaMontoFacturado)
+    {
+        $this->sumaMontoFacturado = $sumaMontoFacturado;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaMontoFacturado
+     *
+     * @return float 
+     */
+    public function getSumaMontoFacturado()
+    {
+        return $this->sumaMontoFacturado;
+    }
+
+    /**
+     * Set sumaKgFacturado
+     *
+     * @param float $sumaKgFacturado
+     * @return resumenMensual
+     */
+    public function setSumaKgFacturado($sumaKgFacturado)
+    {
+        $this->sumaKgFacturado = $sumaKgFacturado;
+    
+        return $this;
+    }
+
+    /**
+     * Get sumaKgFacturado
+     *
+     * @return float 
+     */
+    public function getSumaKgFacturado()
+    {
+        return $this->sumaKgFacturado;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return resumenMensual
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return string 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set turno
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno
+     * @return resumenMensual
+     */
+    public function setTurno(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno = null)
+    {
+        $this->turno = $turno;
+    
+        return $this;
+    }
+
+    /**
+     * Get turno
+     *
+     * @return \ELOGISTIXAL\ElogistixBundle\Entity\Turno 
+     */
+    public function getTurno()
+    {
+        return $this->turno;
+    }
+}

@@ -1,0 +1,7 @@
+api:
+   resource: "@APIAPIBundle/Resources/config/routing.yml"
+   prefix:   /
+    
+    
+    
+ 

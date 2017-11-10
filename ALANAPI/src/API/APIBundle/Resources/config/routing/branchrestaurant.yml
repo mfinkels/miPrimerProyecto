@@ -1,0 +1,22 @@
+branchrestaurant_get:
+    path:     /{idRestaurant}/{id}
+    defaults: { _controller: "APIAPIBundle:BranchRestaurant:get", id: 0  }
+    requirements: { _method: get }
+
+branchrestaurant_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:BranchRestaurant:put" }
+    requirements: { _method: put }
+
+branchrestaurant_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:BranchRestaurant:delete" }
+    requirements: { _method: delete }
+branchrestaurant_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:BranchRestaurant:post" }
+    requirements: { _method: post }
+    
+
+
+
