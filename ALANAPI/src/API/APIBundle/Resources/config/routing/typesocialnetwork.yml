@@ -1,0 +1,17 @@
+typesocialnetwork_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:TypeSocialNetwork:get", id: 0  }
+    requirements: { _method: get }
+typesocialnetwork_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:TypeSocialNetwork:put" }
+    requirements: { _method: put }
+
+typesocialnetwork_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:TypeSocialNetwork:delete" }
+    requirements: { _method: delete }
+typesocialnetwork_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:TypeSocialNetwork:post" }
+    requirements: { _method: post }

@@ -1,0 +1,33 @@
+APIAPIBundle_cuisine:
+    resource: "@APIAPIBundle/Resources/config/routing/cuisine.yml"
+    prefix:   /cuisine
+
+APIAPIBundle_typesocialnetwork:
+    resource: "@APIAPIBundle/Resources/config/routing/typesocialnetwork.yml"
+    prefix:   /typesocialnetwork
+
+APIAPIBundle_service:
+    resource: "@APIAPIBundle/Resources/config/routing/service.yml"
+    prefix:   /service
+
+APIAPIBundle_categoryplate:
+    resource: "@APIAPIBundle/Resources/config/routing/categoryplate.yml"
+    prefix:   /categoryplate
+
+APIAPIBundle_rangepricebranch:
+    resource: "@APIAPIBundle/Resources/config/routing/rangepricebranch.yml"
+    prefix:   /rangepricebranch
+
+APIAPIBundle_restaurant:
+    resource: "@APIAPIBundle/Resources/config/routing/restaurant.yml"
+    prefix:   /restaurant
+  
+APIAPIBundle_socialnetworkrestaurant:
+    resource: "@APIAPIBundle/Resources/config/routing/socialnetworkrestaurant.yml"
+    prefix:   /socialnetworkrestaurant
+
+APIAPIBundle_branchrestaurant:
+    resource: "@APIAPIBundle/Resources/config/routing/branchrestaurant.yml"
+    prefix:   /branchrestaurant    
+    
+        

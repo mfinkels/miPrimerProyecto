@@ -1,0 +1,17 @@
+rangepricebranch_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:RangePriceBranch:get", id: 0  }
+    requirements: { _method: get }
+rangepricebranch_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:RangePriceBranch:put" }
+    requirements: { _method: put }
+
+rangepricebranch_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:RangePriceBranch:delete" }
+    requirements: { _method: delete }
+rangepricebranch_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:RangePriceBranch:post" }
+    requirements: { _method: post }

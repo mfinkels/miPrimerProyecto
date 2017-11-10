@@ -1,0 +1,589 @@
+<?php
+namespace ELOGISTIXAL\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXAL\ElogistixBundle\Entity\UnidadNegocioRepository")
+ * @ORM\Table(name="unidadnegocio")
+ */
+class UnidadNegocio{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $descripcion;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $responsable;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $direccion;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $telefono;
+	
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $celular;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $mail;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $logo;
+
+	/**
+	* @ORM\OneToMany(targetEntity="Turno", mappedBy="unidadnegocio")
+	*/
+	protected $turnos;
+	/**
+	* @ORM\OneToMany(targetEntity="Warehouse", mappedBy="unidadnegocio")
+	*/
+	protected $warehouses;
+	/**
+	* @ORM\OneToMany(targetEntity="Planta", mappedBy="unidadnegocio")
+	*/
+	protected $plantas;
+	/**
+	* @ORM\OneToMany(targetEntity="Empresa", mappedBy="unidadnegocio")
+	*/
+	protected $empresas;
+        
+	/**
+	* @ORM\OneToMany(targetEntity="Usuario", mappedBy="unidadnegocio")
+	*/
+	protected $usuarios;
+	
+	
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $numeroal = 0;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $estado = 'A';
+
+
+    /**********************************
+     * __construct
+     *
+     * 
+     **********************************/        
+	public function __construct()
+	{
+		$this->turno = new ArrayCollection();
+		$this->warehouses = new ArrayCollection();
+		$this->plantas = new ArrayCollection();
+		$this->empresas = new ArrayCollection();		
+	}
+
+	/**********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     *********************************/ 
+	 public function __toString()
+	{
+			return $this->getDescripcion();
+	}		
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return UnidadNegocio
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param string $responsable
+     * @return UnidadNegocio
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return string 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return UnidadNegocio
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+    
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return UnidadNegocio
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+    
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set celular
+     *
+     * @param string $celular
+     * @return UnidadNegocio
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = $celular;
+    
+        return $this;
+    }
+
+    /**
+     * Get celular
+     *
+     * @return string 
+     */
+    public function getCelular()
+    {
+        return $this->celular;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     * @return UnidadNegocio
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string 
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return UnidadNegocio
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return string 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     * @return UnidadNegocio
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string 
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    
+    /**
+     * Add usuarios
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Usuario $usuarios
+     * @return UnidadNegocio
+     */
+    public function addUsuario(\ELOGISTIXAL\ElogistixBundle\Entity\Usuario $usuarios)
+    {
+        $this->usuarios[] = $usuarios;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usuarios
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Usuario $usuarios
+     */
+    public function removeUsuario(\ELOGISTIXAL\ElogistixBundle\Entity\Usuario $usuarios)
+    {
+        $this->usuarios->removeElement($usuarios);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * Set numeroal
+     *
+     * @param integer $numeroal
+     * @return UnidadNegocio
+     */
+    public function setNumeroal($numeroal)
+    {
+        $this->numeroal = $numeroal;
+    
+        return $this;
+    }
+
+    /**
+     * Get numeroal
+     *
+     * @return integer 
+     */
+    public function getNumeroal()
+    {
+        return $this->numeroal;
+    }
+
+    /**
+     * Add turnos
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno
+     * @return UnidadNegocio
+     */
+    public function addMediostransporte(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno)
+    {
+        $this->turnos[] = $turno;
+    
+        return $this;
+    }
+
+    /**
+     * Remove turno
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno
+     */
+    public function removeMediostransporte(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turno)
+    {
+        $this->turnos->removeElement($turno);
+    }
+
+    /**
+     * Get turnos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTurnos()
+    {
+        return $this->turnos;
+    }
+
+    /**
+     * Add warehouses
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouse
+     * @return UnidadNegocio
+     */
+    public function addOperadorDescarga(\ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouse)
+    {
+        $this->warehouses[] = $warehouse;
+    
+        return $this;
+    }
+
+    /**
+     * Remove warehouses
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouse
+     */
+    public function removeOperadorDescarga(\ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouse)
+    {
+        $this->warehouses->removeElement($warehouse);
+    }
+
+    /**
+     * Get warehousea
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWarehouses()
+    {
+        return $this->warehouses;
+    }
+
+    /**
+     * Add plantas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas
+     * @return UnidadNegocio
+     */
+    public function addAlmacen(\ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas)
+    {
+        $this->plantas[] = $plantas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove plantas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Planta $planta
+     */
+    public function removeAlmacen(\ELOGISTIXAL\ElogistixBundle\Entity\Planta $planta)
+    {
+        $this->plantas->removeElement($planta);
+    }
+
+    /**
+     * Get plantas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlantas()
+    {
+        return $this->plantas;
+    }
+
+    /**
+     * Add empresas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas
+     * @return UnidadNegocio
+     */
+    public function addMotivoDiscrepancia(\ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas)
+    {
+        $this->empresas[] = $empresas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove empresa
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresa
+     */
+    public function removeMotivoDiscrepancia(\ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresa)
+    {
+        $this->empresas->removeElement($empresa);
+    }
+
+    /**
+     * Get empresas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEmpresas()
+    {
+        return $this->empresas;
+    }
+
+
+    /**
+     * Add turnos
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turnos
+     * @return UnidadNegocio
+     */
+    public function addTurno(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turnos)
+    {
+        $this->turnos[] = $turnos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove turnos
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Turno $turnos
+     */
+    public function removeTurno(\ELOGISTIXAL\ElogistixBundle\Entity\Turno $turnos)
+    {
+        $this->turnos->removeElement($turnos);
+    }
+
+    /**
+     * Add warehouses
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouses
+     * @return UnidadNegocio
+     */
+    public function addWarehouse(\ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouses)
+    {
+        $this->warehouses[] = $warehouses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove warehouses
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouses
+     */
+    public function removeWarehouse(\ELOGISTIXAL\ElogistixBundle\Entity\Warehouse $warehouses)
+    {
+        $this->warehouses->removeElement($warehouses);
+    }
+
+    /**
+     * Add plantas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas
+     * @return UnidadNegocio
+     */
+    public function addPlanta(\ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas)
+    {
+        $this->plantas[] = $plantas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove plantas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas
+     */
+    public function removePlanta(\ELOGISTIXAL\ElogistixBundle\Entity\Planta $plantas)
+    {
+        $this->plantas->removeElement($plantas);
+    }
+
+    /**
+     * Add empresas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas
+     * @return UnidadNegocio
+     */
+    public function addEmpresa(\ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas)
+    {
+        $this->empresas[] = $empresas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove empresas
+     *
+     * @param \ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas
+     */
+    public function removeEmpresa(\ELOGISTIXAL\ElogistixBundle\Entity\Empresa $empresas)
+    {
+        $this->empresas->removeElement($empresas);
+    }
+}

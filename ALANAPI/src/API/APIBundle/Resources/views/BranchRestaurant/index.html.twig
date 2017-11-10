@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>BranchRestaurant list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Averagecalification</th>
+                <th>Averagefood</th>
+                <th>Averageservice</th>
+                <th>Averageambience</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('branchrestaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.latitude }}</td>
+                <td>{{ entity.longitude }}</td>
+                <td>{{ entity.averageCalification }}</td>
+                <td>{{ entity.averageFood }}</td>
+                <td>{{ entity.averageService }}</td>
+                <td>{{ entity.averageAmbience }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('branchrestaurant_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

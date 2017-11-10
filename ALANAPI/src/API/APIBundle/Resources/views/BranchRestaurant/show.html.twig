@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>BranchRestaurant</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ entity.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ entity.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Averagecalification</th>
+                <td>{{ entity.averageCalification }}</td>
+            </tr>
+            <tr>
+                <th>Averagefood</th>
+                <td>{{ entity.averageFood }}</td>
+            </tr>
+            <tr>
+                <th>Averageservice</th>
+                <td>{{ entity.averageService }}</td>
+            </tr>
+            <tr>
+                <th>Averageambience</th>
+                <td>{{ entity.averageAmbience }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('branchrestaurant') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

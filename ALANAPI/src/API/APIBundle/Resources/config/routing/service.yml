@@ -1,0 +1,18 @@
+service_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Service:get", id: 0  }
+    requirements: { _method: get }
+service_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Service:put" }
+    requirements: { _method: put }
+
+service_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Service:delete" }
+    requirements: { _method: delete }
+service_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:Service:post" }
+    requirements: { _method: post }
+    

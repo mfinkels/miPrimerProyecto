@@ -1,0 +1,165 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\UsuarioCalificacionRepository")
+ * @ORM\Table(name="usuariocalificacion") 
+ */
+class UsuarioCalificacion {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Calificacion", inversedBy="calificaciones")
+     * @ORM\JoinColumn(name="calificacion_id", referencedColumnName="id")
+     */
+    protected $calificacion;
+
+    /**
+     * @ORM\Column(type="string", length=500,nullable=false)
+     */
+    protected $comentario;
+
+    /**
+     * @ORM\Column(type="date",nullable=false)
+     */
+    protected $fecha;
+
+    /**
+     *  @ORM\OneToOne(targetEntity="Compra", mappedBy="usuarioCalificacion")
+     */
+    protected $compra;
+
+    /**
+     *  @ORM\OneToOne(targetEntity="Venta", mappedBy="usuarioCalificacion")
+     */
+    protected $venta;
+    
+    
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    protected function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set comentario
+     *
+     * @param string $comentario
+     * @return UsuarioCalificacion
+     */
+    protected function setComentario($comentario) {
+        $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Get comentario
+     *
+     * @return string 
+     */
+    protected function getComentario() {
+        return $this->comentario;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return UsuarioCalificacion
+     */
+    protected function setFecha($fecha) {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    protected function getFecha() {
+        return $this->fecha;
+    }
+
+    /**
+     * Set calificacion
+     *
+     * @param \MERCADO\MSBundle\Entity\Calificacion $calificacion
+     * @return UsuarioCalificacion
+     */
+    protected function setCalificacion(\MERCADO\MSBundle\Entity\Calificacion $calificacion = null) {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return \MERCADO\MSBundle\Entity\Calificacion 
+     */
+    protected function getCalificacion() {
+        return $this->calificacion;
+    }
+
+
+    /**
+     * Set compra
+     *
+     * @param \MERCADO\MSBundle\Entity\Compra $compra
+     * @return UsuarioCalificacion
+     */
+    public function setCompra(\MERCADO\MSBundle\Entity\Compra $compra = null)
+    {
+        $this->compra = $compra;
+    
+        return $this;
+    }
+
+    /**
+     * Get compra
+     *
+     * @return \MERCADO\MSBundle\Entity\Compra 
+     */
+    public function getCompra()
+    {
+        return $this->compra;
+    }
+}

@@ -1,0 +1,507 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\PublicacionRepository")
+ * @ORM\Table(name="publicacion") 
+ */
+class Publicacion {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="publicaciones")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    protected $usuario;
+
+ 
+    /**
+     * @ORM\Column(type="text", length=22,nullable=false)
+     */
+    protected $titulo;
+
+    /**
+     * @ORM\Column(type="date",nullable=false)
+     */
+    protected $fecha;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $activo;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $habilitado=false;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Favorito", mappedBy="publicacion")
+     */
+    protected $favoritos;
+    /**
+     * @ORM\OneToMany(targetEntity="Compra", mappedBy="publicacion")
+     */
+    protected $compras;
+    /**
+     * @ORM\OneToMany(targetEntity="Venta", mappedBy="publicacion")
+     */
+    protected $ventas;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SubCategoria", inversedBy="publicaciones")
+     * @ORM\JoinColumn(name="subcategoria_id", referencedColumnName="id")
+     */
+    protected $subcategoria;
+
+    /**
+     * @ORM\Column(type="text", length=1000,nullable=false)
+     */
+    protected $descripcion;
+
+    /**
+     * @ORM\Column(type="float", scale=2)
+     */
+    protected $precio;
+
+    /**
+     * @ORM\Column(type="string", length=500,nullable=true)
+     */
+    protected $video;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Imagen", mappedBy="publicacion",cascade={"persist"})
+     */
+    protected $imagenes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PublicacionColor", mappedBy="publicacion",cascade={"persist"})
+     */
+    protected $coloresPublicacion;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Rechazo", mappedBy="publicacion")
+     */
+    protected $rechazos;
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        $this->favoritos = new ArrayCollection();
+        $this->compras = new ArrayCollection();
+        $this->ventas = new ArrayCollection();
+        $this->imagenes = new ArrayCollection();
+        $this->coloresPublicacion = new ArrayCollection();        
+        $this->rechazo = new ArrayCollection();        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        return $this->getTitulo();
+    }
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     * @return Publicacion
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+    
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string 
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return Publicacion
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return Publicacion
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+    
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * Set habilitado
+     *
+     * @param boolean $habilitado
+     * @return Publicacion
+     */
+    public function setHabilitado($habilitado)
+    {
+        $this->habilitado = $habilitado;
+    
+        return $this;
+    }
+
+    /**
+     * Get habilitado
+     *
+     * @return boolean 
+     */
+    public function getHabilitado()
+    {
+        return $this->habilitado;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Publicacion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set precio
+     *
+     * @param float $precio
+     * @return Publicacion
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+    
+        return $this;
+    }
+
+    /**
+     * Get precio
+     *
+     * @return float 
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * Set video
+     *
+     * @param string $video
+     * @return Publicacion
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+    
+        return $this;
+    }
+
+    /**
+     * Get video
+     *
+     * @return string 
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \MERCADO\MSBundle\Entity\Usuario $usuario
+     * @return Publicacion
+     */
+    public function setUsuario(\MERCADO\MSBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+    
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \MERCADO\MSBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Add favoritos
+     *
+     * @param \MERCADO\MSBundle\Entity\Favorito $favoritos
+     * @return Publicacion
+     */
+    public function addFavorito(\MERCADO\MSBundle\Entity\Favorito $favoritos)
+    {
+        $this->favoritos[] = $favoritos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove favoritos
+     *
+     * @param \MERCADO\MSBundle\Entity\Favorito $favoritos
+     */
+    public function removeFavorito(\MERCADO\MSBundle\Entity\Favorito $favoritos)
+    {
+        $this->favoritos->removeElement($favoritos);
+    }
+
+    /**
+     * Get favoritos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoritos()
+    {
+        return $this->favoritos;
+    }
+
+    /**
+     * Add compras
+     *
+     * @param \MERCADO\MSBundle\Entity\Compra $compras
+     * @return Publicacion
+     */
+    public function addCompra(\MERCADO\MSBundle\Entity\Compra $compras)
+    {
+        $this->compras[] = $compras;
+    
+        return $this;
+    }
+
+    /**
+     * Remove compras
+     *
+     * @param \MERCADO\MSBundle\Entity\Compra $compras
+     */
+    public function removeCompra(\MERCADO\MSBundle\Entity\Compra $compras)
+    {
+        $this->compras->removeElement($compras);
+    }
+
+    /**
+     * Get compras
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCompras()
+    {
+        return $this->compras;
+    }
+
+    /**
+     * Add ventas
+     *
+     * @param \MERCADO\MSBundle\Entity\Venta $ventas
+     * @return Publicacion
+     */
+    public function addVenta(\MERCADO\MSBundle\Entity\Venta $ventas)
+    {
+        $this->ventas[] = $ventas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ventas
+     *
+     * @param \MERCADO\MSBundle\Entity\Venta $ventas
+     */
+    public function removeVenta(\MERCADO\MSBundle\Entity\Venta $ventas)
+    {
+        $this->ventas->removeElement($ventas);
+    }
+
+    /**
+     * Get ventas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVentas()
+    {
+        return $this->ventas;
+    }
+
+    /**
+     * Set subcategoria
+     *
+     * @param \MERCADO\MSBundle\Entity\SubCategoria $subcategoria
+     * @return Publicacion
+     */
+    public function setSubcategoria(\MERCADO\MSBundle\Entity\SubCategoria $subcategoria = null)
+    {
+        $this->subcategoria = $subcategoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get subcategoria
+     *
+     * @return \MERCADO\MSBundle\Entity\SubCategoria 
+     */
+    public function getSubcategoria()
+    {
+        return $this->subcategoria;
+    }
+
+    /**
+     * Add imagenes
+     *
+     * @param \MERCADO\MSBundle\Entity\Imagen $imagenes
+     * @return Publicacion
+     */
+    public function addImagen(\MERCADO\MSBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes[] = $imagenes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove imagenes
+     *
+     * @param \MERCADO\MSBundle\Entity\Imagen $imagenes
+     */
+    public function removeImagen(\MERCADO\MSBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes->removeElement($imagenes);
+    }
+
+    /**
+     * Get imagenes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImagenes()
+    {
+        return $this->imagenes;
+    }
+
+    /**
+     * Add coloresPublicacion
+     *
+     * @param \MERCADO\MSBundle\Entity\PublicacionColor $coloresPublicacion
+     * @return Publicacion
+     */
+    public function addColoresPublicacion(\MERCADO\MSBundle\Entity\PublicacionColor $coloresPublicacion)
+    {
+        $this->coloresPublicacion[] = $coloresPublicacion;
+    
+        return $this;
+    }
+
+    /**
+     * Remove coloresPublicacion
+     *
+     * @param \MERCADO\MSBundle\Entity\PublicacionColor $coloresPublicacion
+     */
+    public function removeColoresPublicacion(\MERCADO\MSBundle\Entity\PublicacionColor $coloresPublicacion)
+    {
+        $this->coloresPublicacion->removeElement($coloresPublicacion);
+    }
+
+    /**
+     * Get coloresPublicacion
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getColoresPublicacion()
+    {
+        return $this->coloresPublicacion;
+    }
+}

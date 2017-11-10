@@ -1,0 +1,264 @@
+<?php
+
+namespace MERCADO\MSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * @ORM\Entity(repositoryClass="MERCADO\MSBundle\Entity\ImagenRepository")
+ * @ORM\Table(name="imagen") 
+ * @ORM\HasLifecycleCallbacks 
+ */
+class Imagen {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Producto", inversedBy="imagenes")
+     * @ORM\JoinColumn(name="producto_id", referencedColumnName="id",nullable=false)  
+     */
+    protected $producto;
+
+    /**
+     * @ORM\Column(type="string", length=200,nullable=false)
+     * @Assert\Length(
+     *      max = 200,     
+     *      maxMessage = "La dirección del path no puede superar los 200 caracteres"
+     * )     
+     * 
+     */
+    protected $path;
+
+    /**
+     * @ORM\Column(type="string", length=10,nullable=false)
+     * @Assert\Length(
+     *      max = 10,     
+     *      maxMessage = "La dirección del path no puede superar los 10 caracteres"
+     * )     
+     * 
+     */
+    protected $extension;
+    
+    /**
+     * @ORM\Column(type="string", length=1,nullable=false)
+     */
+    protected $ubicacion;
+        
+    protected $icono;
+    private $temp;
+
+    /**
+     * @Assert\File(maxSize="200000000")
+     */
+    private $file;
+
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+        return $this->getId().'.'.$this->getExtension();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Imagen
+     */
+    public function setPath($path) {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath() {
+        return $this->path;
+    }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return Imagen
+     */
+    public function setExtension($extension) {
+        $this->extension = $extension;
+
+        return $this;
+    }
+
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension() {
+        return $this->extension;
+    }
+
+    /**
+     * Set producto
+     *
+     * @param \MERCADO\MSBundle\Entity\Producto $producto
+     * @return Imagen
+     */
+    public function setProducto(\MERCADO\MSBundle\Entity\Producto $producto) {
+        $this->producto = $producto;
+
+        return $this;
+    }
+
+    /**
+     * Get producto
+     *
+     * @return \MERCADO\MSBundle\Entity\Producto 
+     */
+    public function getProducto() {
+        return $this->producto;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null) {
+        $this->file = $file;
+        // check if we have an old image path
+        if (is_file($this->getAbsolutePath())) {
+            // store the old name to delete after the update
+            $this->temp = $this->getAbsolutePath();
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+        if (null !== $this->getFile()) {
+            $this->path = $this->getFile()->getClientOriginalName();
+            $this->extension = $this->getFile()->getClientOriginalExtension();
+        }
+    }
+
+    public function getAbsolutePath() {
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->id . '.' . $this->extension;
+    }
+
+    public function getWebPath() {
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
+    }
+
+    protected function getUploadRootDir() {
+        // la ruta absoluta del directorio donde se deben
+        // guardar los archivos cargados
+        return __DIR__ . '/../../../../mercado/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        // se deshace del __DIR__ para no meter la pata
+        // al mostrar el documento/imagen cargada en la vista.
+        return 'uploads/documents';
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload() {
+
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does
+        $this->getFile()->move(
+                $this->getUploadRootDir(), $this->id . '.' . $this->getFile()->getClientOriginalExtension()
+        );
+
+        $this->setFile(null);
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove() {
+        $this->temp = $this->getAbsolutePath();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload() {
+        if (isset($this->temp)) {
+            unlink($this->temp);
+        }
+    }
+
+    public function getTemp() {
+        return $this->temp;
+    }
+
+    public function setTemp($temp) {
+        $this->temp = $temp;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+}

@@ -1,0 +1,72 @@
+<?php
+
+namespace ELOGISTIXPR\ElogistixBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity(repositoryClass="ELOGISTIXPR\ElogistixBundle\Entity\ClasificacionABCFamiliaRepository")
+ * @ORM\Table(name="clasificacionabcfamilia") 
+ */
+class ClasificacionABCFamilia {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UnidadNegocio", inversedBy="clasificacionesABCFamilia")
+     * @ORM\JoinColumn(name="unidadnegocio_id", referencedColumnName="id", nullable=true)
+     */
+    protected $unidadNegocio;
+    /**
+     * @ORM\ManyToOne(targetEntity="Familia", inversedBy="clasificacionesABCFamilia")
+     * @ORM\JoinColumn(name="familia_id", referencedColumnName="id", nullable=true)
+     */
+    protected $familia;
+    /**
+     * @ORM\ManyToOne(targetEntity="ClasificacionABC", inversedBy="clasificacionesABCFamilia")
+     * @ORM\JoinColumn(name="clasificacionABC_id", referencedColumnName="id", nullable=true)
+     */
+    protected $clasificacionABC;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $diasCobertura;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    protected $estado = 'A';
+
+    
+    /*     * ********************************
+     * __construct
+     *
+     * 
+     * ******************************** */
+
+    public function __construct() {
+        
+    }
+
+    /*     * ********************************
+     * __toString()
+     *
+     * Este método sirve para poder popular los comboboxes en los forms.
+     * ******************************* */
+
+    public function __toString() {
+       
+    }
+
+    
+    
+}

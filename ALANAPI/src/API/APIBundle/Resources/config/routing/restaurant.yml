@@ -1,0 +1,20 @@
+restaurant_get:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Restaurant:get", id: 0  }
+    requirements: { _method: get }
+restaurant_put:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Restaurant:put" }
+    requirements: { _method: put }
+
+restaurant_delete:
+    path:     /{id}
+    defaults: { _controller: "APIAPIBundle:Restaurant:delete" }
+    requirements: { _method: delete }
+restaurant_post:
+    path:     /
+    defaults: { _controller: "APIAPIBundle:Restaurant:post" }
+    requirements: { _method: post }
+
+
+
