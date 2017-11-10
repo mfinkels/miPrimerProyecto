@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.morfando.android.morfando.Class.CalificationPlate;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
@@ -39,10 +41,10 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
 
     Plate myPlate;
 
-    TextView name, description, price;
+    TextView name, description;
 
     RatingBar value;
-    TextView message;
+    EditText message;
 
 
     Button send;
@@ -55,8 +57,22 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
 
         myPlate = main.getMyPlate();
 
-        //muestro datos plato, al a pretar enviar recibir info generar CalificationPlate y insertar
-        //FALTA AGARRAR ID BRANCH Y ID USER
+        name = (TextView)toReturn.findViewById(R.id.plateName);
+        description = (TextView)toReturn.findViewById(R.id.plateDescription);
+
+        name.setText(myPlate.name);
+        description.setText(myPlate.description);
+
+        value = (RatingBar)toReturn.findViewById(R.id.calificationPlate);
+        message = (EditText)toReturn.findViewById(R.id.messageCalificationPlate);
+
+        send = (Button)toReturn.findViewById(R.id.btnSend);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendPressed();
+            }
+        });
 
 
         Toolbar toolbar = (Toolbar) toReturn.findViewById(R.id.toolbar);
@@ -75,8 +91,25 @@ public class calificationPlateFrag extends android.support.v4.app.DialogFragment
 
     private void sendPressed(){
         // genero Calification
+        CalificationPlate calification = new CalificationPlate();
+        main.setImportantInformationCalificactionPlate(calification);
+        calification.idPlate = myPlate.idPlate;
+        calification.message = message.getText().toString();
+        calification.value = (int)value.getRating();
 
-        //listener y mando espero q vuelva
+        //listener y mando
+        asyncTaskCompleted listener = new asyncTaskCompleted() {
+            @Override
+            public void onPostAsyncTask(Object result) {
+                Boolean resultado = (Boolean)result;
+                if (resultado){
+                    dismiss();
+                } else {
+                    Toast.makeText(main, "Error", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+        pq.createCalificationPlate(calification, listener);
     }
 
 

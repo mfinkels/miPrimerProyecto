@@ -2,6 +2,7 @@ package com.morfando.android.morfando.Reservation;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class pastReservationFrag extends Fragment {
             @Override
             public void onPostAsyncTask(Object result) {
                 ArrayList<Reservation> list = (ArrayList<Reservation>) result;
+                Log.d("reservation", "reservation past " + list.toString());
                 if (list != null){
                     adapter = new reservationAdapter(list, main);
                     reservation.setAdapter(adapter);

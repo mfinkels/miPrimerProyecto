@@ -2,7 +2,8 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/backgroundFrag">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -50,13 +51,6 @@
                 android:textSize="16sp"
                 android:gravity="center_horizontal"
                 android:id="@+id/plateDescription"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$10"
-                android:gravity="center_horizontal"
-                android:textSize="18sp"
-                android:id="@+id/pricePlate"/>
 
         </LinearLayout>
 
@@ -66,6 +60,20 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:stepSize="1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"
+            android:id="@+id/messageCalificationPlate"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/buttonColor"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:text="Send"
+            android:id="@+id/btnSend"/>
 
     </LinearLayout>
 

@@ -9,10 +9,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.morfando.android.morfando.Class.Branch;
+import com.morfando.android.morfando.Class.CalificationPlate;
 import com.morfando.android.morfando.Class.OrderReservation;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Plate;
@@ -322,6 +324,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showPlateCalification() {
-        updateDialogFragment(new orderReservationFrag());
+        updateDialogFragment(new calificationPlateFrag());
+    }
+
+    public void setImportantInformationCalificactionPlate(CalificationPlate calification) {
+        calification.idUser = myUser.idUser;
+        calification.idBranch = reservation.branch.idBranch;
     }
 }

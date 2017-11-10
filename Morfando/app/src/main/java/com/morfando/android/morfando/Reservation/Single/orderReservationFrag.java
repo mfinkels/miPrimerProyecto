@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,7 +53,8 @@ public class orderReservationFrag extends DialogFragment {
 
         myReservation = main.getReservation();
 
-        if (myReservation.date.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
+        if (myReservation.date.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()){
+            Log.d("order", "order present");
             newOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,6 +62,7 @@ public class orderReservationFrag extends DialogFragment {
                 }
             });
         } else {
+            Log.d("order", "order past");
             newOrder.setVisibility(View.INVISIBLE);
             listOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -78,7 +81,7 @@ public class orderReservationFrag extends DialogFragment {
                 if (plates != null && plates.size() >= 0) {
                     myReservation.orders = plates;
                     main.setReservation(myReservation);
-                    plateAdapter adapter = new plateAdapter(myReservation.orders,main,false, null);
+                    adapter = new plateAdapter(myReservation.orders,main,false, null);
                     listOrder.setAdapter(adapter);
                     listOrder.deferNotifyDataSetChanged();
                 } else {
