@@ -6,15 +6,18 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.morfando.android.morfando.Class.ParseQuery;
+import com.morfando.android.morfando.Class.Plate;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
@@ -54,7 +57,6 @@ public class singleReservationFrag extends DialogFragment {
                 makeOrder();
             }
         });
-        cancel = (Button)toReturn.findViewById(R.id.btnCancelReservation);
 
 
         resName.setText(myReservation.branch.restaurant.name + " " + myReservation.branch.name);
@@ -62,6 +64,20 @@ public class singleReservationFrag extends DialogFragment {
         time.setText(myReservation.date.get(Calendar.HOUR_OF_DAY) + ":" + myReservation.date.get(Calendar.MINUTE));
         guest.setText(myReservation.guest + "");
 
+
+
+        cancel = (Button)toReturn.findViewById(R.id.btnCancelReservation);
+
+        if (myReservation.date.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()){
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancelReservation();
+                }
+            });
+        } else {
+            cancel.setVisibility(View.GONE);
+        }
 
 
 

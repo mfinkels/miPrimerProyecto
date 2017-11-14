@@ -17,7 +17,6 @@ import android.widget.ListView;
 import com.morfando.android.morfando.Class.Branch;
 import com.morfando.android.morfando.Class.CalificationBranch;
 import com.morfando.android.morfando.Class.ParseQuery;
-import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Single.Adapter.calificationAdapter;

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:id="@+id/btnUpcoming"
-            android:background="@color/buttonColor"
+            android:background="@color/colorPrimaryDark"
             android:textColor="#fff"
             android:textAllCaps="false"
             android:textSize="20sp"
@@ -38,7 +38,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/buttonColor"
+            android:background="@color/colorPrimaryDark"
             android:layout_weight="0.5"
             android:id="@+id/btnPast"
             android:textColor="#fff"

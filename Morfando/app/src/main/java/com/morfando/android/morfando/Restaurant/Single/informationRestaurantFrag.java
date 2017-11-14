@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
-import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.morfando.android.morfando.Restaurant.Adapter.lvRestaurantAdapter;
@@ -45,7 +45,7 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
     MainActivity main;
     ParseQuery pq;
 
-    TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
+    TextView description, food, service, ambience;
     GridView serviceGV;
     LinearLayout socialNetwork, promotion;
 
@@ -115,10 +115,11 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         description.setText(myBranch.restaurant.description);
 
         //si tiene socialNetwork
+        /*
         if (myBranch.restaurant.social.size() > 0){
 
             TextView titleSocial = new TextView(main);
-            titleSocial.setText("Social NetWork");
+            titleSocial.setText("Redes Sociales");
 
             LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -130,7 +131,7 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
             GridView gridView= new GridView(main);
 
-            gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.FILL_PARENT, GridLayout.LayoutParams.FILL_PARENT));
+            gridView.setLayoutParams(new GridView.LayoutParams(GridLayout.LayoutParams.MATCH_PARENT, GridLayout.LayoutParams.MATCH_PARENT));
             gridView.setNumColumns(myBranch.restaurant.social.size());
             gridView.setColumnWidth(GridView.AUTO_FIT);
             final socialNetworkAdapter adapterSocial = new socialNetworkAdapter(main, myBranch.restaurant.social);
@@ -148,6 +149,8 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
 
         }
 
+        */
+
 
 
         serviceAdapter adapterService = new serviceAdapter(main, myBranch.service);
@@ -157,10 +160,11 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
         timetable.setAdapter(adapterTimetable);
 
         // si tiene promotion
+        /*
         if(myBranch.promotion.size() > 0){
 
             TextView titlePromotion = new TextView(main);
-            titlePromotion.setText("Promotion");
+            titlePromotion.setText("Promociones");
 
             LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -177,6 +181,7 @@ public class informationRestaurantFrag extends Fragment implements View.OnClickL
             //promotionList.setAdapter(adapterPromotion);
 
         }
+        */
 
 
         food.setText(myBranch.averageFood + "");

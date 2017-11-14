@@ -15,6 +15,7 @@ import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,7 +77,7 @@ public class calificationAdapter extends BaseAdapter {
         TextView date;
         date = (TextView)returnView.findViewById(R.id.datetimeCalification);
 
-        date.setText(String.valueOf(cb.date));
+        date.setText(cb.date.get(Calendar.DAY_OF_MONTH) + "/" + cb.date.get(Calendar.MONTH) + "/" +cb.date.get(Calendar.YEAR));
 
         RatingBar calification;
         calification = (RatingBar)returnView.findViewById(R.id.calificationUser);

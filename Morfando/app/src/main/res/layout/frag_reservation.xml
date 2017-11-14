@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guest"
+            android:text="Comensales"
             android:textSize="24sp"/>
 
 
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="Fecha"
             android:textSize="24sp"/>
 
         //Date
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time"
+            android:text="Horario"
             android:textSize="24sp"/>
 
         <TextView
@@ -97,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/makeReservation"
-        android:text="Reserve"
+        android:text="Reservar"
         android:textAllCaps="false"
         android:background="@color/buttonColor"
         android:textColor="#fff"

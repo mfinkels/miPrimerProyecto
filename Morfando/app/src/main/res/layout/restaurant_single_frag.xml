@@ -27,13 +27,13 @@
         android:id="@+id/imagesConteiner"
         android:layout_below="@id/appbar">
 
-        <ImageSwitcher
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imgSwitcherSingle"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"></ImageSwitcher>
+            android:layout_alignParentStart="true"
+            android:id="@+id/imgRestaurant"/>
 
 
         <LinearLayout
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
-            android:layout_alignBottom="@id/imgSwitcherSingle">
+            android:layout_alignBottom="@id/imgRestaurant">
             <TextView
             android:id="@+id/nameSingle"
             android:layout_width="wrap_content"
@@ -97,24 +97,31 @@
             android:id="@+id/tabConteiner"
             android:layout_marginBottom="60dp">
 
-            <android.support.design.widget.AppBarLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
+                android:orientation="horizontal">
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabMode="fixed"
-                    app:tabGravity="fill"/>
-            </android.support.design.widget.AppBarLayout>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:id="@+id/btnInfo"
+                    android:text="Informacion"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:id="@+id/btnMenu"
+                    android:text="Menu"/>
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

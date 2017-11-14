@@ -267,8 +267,13 @@ public class ParseQuery {
 
                 JSONObject obj = new JSONObject(resultado);
 
-                //Social Network
+                b = parse.branch(obj);
+
+                //Restaurant
                 JSONObject resto = obj.getJSONObject("restaurant");
+                b.restaurant = parse.restaurant(resto);
+
+                //Social Network
                 JSONArray socialNetwork = resto.getJSONArray("socialNetwork");
                 b.restaurant.social = parse.socialNetwork(socialNetwork);
 

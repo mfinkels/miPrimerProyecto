@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:background="@color/buttonColor"
         android:layout_gravity="center_vertical"
-        android:text="Add to cart"
+        android:text="Agregar"
         android:textAllCaps="false"
         android:textColor="#fff" />
 

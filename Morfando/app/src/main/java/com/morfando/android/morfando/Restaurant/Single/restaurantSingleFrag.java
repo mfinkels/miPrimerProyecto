@@ -1,6 +1,8 @@
 package com.morfando.android.morfando.Restaurant.Single;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -54,12 +58,14 @@ import com.morfando.android.morfando.Restaurant.Single.Adapter.timetableAdapter;
 import com.morfando.android.morfando.Restaurant.Single.calificationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.informationRestaurantFrag;
 import com.morfando.android.morfando.Restaurant.Single.menuRestaurantFrag;
+import com.morfando.android.morfando.Restaurant.lvRestaurantFrag;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,21 +84,15 @@ public class restaurantSingleFrag extends DialogFragment {
     MainActivity main;
     TextView name, range, cousine;
     RatingBar calification;
+    ImageView imgResto;
 
     ParseQuery pq;
 
-    Button reserve;
-    TextView description, food, service, ambience, typeFood, typeAmbience, typeService;
-    GridView serviceGV;
-    LinearLayout socialNetwork, promotion;
+    Button reserve, info, menu;
 
-    ListView timetable, calificationLV;
+    FragmentManager adminFragment;
+    FragmentTransaction trans;
 
-    Button address, moreCalification;
-
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
 
     private Branch myBranch;
 
@@ -103,12 +103,15 @@ public class restaurantSingleFrag extends DialogFragment {
         main = (MainActivity)getActivity();
         pq = new ParseQuery(main);
 
+        adminFragment = main.getSupportFragmentManager();
+
         myBranch = main.getBranch();
 
         name = (TextView)toReturn.findViewById(R.id.nameSingle);
         cousine = (TextView) toReturn.findViewById(R.id.cousineSingle);
         calification = (RatingBar)toReturn.findViewById(R.id.calificationSingle);
         range = (TextView)toReturn.findViewById(R.id.priceRangeSingle);
+        imgResto =(ImageView)toReturn.findViewById(R.id.imgRestaurant);
         reserve = (Button) toReturn.findViewById(R.id.btnReservation);
         reserve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,16 +120,27 @@ public class restaurantSingleFrag extends DialogFragment {
             }
         });
 
-        description = (TextView)toReturn.findViewById(R.id.descriptionSingle);
-        serviceGV = (GridView) toReturn.findViewById(R.id.gridviewService);
-        timetable = (ListView) toReturn.findViewById(R.id.timetableLV);
-        food = (TextView)toReturn.findViewById(R.id.foodCalification);
-        service = (TextView)toReturn.findViewById(R.id.serviceCalification);
-        ambience = (TextView)toReturn.findViewById(R.id.ambienceCalification);
-        calificationLV = (ListView)toReturn.findViewById(R.id.listCalification);
-        promotion = (LinearLayout)toReturn.findViewById(R.id.conteinerPromotion);
-        socialNetwork = (LinearLayout)toReturn.findViewById(R.id.socialNetworkConteiner);
+        info = (Button)toReturn.findViewById(R.id.btnInfo);
+        menu =(Button)toReturn.findViewById(R.id.btnMenu);
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infoPressed();
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuPressed();
+            }
+        });
+
+        if (myBranch.photo.size() >= 0){
+            new DownloadImageTask(imgResto).execute(myBranch.photo.get(0).photo);
+        }
+
+        infoPressed();
         setInformation(myBranch);
 
 
@@ -140,12 +154,6 @@ public class restaurantSingleFrag extends DialogFragment {
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
         }
         setHasOptionsMenu(true);
-
-        viewPager = (ViewPager) toReturn.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = (TabLayout) toReturn.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
 
         return toReturn;
     }
@@ -169,40 +177,22 @@ public class restaurantSingleFrag extends DialogFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(main.getSupportFragmentManager());
-        adapter.addFragment(new informationRestaurantFrag(), "Information");
-        adapter.addFragment(new menuRestaurantFrag(), "Menu");
-        viewPager.setAdapter(adapter);
+    private void infoPressed(){
+        info.setEnabled(false);
+        menu.setEnabled(true);
+
+        trans=adminFragment.beginTransaction();
+        trans.replace(R.id.fragmentSingleRestaurant, new informationRestaurantFrag());
+        trans.commit();
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    private void menuPressed(){
+        menu.setEnabled(false);
+        info.setEnabled(true);
 
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
+        trans=adminFragment.beginTransaction();
+        trans.replace(R.id.fragmentSingleRestaurant, new menuRestaurantFrag());
+        trans.commit();
     }
 
     private void setInformation(Branch myBranch) {
@@ -214,6 +204,33 @@ public class restaurantSingleFrag extends DialogFragment {
         calification.setRating(Float.parseFloat(myBranch.averageCalification + ""));
 
         range.setText("$" + String.valueOf(myBranch.range.minimum) + " - $" + String.valueOf(myBranch.range.maximum));
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+                return mIcon11;
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                return null;
+            }
+
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            if (result != null){
+                bmImage.setImageBitmap(result);
+            }
+        }
     }
 
 

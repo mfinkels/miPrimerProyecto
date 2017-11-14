@@ -28,7 +28,6 @@ import com.morfando.android.morfando.Class.Cuisine;
 import com.morfando.android.morfando.Class.ParseQuery;
 import com.morfando.android.morfando.Class.Reservation;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
-import com.morfando.android.morfando.Main2Activity;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
 import com.shawnlin.numberpicker.NumberPicker;

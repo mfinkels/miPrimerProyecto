@@ -23,7 +23,6 @@ import com.morfando.android.morfando.Class.Service;
 import com.morfando.android.morfando.Class.SocialNetwork;
 import com.morfando.android.morfando.Class.Timetable;
 import com.morfando.android.morfando.Class.Utility;
-import com.morfando.android.morfando.Class.test;
 import com.morfando.android.morfando.Interface.asyncTaskCompleted;
 import com.morfando.android.morfando.MainActivity;
 import com.morfando.android.morfando.R;
