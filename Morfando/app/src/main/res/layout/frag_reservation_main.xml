@@ -5,6 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        android:id="@+id/appbar"
+        android:fitsSystemWindows="false">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,13 +30,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:id="@+id/btnUpcoming"
-            android:text="Upcoming"/>
+            android:background="@color/buttonColor"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:text="Proximas"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/buttonColor"
             android:layout_weight="0.5"
             android:id="@+id/btnPast"
-            android:text="Past"/>
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:text="Anteriores"/>
     </LinearLayout>
 
     <FrameLayout

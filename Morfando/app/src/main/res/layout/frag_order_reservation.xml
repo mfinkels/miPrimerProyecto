@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnNewOrder"
-        android:text="New Order"
+        android:text="Agregar Orden"
         android:textAllCaps="false"
         android:background="@color/buttonColor"
         android:textColor="#fff"

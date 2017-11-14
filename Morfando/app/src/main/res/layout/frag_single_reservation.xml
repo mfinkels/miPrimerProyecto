@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnOrder"
-            android:text="Order"
+            android:text="Orden"
             android:textAllCaps="false"
             android:background="@color/buttonColor"
             android:textColor="#fff"
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/buttonColor"
-        android:text="Cancel Reservation"
+        android:text="Cancelar"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="24sp" />

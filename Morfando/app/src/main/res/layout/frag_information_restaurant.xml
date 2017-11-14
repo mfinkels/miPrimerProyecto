@@ -54,7 +54,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Service"
+                android:text="Servicio"
                 android:gravity="center"
                 android:textSize="24sp"/>
 
@@ -75,6 +75,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/timetableSingle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horarios"
+                android:gravity="center"
+                android:textSize="24sp"/>
 
             <ListView
                 android:layout_width="match_parent"
@@ -239,6 +245,13 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calificaciones"
+                android:gravity="center"
+                android:textSize="24sp"/>
+
 
             <ListView
                 android:layout_width="match_parent"
@@ -248,7 +261,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnMoreCalification"
-                android:text="More"
+                android:text="Mas"
                 android:textAllCaps="false"
                 android:background="@color/buttonColor"
                 android:textColor="#fff"

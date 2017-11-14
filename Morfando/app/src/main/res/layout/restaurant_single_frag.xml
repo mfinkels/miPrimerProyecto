@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme"
+        android:id="@+id/appbar"
         android:fitsSystemWindows="false">
 
         <android.support.v7.widget.Toolbar
@@ -23,7 +24,8 @@
     <RelativeLayout
         android:layout_height="150dp"
         android:layout_width="match_parent"
-        android:id="@+id/imagesConteiner">
+        android:id="@+id/imagesConteiner"
+        android:layout_below="@id/appbar">
 
         <ImageSwitcher
             android:layout_width="match_parent"
@@ -129,7 +131,7 @@
         android:id="@+id/btnReservation"
         android:textAllCaps="false"
         android:background="@color/buttonColor"
-        android:text="Make Reservation"
+        android:text="Reservar"
         android:textColor="#fff"
         android:textSize="24sp"
         android:layout_alignParentBottom="true"
