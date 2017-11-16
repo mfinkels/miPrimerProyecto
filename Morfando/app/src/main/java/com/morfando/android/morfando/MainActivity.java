@@ -530,11 +530,13 @@ public class MainActivity extends AppCompatActivity {
         }
         if (result.length() == 0) {
             // crear usuario.
+            /*
             Fragment profile;
             profile = new profileFrag();
             trans=adminFragment.beginTransaction();
             trans.replace(R.id.fragmentConteiner, profile);
             trans.commit();
+            */
         } else {
             errorAlert("Error", result);
         }

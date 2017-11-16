@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -135,4 +136,152 @@
         android:layout_alignParentBottom="true"
         />
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        android:id="@+id/appbar"
+        android:fitsSystemWindows="false">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:id="@+id/imagesConteiner"
+        android:layout_below="@id/appbar">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/imgRestaurant"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@id/imgRestaurant">
+            <TextView
+            android:id="@+id/nameSingle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/cousineSingle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Italian | Pasta"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right|bottom"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/calificationSingle"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.1"
+                    android:theme="@style/RatingBarCustom" />
+
+                <TextView
+                    android:id="@+id/priceRangeSingle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:text="$$$"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/imagesConteiner"
+            android:id="@+id/tabConteiner"
+            android:layout_marginBottom="60dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:id="@+id/btnInfo"
+                    android:text="Informacion"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:id="@+id/btnMenu"
+                    android:text="Menu"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragmentSingleRestaurant"></FrameLayout>
+
+
+
+        </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnReservation"
+        android:textAllCaps="false"
+        android:background="@color/buttonColor"
+        android:text="Reservar"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        />
+
+>>>>>>> origin/master
 </RelativeLayout>
