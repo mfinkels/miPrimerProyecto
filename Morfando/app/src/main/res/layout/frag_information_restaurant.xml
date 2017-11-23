@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/descriptionSingle"
-            android:textSize="20sp"
-            android:text="Descripcion del resto se trae de la base de datos  todo esto"/>
+            android:textSize="20sp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,7 +131,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/foodCalification"
-                                android:text="7"
                                 android:layout_marginRight="5dp"
                                 android:textSize="24sp"/>
                             <TextView
@@ -172,7 +170,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/serviceCalification"
-                                android:text="7"
                                 android:layout_marginRight="5dp"
                                 android:textSize="24sp"/>
                             <TextView
@@ -212,7 +209,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/ambienceCalification"
-                                android:text="7"
                                 android:layout_marginRight="5dp"
                                 android:textSize="24sp"/>
                             <TextView

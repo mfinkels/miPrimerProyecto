@@ -45,10 +45,10 @@ public class ParsingObjects {
             b.name = json.getString("name");
             b.latitude = json.getString("latitude");
             b.longitude = json.getString("longitude");
-            b.averageCalification = json.getInt("averageCalification");
-            b.averageFood = json.getInt("averageFood");
-            b.averageService = json.getInt("averageService");
-            b.averageAmbience = json.getInt("averageAmbience");
+            b.averageCalification = json.getDouble("averageCalification");
+            b.averageFood = json.getDouble("averageFood");
+            b.averageService = json.getDouble("averageService");
+            b.averageAmbience = json.getDouble("averageAmbience");
             return b;
 
         }catch (JSONException e){
