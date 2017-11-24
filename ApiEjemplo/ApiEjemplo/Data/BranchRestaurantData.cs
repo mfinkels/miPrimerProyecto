@@ -77,6 +77,32 @@ namespace ApiEjemplo.Data
             return list;
         }
 
+        public static List<BranchRestaurant> GetWithFilter(int cuisine, int service, int rating)
+        {
+            string select = "call branchFilterBy ("+ cuisine.ToString() +"," + service.ToString() + "," + rating.ToString() +")";
+            DataTable dt = DBHelper.EjecutarSelect(select);
+            List<BranchRestaurant> list = new List<BranchRestaurant>();
+            BranchRestaurant branch;
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    branch = getByRow(row);
+                    branch.photo = PhotoBranchData.getByBranch(branch.idBranchRestaurant);
+                    branch.cuisine = CuisineBranchData.getByBranch(branch.idBranchRestaurant);
+                    branch.filter = FilterBranchData.getByBranch(branch.idBranchRestaurant);
+                    branch.promotion = BranchPromotionData.getAllByBranch(branch.idBranchRestaurant);
+                    branch.service = ServiceBranchData.getServicesByRestaurants(branch.idBranchRestaurant);
+                    branch.timetable = TimetableBranchData.getByBranch(branch.idBranchRestaurant);
+                    branch.restaurant = RestaurantData.getById(branch.idRestaurant);
+                    branch.RangePrice = RangePriceBranchData.getById(branch.idRangePriceBranch);
+                    list.Add(branch);
+                }
+                branch = getByRow(dt.Rows[0]);
+            }
+            return list;
+        }
+
         private static BranchRestaurant getByRow(DataRow row)
         {
             BranchRestaurant branch = new BranchRestaurant();

@@ -21,6 +21,13 @@ namespace ApiEjemplo.Controllers
         {
             return BranchRestaurantData.getAll(limit, offset);
         }
+
+        [Route("api/branch/{cocina}/{service}/{rating}")]
+        public IList<BranchRestaurant> Get(int cocina, int service, int rating)
+        {
+            return BranchRestaurantData.GetWithFilter(cocina, service, rating);
+        }
+
         // GET api/<controller>/5
         [ResponseType(typeof(BranchRestaurant))]
         public IHttpActionResult Get(int id)
