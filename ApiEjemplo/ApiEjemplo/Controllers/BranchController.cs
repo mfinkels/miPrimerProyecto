@@ -39,9 +39,25 @@ namespace ApiEjemplo.Controllers
             }
             return Ok(branch);
         }
-        
+
+
+        // GET api/<controller>/5
+        [Route("api/branch/service")]
+        [ResponseType(typeof(Service))]
+        public IList<Service> GetServices()
+        {
+            return ServiceData.getAll();
+        }
+
+        [Route("api/branch/cousine")]
+        [ResponseType(typeof(Cuisine))]
+        public IList<Cuisine> GetCousine()
+        {
+            return CuisineData.getAll();
+        }
+
         // 	TypeMenuData
-                 // POST api/<controller>
+        // POST api/<controller>
         [Route("api/branch/TypeMenu")]
         [ResponseType(typeof(TypeMenu))]
         public IHttpActionResult PostTypeMenu(TypeMenu p)
