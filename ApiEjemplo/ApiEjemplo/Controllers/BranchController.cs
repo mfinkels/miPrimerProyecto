@@ -23,7 +23,7 @@ namespace ApiEjemplo.Controllers
         }
 
         [Route("api/branch/{cocina}/{service}/{rating}")]
-        public IList<BranchRestaurant> Get(int cocina, int service, int rating)
+        public IList<BranchRestaurant> GetWithFilter(int cocina, int service, int rating)
         {
             return BranchRestaurantData.GetWithFilter(cocina, service, rating);
         }
