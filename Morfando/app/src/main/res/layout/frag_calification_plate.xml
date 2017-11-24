@@ -53,15 +53,10 @@
                 android:id="@+id/plateDescription"/>
 
         </LinearLayout>
-<<<<<<< HEAD
 
         <RatingBar
             android:id="@+id/calificationPlate"
-=======
-        <RatingBar
-            android:id="@+id/calificationPlate"
             android:theme="@style/RatingBarCustom"
->>>>>>> origin/master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"

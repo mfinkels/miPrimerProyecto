@@ -33,7 +33,7 @@ namespace ApiEjemplo.Controllers
             return Ok(user);
         }
 
-        // by the email and password you get the userss
+        // by the email and password you get the user
         [Route("api/user/LogInUser/{email}/{password}")]
         [HttpGet]
         public IHttpActionResult GetLogInUser(string email, string password)
@@ -105,22 +105,3 @@ namespace ApiEjemplo.Controllers
         }
     }
 }
-
-/*
-
-
-Command: "D:\home\site\deployments\tools\deploy.cmd"
-Handling .NET Web Application deployment.
-MSBuild auto-detection: using msbuild version '14.0' from 'D:\Program Files (x86)\MSBuild\14.0\bin\amd64'.
-All packages listed in packages.config are already installed.
-Controllers\ServiceBranch.cs(10,28): error CS1002: ; expected [D:\home\site\repository\ApiEjemplo\ApiEjemplo\ApiEjemplo.csproj]
-Data\ServiceBranchData.cs(73,73): error CS1001: Identifier expected [D:\home\site\repository\ApiEjemplo\ApiEjemplo\ApiEjemplo.csproj]
-Failed exitCode=1, command="D:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" "D:\home\site\repository\ApiEjemplo\ApiEjemplo\ApiEjemplo.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="D:\local\Temp\8d522cc922306a9";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="D:\home\site\repository\ApiEjemplo\\"
-An error has occurred during web site deployment.
-\r\nD:\Program Files (x86)\SiteExtensions\Kudu\67.61027.3099\bin\Scripts\starter.cmd "D:\home\site\deployments\tools\deploy.cmd"
-
-
-
-
-
- */
